@@ -7,12 +7,12 @@ namespace Webárúház_Nagy_Project.Models
     {
         public Tagek()
         {
-            Termekeks = new HashSet<Termekek>();
+            Tagkapcsolos = new HashSet<Tagkapcsolo>();
         }
 
         public int TagId { get; set; }
         public string TagNev { get; set; } = null!;
 
-        public virtual ICollection<Termekek> Termekeks { get; set; }
+        public virtual ICollection<Tagkapcsolo> Tagkapcsolos { get; set; }
     }
 }

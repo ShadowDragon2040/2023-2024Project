@@ -7,8 +7,8 @@ namespace Webárúház_Nagy_Project.Models
     {
         public Termekek()
         {
-            Hozzaszolas = new HashSet<Hozzaszolas>();
-            Szamlazas = new HashSet<Szamlazas>();
+            Hozzaszolasoks = new HashSet<Hozzaszolasok>();
+            Szamlazas = new HashSet<Szamlaza>();
         }
 
         public Guid Id { get; set; }
@@ -20,9 +20,7 @@ namespace Webárúház_Nagy_Project.Models
         public int TagId { get; set; }
         public string Keputvonal { get; set; } = null!;
 
-        public virtual Szinek Szin { get; set; } = null!;
-        public virtual Tagek Tag { get; set; } = null!;
-        public virtual ICollection<Hozzaszolas> Hozzaszolas { get; set; }
-        public virtual ICollection<Szamlazas> Szamlazas { get; set; }
+        public virtual ICollection<Hozzaszolasok> Hozzaszolasoks { get; set; }
+        public virtual ICollection<Szamlaza> Szamlazas { get; set; }
     }
 }

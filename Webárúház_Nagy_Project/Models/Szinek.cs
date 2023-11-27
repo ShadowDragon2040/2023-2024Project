@@ -7,12 +7,12 @@ namespace Webárúház_Nagy_Project.Models
     {
         public Szinek()
         {
-            Termekeks = new HashSet<Termekek>();
+            Szinkapcsolos = new HashSet<Szinkapcsolo>();
         }
 
         public int SzinId { get; set; }
         public string SzinHex { get; set; } = null!;
 
-        public virtual ICollection<Termekek> Termekeks { get; set; }
+        public virtual ICollection<Szinkapcsolo> Szinkapcsolos { get; set; }
     }
 }
