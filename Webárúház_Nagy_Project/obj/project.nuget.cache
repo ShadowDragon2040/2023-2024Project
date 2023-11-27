@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sk+PAS8+J/LXIh6tGj23e/isW6SRJj5CPCRV0DrgFFF/0vdVoT/Lx1QVfAmXFzrMGxG5WzTjUPtblGJKUCQUYg==",
+  "dgSpecHash": "1JCnGDaABRJzgAEFgbcLlKJXc0MGcxeFoxT1pP4nMqfUeZttugIpFmVfH45++vbTjaBgfYkxdyNKceNyGz9wHw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vbalázs\\source\\repos\\Webárúház_Nagy_Project\\Webárúház_Nagy_Project\\Webárúház_Nagy_Project.csproj",
+  "projectFilePath": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\Webárúház_Nagy_Project\\Webárúház_Nagy_Project.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vbalázs\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\vbalázs\\.nuget\\packages\\google.protobuf\\3.21.9\\google.protobuf.3.21.9.nupkg.sha512",
