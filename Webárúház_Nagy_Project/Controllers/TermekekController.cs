@@ -18,11 +18,11 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult Get(Guid id)
+        public ActionResult Get(int id)
         {
             using (var context = new project_databaseContext())
             {
-                var result = context.Termekek.Where(x => x.Id == id);
+                var result = context.Termekek.Where(x => x.TermekekId == id);
                 return Ok(result);
             }
         }
@@ -34,12 +34,11 @@ namespace Webárúház_Nagy_Project.Controllers
             {
                 var request = new Termekek
                 {
-                    Id = Guid.NewGuid(),
                     TermekNev = createdTermekekDto.TermekNev,
                     Leiras = createdTermekekDto.Leiras,
                     Menyiseg = createdTermekekDto.Menyiseg,
-                    Szin = createdTermekekDto.Szin,
-                    Tag = createdTermekekDto.Tag,
+                    SzinId = createdTermekekDto.SzinId,
+                    TagId = createdTermekekDto.TagId,
                     Keputvonal = createdTermekekDto.Keputvonal,
                 };
 
@@ -51,17 +50,17 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(Guid id, UpdateTermekekDto updateTermekedDto)
+        public ActionResult Put(int id, UpdateTermekekDto updateTermekedDto)
         {
             using (var context = new project_databaseContext())
             {
-                var existingTermek = context.Termekek.FirstOrDefault(x => x.Id == id);
+                var existingTermek = context.Termekek.FirstOrDefault(x => x.TermekekId == id);
 
                 existingTermek.TermekNev = updateTermekedDto.TermekNev;
                 existingTermek.Leiras = updateTermekedDto.Leiras;
                 existingTermek.Menyiseg = updateTermekedDto.Menyiseg;
-                existingTermek.Szin = updateTermekedDto.Szin;
-                existingTermek.Tag = updateTermekedDto.Tag;
+                existingTermek.SzinId = updateTermekedDto.SzinId;
+                existingTermek.TagId = updateTermekedDto.TagId;
                 existingTermek.Keputvonal = updateTermekedDto.Keputvonal;
 
                 context.Termekek.Update(existingTermek);
@@ -71,11 +70,11 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(Guid id)
+        public ActionResult Delete(int id)
         {
             using (var context = new project_databaseContext())
             {
-                var existingTermek = context.Termekek.FirstOrDefault(x => x.Id == id);
+                var existingTermek = context.Termekek.FirstOrDefault(x => x.TermekekId == id);
 
                 context.Termekek.Remove(existingTermek);
                 context.SaveChanges();

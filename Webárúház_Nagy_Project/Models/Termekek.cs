@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Webárúház_Nagy_Project.Models
 {
@@ -7,11 +8,11 @@ namespace Webárúház_Nagy_Project.Models
     {
         public Termekek()
         {
-            Hozzaszolasoks = new HashSet<Hozzaszolasok>();
-            Szamlazas = new HashSet<Szamlaza>();
+            Hozzaszolasok = new HashSet<Hozzaszolasok>();
+            Szamlazasok = new HashSet<Szamlazasok>();
         }
 
-        public Guid Id { get; set; }
+        public int TermekekId { get; set; }
         public string TermekNev { get; set; } = null!;
         public int Ar { get; set; }
         public string Leiras { get; set; } = null!;
@@ -20,7 +21,8 @@ namespace Webárúház_Nagy_Project.Models
         public int TagId { get; set; }
         public string Keputvonal { get; set; } = null!;
 
-        public virtual ICollection<Hozzaszolasok> Hozzaszolasoks { get; set; }
-        public virtual ICollection<Szamlaza> Szamlazas { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Hozzaszolasok> Hozzaszolasok { get; set; }
+        public virtual ICollection<Szamlazasok> Szamlazasok { get; set; }
     }
 }

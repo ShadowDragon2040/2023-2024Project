@@ -4,13 +4,13 @@ using System.Text.Json.Serialization;
 
 namespace Webárúház_Nagy_Project.Models
 {
-    public partial class Hozzaszolasok
+    public partial class Szamlazasok
     {
-        public int HozzaszolasId { get; set; }
+        public int SzamlazasId { get; set; }
         public int FelhasznaloId { get; set; }
         public int TermekId { get; set; }
-        public string Leiras { get; set; } = null!;
-        public bool Ertekeles { get; set; }
+        public DateTime VasarlasIdopontja { get; set; }
+        public bool SikeresSzalitas { get; set; }
 
         [JsonIgnore]
         public virtual Felhasznalok Felhasznalok { get; set; } = null!;

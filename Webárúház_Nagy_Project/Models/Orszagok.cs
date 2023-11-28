@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Webárúház_Nagy_Project.Models
 {
@@ -7,12 +8,13 @@ namespace Webárúház_Nagy_Project.Models
     {
         public Orszagok()
         {
-            Felhasznaloks = new HashSet<Felhasznalok>();
+            Felhasznalok = new HashSet<Felhasznalok>();
         }
 
         public int OrszagId { get; set; }
         public string OrszagKod { get; set; } = null!;
 
-        public virtual ICollection<Felhasznalok> Felhasznaloks { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Felhasznalok> Felhasznalok { get; set; }
     }
 }

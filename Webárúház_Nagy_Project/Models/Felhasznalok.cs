@@ -7,11 +7,11 @@ namespace Webárúház_Nagy_Project.Models
     {
         public Felhasznalok()
         {
-            Hozzaszolasoks = new HashSet<Hozzaszolasok>();
-            Szamlazas = new HashSet<Szamlaza>();
+            Hozzaszolasok = new HashSet<Hozzaszolasok>();
+            Szamlazasok = new HashSet<Szamlazasok>();
         }
 
-        public Guid Id { get; set; }
+        public int FelhasznaloId { get; set; }
         public string LoginNev { get; set; } = null!;
         public string Hash { get; set; } = null!;
         public string Salt { get; set; } = null!;
@@ -28,7 +28,7 @@ namespace Webárúház_Nagy_Project.Models
 
         public virtual Orszagok OrszagKod { get; set; } = null!;
         public virtual Varosok VarosNev { get; set; } = null!;
-        public virtual ICollection<Hozzaszolasok> Hozzaszolasoks { get; set; }
-        public virtual ICollection<Szamlaza> Szamlazas { get; set; }
+        public virtual ICollection<Hozzaszolasok> Hozzaszolasok { get; set; }
+        public virtual ICollection<Szamlazasok> Szamlazasok { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             using (var context = new project_databaseContext())
             {
-                var result = context.Hozzaszolasok.Where(x => x.Id == id);
+                var result = context.Hozzaszolasok.Where(x => x.HozzaszolasId == id);
                 return Ok(result);
             }
         }
@@ -34,11 +34,10 @@ namespace Webárúház_Nagy_Project.Controllers
             using (var context = new project_databaseContext())
             {
 
-                var request = new Hozzaszolas
+                var request = new Hozzaszolasok
                 {
-                    Id = createdHozzaszolasokDto.Id,
-                    Felhasznalo = createdHozzaszolasokDto.FelhasznaloId,
-                    Termek = createdHozzaszolasokDto.TermekId,
+                    Felhasznalok = createdHozzaszolasokDto.FelhasznaloId,
+                    Termekek = createdHozzaszolasokDto.TermekId,
                 };
 
                 context.Hozzaszolasok.Add(request);
@@ -72,7 +71,7 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             using (var context = new project_databaseContext())
             {
-                var existingHozzaszolas = context.Hozzaszolasok.FirstOrDefault(x => x.Id == id);
+                var existingHozzaszolas = context.Hozzaszolasok.FirstOrDefault(x => x.HozzaszolasId == id);
 
                 context.Hozzaszolasok.Remove(existingHozzaszolas);
                 context.SaveChanges();

@@ -19,7 +19,7 @@ namespace Webárúház_Nagy_Project.Models
         public virtual DbSet<Felhasznalok> Felhasznalok { get; set; } = null!;
         public virtual DbSet<Hozzaszolasok> Hozzaszolasok { get; set; } = null!;
         public virtual DbSet<Orszagok> Orszagok { get; set; } = null!;
-        public virtual DbSet<Szamlaza> Szamlazas { get; set; } = null!;
+        public virtual DbSet<Szamlazasok> Szamlazasok { get; set; } = null!;
         public virtual DbSet<Szinek> Szinek { get; set; } = null!;
         public virtual DbSet<Szinkapcsolo> Szinkapcsolo { get; set; } = null!;
         public virtual DbSet<Tagek> Tagek { get; set; } = null!;
@@ -40,6 +40,9 @@ namespace Webárúház_Nagy_Project.Models
         {
             modelBuilder.Entity<Felhasznalok>(entity =>
             {
+                entity.HasKey(e => e.FelhasznaloId)
+                .HasName("PRIMARY");
+
                 entity.ToTable("felhasznalok");
 
                 entity.HasIndex(e => new { e.OrszagKodId, e.VarosNevId }, "OrszágKodId");
@@ -75,13 +78,13 @@ namespace Webárúház_Nagy_Project.Models
                 entity.Property(e => e.VarosNevId).HasColumnType("int(11)");
 
                 entity.HasOne(d => d.OrszagKod)
-                    .WithMany(p => p.Felhasznaloks)
+                    .WithMany(p => p.Felhasznalok)
                     .HasForeignKey(d => d.OrszagKodId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("felhasznalok_ibfk_1");
 
                 entity.HasOne(d => d.VarosNev)
-                    .WithMany(p => p.Felhasznaloks)
+                    .WithMany(p => p.Felhasznalok)
                     .HasForeignKey(d => d.VarosNevId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("felhasznalok_ibfk_2");
@@ -89,24 +92,27 @@ namespace Webárúház_Nagy_Project.Models
 
             modelBuilder.Entity<Hozzaszolasok>(entity =>
             {
+                entity.HasKey(e => e.HozzaszolasId)
+                .HasName("PRIMARY");
+                
                 entity.ToTable("hozzaszolasok");
 
                 entity.HasIndex(e => new { e.FelhasznaloId, e.TermekId }, "FelhasznaloId");
 
                 entity.HasIndex(e => e.TermekId, "hozzaszolas_ibfk_1");
 
-                entity.Property(e => e.Id).HasColumnType("int(11)");
+                entity.Property(e => e.HozzaszolasId).HasColumnType("int(11)");
 
                 entity.Property(e => e.Leiras).HasMaxLength(255);
 
-                entity.HasOne(d => d.Felhasznalo)
-                    .WithMany(p => p.Hozzaszolasoks)
+                entity.HasOne(d => d.Felhasznalok)
+                    .WithMany(p => p.Hozzaszolasok)
                     .HasForeignKey(d => d.FelhasznaloId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("hozzaszolasok_ibfk_2");
 
-                entity.HasOne(d => d.Termek)
-                    .WithMany(p => p.Hozzaszolasoks)
+                entity.HasOne(d => d.Termekek)
+                    .WithMany(p => p.Hozzaszolasok)
                     .HasForeignKey(d => d.TermekId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("hozzaszolasok_ibfk_1");
@@ -124,26 +130,29 @@ namespace Webárúház_Nagy_Project.Models
                 entity.Property(e => e.OrszagKod).HasMaxLength(128);
             });
 
-            modelBuilder.Entity<Szamlaza>(entity =>
+            modelBuilder.Entity<Szamlazasok>(entity =>
             {
+                entity.HasKey(e => e.SzamlazasId)
+                .HasName("PRIMARY");
+
                 entity.ToTable("szamlazas");
 
                 entity.HasIndex(e => new { e.FelhasznaloId, e.TermekId }, "FelhasznaloId");
 
                 entity.HasIndex(e => e.TermekId, "szamlazas_ibfk_1");
 
-                entity.Property(e => e.Id).HasColumnType("int(11)");
+                entity.Property(e => e.SzamlazasId).HasColumnType("int(11)");
 
                 entity.Property(e => e.VasarlasIdopontja).HasColumnType("date");
 
-                entity.HasOne(d => d.Felhasznalo)
-                    .WithMany(p => p.Szamlazas)
+                entity.HasOne(d => d.Felhasznalok)
+                    .WithMany(p => p.Szamlazasok)
                     .HasForeignKey(d => d.FelhasznaloId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("szamlazas_ibfk_2");
 
-                entity.HasOne(d => d.Termek)
-                    .WithMany(p => p.Szamlazas)
+                entity.HasOne(d => d.Termekek)
+                    .WithMany(p => p.Szamlazasok)
                     .HasForeignKey(d => d.TermekId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("szamlazas_ibfk_1");
@@ -163,6 +172,9 @@ namespace Webárúház_Nagy_Project.Models
 
             modelBuilder.Entity<Szinkapcsolo>(entity =>
             {
+                entity.HasKey(e => e.Id)
+                .HasName("PRIMARY");
+                
                 entity.ToTable("szinkapcsolo");
 
                 entity.HasIndex(e => e.SzinKapcsoloId, "SzinKapcsoloId");
@@ -176,7 +188,7 @@ namespace Webárúház_Nagy_Project.Models
                 entity.Property(e => e.TermekSzinKapcsoloId).HasColumnType("int(11)");
 
                 entity.HasOne(d => d.SzinKapcsolo)
-                    .WithMany(p => p.Szinkapcsolos)
+                    .WithMany(p => p.Szinkapcsolo)
                     .HasForeignKey(d => d.SzinKapcsoloId)
                     .HasConstraintName("szinkapcsolo_ibfk_1");
             });
@@ -195,6 +207,9 @@ namespace Webárúház_Nagy_Project.Models
 
             modelBuilder.Entity<Tagkapcsolo>(entity =>
             {
+                entity.HasKey(e => e.Id)
+                .HasName("PRIMARY");
+
                 entity.ToTable("tagkapcsolo");
 
                 entity.HasIndex(e => e.TagKapcsoloId, "TagKapcsoloId");
@@ -208,13 +223,16 @@ namespace Webárúház_Nagy_Project.Models
                 entity.Property(e => e.TermekTagKapcsoloId).HasColumnType("int(11)");
 
                 entity.HasOne(d => d.TagKapcsolo)
-                    .WithMany(p => p.Tagkapcsolos)
+                    .WithMany(p => p.Tagkapcsolo)
                     .HasForeignKey(d => d.TagKapcsoloId)
                     .HasConstraintName("tagkapcsolo_ibfk_1");
             });
 
             modelBuilder.Entity<Termekek>(entity =>
             {
+                entity.HasKey(e => e.TermekekId)
+                .HasName("PRIMARY");
+
                 entity.ToTable("termekek");
 
                 entity.HasIndex(e => e.SzinId, "SzinValasztek");

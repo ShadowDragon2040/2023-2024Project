@@ -23,7 +23,7 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             using (var context = new project_databaseContext())
             {
-                var result = context.Szamlazasok.Where(x => x.Id == id);
+                var result = context.Szamlazasok.Where(x => x.SzamlazasId == id);
                 return Ok(result);
             }
         }
@@ -34,11 +34,10 @@ namespace Webárúház_Nagy_Project.Controllers
             using (var context = new project_databaseContext())
             {
 
-                var request = new Szamlazas
+                var request = new Szamlazasok
                 {
-                    Id = createdSzamlazasokDto.Id,
-                    Felhasznalo = createdSzamlazasokDto.FelhasznaloId,
-                    Termek = createdSzamlazasokDto.TermekId,
+                    Felhasznalok = createdSzamlazasokDto.FelhasznaloId,
+                    Termekek = createdSzamlazasokDto.TermekId,
                     VasarlasIdopontja = DateTime.Now,
                     SikeresSzalitas = false,
                 };
@@ -74,7 +73,7 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             using (var context = new project_databaseContext())
             {
-                var existingSzamlazas = context.Szamlazasok.FirstOrDefault(x => x.Id == id);
+                var existingSzamlazas = context.Szamlazasok.FirstOrDefault(x => x.SzamlazasId == id);
 
                 context.Szamlazasok.Remove(existingSzamlazas);
                 context.SaveChanges();

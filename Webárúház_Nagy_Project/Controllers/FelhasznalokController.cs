@@ -20,11 +20,11 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult Get(Guid id)
+        public ActionResult Get(int id)
         {
             using (var context = new project_databaseContext())
             {
-                var result = context.Felhasznalok.Where(x => x.Id == id);
+                var result = context.Felhasznalok.Where(x => x.FelhasznaloId == id);
                 return Ok(result);
             }
         }
@@ -37,7 +37,6 @@ namespace Webárúház_Nagy_Project.Controllers
                 
                 var request = new Felhasznalok
                 {
-                    Id = Guid.NewGuid(),
                     LoginNev = createdFelhasznalokDto.LoginNev,
                     Hash = createdFelhasznalokDto.Hash,
                     Salt = createdFelhasznalokDto.Salt,
@@ -46,7 +45,7 @@ namespace Webárúház_Nagy_Project.Controllers
                     Aktivalva = createdFelhasznalokDto.Aktivalva,
                     Email = createdFelhasznalokDto.Email,
                     ProfilKep = createdFelhasznalokDto.ProfilKep,
-                    OrszágKod = createdFelhasznalokDto.OrszágKod,
+                    OrszagKod = createdFelhasznalokDto.OrszágKod,
                     VarosNev = createdFelhasznalokDto.VarosNev,
                     UtcaNev = createdFelhasznalokDto.UtcaNev,
                     IranyitoSzam = createdFelhasznalokDto.IranyitoSzam,
@@ -61,11 +60,11 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(Guid id, UpdateFelhasznalokDto updateFelhasznalokDto)
+        public ActionResult Put(int id, UpdateFelhasznalokDto updateFelhasznalokDto)
         {
             using (var context = new project_databaseContext())
             {
-                var existingFelhasznalo = context.Felhasznalok.FirstOrDefault(x => x.Id == id);
+                var existingFelhasznalo = context.Felhasznalok.FirstOrDefault(x => x.FelhasznaloId == id);
 
                 existingFelhasznalo.LoginNev = updateFelhasznalokDto.LoginNev;
                 existingFelhasznalo.Hash = updateFelhasznalokDto.Hash;
@@ -75,7 +74,7 @@ namespace Webárúház_Nagy_Project.Controllers
                 existingFelhasznalo.Aktivalva = updateFelhasznalokDto.Aktivalva;
                 existingFelhasznalo.Email = updateFelhasznalokDto.Email;
                 existingFelhasznalo.ProfilKep = updateFelhasznalokDto.ProfilKep;
-                    existingFelhasznalo.OrszágKod = updateFelhasznalokDto.OrszágKod;
+                    existingFelhasznalo.OrszagKod = updateFelhasznalokDto.OrszágKod;
                 existingFelhasznalo.VarosNev = updateFelhasznalokDto.VarosNev;
                 existingFelhasznalo.UtcaNev = updateFelhasznalokDto.UtcaNev;
                 existingFelhasznalo.IranyitoSzam = updateFelhasznalokDto.IranyitoSzam;
@@ -88,11 +87,11 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(Guid id)
+        public ActionResult Delete(int id)
         {
             using (var context = new project_databaseContext())
             {
-                var existingFelhasznalo = context.Felhasznalok.FirstOrDefault(x => x.Id == id);
+                var existingFelhasznalo = context.Felhasznalok.FirstOrDefault(x => x.FelhasznaloId == id);
 
                 context.Felhasznalok.Remove(existingFelhasznalo);
                 context.SaveChanges();
