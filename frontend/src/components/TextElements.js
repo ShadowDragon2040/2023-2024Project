@@ -23,6 +23,22 @@ export const InfoContainer2=styled.div`
 
     }
 `
+export const CarouselImage=styled.img`
+width:250px;
+height:250px;
+`
+
+
+export const SlideContainer=styled.div`
+    color: #fff;
+    background: ${({lightBg})=>(lightBg?'#f9f9f9':'#010606')};
+    @media screen and (max-width:768px) {
+        padding: 100px 0;
+
+    }
+    width: 300px;
+    text-allign: center;
+`
 export const InfoWrapper =styled.div`
     display: grid;
     z-index: 1;
@@ -143,18 +159,45 @@ export const Img =styled.img`
     width:100%;
     
 `
-
 export const ServicesP=styled.p`
+    
+    font-size: 1rem;
+    text-align: center;
+`
+
+export const ServicesP2=styled.p`
+    color:red;
     font-size: 1rem;
     text-align: center;
 `
 export const ServicesCard=styled.div`
+    
     background: #fff;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     border-radius: 10px;
+    max-height: 340px;
+    padding: 30px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    transition: all 0.2s ease-in-out;
+
+    &:hover{
+        transform: scale(1.02);
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+    }
+
+`
+export const ServicesCard2=styled.div`
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 10px;
+    max-width:250px;
     max-height: 340px;
     padding: 30px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
@@ -394,8 +437,8 @@ export const HeroP=styled.p`
     }
 `
 export const CarouselContainer = styled.div`
-    background-color: black;
-    padding:50px 600px;
+    width:100vw;
+    padding:200px 200px;
 `
 
 

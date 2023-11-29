@@ -1,10 +1,17 @@
-import React from "react"
+import React from 'react';
+import Navbar from './Navbar';
+import CarouselComponent from './CarouselComponent';
 
-function SlideShow() {
-  return (
-    <>
-    asd
-      </>
-    )
-}
-export default SlideShow
+
+const SlideShow = () => {
+
+
+    return (
+      <>
+      <Navbar/>
+      <CarouselComponent/>
+     </>
+    );
+};
+
+export default SlideShow;
