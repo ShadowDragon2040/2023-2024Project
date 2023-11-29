@@ -10,8 +10,8 @@ import Footer from '../components/Footer'
 import ModelSection from '../components/ModelSection'
 
 const Home = () => {
-  const[isOpen,setIsOpen]=useState(false)
 
+  const[isOpen,setIsOpen]=useState(false)
   const toggle=()=>{
     setIsOpen(!isOpen)
   }
@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <>
       <Sidebar isOpen={isOpen} toggle={toggle}/>
-      <Navbar toggle={toggle}/>
+      <Navbar/>
       <HeroSection/>
       <InfoSection />
       <PrinterTools/>

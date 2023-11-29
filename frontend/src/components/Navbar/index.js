@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {FaBars} from 'react-icons/fa'
 import { IconContext } from 'react-icons';
 import { animateScroll as scroll } from 'react-scroll';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 import { 
   Nav,
@@ -17,8 +18,11 @@ import {
 
 
 
-const Navbar = ({toggle}) => {
+const NavbarA = ({toggle}) => {
   const [scrollNav, setScrollNav]= useState(false);
+
+  const location = useLocation();
+  const path = location.pathname;
 
   const changeNav=()=>{
     if(window.scrollY >= 80){
@@ -30,13 +34,17 @@ const Navbar = ({toggle}) => {
   useEffect(()=>{
     window.addEventListener('scroll',changeNav);
   },[])
+  
+
 
   const toggleHome=()=>{
     scroll.scrollToTop();
   }
 
+
   return (
     <>
+    
     <IconContext.Provider value={{color:'#fff'}}>
         <Nav scrollNav={scrollNav}>
           <NavbarContainer>
@@ -44,7 +52,7 @@ const Navbar = ({toggle}) => {
             <MobileIcon onClick={toggle}>
               <FaBars/>
             </MobileIcon>
-            <NavMenu>
+           <NavMenu>
               <NavItem>
                 <NavLinks to='about'
                 smooth={true} 
@@ -92,7 +100,7 @@ const Navbar = ({toggle}) => {
               </NavItem>
             </NavMenu>
             <NavBtn>
-              <NavBtnLink to='ShopPage'>Shop</NavBtnLink>
+              <NavBtnLink  to='ShopPage'>Shop</NavBtnLink>
             </NavBtn>
           </NavbarContainer>
         </Nav>
@@ -101,4 +109,4 @@ const Navbar = ({toggle}) => {
   );
 };
 
-export default Navbar;
+export default NavbarA;

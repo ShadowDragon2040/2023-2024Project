@@ -344,6 +344,7 @@ export const NavbarContainer=styled.div`
     width: 100%;
     padding: 0 24px ;
     max-width:1100px;
+    background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg,rgba(0,0,0,0.2) 0%,transparent 100%);
 
 `    
 export const NavLogo=styled(LinkR)`
@@ -438,7 +439,7 @@ export const HeroP=styled.p`
 `
 export const CarouselContainer = styled.div`
     width:100vw;
-    padding:200px 200px;
+    padding:180px 200px;
 `
 
 
@@ -639,5 +640,12 @@ export const SidebarRoute=styled(LinkR)`
         background: #fff;
         color: #010606;
     }
+
+`
+export  const CategoryContainer=styled.div`
+    padding-top:140px;  
+    width:13vw; 
+    height:100%;    
+    float:left  
 
 `

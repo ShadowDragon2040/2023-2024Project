@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 import CarouselComponent from './CarouselComponent';
-
+import Footer from './Footer';
 
 const SlideShow = () => {
 
@@ -10,6 +10,7 @@ const SlideShow = () => {
       <>
       <Navbar/>
       <CarouselComponent/>
+      <Footer/>
      </>
     );
 };
