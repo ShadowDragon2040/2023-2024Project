@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Policy;
 using Webárúház_Nagy_Project.DTOs;
@@ -10,7 +11,7 @@ namespace Webárúház_Nagy_Project.Controllers
     [ApiController]
     public class FelhasznalokController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet, Authorize]
         public ActionResult Get()
         {
             using (var context = new project_databaseContext())
@@ -19,7 +20,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public ActionResult Get(int id)
         {
             using (var context = new project_databaseContext())
@@ -29,7 +30,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public ActionResult<FelhasznalokDto> Post(CreatedFelhasznalokDto createdFelhasznalokDto)
         {
             using (var context = new project_databaseContext())
@@ -59,7 +60,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), Authorize]
         public ActionResult Put(int id, UpdateFelhasznalokDto updateFelhasznalokDto)
         {
             using (var context = new project_databaseContext())
@@ -86,7 +87,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public ActionResult Delete(int id)
         {
             using (var context = new project_databaseContext())

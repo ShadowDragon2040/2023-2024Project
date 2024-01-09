@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Webárúház_Nagy_Project.DTOs;
 using Webárúház_Nagy_Project.Models;
@@ -9,7 +10,7 @@ namespace Webárúház_Nagy_Project.Controllers
     [ApiController]
     public class HozzaszolasController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet, Authorize]
         public ActionResult Get()
         {
             using (var context = new project_databaseContext())
@@ -18,7 +19,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public ActionResult Get(int id)
         {
             using (var context = new project_databaseContext())
@@ -28,7 +29,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public ActionResult<HozzaszolasokDto> Post(CreatedHozzaszolasokDto createdHozzaszolasokDto)
         {
             using (var context = new project_databaseContext())
@@ -66,7 +67,7 @@ namespace Webárúház_Nagy_Project.Controllers
         }
         */
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public ActionResult Delete(int id)
         {
             using (var context = new project_databaseContext())

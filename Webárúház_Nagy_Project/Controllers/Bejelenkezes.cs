@@ -57,6 +57,7 @@ namespace Webárúház_Nagy_Project.Controllers
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
             var token = new JwtSecurityToken(
                 claims: claims,
+                //mikor járjon le a token
                 expires: DateTime.Now.AddDays(1),
                 signingCredentials: creds
                 );
