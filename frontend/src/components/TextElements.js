@@ -26,7 +26,7 @@ export const InfoContainer2=styled.div`
 export const CarouselImage=styled.img`
 float:left;
 width:60%;
-height:25vw;
+height:20vw;
 `
 
 
@@ -440,7 +440,7 @@ export const HeroP=styled.p`
 `
 export const CarouselContainer = styled.div`
     margin:auto;
-    width:80%;
+    width:60%;
     height:30%;
     padding:180px 200px;
 `

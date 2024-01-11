@@ -30,17 +30,17 @@ function CarouselComponent(props) {
   return (
     
     <CarouselContainer>
-      <Carousel autoPlay={true} infiniteLoop={true}>
-        <div style={{backgroundColor:"red"}}>
-          <img src={Image1}>
-          </img>
+      <Carousel autoPlay={true} infiniteLoop={true} showThumbs={false}>
+        <div>
+          <CarouselImage src={Image1}/>
+  
           <p>
 
           </p>
         </div>
-        <div style={{backgroundColor:"blue"}}>
-          <img src={Image2}>
-          </img>
+        <div>
+          <CarouselImage src={Image2}/>
+          
           <p>
             
           </p>

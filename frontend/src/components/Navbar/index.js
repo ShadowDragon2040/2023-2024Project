@@ -1,19 +1,16 @@
 import React, {useEffect, useState} from 'react'
-import {FaBars} from 'react-icons/fa'
 import { IconContext } from 'react-icons';
 import { animateScroll as scroll } from 'react-scroll';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import SearchBar from '../SeachBar';
 
 import { 
   Nav,
   NavbarContainer,
   NavLogo,
-  MobileIcon,
-  NavItem,
-  NavMenu,
-  NavLinks,
   NavBtn,
-  NavBtnLink
+  NavBtnLink,
+  InfoContainer,
  } from '../TextElements';
 
 
@@ -41,6 +38,11 @@ const NavbarA = ({toggle}) => {
     scroll.scrollToTop();
   }
 
+//Mobilos megjelenítés!!!!!
+/*<MobileIcon onClick={toggle}>
+<FaBars/>
+</MobileIcon>
+*/
 
   return (
     <>
@@ -49,10 +51,13 @@ const NavbarA = ({toggle}) => {
         <Nav scrollNav={scrollNav}>
           <NavbarContainer>
             <NavLogo to='/' onClick={toggleHome}>PrintFusion</NavLogo>
-            <MobileIcon onClick={toggle}>
-              <FaBars/>
-            </MobileIcon>
            
+   
+            <NavBtn>
+
+             <SearchBar/>
+              
+            </NavBtn>
             <NavBtn>
               <NavBtnLink  to='ShopPage'>Shop</NavBtnLink>
             </NavBtn>
