@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\Webárúház_Nagy_Project.props" />
-</Project>

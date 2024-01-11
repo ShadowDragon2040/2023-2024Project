@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\NagyProjectBackend7.0.props" />
+</Project>

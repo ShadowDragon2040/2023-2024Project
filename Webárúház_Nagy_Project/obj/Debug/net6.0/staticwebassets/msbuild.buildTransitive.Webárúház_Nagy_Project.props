@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\Webárúház_Nagy_Project.props" />
-</Project>
