@@ -52,53 +52,7 @@ const NavbarA = ({toggle}) => {
             <MobileIcon onClick={toggle}>
               <FaBars/>
             </MobileIcon>
-           <NavMenu>
-              <NavItem>
-                <NavLinks to='about'
-                smooth={true} 
-                duration={500} 
-                spy={true}
-                exact='true' 
-                offset={-80}
-                >Bemutatkozás</NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks to='tools'
-                smooth={true} 
-                duration={500} 
-                spy={true}
-                exact='true'
-                offset={-80}
-                >Nyomtatóink</NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks to='products'
-                smooth={true} 
-                duration={500} 
-                spy={true}
-                exact='true' 
-                offset={-80}
-                >Termékeink</NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks to='models'
-                smooth={true} 
-                duration={500} 
-                spy={true}
-                exact='true' 
-                offset={-80}
-                >Modellek</NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks to='services'
-                smooth={true} 
-                duration={500} 
-                spy={true}
-                exact='true' 
-                offset={-80}
-                >Utómunkák</NavLinks>
-              </NavItem>
-            </NavMenu>
+           
             <NavBtn>
               <NavBtnLink  to='ShopPage'>Shop</NavBtnLink>
             </NavBtn>

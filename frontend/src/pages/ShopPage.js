@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
-import Navbar from '../components/Navbar'
+import Navbar from '../components/Navbar';
+import CarouselComponent from '../components/CarouselComponent';
 import Footer from '../components/Footer';
-import { InfoContainer, InfoRow } from '../components/TextElements';
-import SlideShow from '../components/SlideShow';
+
 
 function ShopPage(){
 
@@ -14,8 +14,11 @@ function ShopPage(){
   }
     return(
       <>
-        <SlideShow>
-          </SlideShow>      
+        
+        <Navbar/>
+        <CarouselComponent />
+        <Footer/>
+               
       </>
       
         )

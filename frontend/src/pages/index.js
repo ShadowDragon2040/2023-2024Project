@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import HeroSection from '../components/HeroSection'
-import Navbar from '../components/Navbar'
+import MainNavbar from "../components/MainNavbar"
 import Sidebar from '../components/Sidebar'
 import InfoSection from '../components/InfoSection'
 import PrinterTools from '../components/PrinterTools'
@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <>
       <Sidebar isOpen={isOpen} toggle={toggle}/>
-      <Navbar/>
+      <MainNavbar/>
       <HeroSection/>
       <InfoSection />
       <PrinterTools/>

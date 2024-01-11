@@ -3036,23 +3036,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vbalázs\\.nuget\\packages\\": {},
+    "C:\\Users\\pbálint\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\Webárúház_Nagy_Project\\Webárúház_Nagy_Project.csproj",
+      "projectUniqueName": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Webárúház_Nagy_Project\\Webárúház_Nagy_Project.csproj",
       "projectName": "Webárúház_Nagy_Project",
-      "projectPath": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\Webárúház_Nagy_Project\\Webárúház_Nagy_Project.csproj",
-      "packagesPath": "C:\\Users\\vbalázs\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\Webárúház_Nagy_Project\\obj\\",
+      "projectPath": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Webárúház_Nagy_Project\\Webárúház_Nagy_Project.csproj",
+      "packagesPath": "C:\\Users\\pbálint\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Webárúház_Nagy_Project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\vbalázs\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pbálint\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

@@ -24,8 +24,9 @@ export const InfoContainer2=styled.div`
     }
 `
 export const CarouselImage=styled.img`
-width:250px;
-height:250px;
+float:left;
+width:60%;
+height:25vw;
 `
 
 
@@ -438,7 +439,9 @@ export const HeroP=styled.p`
     }
 `
 export const CarouselContainer = styled.div`
-    width:100vw;
+    margin:auto;
+    width:80%;
+    height:30%;
     padding:180px 200px;
 `
 
