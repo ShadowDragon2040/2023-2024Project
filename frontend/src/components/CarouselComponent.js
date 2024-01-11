@@ -1,35 +1,52 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import Image1 from "./ComponentImages/image1.jpg"
 import Image2 from "./ComponentImages/image2.jpg"
-import Image3 from "./ComponentImages/image3.jpg"
-import Carousel from "react-grid-carousel"
-import {CarouselContainer, CarouselImage} from './TextElements';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
+import {CarouselContainer, CarouselImage, InfoContainer} from './TextElements';
 
 
-function CarouselComponent() {
+
+function CarouselComponent(props) {
+/*
+  const [carouselItem,setCarouselItem]=useState([]);
+
+  const url="";
+  useEffect(
+    fetch(url)
+    .then(resp=>resp.json)
+    .then((data)=>{setCarouselItem(data.result)})
+  )
+  const carouselElemek=props.CarouselElemek.map(item=>{
+    <Carousel.Item>
+    <CarouselImage src={item.src}/>
+    <InfoContainer>
+    <CarouselItemDetails/>
+      
+    </InfoContainer>
+  </Carousel.Item>
+  })
+  */
   return (
     
     <CarouselContainer>
-    <Carousel cols={3} rows={1} gap={1} autoplay={3500} loop>
-      <Carousel.Item>
-        <CarouselImage src={Image1}></CarouselImage>
-      </Carousel.Item>
-      <Carousel.Item>
-        <CarouselImage src={Image2}></CarouselImage>
-      </Carousel.Item>
-      <Carousel.Item>
-        <CarouselImage src={Image3}></CarouselImage>
-      </Carousel.Item>
+      <Carousel autoPlay={true} infiniteLoop={true} showThumbs={false}>
+        <div>
+          <CarouselImage src={Image1}/>
+  
+          <p>
 
-      <Carousel.Item>
-        <CarouselImage src={Image3}></CarouselImage>
-      </Carousel.Item>
-      <Carousel.Item>
-        <CarouselImage src={Image2}></CarouselImage>
-      </Carousel.Item>
-      <Carousel.Item>
-        <CarouselImage src={Image1}></CarouselImage>
-      </Carousel.Item>
+          </p>
+        </div>
+        <div>
+          <CarouselImage src={Image2}/>
+          
+          <p>
+            
+          </p>
+        </div>
+     
+      
     </Carousel>
    </CarouselContainer>
   )

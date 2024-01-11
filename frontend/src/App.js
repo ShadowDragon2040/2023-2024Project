@@ -13,6 +13,7 @@ import OtthoniDiszPage from './pages/OtthoniDisz';
 import AlkatreszPage from './pages/Alkatresz';
 import ModelltervezesPage from './pages/ModelltervezesPage';
 import ShopPage from './pages/ShopPage';
+import "bootstrap/dist/css/bootstrap.css"
 
 function App() {
   return (

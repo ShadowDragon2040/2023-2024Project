@@ -1,19 +1,16 @@
 import React, {useEffect, useState} from 'react'
-import {FaBars} from 'react-icons/fa'
 import { IconContext } from 'react-icons';
 import { animateScroll as scroll } from 'react-scroll';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import SearchBar from '../SeachBar';
 
 import { 
   Nav,
   NavbarContainer,
   NavLogo,
-  MobileIcon,
-  NavItem,
-  NavMenu,
-  NavLinks,
   NavBtn,
-  NavBtnLink
+  NavBtnLink,
+  InfoContainer,
  } from '../TextElements';
 
 
@@ -41,6 +38,11 @@ const NavbarA = ({toggle}) => {
     scroll.scrollToTop();
   }
 
+//Mobilos megjelenítés!!!!!
+/*<MobileIcon onClick={toggle}>
+<FaBars/>
+</MobileIcon>
+*/
 
   return (
     <>
@@ -49,56 +51,13 @@ const NavbarA = ({toggle}) => {
         <Nav scrollNav={scrollNav}>
           <NavbarContainer>
             <NavLogo to='/' onClick={toggleHome}>PrintFusion</NavLogo>
-            <MobileIcon onClick={toggle}>
-              <FaBars/>
-            </MobileIcon>
-           <NavMenu>
-              <NavItem>
-                <NavLinks to='about'
-                smooth={true} 
-                duration={500} 
-                spy={true}
-                exact='true' 
-                offset={-80}
-                >Bemutatkozás</NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks to='tools'
-                smooth={true} 
-                duration={500} 
-                spy={true}
-                exact='true'
-                offset={-80}
-                >Nyomtatóink</NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks to='products'
-                smooth={true} 
-                duration={500} 
-                spy={true}
-                exact='true' 
-                offset={-80}
-                >Termékeink</NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks to='models'
-                smooth={true} 
-                duration={500} 
-                spy={true}
-                exact='true' 
-                offset={-80}
-                >Modellek</NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks to='services'
-                smooth={true} 
-                duration={500} 
-                spy={true}
-                exact='true' 
-                offset={-80}
-                >Utómunkák</NavLinks>
-              </NavItem>
-            </NavMenu>
+           
+   
+            <NavBtn>
+
+             <SearchBar/>
+              
+            </NavBtn>
             <NavBtn>
               <NavBtnLink  to='ShopPage'>Shop</NavBtnLink>
             </NavBtn>
