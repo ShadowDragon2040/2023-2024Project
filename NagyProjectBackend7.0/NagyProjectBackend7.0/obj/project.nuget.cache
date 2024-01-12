@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "dCWpY7ieC4Pdk5Q0DyVG4PXvlrjIQ2gjmmuljkYRGsCTCe7KUZYyQecDcuTDXsxhUvY2ybkvSGnpxgSZevtcsA==",
+  "dgSpecHash": "vVJxw8gr+W7FfYG4uQaIZaok0I08G9ljD6jx19HDg2C3jGA65C7XnXq9IV8qyr5zS2ITLykKhwXl89tv0NnTAw==",
   "success": true,
   "projectFilePath": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\NagyProjectBackend7.0\\NagyProjectBackend7.0\\NagyProjectBackend7.0.csproj",
   "expectedPackageFiles": [
@@ -44,6 +44,7 @@
     "C:\\Users\\vbalázs\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\vbalázs\\.nuget\\packages\\mysql.data\\8.2.0\\mysql.data.8.2.0.nupkg.sha512",
     "C:\\Users\\vbalázs\\.nuget\\packages\\mysql.entityframeworkcore\\7.0.10\\mysql.entityframeworkcore.7.0.10.nupkg.sha512",
+    "C:\\Users\\vbalázs\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
     "C:\\Users\\vbalázs\\.nuget\\packages\\scrutor\\3.3.0\\scrutor.3.3.0.nupkg.sha512",
     "C:\\Users\\vbalázs\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "C:\\Users\\vbalázs\\.nuget\\packages\\swashbuckle.aspnetcore.filters\\8.0.0\\swashbuckle.aspnetcore.filters.8.0.0.nupkg.sha512",

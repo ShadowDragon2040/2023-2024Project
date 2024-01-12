@@ -67,7 +67,7 @@ namespace Webárúház_Nagy_Project.Controllers
         }
         */
 
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             using (var context = new project_databaseContext())

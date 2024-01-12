@@ -22,27 +22,7 @@ namespace Webárúház_Nagy_Project.Controllers
             _configuration = configuration;
         }
 
-        // .net 6.0 módszer
-        /*
-        [HttpPost("Register")]
-        public async Task<ActionResult<Felhasznalok>> Register(UserDto request)
-        {
-            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
-
-            user.Hash = passwordHash;
-            user.Salt = passwordSalt;
-
-        }
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        {
-            using (var hmac = new HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            }
-        }
-        */
-
+        
         // .net 7.0 módszer
 
         [HttpPost("Register")]

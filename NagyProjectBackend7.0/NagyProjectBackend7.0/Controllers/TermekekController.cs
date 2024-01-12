@@ -28,7 +28,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Roles = "Admin")]
         public ActionResult<TermekekDto> Post(CreatedTermekekDto createdTermekekDto)
         {
             using (var context = new project_databaseContext())
@@ -50,7 +50,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpPut("{id}"), Authorize]
+        [HttpPut("{id}"), Authorize(Roles = "Admin")]
         public ActionResult Put(int id, UpdateTermekekDto updateTermekedDto)
         {
             using (var context = new project_databaseContext())
@@ -70,7 +70,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             using (var context = new project_databaseContext())

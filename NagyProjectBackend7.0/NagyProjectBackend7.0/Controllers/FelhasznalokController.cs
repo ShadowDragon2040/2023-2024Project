@@ -11,7 +11,7 @@ namespace Webárúház_Nagy_Project.Controllers
     [ApiController]
     public class FelhasznalokController : ControllerBase
     {
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Roles = "Admin")]
         public ActionResult Get()
         {
             using (var context = new project_databaseContext())
@@ -20,7 +20,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize(Roles = "Admin")]
         public ActionResult Get(int id)
         {
             using (var context = new project_databaseContext())
@@ -30,7 +30,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Roles = "Admin")]
         public ActionResult<FelhasznalokDto> Post(CreatedFelhasznalokDto createdFelhasznalokDto)
         {
             using (var context = new project_databaseContext())
@@ -60,7 +60,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpPut("{id}"), Authorize]
+        [HttpPut("{id}"), Authorize(Roles = "Admin")]
         public ActionResult Put(int id, UpdateFelhasznalokDto updateFelhasznalokDto)
         {
             using (var context = new project_databaseContext())
@@ -87,7 +87,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             using (var context = new project_databaseContext())
