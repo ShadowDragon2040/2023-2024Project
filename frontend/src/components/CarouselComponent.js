@@ -30,7 +30,7 @@ function CarouselComponent(props) {
   return (
     
     <CarouselContainer>
-      <Carousel autoPlay={true} infiniteLoop={true} showThumbs={false}>
+      <Carousel className='bg-dark' autoPlay={true} infiniteLoop={true} showThumbs={false}>
         <div>
           <CarouselImage src={Image1}/>
   

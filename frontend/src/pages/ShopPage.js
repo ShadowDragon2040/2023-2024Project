@@ -3,7 +3,8 @@ import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import CarouselComponent from '../components/CarouselComponent';
 import Footer from '../components/Footer';
-
+import CategorySelectorBox from '../components/CategoryBox/CategorySelectorBox';
+import { InfoContainer } from '../components/TextElements';
 
 function ShopPage(){
 
@@ -14,11 +15,22 @@ function ShopPage(){
   }
     return(
       <>
-        
+        <InfoContainer>
         <Navbar/>
-        <CarouselComponent />
+        <div className='container'>
+              
+
+          <div className='row'>
+            <div className='col col-md-12'>
+              <CategorySelectorBox/>
+              <CarouselComponent />
+            </div>
+          </div>
+            
+        </div>
+          
         <Footer/>
-               
+        </InfoContainer>   
       </>
       
         )
