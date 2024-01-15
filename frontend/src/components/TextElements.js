@@ -440,9 +440,9 @@ export const HeroP=styled.p`
 `
 export const CarouselContainer = styled.div`
     margin:auto;
-    width:60%;
-    height:30%;
-    padding:180px 200px;
+    width:70%;
+    height:40%;
+    padding:150px 200px;
 `
 
 
@@ -646,9 +646,14 @@ export const SidebarRoute=styled(LinkR)`
 
 `
 export  const CategoryContainer=styled.div`
-    padding-top:140px;  
+    padding-top:150px;  
     width:13vw; 
-    height:100%;    
-    float:left  
+    float:left;
+    position:absolute;
+    margin:auto;
+    border:2px solid black;
+    padding:15px;
+    top:150px;
+    
 
 `
