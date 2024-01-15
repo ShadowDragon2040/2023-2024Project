@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import CarouselComponent from '../components/CarouselComponent';
 import Footer from '../components/Footer';
 import CategorySelectorBox from '../components/CategoryBox/CategorySelectorBox';
-import { InfoContainer } from '../components/TextElements';
+import { HeroContainer2} from '../components/TextElements';
 
 function ShopPage(){
 
@@ -15,8 +15,9 @@ function ShopPage(){
   }
     return(
       <>
-        <InfoContainer>
-        <Navbar/>
+        <HeroContainer2>
+
+            <Navbar/>
         <div className='container'>
               
 
@@ -30,7 +31,7 @@ function ShopPage(){
         </div>
           
         <Footer/>
-        </InfoContainer>   
+        </HeroContainer2>   
       </>
       
         )

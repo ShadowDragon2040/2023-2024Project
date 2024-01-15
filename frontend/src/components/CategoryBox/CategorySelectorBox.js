@@ -18,7 +18,13 @@ const Option = (props) => (
   </div>
 );
 
-
+//Selection Box styling
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    backgroundColor: "darkgreen", 
+  }),
+};
 
 const CategorySelectorBox = () => {
   const [optionSelected, setOptionSelected] = useState(colourOptions);
@@ -30,7 +36,8 @@ const CategorySelectorBox = () => {
   return (
     <CategoryContainer className="border rounded bg-dark text-success">
       <label>Choose by tags</label>
-      <Select 
+      <Select className="react-select-container"
+      styles={customStyles}
         components={{
           Option
         
