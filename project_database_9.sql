@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Nov 28. 08:44
+-- Létrehozás ideje: 2024. Jan 15. 12:35
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -361,14 +361,14 @@ CREATE TABLE `termekek` (
 --
 
 INSERT INTO `termekek` (`TermekId`, `TermekNev`, `Ar`, `Leiras`, `Menyiseg`, `SzinId`, `TagId`, `Keputvonal`) VALUES
-(1, '3D Printed House', 5503, 'A 2-bedroom 3D printed house', 8, 1, 1, 'path/to/image1.jpg'),
-(2, 'Practice Butterfly Knife', 6870, 'High-quality practice butterfly knife for enthusiasts', 80, 5, 5, 'path/to/image5.jpg'),
-(3, 'Foldable Electric Scooter', 1260, 'Foldable electric scooter for convenient urban commuting', 200, 16, 16, 'path/to/image16.jpg'),
-(4, 'Mini Christmas Tree Decor', 1110, 'Adorable tabletop-sized mini Christmas tree for festive decor', 36, 6, 6, 'path/to/image6.jpg'),
-(5, 'Gourmet Espresso Machine', 5576, 'Premium gourmet espresso machine for coffee connoisseurs', 75, 14, 14, 'path/to/image14.jpg'),
+(1, '3D Printed House', 5503, 'A 2-bedroom 3D printed house', 8, 1, 1, 'images/3D_Printed_House.jpg'),
+(2, 'Animal Wall Lamps', 6870, 'Decorative Animal Inspired Wall Lamps', 80, 5, 5, 'images/3D_Printed_Animal_Lamps.jpg'),
+(3, '3D_Printed_Chair', 8050, 'A fully 3D printed chair with ergonomic and natural looking design.', 200, 16, 16, 'images/3D_Printed_Chair.jpg'),
+(4, 'Mini Christmas Tree Decor', 1110, 'Adorable tabletop-sized mini Christmas tree for festive decor', 36, 6, 6, 'images/Mini_Christmass_Tree_Decoration.jpg'),
+(5, 'Christmass Tree Decoration', 260, 'Beautiful Christmass Tree Decoration', 75, 14, 14, 'images/3D_Printed_Christmass_Decoration.jpg'),
 (6, 'Designer Office Chair', 1415, 'Ergonomically designed office chair for a stylish and comfortable workspace', 190, 18, 18, 'path/to/image18.jpg'),
-(7, 'Smart Home Thermostat', 1460, 'Smart home thermostat for energy-efficient temperature control', 230, 20, 20, 'path/to/image20.jpg'),
-(8, 'Insulated Stainless Steel Flask', 90684, 'Premium quality insulated stainless steel flask for outdoor adventures', 120, 4, 4, 'path/to/image4.jpg'),
+(7, 'Concrete Bench and Table', 22000, 'An affordable City Bench and table combo made with 3D printed concrete.', 230, 20, 20, 'images/City_Bench.jpg'),
+(8, 'Printed Vase Containers', 2000, '3D Printed Vase Containers for all of your needs.', 120, 4, 4, 'images/3D_Printed_Containers.jpg'),
 (9, 'Portable Electric Blender', 6755, 'Compact and portable electric blender for on-the-go smoothies', 95, 11, 11, 'path/to/image11.jpg'),
 (10, 'Ultra HD Smart TV', 13670, 'Ultra HD smart TV with advanced features for an immersive viewing experience', 220, 15, 15, 'path/to/image15.jpg'),
 (11, 'Professional DSLR Camera', 1080, 'High-performance professional DSLR camera for photography enthusiasts', 180, 10, 10, 'path/to/image10.jpg'),
