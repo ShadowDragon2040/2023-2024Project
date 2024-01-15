@@ -230,7 +230,7 @@ namespace Webárúház_Nagy_Project.Models
 
             modelBuilder.Entity<Termekek>(entity =>
             {
-                entity.HasKey(e => e.TermekekId)
+                entity.HasKey(e => e.TermekId)
                 .HasName("PRIMARY");
 
                 entity.ToTable("termekek");

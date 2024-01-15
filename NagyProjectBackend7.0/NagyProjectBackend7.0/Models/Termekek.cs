@@ -12,7 +12,7 @@ namespace Webárúház_Nagy_Project.Models
             Szamlazasok = new HashSet<Szamlazasok>();
         }
 
-        public int TermekekId { get; set; }
+        public int TermekId { get; set; }
         public string TermekNev { get; set; } = null!;
         public int Ar { get; set; }
         public string Leiras { get; set; } = null!;

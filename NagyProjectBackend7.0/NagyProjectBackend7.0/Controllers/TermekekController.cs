@@ -9,7 +9,7 @@ namespace Webárúház_Nagy_Project.Controllers
     [ApiController]
     public class TermekekController : ControllerBase
     {
-        [HttpGet, Authorize]
+        [HttpGet/*, Authorize*/]
         public ActionResult Get()
         {
             using (var context = new project_databaseContext())
@@ -23,7 +23,7 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             using (var context = new project_databaseContext())
             {
-                var result = context.Termekek.Where(x => x.TermekekId == id);
+                var result = context.Termekek.Where(x => x.TermekId == id);
                 return Ok(result);
             }
         }
@@ -55,7 +55,7 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             using (var context = new project_databaseContext())
             {
-                var existingTermek = context.Termekek.FirstOrDefault(x => x.TermekekId == id);
+                var existingTermek = context.Termekek.FirstOrDefault(x => x.TermekId == id);
 
                 existingTermek.TermekNev = updateTermekedDto.TermekNev;
                 existingTermek.Leiras = updateTermekedDto.Leiras;
@@ -75,7 +75,7 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             using (var context = new project_databaseContext())
             {
-                var existingTermek = context.Termekek.FirstOrDefault(x => x.TermekekId == id);
+                var existingTermek = context.Termekek.FirstOrDefault(x => x.TermekId == id);
 
                 context.Termekek.Remove(existingTermek);
                 context.SaveChanges();
