@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 function ShopSideBar() {
   return (
     <div>
-      <ShopSidebarContainer className='border border-dark" rounded bg-ligth text-success'>
+      <ShopSidebarContainer className='bg-ligth text-success border border-success'>
         <NavLink to={'/'} className='nav-link'>
           <h5>
           <FaHome /> Home

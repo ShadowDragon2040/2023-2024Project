@@ -25,7 +25,7 @@ export const InfoContainer2=styled.div`
 `
 export const CarouselImage=styled.img`
 float:left;
-width:60%;
+width:100%;
 height:20vw;
 `
 
@@ -457,8 +457,7 @@ export const HeroP=styled.p`
 export const CarouselContainer = styled.div`
     position:relative;
     margin-top:150px;
-    margin-left:20px;
-    width:100%;
+    width:90%;
     height:40%;
    
 `
@@ -593,11 +592,10 @@ export const SidebarContainer=styled.aside`
     top: ${({isOpen}) => (isOpen ? '0' : '-100%')};
 `
 export const ShopSidebarContainer=styled.aside`
-    max-width:100%;
+    width:60%;
     margin-top:80px;
     float:left;
     position:relative;
-    border:4px solid black;
     padding:25px;
     background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg,rgba(0,0,0,0.2) 0%,transparent 100%);
 `

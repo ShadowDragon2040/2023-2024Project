@@ -14,13 +14,13 @@ function ShopPage(){
         <HeroContainer2>
             <Navbar/>
             <div className='row'>
-              <div className='col-sm-4'>
+              <div className='col-md-3'>
                 <ShopSideBar/>
               </div>
-              <div className='col-md-4'>
+              <div className='col-md-6'>
                 <CarouselComponent />
               </div>
-              <div className='col-sm-4'>
+              <div className='col-md-2'>
 
               </div>
             </div>
