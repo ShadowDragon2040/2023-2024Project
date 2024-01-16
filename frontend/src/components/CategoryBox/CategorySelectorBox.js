@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Select, { components } from "react-select";
 import { colourOptions } from "./data.js";
-import { CategoryContainer } from "../TextElements.js";
+import { CategoryContainer, SidebarContainer } from "../TextElements.js";
 
 const Option = (props) => (
   <div>
@@ -32,25 +32,28 @@ const CategorySelectorBox = () => {
   const handleChange = (selected) => {
     setOptionSelected(selected);
   };
-
+  
   return (
-    <CategoryContainer className="border rounded bg-dark text-success">
-      <label>Choose by tags</label>
+    <>
+      <label>Categories</label>
+
+        
+        
       <Select className="react-select-container"
       styles={customStyles}
-        components={{
-          Option
+      components={{
+        Option
         
-        }}
-        options={colourOptions}
-        isMulti
-        closeMenuOnSelect={false}
-        hideSelectedOptions={true}
-        onChange={handleChange}
-        allowSelectAll={true}
-        value={optionSelected}
+      }}
+      options={colourOptions}
+      isMulti
+      closeMenuOnSelect={false}
+      hideSelectedOptions={true}
+      onChange={handleChange}
+      allowSelectAll={true}
+      value={optionSelected}
       />
-    </CategoryContainer>
+      </>
   );
 };
 

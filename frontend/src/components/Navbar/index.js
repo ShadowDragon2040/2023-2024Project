@@ -43,11 +43,12 @@ const NavbarA = ({toggle}) => {
 <FaBars/>
 </MobileIcon>
 */
-
+/*
+<IconContext.Provider value={{color:'#fff'}}>
+</IconContext.Provider>
+*/
   return (
     <>
-    
-    <IconContext.Provider value={{color:'#fff'}}>
         <Nav scrollNav={scrollNav}>
           <NavbarContainer>
             <NavLogo to='/' onClick={toggleHome}>PrintFusion</NavLogo>
@@ -59,11 +60,10 @@ const NavbarA = ({toggle}) => {
               
             </NavBtn>
             <NavBtn>
-              <NavBtnLink  to='ShopPage'>Shop</NavBtnLink>
+              <NavBtnLink  to='ShopPage'>Login</NavBtnLink>
             </NavBtn>
           </NavbarContainer>
         </Nav>
-        </IconContext.Provider>
     </>
   );
 };

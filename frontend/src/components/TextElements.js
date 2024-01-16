@@ -344,7 +344,6 @@ export const NavbarContainer=styled.div`
     z-index: 1;
     width: 100%;
     padding: 0 24px ;
-    max-width:1100px;
     background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg,rgba(0,0,0,0.2) 0%,transparent 100%);
 
 `    
@@ -404,7 +403,7 @@ export const HeroContainer=styled.div`
 export const HeroContainer2=styled.div`
     background: green;
     height: 950px;
-  
+
     :before{
         content: '';
         position: absolute;
@@ -456,10 +455,12 @@ export const HeroP=styled.p`
     }
 `
 export const CarouselContainer = styled.div`
-    margin:auto;
-    width:70%;
+    position:absolute;
+    margin-top:100px;
+    margin-left:20px;
+    width:40%;
     height:40%;
-    padding:150px 200px;
+   
 `
 
 
@@ -590,6 +591,15 @@ export const SidebarContainer=styled.aside`
     opacity: ${({isOpen}) => (isOpen ? '100%' : '0')};
     top: ${({isOpen}) => (isOpen ? '0' : '-100%')};
 `
+export const ShopSidebarContainer=styled.aside`
+    max-width:100%; 
+    margin-top:100px;
+    float:left
+    position:absolute;
+    border:4px solid black;
+    padding:15px;
+`
+
 export const CloseIcon=styled(FaTimes)`
     color: #fff;
 
@@ -662,15 +672,4 @@ export const SidebarRoute=styled(LinkR)`
     }
 
 `
-export  const CategoryContainer=styled.div`
-    padding-top:150px;  
-    width:13vw; 
-    float:left;
-    position:absolute;
-    margin:auto;
-    border:2px solid black;
-    padding:15px;
-    top:150px;
-    
 
-`
