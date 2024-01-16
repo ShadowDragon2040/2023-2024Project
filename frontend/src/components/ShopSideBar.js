@@ -1,21 +1,33 @@
-import React from 'react'
-import CategorySelectorBox from './CategoryBox/CategorySelectorBox'
-import { ShopSidebarContainer } from './TextElements'
+import React from 'react';
+import { FaHome, FaNewspaper,FaPaintBrush,FaGitlab } from 'react-icons/fa';
+import CategorySelectorBox from './CategoryBox/CategorySelectorBox';
+import { ShopSidebarContainer } from './TextElements';
+import '../App.css';
+import { NavLink } from 'react-router-dom';
 
 function ShopSideBar() {
   return (
-    <>
-    <ShopSidebarContainer >
-      <a href="#">Home</a> <br></br>
-      <a href='#'>News</a> <br></br>
+    <div>
+      <ShopSidebarContainer className='border rounded bg-dark text-success'>
+        <NavLink to={'/'} className='nav-link'>
+          <FaHome /> Home
+        </NavLink>
+        <NavLink to={'/news'} className='nav-link'>
+          <FaNewspaper /> News
+        </NavLink>
 
-      <CategorySelectorBox/>
-      <a href='#'>Paints</a> <br></br>
-      <a href='#'>Lab</a>
-    </ShopSidebarContainer>
-   
-    </>
-  )
+        <CategorySelectorBox />
+
+        <NavLink to={'/paints'} className='nav-link'>
+
+        <FaPaintBrush />Paints
+        </NavLink>
+        <NavLink to={'/lab'} className='nav-link'>
+          <FaGitlab/> Lab
+        </NavLink>
+      </ShopSidebarContainer>
+    </div>
+  );
 }
 
-export default ShopSideBar
+export default ShopSideBar;

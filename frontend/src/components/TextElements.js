@@ -397,16 +397,16 @@ export const HeroContainer=styled.div`
         background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%,
         rgba(0,0,0,0.6) 100%),
         linear-gradient(180deg,rgba(0,0,0,0.2) 0%, transparent 100%);
-        z-index: 2;
     }
 `
 export const HeroContainer2=styled.div`
     background: green;
     height: 950px;
+    z-index: 1;
 
     :before{
         content: '';
-        position: absolute;
+        position: relative;
         top: 0;
         left: 0;
         right: 0;
@@ -458,7 +458,7 @@ export const CarouselContainer = styled.div`
     position:relative;
     margin-top:100px;
     margin-left:20px;
-    width:100%;
+    width:80%;
     height:40%;
    
 `
@@ -593,12 +593,12 @@ export const SidebarContainer=styled.aside`
     top: ${({isOpen}) => (isOpen ? '0' : '-100%')};
 `
 export const ShopSidebarContainer=styled.aside`
-    max-width:100%; 
+    max-width:60%;
     margin-top:100px;
     float:left
-    position:absolute;
+    position:relative;
     border:4px solid black;
-    padding:15px;
+    padding:25px;
 `
 
 export const CloseIcon=styled(FaTimes)`

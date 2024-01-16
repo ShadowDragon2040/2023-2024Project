@@ -1,60 +1,63 @@
-import React, { useState } from "react";
-import Select, { components } from "react-select";
-import { colourOptions } from "./data.js";
-import { CategoryContainer, SidebarContainer } from "../TextElements.js";
+import React, { useState, useEffect, useRef } from 'react';
 
-const Option = (props) => (
-  <div>
-    <components.Option {...props}>
-      <input
-        style={{ width: "100%" }}
-        name={props.label}
-        type="checkbox"
-        defaultChecked={props.isSelected}
-        readOnly={true}
-      />
-      <label>{props.label}</label>
-    </components.Option>
-  </div>
-);
+const CategorySelector = () => {
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [displayedCategory, setDisplayedCategory] = useState('');
+  const inputRef = useRef(null);
 
-//Selection Box styling
-const customStyles = {
-  control: (provided) => ({
-    ...provided,
-    backgroundColor: "darkgreen", 
-  }),
-};
+  const handleCheckboxChange = (category) => {
+    const updatedCategories = selectedCategories.includes(category)
+      ? selectedCategories.filter((selectedCategory) => selectedCategory !== category)
+      : [...selectedCategories, category];
 
-const CategorySelectorBox = () => {
-  const [optionSelected, setOptionSelected] = useState(colourOptions);
-
-  const handleChange = (selected) => {
-    setOptionSelected(selected);
+    setSelectedCategories(updatedCategories);
+    updateDisplayedCategory(updatedCategories);
   };
-  
-  return (
-    <>
-      <label>Categories</label>
 
-        
-        
-      <Select className="react-select-container"
-      styles={customStyles}
-      components={{
-        Option
-        
-      }}
-      options={colourOptions}
-      isMulti
-      closeMenuOnSelect={false}
-      hideSelectedOptions={true}
-      onChange={handleChange}
-      allowSelectAll={true}
-      value={optionSelected}
-      />
-      </>
+  const updateDisplayedCategory = (categories) => {
+    setDisplayedCategory(categories.join(', '));
+  };
+
+  useEffect(() => {
+    // Adjust the height of the input field based on its content
+    if (inputRef.current) {
+      inputRef.current.style.height = 'auto';
+      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
+    }
+  }, [displayedCategory]);
+
+  return (
+    <div>
+      <h5>Categories</h5>
+      <div>
+        <input
+          className='form-select'
+          disabled
+          type="text"
+          value={displayedCategory}
+          readOnly
+          ref={inputRef}
+          style={{ height: 'auto', minHeight: '20px' }}
+        />
+      </div>
+      <div>
+        {['Category 1', 'Category 2', 'Category 3'].map((category) => (
+          <div key={category}>
+            <label>
+              <input
+                style={{marginLeft:'50px'}}
+                type="checkbox"
+                value={category}
+                checked={selectedCategories.includes(category)}
+                onChange={() => handleCheckboxChange(category)}
+              />
+              {category}
+            </label>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
-export default CategorySelectorBox;
+export default CategorySelector;

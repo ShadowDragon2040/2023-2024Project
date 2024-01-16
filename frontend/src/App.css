@@ -17,6 +17,16 @@
   color: #209e52;
 
 }
+.selectpicker {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 12'%3e%3cpath d='M1 1l6 5-6 5' fill='%23343a40'/%3e%3c/svg%3e") no-repeat right 0.75rem center/8px 12px;
+}
+
+.selectpicker::-ms-expand {
+  display: none;
+}
 
 .form span{
 
@@ -48,4 +58,7 @@
 
   box-shadow: none;
   border:none;
+}
+a{
+  text-decoration: none;
 }
