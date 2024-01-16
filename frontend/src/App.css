@@ -50,7 +50,6 @@
 .form-input{
 
   height: 35px;
-  text-indent: 33px;
   border-radius: 10px;
 }
 
@@ -66,8 +65,8 @@ a{
   display: inline-block; 
   margin-bottom: 20px;
   align-items: center; 
-  padding: 10px 15px;
-  transition: background-color 0.3s ease; 
+  padding: 15px 15px;
+  transition: background-color 0.5s ease; 
   text-decoration: none; 
   color: inherit; 
   border-radius: 25px;
@@ -85,10 +84,20 @@ a{
   display: flex;
   align-items: center;
 }
-.search-icon {
-  margin-left: 5px; 
+
+.input-container:focus {
+  width: 100%;
+  transition: 0.5s ease-in-out;
 }
-.search-icon:hover {
-  background-color: lightslategray;
-  border-radius: 5px;
+
+.input-wrapper {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s, height 0.3s;
+}
+
+.input-wrapper.show {
+  opacity: 1;
+  height: auto;
 }

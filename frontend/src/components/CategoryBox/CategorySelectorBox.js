@@ -30,7 +30,10 @@ const CategorySelector = () => {
 
   return (
     <div>
-      <BiCategory/>Categories
+      <h5>
+
+      <BiCategory/> Categories
+      </h5>
       <div>
         <input
           className='form-control bg-dark text-success'
