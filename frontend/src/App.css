@@ -62,3 +62,33 @@
 a{
   text-decoration: none;
 }
+.nav-link{
+  display: inline-block; 
+  margin-bottom: 20px;
+  align-items: center; 
+  padding: 10px 15px;
+  transition: background-color 0.3s ease; 
+  text-decoration: none; 
+  color: inherit; 
+  border-radius: 25px;
+  background-color: white;
+
+}
+
+.nav-link:hover{
+
+  background-color: lightslategray;
+  border-radius: 25px;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+}
+.search-icon {
+  margin-left: 5px; 
+}
+.search-icon:hover {
+  background-color: lightslategray;
+  border-radius: 5px;
+}

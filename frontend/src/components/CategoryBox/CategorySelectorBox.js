@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { BiCategory } from "react-icons/bi";
+
 
 const CategorySelector = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -28,16 +30,15 @@ const CategorySelector = () => {
 
   return (
     <div>
-      <h5>Categories</h5>
+      <BiCategory/>Categories
       <div>
         <input
-          className='form-select'
+          className='form-control bg-dark text-success'
           disabled
           type="text"
           value={displayedCategory}
           readOnly
           ref={inputRef}
-          style={{ height: 'auto', minHeight: '20px' }}
         />
       </div>
       <div>

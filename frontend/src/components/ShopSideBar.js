@@ -2,13 +2,12 @@ import React from 'react';
 import { FaHome, FaNewspaper,FaPaintBrush,FaGitlab } from 'react-icons/fa';
 import CategorySelectorBox from './CategoryBox/CategorySelectorBox';
 import { ShopSidebarContainer } from './TextElements';
-import '../App.css';
 import { NavLink } from 'react-router-dom';
 
 function ShopSideBar() {
   return (
     <div>
-      <ShopSidebarContainer className='border rounded bg-dark text-success'>
+      <ShopSidebarContainer className='border border-dark" rounded bg-ligth text-success'>
         <NavLink to={'/'} className='nav-link'>
           <FaHome /> Home
         </NavLink>

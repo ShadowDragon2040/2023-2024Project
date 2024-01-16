@@ -456,21 +456,21 @@ export const HeroP=styled.p`
 `
 export const CarouselContainer = styled.div`
     position:relative;
-    margin-top:100px;
+    margin-top:150px;
     margin-left:20px;
-    width:80%;
+    width:100%;
     height:40%;
    
 `
 
 
 export const FooterContainer=styled.footer`
-
+    margin-top:50px;
     background-color: #101522;
 `
 
 export const FooterWrap =styled.div`
-    padding: 48px 24px;
+    padding: 30px 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -483,7 +483,7 @@ export const FooterLinksContainer =styled.div`
     justify-content: center;
 
     @media screen and (max-width: 820px){
-        padding-top: 32px;
+        padding-top: 25px;
     }
 
 `
@@ -509,14 +509,14 @@ export const FooterLinkItems =styled.div`
 
     @media screen and (max-width: 420px){
         margin: 0;
-        padding: 10px;
+        padding: 5px;
         width: 100%;
     }
 `
 
 export const FooterLinkTitle =styled.h1`
     font-size: 14px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
 `
 
 export const FooterLink =styled(Link)`
@@ -593,12 +593,13 @@ export const SidebarContainer=styled.aside`
     top: ${({isOpen}) => (isOpen ? '0' : '-100%')};
 `
 export const ShopSidebarContainer=styled.aside`
-    max-width:60%;
-    margin-top:100px;
-    float:left
+    max-width:100%;
+    margin-top:80px;
+    float:left;
     position:relative;
     border:4px solid black;
     padding:25px;
+    background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg,rgba(0,0,0,0.2) 0%,transparent 100%);
 `
 
 export const CloseIcon=styled(FaTimes)`
