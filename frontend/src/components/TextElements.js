@@ -455,16 +455,17 @@ export const HeroP=styled.p`
     }
 `
 export const CarouselContainer = styled.div`
-    position:absolute;
+    position:relative;
     margin-top:100px;
     margin-left:20px;
-    width:40%;
+    width:100%;
     height:40%;
    
 `
 
 
 export const FooterContainer=styled.footer`
+
     background-color: #101522;
 `
 
