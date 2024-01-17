@@ -400,7 +400,7 @@ export const HeroContainer=styled.div`
     }
 `
 export const HeroContainer2=styled.div`
-    background: green;
+    background: darkgreen;
     height: 950px;
     z-index: 1;
 
@@ -456,11 +456,20 @@ export const HeroP=styled.p`
 `
 export const CarouselContainer = styled.div`
     position:relative;
+    display:inline-block;
     margin-top:150px;
     margin-left:120px;
     width:90%;
-    height:40%;
    
+`
+export const ItemContainer=styled.div`
+        position:relative;
+        display:inline-block;
+        margin:auto;
+        margin-top:50px;
+        margin-left:120px;
+        width:90%;
+        max-width:350px;
 `
 
 
@@ -593,7 +602,7 @@ export const SidebarContainer=styled.aside`
     top: ${({isOpen}) => (isOpen ? '0' : '-100%')};
 `
 export const ShopSidebarContainer=styled.aside`
-    min-width:200px;
+    min-width:220px;
     width:60%;
     margin-top:80px;
     float:left;

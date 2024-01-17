@@ -4,7 +4,7 @@ using Swashbuckle.AspNetCore.Filters;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace Webárúház_Nagy_Project
+namespace WebÃ¡ruhÃ¡z_Nagy_Project
 {
     public class Program
     {
@@ -13,6 +13,8 @@ namespace Webárúház_Nagy_Project
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+ builder.Services.AddCors(c => { c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); });
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -41,7 +43,7 @@ namespace Webárúház_Nagy_Project
             });
 
             var app = builder.Build();
-
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
