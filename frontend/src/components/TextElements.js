@@ -457,6 +457,7 @@ export const HeroP=styled.p`
 export const CarouselContainer = styled.div`
     position:relative;
     margin-top:150px;
+    margin-left:120px;
     width:90%;
     height:40%;
    
@@ -600,6 +601,17 @@ export const ShopSidebarContainer=styled.aside`
     padding:25px;
     background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg,rgba(0,0,0,0.2) 0%,transparent 100%);
 `
+
+export const ProfileDisplayPageContainer=styled.aside`
+    min-width:200px;
+    width:60%;
+    margin-top:80px;
+    float:right;
+    position:relative;
+    padding:25px;
+    background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg,rgba(0,0,0,0.2) 0%,transparent 100%);
+`
+
 
 export const CloseIcon=styled(FaTimes)`
     color: #fff;
