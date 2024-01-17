@@ -35,10 +35,6 @@ function CarouselComponent(props) {
       <Carousel className='bg-dark border border-dark rounded ' autoPlay={true} infiniteLoop={true} showThumbs={false} showStatus={false}>
      
           <CarouselImage src={Image1}/>
-  
-         
-        
-      
           <CarouselImage src={Image2}/>
           <CarouselImage src={Image3}/>
        

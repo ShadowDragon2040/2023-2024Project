@@ -401,7 +401,6 @@ export const HeroContainer=styled.div`
 `
 export const HeroContainer2=styled.div`
     background: darkgreen;
-    height: 950px;
     z-index: 1;
 
     :before{
@@ -458,8 +457,8 @@ export const CarouselContainer = styled.div`
     position:relative;
     display:inline-block;
     margin-top:150px;
-    margin-left:120px;
-    width:90%;
+    margin-left:125px;
+    width:100%;
    
 `
 export const ItemContainer=styled.div`
@@ -467,14 +466,15 @@ export const ItemContainer=styled.div`
         display:inline-block;
         margin:auto;
         margin-top:50px;
-        margin-left:120px;
+        margin-left:145px;
         width:90%;
-        max-width:350px;
 `
 
 
 export const FooterContainer=styled.footer`
     margin-top:50px;
+    position:relative;
+    z-index:10;
     background-color: #101522;
 `
 
@@ -602,21 +602,24 @@ export const SidebarContainer=styled.aside`
     top: ${({isOpen}) => (isOpen ? '0' : '-100%')};
 `
 export const ShopSidebarContainer=styled.aside`
-    min-width:220px;
-    width:60%;
+    width:20%;
     margin-top:80px;
     float:left;
-    position:relative;
+    height:100%;
+    z-index:5;
+    position:fixed;
     padding:25px;
     background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg,rgba(0,0,0,0.2) 0%,transparent 100%);
 `
 
 export const ProfileDisplayPageContainer=styled.aside`
-    min-width:200px;
-    width:60%;
+    width:20%;
     margin-top:80px;
     float:right;
-    position:relative;
+    position:fixed;
+    z-index:5;
+    height:100%;
+    right:0px;
     padding:25px;
     background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg,rgba(0,0,0,0.2) 0%,transparent 100%);
 `

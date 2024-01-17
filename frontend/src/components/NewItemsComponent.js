@@ -8,7 +8,7 @@ function NewItemsComponent () {
         <h5>
             NEW ITEMS
         </h5>
-        <div className='card-group'>
+        <div>
         <GetTermekek/>
         </div>
     </ItemContainer>

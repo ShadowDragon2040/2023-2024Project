@@ -21,7 +21,7 @@ const Footer = () => {
         scroll.scrollToTop();
     };
   return (
-    <FooterContainer>
+    <FooterContainer style={{zIndex:"10"}}>
         <FooterWrap>
             <FooterLinksContainer>
                 <FooterLinksWrapper>
