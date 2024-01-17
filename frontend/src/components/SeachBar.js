@@ -4,15 +4,8 @@ import { FaSearch, FaMicrophone } from 'react-icons/fa';
 function SearchBar() {
   const inputRef = useRef(null);
   const [listening, setListening] = useState(false);
-  const [showInput, setShowInput] = useState(false);
-
-  const handleIconClick = () => {
-    setShowInput(!showInput);
-
-    if (inputRef.current && !showInput) {
-      inputRef.current.focus();
-    }
-  };
+ 
+ 
 
   const handleMicrophoneClick = () => {
     if (listening) {
@@ -59,8 +52,8 @@ function SearchBar() {
   return (
     <div className="form">
       <div className="input-container">
-        <FaSearch className="search-icon" size={30} onClick={handleIconClick} />
-        {showInput && (
+        <FaSearch className="search-icon" size={30}/>
+       
           <>
             <input
               ref={inputRef}
@@ -75,7 +68,7 @@ function SearchBar() {
               onClick={handleMicrophoneClick}
             />
           </>
-        )}
+       
       </div>
     </div>
   );

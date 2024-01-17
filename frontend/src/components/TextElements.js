@@ -592,6 +592,7 @@ export const SidebarContainer=styled.aside`
     top: ${({isOpen}) => (isOpen ? '0' : '-100%')};
 `
 export const ShopSidebarContainer=styled.aside`
+    min-width:200px;
     width:60%;
     margin-top:80px;
     float:left;

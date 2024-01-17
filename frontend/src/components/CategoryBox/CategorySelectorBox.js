@@ -33,32 +33,28 @@ const CategorySelector = () => {
       <h5>
 
       <BiCategory/> Categories
-      </h5>
+      </h5>        
       <div>
-        <input
-          className='form-control bg-dark text-success'
-          disabled
-          type="text"
-          value={displayedCategory}
-          readOnly
-          ref={inputRef}
-        />
-      </div>
-      <div>
+        <ul>
+
         {['Category 1', 'Category 2', 'Category 3'].map((category) => (
-          <div key={category}>
+          
+              <div key={category} className='form-check form-switch'>
             <label>
+              {category}
               <input
-                style={{marginLeft:'50px'}}
+                className='form-check-input bg-success'
+                id="flexSwitchCheckDefault"
                 type="checkbox"
                 value={category}
                 checked={selectedCategories.includes(category)}
                 onChange={() => handleCheckboxChange(category)}
-              />
-              {category}
+                />
             </label>
           </div>
-        ))}
+         ))}
+
+      </ul>
       </div>
     </div>
   );

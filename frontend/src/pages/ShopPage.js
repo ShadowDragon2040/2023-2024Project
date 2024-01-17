@@ -20,8 +20,8 @@ function ShopPage(){
               <div className='col-md-6'>
                 <CarouselComponent />
               </div>
-              <div className='col-md-2'>
-
+              <div className='col-md-3'>
+                
               </div>
             </div>
           

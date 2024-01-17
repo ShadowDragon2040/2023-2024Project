@@ -1,10 +1,10 @@
-import React,{useState,useEffect} from 'react'
+import React from 'react'
 import Image1 from "./ComponentImages/image1.png"
 import Image2 from "./ComponentImages/image2.jpg"
 import Image3 from "./ComponentImages/image3.jpg"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-import {CarouselContainer, CarouselImage, InfoContainer} from './TextElements';
+import {CarouselContainer, CarouselImage} from './TextElements';
 
 
 
@@ -32,7 +32,7 @@ function CarouselComponent(props) {
     
     <CarouselContainer>
       <h5>SPECIAL COLLECTIONS</h5>
-      <Carousel className='bg-dark border border-dark rounded ' autoPlay={true} infiniteLoop={true} showThumbs={false}>
+      <Carousel className='bg-dark border border-dark rounded ' autoPlay={true} infiniteLoop={true} showThumbs={false} showStatus={false}>
      
           <CarouselImage src={Image1}/>
   

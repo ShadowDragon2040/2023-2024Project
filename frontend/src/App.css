@@ -101,3 +101,8 @@ a{
   opacity: 1;
   height: auto;
 }
+
+.search-icon, .microphone-icon{
+ color: white;
+ margin:10px;
+}

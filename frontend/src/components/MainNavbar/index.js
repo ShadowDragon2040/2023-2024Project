@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {FaBars} from 'react-icons/fa'
 import { IconContext } from 'react-icons';
 import { animateScroll as scroll } from 'react-scroll';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+//import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 import { 
   Nav,
@@ -21,9 +21,9 @@ import {
 const NavbarA = ({toggle}) => {
   const [scrollNav, setScrollNav]= useState(false);
 
-  const location = useLocation();
+ /* const location = useLocation();
   const path = location.pathname;
-
+*/
   const changeNav=()=>{
     if(window.scrollY >= 80){
       setScrollNav(true);

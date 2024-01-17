@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import { IconContext } from 'react-icons';
 import { animateScroll as scroll } from 'react-scroll';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+//import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import SearchBar from '../SeachBar';
 
 import { 
@@ -9,8 +8,7 @@ import {
   NavbarContainer,
   NavLogo,
   NavBtn,
-  NavBtnLink,
-  InfoContainer,
+  NavBtnLink
  } from '../TextElements';
 
 
@@ -18,9 +16,9 @@ import {
 const NavbarA = ({toggle}) => {
   const [scrollNav, setScrollNav]= useState(false);
 
-  const location = useLocation();
+ /* const location = useLocation();
   const path = location.pathname;
-
+*/
   const changeNav=()=>{
     if(window.scrollY >= 80){
       setScrollNav(true);
