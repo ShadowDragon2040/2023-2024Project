@@ -24,8 +24,6 @@ export const InfoContainer2=styled.div`
     }
 `
 export const CarouselImage=styled.img`
-float:left;
-width:100%;
 height:20vw;
 `
 
@@ -402,7 +400,6 @@ export const HeroContainer=styled.div`
 export const HeroContainer2=styled.div`
     background: darkgreen;
     z-index: 1;
-
     :before{
         content: '';
         position: relative;
@@ -456,8 +453,8 @@ export const HeroP=styled.p`
 export const CarouselContainer = styled.div`
     position:relative;
     display:inline-block;
-    margin-top:150px;
-    margin-left:125px;
+    margin-top:20%;
+    margin-left:19%;
     width:100%;
    
 `
@@ -465,14 +462,14 @@ export const ItemContainer=styled.div`
         position:relative;
         display:inline-block;
         margin:auto;
-        margin-top:50px;
-        margin-left:145px;
-        width:90%;
+        margin-top:10%;
+        margin-left:19%;
+        width:100%;
 `
 
 
 export const FooterContainer=styled.footer`
-    margin-top:50px;
+    margin-top:10%;
     position:relative;
     z-index:10;
     background-color: #101522;
@@ -589,7 +586,7 @@ export const SocialIconLink =styled.a`
 
 export const SidebarContainer=styled.aside`
     position:fixed;
-    z-index: 999;
+    z-index: 10;
     width:100%;
     height:100%;
     background:#0d0d0d;
@@ -607,6 +604,7 @@ export const ShopSidebarContainer=styled.aside`
     float:left;
     height:100%;
     z-index:5;
+    left:0px;
     position:fixed;
     padding:25px;
     background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg,rgba(0,0,0,0.2) 0%,transparent 100%);
@@ -619,7 +617,7 @@ export const ProfileDisplayPageContainer=styled.aside`
     position:fixed;
     z-index:5;
     height:100%;
-    right:0px;
+    right:2px;
     padding:25px;
     background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg,rgba(0,0,0,0.2) 0%,transparent 100%);
 `

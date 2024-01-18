@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../components/Navbar';
 import CarouselComponent from '../components/CarouselComponent';
 import Footer from '../components/Footer';
-import { HeroContainer2} from '../components/TextElements';
+import { HeroContainer2, ItemContainer} from '../components/TextElements';
 import ShopSideBar from '../components/ShopSideBar';
 import ProfileDisplayPage from '../components/ProfileDisplayPage'
 import NewItemsComponent from '../components/NewItemsComponent';
@@ -14,18 +14,20 @@ function ShopPage(){
       <>
         <HeroContainer2>
             <Navbar/>
-            <div className='row'>
-              <div className='col-md-2'>
-                <ShopSideBar/>
+            <div class="container">
+              <div class="row align-items-start">
+                <div class="col-2">
+                  <ShopSideBar/>
+                </div>
+              <div class="col-6">
+                  <CarouselComponent/>
+                  <NewItemsComponent/>
               </div>
-              <div className='col-md-6'>
-                <CarouselComponent />
-                <NewItemsComponent/>
-              </div>
-              <div className='col-md-4'>
+            <div class="col-4">
                 <ProfileDisplayPage/>
-              </div>
             </div>
+          </div>
+          </div>
            
           
             <Footer/>
