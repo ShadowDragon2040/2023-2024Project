@@ -12,7 +12,7 @@ function GetTermekek() {
 
   const cards = newsList.map(item => (
     <div className="col-sm-4" key={item.termekId}>
-      <div className="card" style={{width:"15vw", minHeight:"20vw", margin:"0px 10px 10px 10px"}}>
+      <div className="card" style={{width:"14vw", minHeight:"20vw", margin:"0px 10px 10px 10px"}}>
         <img className="card-img-top image-fluid" src={item.keputvonal} alt="Card image cap" />
         <div className="card-body">
           <h5 className="card-title">{item.termekNev}</h5>

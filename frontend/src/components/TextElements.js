@@ -463,7 +463,7 @@ export const ItemContainer=styled.div`
         display:inline-block;
         margin:auto;
         margin-top:10%;
-        margin-left:19%;
+        margin-left:15%;
         width:100%;
 `
 
@@ -614,10 +614,10 @@ export const ProfileDisplayPageContainer=styled.aside`
     width:20%;
     margin-top:80px;
     float:right;
-    position:fixed;
+    position:absolute;
     z-index:5;
     height:100%;
-    right:2px;
+    right:0px;
     padding:25px;
     background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg,rgba(0,0,0,0.2) 0%,transparent 100%);
 `
