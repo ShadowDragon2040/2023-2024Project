@@ -8,9 +8,7 @@ function NewItemsComponent (props) {
     <>
     <CarouselComponent/>
     <ItemContainer>
-        <h5>
-            NEW ITEMS
-        </h5>
+        
         <div>
         <GetTermekek setSingleItem={props.setSingleItem} setItemData={props.setItemData}/>
         </div>

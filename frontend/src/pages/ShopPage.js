@@ -20,10 +20,10 @@ function ShopPage() {
             <div className="col-2">
               <ShopSideBar />
             </div>
-            <div className="col-6">
+            <div className="col-8">
               {singleItem ? <DisplayItem setSingleItem={setSingleItem} setItemData={setItemData} /> : <DisplaySingleItem ItemData={ItemData} setSingleItem={setSingleItem}/>}
             </div>
-            <div className="col-4">
+            <div className="col-2">
               <ProfileDisplayPage />
             </div>
           </div>

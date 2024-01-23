@@ -7,7 +7,7 @@ function DisplaySingleData(props) {
             <div className="col-2">
             </div>
             <div className="col-6 w-100">
-              <div className='card w-100' style={{margin:'25% 20% 10% 20%'}}>
+              <div className='card w-100 mx-auto' style={{marginTop:'15%'}}>
                 <img src={props.ItemData.keputvonal} alt={props.ItemData.termekId}/>
                 <div className='card-body'>
                   <h4>{props.ItemData.termekNev} </h4>

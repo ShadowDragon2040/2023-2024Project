@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { animateScroll as scroll } from 'react-scroll';
 
-
 function GetTermekek(props) {
   const [newsList, setNewsList] = useState([]);
+  const [visibleCards, setVisibleCards] = useState(3);
 
-  const setSingleItemData=(item)=>{
+  const setSingleItemData = (item) => {
     scroll.scrollToTop();
     props.setSingleItem(false);
     console.log(item);
     props.setItemData(item);
-  }
+  };
 
   useEffect(() => {
     axios.get('http://localhost:5219/Termekek')
@@ -19,22 +19,43 @@ function GetTermekek(props) {
       .catch(error => console.error('Hiba a lekérdezés során:', error));
   }, []);
 
-  const cards = newsList.map(item => (
-    <div className="col-sm-4" key={item.termekId}>
-      <div className="card border-dark rounded" style={{ width: '100%', minHeight: '15vw', margin: '0px 10px 10px 10px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-      <div className="card-body bg-success">
+  const cards = newsList.slice(0, visibleCards).map(item => (
+    <div className="col-md-4 mb-2" key={item.termekId}>
+
+    <button className="btn btn-dark w-100 " onClick={() => setSingleItemData(item)}>
+      <div className="card border-dark rounded" style={{ width: '100%', minHeight: '20vw' }}>
+        <div className="card-body bg-success">
+          <img className="card-img-top" src={item.keputvonal} alt={item.termekId} style={{ height: '100%', objectFit: 'cover', margin: '0vw 0vw 1vw 0vw' }} />
           <h5 className="card-title">{item.termekNev}</h5>
-          <img className="card-img-top" src={item.keputvonal} alt={item.termekId} style={{ height:'100%', objectFit: 'cover',margin:'1vw 0vw 1vw 0vw' }} />
-          <button className="btn btn-dark" onClick={() => setSingleItemData(item)}>Details</button>
+          <p>{item.leiras}</p>
+          <p className='font-weight-bold'>{item.ar}. -HUF</p>
 
         </div>
       </div>
+         </button>
     </div>
   ));
 
+  const handleShowMore = () => {
+    setVisibleCards(prevVisibleCards => prevVisibleCards + 3);
+  };
+
   return (
-    <div className="row">
-      {cards}
+    <div>
+        <div className="row">
+        <div className="col-md-6">
+          <h5>NEW ITEMS</h5>
+        </div>
+      {visibleCards < newsList.length && (
+        <div className="col-md-6 text-right">
+          <a className='link' onClick={handleShowMore}>Show More</a>
+        </div>
+      
+      )}
+      </div>
+      <div className="row w-100">
+        {cards}
+      </div>
     </div>
   );
 }

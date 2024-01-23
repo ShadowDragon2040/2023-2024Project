@@ -454,7 +454,6 @@ export const CarouselContainer = styled.div`
     position:relative;
     display:inline-block;
     margin-top:20%;
-    margin-left:18%;
     width:100%;
    
 `
@@ -463,13 +462,12 @@ export const ItemContainer=styled.div`
         display:inline-block;
         margin:auto;
         margin-top:10%;
-        margin-left:15%;
         width:100%;
 `
 
 
 export const FooterContainer=styled.footer`
-    
+    bottom:0px;
     margin-top:10%;
     position:relative;
     z-index:10;

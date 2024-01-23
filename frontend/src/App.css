@@ -75,6 +75,17 @@ a{
 
 }
 
+.link{
+  color: white;
+  text-align: right;
+  float: right;
+}
+
+.link:hover{
+  color: lightblue;
+  cursor: grab;
+}
+
 .nav-link:hover{
 
   background-color: darkslategray;
