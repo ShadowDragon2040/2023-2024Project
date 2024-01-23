@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { animateScroll as scroll } from 'react-scroll';
 
 
 function GetTermekek(props) {
   const [newsList, setNewsList] = useState([]);
 
   const setSingleItemData=(item)=>{
+    scroll.scrollToTop();
     props.setSingleItem(false);
     console.log(item);
     props.setItemData(item);

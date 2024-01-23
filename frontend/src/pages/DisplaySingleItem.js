@@ -13,6 +13,9 @@ function DisplaySingleData(props) {
                   <h4>{props.ItemData.termekNev} </h4>
                   <p >{props.ItemData.leiras}</p>
                   <p>Raktáron: {props.ItemData.menyiseg} db</p>
+                  <h3>{props.ItemData.ar} -Ft</h3>
+                  <p>Tagek: {props.ItemData.tagId}</p>
+                  <p>Színek: {props.ItemData.szinId}</p>
                 </div>
                   <button onClick={()=>props.setSingleItem(true)}>Vissza</button>
                 </div>
