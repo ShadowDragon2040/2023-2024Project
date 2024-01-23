@@ -9,12 +9,14 @@ import DisplaySingleItem from './DisplaySingleItem';
 
 function ShopPage() {
   const [singleItem, setSingleItem] = useState(true);
+  const [isProfileVisible, setProfileVisible] = useState(false);
   const [ItemData,setItemData]=useState(null)
+  const [userData, setUserData] = useState(null);
 
   return (
     <>
       <HeroContainer2>
-        <Navbar />
+        <Navbar isProfileVisible={isProfileVisible} setProfileVisible={setProfileVisible} setUserData={setUserData} />
         <div className="container">
           <div className="row align-items-start">
             <div className="col-2">
@@ -24,7 +26,7 @@ function ShopPage() {
               {singleItem ? <DisplayItem setSingleItem={setSingleItem} setItemData={setItemData} /> : <DisplaySingleItem ItemData={ItemData} setSingleItem={setSingleItem}/>}
             </div>
             <div className="col-2">
-              <ProfileDisplayPage />
+              {isProfileVisible?<ProfileDisplayPage userData={userData}/>:<></> } 
             </div>
           </div>
         </div>

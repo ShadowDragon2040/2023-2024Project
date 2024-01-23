@@ -48,7 +48,7 @@ function GetTermekek(props) {
         </div>
       {visibleCards < newsList.length && (
         <div className="col-md-6 text-right">
-          <a className='link' onClick={handleShowMore}>Show More</a>
+          <a href='@' className='link' onClick={handleShowMore}>Show More</a>
         </div>
       
       )}

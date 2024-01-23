@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { animateScroll as scroll } from 'react-scroll';
 //import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import SearchBar from '../SeachBar';
+import { CgProfile } from "react-icons/cg";
 
 import { 
   Nav,
@@ -13,12 +14,21 @@ import {
 
 
 
-const NavbarA = ({toggle}) => {
+function Navbar(props)  {
   const [scrollNav, setScrollNav]= useState(false);
 
  /* const location = useLocation();
   const path = location.pathname;
 */
+
+  const handleProfileCLick=()=>{
+    if(!props.isProfileVisible)
+      props.setProfileVisible(true)
+    else
+    props.setProfileVisible(false)
+
+  }
+
   const changeNav=()=>{
     if(window.scrollY >= 80){
       setScrollNav(true);
@@ -57,6 +67,11 @@ const NavbarA = ({toggle}) => {
              <SearchBar/>
               
             </NavBtn>
+
+            <NavBtn>
+              <NavBtnLink  to='ShopPage' onClick={handleProfileCLick}> <CgProfile /> </NavBtnLink>
+            </NavBtn>
+
             <NavBtn>
               <NavBtnLink  to='ShopPage'>Login</NavBtnLink>
             </NavBtn>
@@ -66,4 +81,4 @@ const NavbarA = ({toggle}) => {
   );
 };
 
-export default NavbarA;
+export default Navbar;
