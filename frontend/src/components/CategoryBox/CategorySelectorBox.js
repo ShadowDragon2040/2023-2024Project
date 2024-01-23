@@ -30,14 +30,14 @@ const CategorySelector = () => {
 
   return (
     <div>
-      <h5>
+      <h5 className='p-2'>
 
-      <BiCategory/> Categories
+      <BiCategory/> Sort by Tags
       </h5>        
       <div>
         <ul>
 
-        {['Category 1', 'Category 2', 'Category 3'].map((category) => (
+        {['Tag 1', 'Tag 2', 'Tag 3'].map((category) => (
           
               <div key={category} className='form-check form-switch'>
             <label>
