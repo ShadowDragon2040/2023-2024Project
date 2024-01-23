@@ -22,7 +22,7 @@ function GetTermekek(props) {
       <div className="card border-dark rounded" style={{ width: '100%', minHeight: '15vw', margin: '0px 10px 10px 10px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
       <div className="card-body bg-success">
           <h5 className="card-title">{item.termekNev}</h5>
-          <img className="card-img-top" src={item.keputvonal} alt="Card image cap" style={{ height:'100%', objectFit: 'cover',margin:'1vw 0vw 1vw 0vw' }} />
+          <img className="card-img-top" src={item.keputvonal} alt={item.termekId} style={{ height:'100%', objectFit: 'cover',margin:'1vw 0vw 1vw 0vw' }} />
           <button className="btn btn-dark" onClick={() => setSingleItemData(item)}>Details</button>
 
         </div>

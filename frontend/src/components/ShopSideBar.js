@@ -3,7 +3,6 @@ import { FaHome, FaNewspaper,FaPaintBrush,FaGitlab } from 'react-icons/fa';
 import { IoGiftSharp } from "react-icons/io5";
 import CategorySelectorBox from './CategoryBox/CategorySelectorBox';
 import { ShopSidebarContainer } from './TextElements';
-import Logo from "./ComponentImages/logo1.png"
 import { NavLink } from 'react-router-dom';
 
 function ShopSideBar() {
