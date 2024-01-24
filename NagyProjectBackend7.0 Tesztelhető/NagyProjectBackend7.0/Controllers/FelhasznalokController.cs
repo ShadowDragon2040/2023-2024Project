@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Policy;
 using Webárúház_Nagy_Project.DTOs;
 using Webárúház_Nagy_Project.Models;
@@ -11,31 +12,31 @@ namespace Webárúház_Nagy_Project.Controllers
     [ApiController]
     public class FelhasznalokController : ControllerBase
     {
-        [HttpGet/*, Authorize(Roles = "Admin")*/]
-        public ActionResult Get()
+        private readonly project_databaseContext _context;
+
+        public FelhasznalokController(project_databaseContext context)
         {
-            using (var context = new project_databaseContext())
-            {
-                return Ok(context.Felhasznalok.ToList());
-            }
+            _context = context;
         }
 
-        [HttpGet("{id}")/* Authorize(Roles = "Admin")*/]
-        public ActionResult Get(int id)
+        [HttpGet]
+        public async Task<ActionResult> Get()
         {
-            using (var context = new project_databaseContext())
-            {
-                var result = context.Felhasznalok.Where(x => x.FelhasznaloId == id);
-                return Ok(result);
-            }
+            return Ok(await _context.Felhasznalok.ToListAsync());
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> Get(int id)
+        {
+            var result = await _context.Felhasznalok.Where(x => x.FelhasznaloId == id).ToListAsync();
+            return Ok(result);
         }
 
         [HttpPost/*, Authorize(Roles = "Admin")*/]
-        public ActionResult<FelhasznalokDto> Post(CreatedFelhasznalokDto createdFelhasznalokDto)
+        public async Task<ActionResult<FelhasznalokDto>> Post(CreatedFelhasznalokDto createdFelhasznalokDto)
         {
             using (var context = new project_databaseContext())
             {
-                
                 var request = new Felhasznalok
                 {
                     LoginNev = createdFelhasznalokDto.LoginNev,
@@ -54,18 +55,23 @@ namespace Webárúház_Nagy_Project.Controllers
                 };
 
                 context.Felhasznalok.Add(request);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 return Ok(/*request.AsDto()*/);
             }
         }
 
         [HttpPut("{id}")/*, Authorize(Roles = "Admin")*/]
-        public ActionResult Put(int id, UpdateFelhasznalokDto updateFelhasznalokDto)
+        public async Task<ActionResult> Put(int id, UpdateFelhasznalokDto updateFelhasznalokDto)
         {
             using (var context = new project_databaseContext())
             {
-                var existingFelhasznalo = context.Felhasznalok.FirstOrDefault(x => x.FelhasznaloId == id);
+                var existingFelhasznalo = await context.Felhasznalok.FirstOrDefaultAsync(x => x.FelhasznaloId == id);
+
+                if (existingFelhasznalo == null)
+                {
+                    return NotFound();
+                }
 
                 existingFelhasznalo.LoginNev = updateFelhasznalokDto.LoginNev;
                 existingFelhasznalo.Hash = updateFelhasznalokDto.Hash;
@@ -75,29 +81,32 @@ namespace Webárúház_Nagy_Project.Controllers
                 existingFelhasznalo.Aktivalva = updateFelhasznalokDto.Aktivalva;
                 existingFelhasznalo.Email = updateFelhasznalokDto.Email;
                 existingFelhasznalo.ProfilKep = updateFelhasznalokDto.ProfilKep;
-                    existingFelhasznalo.OrszagKod = updateFelhasznalokDto.OrszágKod;
+                existingFelhasznalo.OrszagKod = updateFelhasznalokDto.OrszágKod;
                 existingFelhasznalo.VarosNev = updateFelhasznalokDto.VarosNev;
                 existingFelhasznalo.UtcaNev = updateFelhasznalokDto.UtcaNev;
                 existingFelhasznalo.IranyitoSzam = updateFelhasznalokDto.IranyitoSzam;
                 existingFelhasznalo.Hazszam = updateFelhasznalokDto.Hazszam;
 
-                context.Felhasznalok.Update(existingFelhasznalo);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
                 return Ok();
             }
         }
 
-        [HttpDelete("{id}")/*, Authorize(Roles = "Admin")*/]
-        public ActionResult Delete(int id)
-        {
-            using (var context = new project_databaseContext())
-            {
-                var existingFelhasznalo = context.Felhasznalok.FirstOrDefault(x => x.FelhasznaloId == id);
 
-                context.Felhasznalok.Remove(existingFelhasznalo);
-                context.SaveChanges();
-                return Ok();
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var existingFelhasznalo = await _context.Felhasznalok.FirstOrDefaultAsync(x => x.FelhasznaloId == id);
+
+            if (existingFelhasznalo == null)
+            {
+                return NotFound();
             }
+
+            _context.Felhasznalok.Remove(existingFelhasznalo);
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }

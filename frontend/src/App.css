@@ -118,3 +118,10 @@ a{
  color: white;
  margin:10px;
 }
+
+.cardbtn {
+  transition: 0.3s;
+}
+.cardbtn:hover{
+  width: 105%;
+}

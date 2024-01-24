@@ -279,6 +279,7 @@ export const NavLinks=styled(LinkS)`
 `
 export const NavBtn=styled.nav`
     display: flex;
+
     align-items: center;
 
     @media screen and (max-width: 768px) {
@@ -294,6 +295,7 @@ export const NavBtnLink=styled(LinkR)`
     white-space:nowrap;
     padding: 10px 22px;
     color:#010606;
+    justify-self:end;
     font-size: 16px;
     outline: none;
     border: none;
@@ -336,8 +338,8 @@ export const NavMenu=styled.ul`
 `
 
 export const NavbarContainer=styled.div`
+    justify-content: space-between;
     display:flex;
-    justify-content:space-between;
     height: 80px;
     z-index: 1;
     width: 100%;
@@ -347,7 +349,6 @@ export const NavbarContainer=styled.div`
 `    
 export const NavLogo=styled(LinkR)`
     color:#fff;
-    justify-self: flex-start;
     cursor: pointer;
     font-size: 1.5rem;
     display: flex;
@@ -453,8 +454,9 @@ export const HeroP=styled.p`
 export const CarouselContainer = styled.div`
     position:relative;
     display:inline-block;
+    margin-left:10%;
     margin-top:20%;
-    width:100%;
+    width:80%;
    
 `
 export const ItemContainer=styled.div`

@@ -22,8 +22,8 @@ function GetTermekek(props) {
   const cards = newsList.slice(0, visibleCards).map(item => (
     <div className="col-md-4 mb-2" key={item.termekId}>
 
-    <button className="btn btn-dark w-100 " onClick={() => setSingleItemData(item)}>
-      <div className="card border-dark rounded" style={{ width: '100%', minHeight: '20vw' }}>
+    <button className="btn cardbtn" onClick={() => setSingleItemData(item)}>
+      <div className="card border-success rounded w-100" style={{ minHeight: '25vw',boxShadow: '10px 10px  10px black' }}>
         <div className="card-body bg-success">
           <img className="card-img-top" src={item.keputvonal} alt={item.termekId} style={{ height: '100%', objectFit: 'cover', margin: '0vw 0vw 1vw 0vw' }} />
           <h5 className="card-title">{item.termekNev}</h5>
@@ -48,7 +48,7 @@ function GetTermekek(props) {
         </div>
       {visibleCards < newsList.length && (
         <div className="col-md-6 text-right">
-          <a href='@' className='link' onClick={handleShowMore}>Show More</a>
+          <a className='link' onClick={handleShowMore}>Show More</a>
         </div>
       
       )}
