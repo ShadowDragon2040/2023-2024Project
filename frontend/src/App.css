@@ -11,7 +11,6 @@
 
 .form .fa-search{
 
-  position: absolute;
   top:20px;
   left: 20px;
   color: #209e52;
@@ -113,6 +112,9 @@ a{
   opacity: 1;
   height: auto;
 }
+.search-bar{
+  width: 100%;
+}
 
 .search-icon, .microphone-icon{
  color: white;
@@ -125,3 +127,21 @@ a{
 .cardbtn:hover{
   width: 105%;
 }
+
+.result-box {
+  min-width: 20%;
+  padding: 5px 0px 0px 10px;
+  font-weight: bold;
+  text-align: left;
+  border: black solid 1px;
+  background-color: white;
+}
+
+.result-container {
+  min-width: 20%;
+  position: absolute;
+  overflow-y:scroll;
+  max-height: 300px;
+  background-color: white;
+}
+

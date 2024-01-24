@@ -12,15 +12,20 @@ function ShopPage() {
   const [isProfileVisible, setProfileVisible] = useState(false);
   const [ItemData,setItemData]=useState(null)
   const [userData, setUserData] = useState(null);
-
   return (
     <>
       <HeroContainer2>
-        <Navbar isProfileVisible={isProfileVisible} setProfileVisible={setProfileVisible} setUserData={setUserData} />
+        <Navbar
+        isProfileVisible={isProfileVisible}
+        setProfileVisible={setProfileVisible}
+        setUserData={setUserData}
+        setItemData={setItemData} 
+        setSingleItem={setSingleItem}
+        />
         <div className="container">
           <div className="row align-items-start">
             <div className="col-2">
-              <ShopSideBar />
+              <ShopSideBar   />
             </div>
             <div className="col-8">
               {singleItem ? <DisplayItem setSingleItem={setSingleItem} setItemData={setItemData} /> : <DisplaySingleItem ItemData={ItemData} setSingleItem={setSingleItem}/>}
