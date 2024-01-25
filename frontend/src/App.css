@@ -13,7 +13,7 @@
 
   top:20px;
   left: 20px;
-  color: #209e52;
+  color: #4a8b64;
 
 }
 
@@ -34,7 +34,7 @@
   right: 17px;
   top: 13px;
   padding: 2px;
-  border-left: 1px solid #209e52;
+  border-left: 1px solid #378457;
 
 }
 
@@ -68,13 +68,22 @@ a{
   text-decoration: none; 
   color: inherit; 
   border-radius: 25px;
-  background-color: white;
+  
 
+}
+
+.menupont{
+  color:#01bf71;
+}
+.back-btn:hover{
+    background-color: black;
+    color:white;
 }
 
 .link{
   color: white;
   text-align: right;
+  margin-right: 15%;
   float: right;
 }
 
@@ -120,6 +129,11 @@ a{
 .search-icon, .microphone-icon{
  color: white;
  margin:10px;
+}
+
+.card-body{
+  background-color:#01bf71;
+
 }
 
 .cardbtn {

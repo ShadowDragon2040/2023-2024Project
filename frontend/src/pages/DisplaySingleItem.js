@@ -7,7 +7,7 @@ function DisplaySingleData(props) {
             <div className="col-2">
             </div>
             <div className="col-6 w-100">
-              <div className='card w-100 mx-auto' style={{marginTop:'15%'}}>
+              <div className='card w-100 mx-auto'  style={{marginTop:'15%',boxShadow:'10px 10px 10px black', marginBottom:'15%'}}>
                 <img src={props.ItemData.keputvonal} alt={props.ItemData.termekId}/>
                 <div className='card-body'>
                   <h4>{props.ItemData.termekNev} </h4>
@@ -17,7 +17,7 @@ function DisplaySingleData(props) {
                   <p>Tagek: {props.ItemData.tagId}</p>
                   <p>Színek: {props.ItemData.szinId}</p>
                 </div>
-                  <button onClick={()=>props.setSingleItem(false)}>Vissza</button>
+                  <button onClick={()=>props.setSingleItem(false)} className='back-btn'>Vissza</button>
                 </div>
             </div>
             <div className="col-4">

@@ -30,7 +30,7 @@ const CategorySelector = () => {
 
   return (
     <div>
-      <h5 className='p-2'>
+      <h5 className='p-2 menupont'>
 
       <BiCategory/> Sort by Tags
       </h5>        
@@ -39,7 +39,7 @@ const CategorySelector = () => {
 
         {['Tag 1', 'Tag 2', 'Tag 3'].map((category) => (
           
-              <div key={category} className='form-check form-switch'>
+              <div key={category} className='form-check form-switch menupont'>
             <label>
               {category}
               <input

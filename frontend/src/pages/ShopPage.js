@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import DisplayItem from '../components/DisplayItems';
 import Footer from '../components/Footer';
-import { HeroContainer2 } from '../components/TextElements';
+import { ShopPageContainer } from '../components/TextElements';
 import ShopSideBar from '../components/ShopSideBar';
 import ProfileDisplayPage from '../components/ProfileDisplayPage';
 import DisplaySingleItem from './DisplaySingleItem';
@@ -15,7 +15,7 @@ function ShopPage() {
   console.log(singleItem);
   return (
     <>
-      <HeroContainer2>
+      <ShopPageContainer>
         <Navbar
         isProfileVisible={isProfileVisible}
         setProfileVisible={setProfileVisible}
@@ -26,7 +26,7 @@ function ShopPage() {
         <div className="container">
           <div className="row align-items-start">
             <div className="col-2">
-              <ShopSideBar   />
+              <ShopSideBar/>
             </div>
             <div className="col-8">
               {singleItem ? <DisplaySingleItem ItemData={ItemData} setSingleItem={setSingleItem}/>: <DisplayItem setSingleItem={setSingleItem} setItemData={setItemData} />}
@@ -38,7 +38,7 @@ function ShopPage() {
         </div>
 
         <Footer />
-      </HeroContainer2>
+      </ShopPageContainer>
     </>
   );
 }

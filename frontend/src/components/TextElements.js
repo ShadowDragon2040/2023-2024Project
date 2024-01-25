@@ -14,6 +14,14 @@ export const InfoContainer=styled.div`
 
     }
 `
+export const InfoContainer3=styled.div`
+    color: #fff;
+    @media screen and (max-width:768px) {
+        padding: 100px 0;
+
+    }
+`
+
 export const InfoContainer2=styled.div`
     color: #fff;
     background: ${({lightBg})=>(lightBg?'#f9f9f9':'#010606')};
@@ -396,8 +404,8 @@ export const HeroContainer=styled.div`
         linear-gradient(180deg,rgba(0,0,0,0.2) 0%, transparent 100%);
     }
 `
-export const HeroContainer2=styled.div`
-    background: darkgreen;
+export const ShopPageContainer=styled.div`
+    background: #378457;
     z-index: 1;
     :before{
         content: '';
@@ -455,6 +463,9 @@ export const CarouselContainer = styled.div`
     margin-left:10%;
     margin-top:20%;
     width:80%;
+    border-radius:5px;
+    background-color:#01bf71;
+
    
 `
 export const ItemContainer=styled.div`
@@ -468,7 +479,6 @@ export const ItemContainer=styled.div`
 
 export const FooterContainer=styled.footer`
     bottom:0px;
-    margin-top:10%;
     position:relative;
     z-index:10;
     background-color: #101522;

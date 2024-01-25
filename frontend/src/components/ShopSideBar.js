@@ -8,17 +8,17 @@ import { NavLink } from 'react-router-dom';
 function ShopSideBar() {
   return (
     <div>
-      <ShopSidebarContainer className='bg-ligth text-success '>
+      <ShopSidebarContainer>
     
         <NavLink to={'/'} className='nav-link'>
-        <h5 className='p-2'>
+        <h5 className='p-2 menupont' >
 
           <FaHome /> Home
           </h5>
          
         </NavLink>
         <NavLink to={'/news'} className='nav-link'>
-          <h5 className='p-2'>
+          <h5 className='p-2 menupont'>
 
           <FaNewspaper /> News
           </h5>
@@ -27,19 +27,19 @@ function ShopSideBar() {
         <CategorySelectorBox />
 
         <NavLink to={'/paints'} className='nav-link'>
-        <h5 className='p-2'>
+        <h5 className='p-2 menupont'>
 
         <FaPaintBrush /> Paints
 
         </h5>
         </NavLink>
         <NavLink to={"/gift"} className='nav-link'>
-          <h5 className='p-2'>
+          <h5 className='p-2 menupont'>
             <IoGiftSharp /> Gift
           </h5>
         </NavLink>
         <NavLink to={'/lab'} className='nav-link'>
-        <h5 className='p-2'>
+        <h5 className='p-2 menupont'>
 
           <FaGitlab/> Lab
 

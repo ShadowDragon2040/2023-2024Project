@@ -24,7 +24,7 @@ function GetTermekek(props) {
 
     <button className="btn cardbtn" onClick={() => setSingleItemData(item)}>
       <div className="card border-success rounded w-100" style={{ minHeight: '25vw',boxShadow: '10px 10px  10px black' }}>
-        <div className="card-body bg-success">
+        <div className="card-body">
           <img className="card-img-top" src={item.keputvonal} alt={item.termekId} style={{ height: '100%', objectFit: 'cover', margin: '0vw 0vw 1vw 0vw' }} />
           <h5 className="card-title">{item.termekNev}</h5>
           <p>{item.leiras}</p>
@@ -47,7 +47,7 @@ function GetTermekek(props) {
           <h5>NEW ITEMS</h5>
         </div>
       {visibleCards < newsList.length && (
-        <div className="col-md-6 text-right">
+        <div className="col-md-6 text-right mr-5">
           <a className='link' onClick={handleShowMore}>Show More</a>
         </div>
       

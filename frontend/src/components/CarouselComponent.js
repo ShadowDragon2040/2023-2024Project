@@ -30,8 +30,6 @@ function CarouselComponent(props) {
   */
   return (
     
-    <CarouselContainer>
-      <h5>SPECIAL COLLECTIONS</h5>
       <Carousel className='bg-dark border border-dark rounded ' autoPlay={true} infiniteLoop={true} showThumbs={false} showStatus={false}>
      
           <CarouselImage src={Image1}/>
@@ -41,7 +39,6 @@ function CarouselComponent(props) {
      
       
     </Carousel>
-   </CarouselContainer>
   )
 }
 

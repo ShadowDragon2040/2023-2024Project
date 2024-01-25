@@ -1,12 +1,18 @@
 import React from 'react'
-import { ItemContainer } from './TextElements'
+import { InfoContainer3, ItemContainer,CarouselContainer } from './TextElements'
 import GetTermekek from './hooks/GetTermekek'
 import CarouselComponent from './CarouselComponent'
-
 function NewItemsComponent (props) {
   return (
     <>
+    <CarouselContainer style={{boxShadow:'10px 10px 10px black'}}>
+    <InfoContainer3>
+      FEATURED ITEMS
+    </InfoContainer3>
+
     <CarouselComponent/>
+    </CarouselContainer>
+
     <ItemContainer>
         
         <div>
