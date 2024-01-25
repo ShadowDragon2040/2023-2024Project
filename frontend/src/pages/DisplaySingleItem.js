@@ -17,7 +17,7 @@ function DisplaySingleData(props) {
                   <p>Tagek: {props.ItemData.tagId}</p>
                   <p>Színek: {props.ItemData.szinId}</p>
                 </div>
-                  <button onClick={()=>props.setSingleItem(true)}>Vissza</button>
+                  <button onClick={()=>props.setSingleItem(false)}>Vissza</button>
                 </div>
             </div>
             <div className="col-4">

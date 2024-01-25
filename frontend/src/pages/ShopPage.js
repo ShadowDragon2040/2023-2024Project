@@ -8,10 +8,11 @@ import ProfileDisplayPage from '../components/ProfileDisplayPage';
 import DisplaySingleItem from './DisplaySingleItem';
 
 function ShopPage() {
-  const [singleItem, setSingleItem] = useState(true);
+  const [singleItem, setSingleItem] = useState(false);
   const [isProfileVisible, setProfileVisible] = useState(false);
   const [ItemData,setItemData]=useState(null)
   const [userData, setUserData] = useState(null);
+  console.log(singleItem);
   return (
     <>
       <HeroContainer2>
@@ -28,7 +29,7 @@ function ShopPage() {
               <ShopSideBar   />
             </div>
             <div className="col-8">
-              {singleItem ? <DisplayItem setSingleItem={setSingleItem} setItemData={setItemData} /> : <DisplaySingleItem ItemData={ItemData} setSingleItem={setSingleItem}/>}
+              {singleItem ? <DisplaySingleItem ItemData={ItemData} setSingleItem={setSingleItem}/>: <DisplayItem setSingleItem={setSingleItem} setItemData={setItemData} />}
             </div>
             <div className="col-2">
               {isProfileVisible?<ProfileDisplayPage userData={userData}/>:<></> } 

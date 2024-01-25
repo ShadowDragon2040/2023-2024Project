@@ -8,7 +8,7 @@ function GetTermekek(props) {
 
   const setSingleItemData = (item) => {
     scroll.scrollToTop();
-    props.setSingleItem(false);
+    props.setSingleItem(true);
     console.log(item);
     props.setItemData(item);
   };
@@ -37,7 +37,7 @@ function GetTermekek(props) {
   ));
 
   const handleShowMore = () => {
-    setVisibleCards(prevVisibleCards => prevVisibleCards + 3);
+    setVisibleCards(prevVisibleCards => prevVisibleCards + 6);
   };
 
   return (
