@@ -136,8 +136,28 @@ a{
 
 }
 
+.img-fluid{
+  width: 150px;
+}
+
+.card{
+  min-height: 25vw;
+  box-shadow: 10px 10px 10px black;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin-top: 15%;
+  margin-bottom: 15%;
+  border-radius: 15px;
+}
+.card-img-top{
+  height: 100%;
+  object-fit: cover;
+  margin: 0vw 0vw 1vw 0vw;
+}
+
 .cardbtn {
   transition: 0.3s;
+  border-radius: 5px;
 }
 .cardbtn:hover{
   width: 105%;

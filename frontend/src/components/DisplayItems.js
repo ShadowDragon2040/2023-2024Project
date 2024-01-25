@@ -5,7 +5,7 @@ import CarouselComponent from './CarouselComponent'
 function NewItemsComponent (props) {
   return (
     <>
-    <CarouselContainer style={{boxShadow:'10px 10px 10px black'}}>
+    <CarouselContainer>
     <InfoContainer3>
       FEATURED ITEMS
     </InfoContainer3>

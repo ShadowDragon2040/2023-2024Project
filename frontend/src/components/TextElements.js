@@ -458,6 +458,7 @@ export const HeroP=styled.p`
     }
 `
 export const CarouselContainer = styled.div`
+    box-shadow:10px 10px 10px black;
     position:relative;
     display:inline-block;
     margin-left:10%;
