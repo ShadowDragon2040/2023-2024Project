@@ -7,7 +7,7 @@ function NewItemsComponent (props) {
     <>
     <CarouselContainer>
     <InfoContainer3>
-      FEATURED ITEMS
+      OFFER OF THE WEEK
     </InfoContainer3>
 
     <CarouselComponent/>

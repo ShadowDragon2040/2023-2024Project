@@ -15,6 +15,8 @@ export const InfoContainer=styled.div`
     }
 `
 export const InfoContainer3=styled.div`
+    padding:10px; 
+    font-size:2em;
     color: #fff;
     @media screen and (max-width:768px) {
         padding: 100px 0;
@@ -32,7 +34,7 @@ export const InfoContainer2=styled.div`
     }
 `
 export const CarouselImage=styled.img`
-height:20vw;
+height:25vw;
 `
 
 
@@ -461,10 +463,10 @@ export const CarouselContainer = styled.div`
     box-shadow:10px 10px 10px black;
     position:relative;
     display:inline-block;
-    margin-left:10%;
-    margin-top:20%;
-    width:80%;
-    border-radius:5px;
+    margin-top:10%;
+    width:100%;
+    height:100%;
+    border-radius:20px;
     background-color:#01bf71;
 
    
@@ -473,7 +475,7 @@ export const ItemContainer=styled.div`
         position:relative;
         display:inline-block;
         margin:auto;
-        margin-top:10%;
+        margin-top:5%;
         width:100%;
 `
 
@@ -609,7 +611,7 @@ export const SidebarContainer=styled.aside`
     top: ${({isOpen}) => (isOpen ? '0' : '-100%')};
 `
 export const ShopSidebarContainer=styled.aside`
-    width:20%;
+    width:15%;
     margin-top:80px;
     float:left;
     height:100%;
@@ -621,7 +623,7 @@ export const ShopSidebarContainer=styled.aside`
 `
 
 export const ProfileDisplayPageContainer=styled.aside`
-    width:20%;
+    width:15%;
     margin-top:80px;
     float:right;
     position:absolute;

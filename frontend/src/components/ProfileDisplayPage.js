@@ -38,10 +38,6 @@ function ProfileDisplayPage() {
                 <p className="mb-2 h5">8512</p>
                 <p className="text-muted mb-0">Income amounts</p>
               </div>
-              <div>
-                <p className="mb-2 h5">4751</p>
-                <p className="text-muted mb-0">Total Transactions</p>
-              </div>
             </div>
 
       </div>
