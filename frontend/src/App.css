@@ -145,9 +145,12 @@ a{
   background-color:#01bf71;
 
 }
+.carousel-thumbnails {
+  width: 200px;
+}
 
 .img-fluid{
-  width: 200px;
+  width: 500px;
 }
 
 .card{

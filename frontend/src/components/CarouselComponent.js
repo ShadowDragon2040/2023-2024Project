@@ -4,7 +4,7 @@ import Image2 from "./ComponentImages/image2.jpg"
 import Image3 from "./ComponentImages/image3.jpg"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-import {CarouselContainer, CarouselImage} from './TextElements';
+import {CarouselImage} from './TextElements';
 
 
 
