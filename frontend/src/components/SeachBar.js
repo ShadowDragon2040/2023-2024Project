@@ -48,7 +48,11 @@
       const query = event.results[last][0].transcript;
 
       if (inputRef.current) {
-        inputRef.current.value = query;
+        setIsInputFocused(true);
+        const updatedValue = query.slice(0, -1);
+        setQuery(updatedValue);
+        inputRef.current.value = updatedValue;
+
       }
 
       console.log('Speech Recognition Result:', query);
