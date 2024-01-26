@@ -15,6 +15,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
     "react-image-gallery": "^1.2.11",
+    "react-inner-image-zoom": "^3.0.2",
     "react-modal": "^3.16.1",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^5.2.3",
