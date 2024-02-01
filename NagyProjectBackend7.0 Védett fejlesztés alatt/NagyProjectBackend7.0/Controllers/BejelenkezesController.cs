@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Webárúház_Nagy_Project.Controllers
 {
@@ -22,7 +23,14 @@ namespace Webárúház_Nagy_Project.Controllers
             _configuration = configuration;
         }
 
-        
+        [HttpGet,Authorize]
+        public ActionResult<string> GetMyName()
+        {
+            var userName = User?.Identity?.Name;
+            var roleClaims = User?.FindAll(ClaimTypes.Role);
+            var roles = roleClaims?.Select(x => x.Value).ToList();
+            return Ok(new { userName,roles });
+        }
         // .net 7.0 módszer
 
         [HttpPost("Register")]

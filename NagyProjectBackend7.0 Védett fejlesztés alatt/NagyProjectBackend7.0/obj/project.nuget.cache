@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pyH6F9Gn9cHPlJKvodSP/KZ3GAZoV6vCNfQgcTVSqda4BbMQcFp+Mu2IEa634XbygZA3byldD3UxQ+XCFJhnvw==",
+  "dgSpecHash": "jr2n/0XyLbqwGBGt0qiiY7as5Y+jDeSSGs5nklXAMbO4uSjbflqdAY/cXHfqyJlL/Xlc4YizfvQyzUHpg6NcDw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\NagyProjectBackend7.0\\NagyProjectBackend7.0\\NagyProjectBackend7.0.csproj",
+  "projectFilePath": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\NagyProjectBackend7.0 Védett fejlesztés alatt\\NagyProjectBackend7.0\\NagyProjectBackend7.0.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vbalázs\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\vbalázs\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",

@@ -17,6 +17,25 @@ namespace Webárúház_Nagy_Project
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
+            //adatbázis adatok (jelszó) tárolás appsetting.json-ban
+            /*
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                var connectionString = builder.Configuration.GetConnectionString("XampMySql");
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            });
+            */
+
+            //farkas módszer
+            builder.Services.AddSwaggerGen();
+            var settingsSection = builder.Configuration.GetSection("AuthSettings");
+            var secret = settingsSection.GetValue<string>("Secret");
+            var issuer = settingsSection.GetValue<string>("Issuer");
+            var auidience = settingsSection.GetValue<string>("Audience");
+
+            var key = Encoding.ASCII.GetBytes(secret);
+            //videós módszer
+            /*
             builder.Services.AddSwaggerGen(options =>
             {
                 options.AddSecurityDefinition("oath2", new OpenApiSecurityScheme
@@ -29,6 +48,28 @@ namespace Webárúház_Nagy_Project
                 options.OperationFilter<SecurityRequirementsOperationFilter>();
 
             });
+            */
+            //farkas módszer
+            builder.Services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = true,
+                    ValidIssuer = issuer,
+                    ValidAudience = auidience,
+                    ValidateAudience = true
+                };
+            });
+
+            builder.Services.AddAuthorization();
+            //videós módszer
+            /*
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -39,7 +80,7 @@ namespace Webárúház_Nagy_Project
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value!))
                 };
             });
-
+            */
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
