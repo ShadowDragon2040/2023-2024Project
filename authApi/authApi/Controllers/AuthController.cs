@@ -1,6 +1,7 @@
 ﻿using authApi.Models.Dtos;
 using authApi.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
+using authApi.Services;
 
 namespace authApi.Controllers
 {

@@ -9,6 +9,7 @@ namespace Webárúház_Nagy_Project.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class FelhasznalokController : ControllerBase
     {
         [HttpGet/*, Authorize(Roles = "Admin")*/]

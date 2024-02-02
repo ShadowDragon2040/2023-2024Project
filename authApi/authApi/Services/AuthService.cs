@@ -4,6 +4,7 @@ using authApi.Models.Dtos;
 using authApi.Services.IServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Mail;
 
 namespace authApi.Services
 {
@@ -65,9 +66,20 @@ namespace authApi.Services
             return false;
         }
 
+        public static void SendMail(string mailAddressTo, string subject, string body)
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
+            mail.From = new MailAddress("printfusionpage@gmail.com");
+            mail.To.Add(mailAddressTo);
+            mail.Subject = subject;
+            mail.Body = body;
+            smtpServer.Credentials = new System.Net.NetworkCredential("printfusionpage@gmail.com", "huci yvoe bmqw thaz");
 
-
-        //private readonly IJwtTokenGenerator jwtTokenGenerat;
+            smtpServer.Port = 587;
+            smtpServer.EnableSsl = true;
+            smtpServer.Send(mail);
+        }
 
         public async Task<string> Register(RegisterRequestDto registrationRequestDto)
         {
@@ -94,6 +106,7 @@ namespace authApi.Services
                         FullName = userToReturn.FullName,
                         Age = userToReturn.Age,
                     };
+                    SendMail(userToReturn.Email, "PrintFusion Regisztráció megerősítése", "Ez egy automatikusan generált üzenet, kattintson a linkre hogy a fiókját hitelesítje!");
                     return "";
                 }
                 else

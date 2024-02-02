@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\NagyProjectBackend7.0.props" />
+</Project>
