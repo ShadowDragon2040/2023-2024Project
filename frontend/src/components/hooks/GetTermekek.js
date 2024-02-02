@@ -20,20 +20,20 @@ function GetTermekek(props) {
   }, []);
 
   const cards = newsList.slice(0, visibleCards).map(item => (
-    <div className="col-md-4 mb-2" key={item.termekId}>
 
-    <button className="btn cardbtn" onClick={() => setSingleItemData(item)}>
-      <div className="card w-100 border-dark rounded">
-        <div className="card-body">
-          <img className="card-img-top" src={item.keputvonal} alt="Image not found!" />
-          <h5 className="card-title">{item.termekNev} </h5>
-          <p>{item.leiras}</p>
-          <p className='font-weight-bold'>{item.ar}. -HUF</p>
-
+    <div className="col-md-4 mb-2 col-sm-6" key={item.termekId}>
+      <button className="btn cardbtn" onClick={() => setSingleItemData(item)}>
+        <div className="card border-dark rounded">
+          <div className="card-body">
+            <img className="card-img-top" src={item.keputvonal} alt="Image not found!" />
+            <h5 className="card-title">{item.termekNev} </h5>
+            <p>{item.leiras}</p>
+            <p className='font-weight-bold'>{item.ar}. -HUF</p>
+          </div>
         </div>
-      </div>
          </button>
     </div>
+
   ));
 
   const handleShowMore = () => {

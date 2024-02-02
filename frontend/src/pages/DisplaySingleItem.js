@@ -5,15 +5,13 @@ import { MdArrowBack } from "react-icons/md";
 function DisplaySingleData(props) {
   return (
     <>
-        <div className='back-btn'>
-          <MdArrowBack onClick={() => props.setSingleItem(false)}/>
+        <div className='back-btn'  onClick={() => props.setSingleItem(false)}>
+          <MdArrowBack/>
         </div>
       <div className="container">
         <div className="row align-items-start">
-          <div className="col-2">
-          </div>
-          <div className="col-6 w-100">
-            <div className='card singlecard w-100 mx-auto'  >
+          <div className="col-sm-6 w-100" >
+            <div className='singlecard w-100 mx-auto'  >
               <InnerImageZoom
                 width={'100%'}
                 src={props.ItemData.keputvonal}
@@ -32,8 +30,6 @@ function DisplaySingleData(props) {
                 <p>Színek: {props.ItemData.szinId}</p>
               </div>
             </div>
-          </div>
-          <div className="col-4">
           </div>
         </div>
       </div>

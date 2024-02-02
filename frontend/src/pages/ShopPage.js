@@ -25,13 +25,13 @@ function ShopPage() {
         />
         <div className="container">
           <div className="row align-items-start">
-            <div className="col-1">
+            <div className="col-sm-2 col-md-3 col-xl-2">
               <ShopSideBar/>
             </div>
-            <div className="col-10">
+            <div className="col-sm-4 col-md-6 col-xl-8">
               {singleItem ? <DisplaySingleItem ItemData={ItemData} setSingleItem={setSingleItem}/>: <DisplayItem setSingleItem={setSingleItem} setItemData={setItemData} />}
             </div>
-            <div className="col-1">
+            <div className="col-sm-4 col-md-3 col-xl-2">
               {isProfileVisible?<ProfileDisplayPage userData={userData}/>:<></> } 
             </div>
           </div>

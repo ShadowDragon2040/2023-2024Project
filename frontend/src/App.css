@@ -76,13 +76,19 @@ a{
   color:#01bf71;
 }
 .back-btn{
-  margin-top: 10%;
+  margin-top: 15%;
   width: 60px;
   font-size: 2em;
   border: 1px solid black;
   border-radius: 100px;
   text-align: center;
   background-color: #01bf71;
+  @media screen and (max-width:700px) {
+    width:20%;
+    margin:100px 0px 0px 120px;
+    padding:10px;
+    font-size:10px;
+}
 }
 .back-btn:hover{
     background-color: black;
@@ -161,6 +167,19 @@ a{
   margin-top: 5%;
   margin-bottom: 5%;
   border-radius: 25px;
+
+}
+
+.singlecard{
+  min-height: 20vw;
+  box-shadow: 10px 10px 10px black;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  border-radius: 25px;
+  
+ 
 }
 
 
@@ -177,6 +196,7 @@ a{
 .cardbtn:hover{
   width: 105%;
 }
+
 
 .result-box {
   min-width: 100%;

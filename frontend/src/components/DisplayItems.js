@@ -14,10 +14,7 @@ function NewItemsComponent (props) {
     </CarouselContainer>
 
     <ItemContainer>
-        
-        <div>
         <GetTermekek setSingleItem={props.setSingleItem} setItemData={props.setItemData}/>
-        </div>
     </ItemContainer>
     </>
   )

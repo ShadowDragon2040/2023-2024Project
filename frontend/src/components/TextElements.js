@@ -58,10 +58,6 @@ export const InfoWrapper =styled.div`
     margin-left:auto;
     padding:0 24px;
     justify-content: center;
-    /* background-image: url(${require(`../images/industar-kft-front.jpg`)});
-    background-repeat:no-repeat;
-    background-position:center;
-    background-size:100%; */
  
 `
 
@@ -463,11 +459,14 @@ export const CarouselContainer = styled.div`
     box-shadow:10px 10px 10px black;
     position:relative;
     display:inline-block;
-    margin-top:10%;
+    margin-top:15%;
     width:100%;
     height:100%;
     border-radius:20px;
     background-color:#01bf71;
+     @media screen and (max-width:700px) {
+        display:none;
+    }
 
    
 `
@@ -476,7 +475,11 @@ export const ItemContainer=styled.div`
         display:inline-block;
         margin:auto;
         margin-top:5%;
-        width:100%;
+        float:right;
+    @media screen and (max-width:700px) {
+        margin-top:80px;
+        width:60%
+    }
 `
 
 
@@ -611,7 +614,7 @@ export const SidebarContainer=styled.aside`
     top: ${({isOpen}) => (isOpen ? '0' : '-100%')};
 `
 export const ShopSidebarContainer=styled.aside`
-    width:15%;
+    width:20%;
     margin-top:80px;
     float:left;
     height:100%;
@@ -620,10 +623,15 @@ export const ShopSidebarContainer=styled.aside`
     position:fixed;
     padding:25px;
     background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg,rgba(0,0,0,0.2) 0%,transparent 100%);
+    @media screen and (max-width:700px) {
+        width:30%;
+        padding:10px;
+        font-size:10px;
+    }
 `
 
 export const ProfileDisplayPageContainer=styled.aside`
-    width:15%;
+    width:20%;
     margin-top:80px;
     float:right;
     position:absolute;
@@ -707,4 +715,3 @@ export const SidebarRoute=styled(LinkR)`
     }
 
 `
-
