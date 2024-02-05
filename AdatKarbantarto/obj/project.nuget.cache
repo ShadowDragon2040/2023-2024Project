@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "GIZaG5Dl8VJs6pJhN5UmY6QXdkdtI7/BOudPwpfOTAq18jD2fXxE8LMj/wC9ecIKrobfuMElHwZDYwG9r3zcuQ==",
+  "dgSpecHash": "M34PiCfEP1L3D6fKan5UJS/iteJg3a2hpMqSpIvlUZ/AK63XlX5wqOCOZLFgavm2O6dT6YNM4Ny5B2KI1mZMzA==",
   "success": true,
   "projectFilePath": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\AdatKarbantarto\\AdatKarbantarto.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\pbálint\\.nuget\\packages\\materialdesigncolors\\1.2.7\\materialdesigncolors.1.2.7.nupkg.sha512",
+    "C:\\Users\\pbálint\\.nuget\\packages\\materialdesignextensions\\3.3.0\\materialdesignextensions.3.3.0.nupkg.sha512",
+    "C:\\Users\\pbálint\\.nuget\\packages\\materialdesignthemes\\3.2.0\\materialdesignthemes.3.2.0.nupkg.sha512"
+  ],
   "logs": []
 }
