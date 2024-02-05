@@ -93,7 +93,7 @@ namespace Webárúház_Nagy_Project
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseCors("AllowOrigin");
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
