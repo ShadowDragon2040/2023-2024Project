@@ -2,6 +2,11 @@
 using authApi.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 using authApi.Services;
+using System.Text;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using authApi.Models;
 
 namespace authApi.Controllers
 {
@@ -11,9 +16,51 @@ namespace authApi.Controllers
     public class AuthController : Controller
     {
         private readonly IAuth authService;
-        public AuthController(IAuth authService)
+        private readonly UserManager<ApplicationUser> userManager;
+
+        public AuthController(IAuth authService, UserManager<ApplicationUser> userManager)
         {
+            this.userManager = userManager;
             this.authService = authService;
+        }
+
+        [HttpPost("confirm")]
+        public async Task<IActionResult> ConfirmEmail(string email, string hash)
+        {
+            try
+            {
+                using (SHA256 sha256 = SHA256.Create())
+                {
+                    byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(email));
+                    var calculatedHash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+
+                    if (calculatedHash.Equals(hash, StringComparison.OrdinalIgnoreCase))
+                    {
+                        var user = await userManager.FindByEmailAsync(email);
+
+                        if (user != null && !user.EmailConfirmed)
+                        {
+                            user.EmailConfirmed = true;
+                            await userManager.UpdateAsync(user);
+                        }
+                        else
+                        {
+                            return BadRequest("Email is already confirmed or user not found.");
+                        }
+                    }
+                    else
+                    {
+                        return BadRequest("Invalid email verification link.");
+                    }
+                }
+
+                EmailService.SendMail(email, "Sikeres regisztráció", $"Ön sikeresen regisztrált a PrintFusion oldalra mostantól az oldal összes funkciója elérhető!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok("Email verified successfully!");
         }
 
         [HttpPost("register")]
@@ -28,6 +75,7 @@ namespace authApi.Controllers
         }
 
         [HttpPost("AssignRole")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> AssignRole([FromBody] AssignRoleDto model)
         {
             var assignedRoleSuccesful = await authService.AssignRole(model.Email, model.Role.ToUpper());
