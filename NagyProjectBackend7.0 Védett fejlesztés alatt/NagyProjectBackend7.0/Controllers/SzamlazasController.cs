@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Webárúház_Nagy_Project.DTOs;
 using Webárúház_Nagy_Project.Models;
 
@@ -10,31 +11,46 @@ namespace Webárúház_Nagy_Project.Controllers
     [ApiController]
     public class SzamlazasController : ControllerBase
     {
-        [HttpGet/*, Authorize(Roles = "Admin")*/]
-        public ActionResult Get()
+        private readonly project_databaseContext _context;
+
+        public SzamlazasController(project_databaseContext context)
         {
-            using (var context = new project_databaseContext())
+            _context = context;
+        }
+
+        [HttpGet/*, Authorize(Roles = "Admin")*/]
+        public async Task<ActionResult> Get()
+        {
+            try
             {
-                return Ok(context.Szamlazasok.ToList());
+                var result = await _context.Szamlazasok.ToListAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpGet("{id}")/*, Authorize(Roles = "Admin")*/]
-        public ActionResult Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            using (var context = new project_databaseContext())
+            try
             {
-                var result = context.Szamlazasok.Where(x => x.SzamlazasId == id);
+                var result = await _context.Szamlazasok.Where(x => x.SzamlazasId == id).ToListAsync();
                 return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpPost/*, Authorize(Roles = "Admin")*/]
-        public ActionResult<SzamlazasokDto> Post(CreatedSzamlazasokDto createdSzamlazasokDto)
+        public async Task<ActionResult<SzamlazasokDto>> Post(CreatedSzamlazasokDto createdSzamlazasokDto)
         {
-            using (var context = new project_databaseContext())
+            try
             {
-
                 var request = new Szamlazasok
                 {
                     Felhasznalok = createdSzamlazasokDto.FelhasznaloId,
@@ -43,41 +59,53 @@ namespace Webárúház_Nagy_Project.Controllers
                     SikeresSzalitas = false,
                 };
 
-                context.Szamlazasok.Add(request);
-                context.SaveChanges();
+                _context.Szamlazasok.Add(request);
+                _context.SaveChanges();
 
                 return Ok(/*request.AsDto()*/);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 
         
         [HttpPut("{id}")/*, Authorize(Roles = "Admin")*/]
-        public ActionResult Put(int Id, UpdateSzamlazasokDto updateSzamlazasokDto)
+        public async Task<ActionResult> Put(int Id, UpdateSzamlazasokDto updateSzamlazasokDto)
         {
-            using (var context = new project_databaseContext())
+            try
             {
-                var existingSzamlazas = context.Szamlazasok.FirstOrDefault(x => x.SzamlazasId == Id);
+                var existingSzamlazas = _context.Szamlazasok.FirstOrDefault(x => x.SzamlazasId == Id);
 
                 /*existingSzamlazas.VasarlasIdopontja = updateSzamlazasokDto.VasarlasIdopontja;*/
                 existingSzamlazas.SikeresSzalitas = updateSzamlazasokDto.SikeresSzalitas;
 
-                context.Szamlazasok.Update(existingSzamlazas);
-                context.SaveChanges();
+                _context.Szamlazasok.Update(existingSzamlazas);
+                _context.SaveChanges();
                 return Ok();
             }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
-        
+
 
         [HttpDelete("{id}")/*, Authorize(Roles = "Admin")*/]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            using (var context = new project_databaseContext())
+            try
             {
-                var existingSzamlazas = context.Szamlazasok.FirstOrDefault(x => x.SzamlazasId == id);
+                var existingSzamlazas = _context.Szamlazasok.FirstOrDefault(x => x.SzamlazasId == id);
 
-                context.Szamlazasok.Remove(existingSzamlazas);
-                context.SaveChanges();
+                _context.Szamlazasok.Remove(existingSzamlazas);
+                _context.SaveChanges();
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Webárúház_Nagy_Project.DTOs;
 using Webárúház_Nagy_Project.Models;
 
@@ -9,29 +10,45 @@ namespace Webárúház_Nagy_Project.Controllers
     [ApiController]
     public class TermekekController : ControllerBase
     {
-        [HttpGet/*, Authorize*/]
-        public ActionResult Get()
+        private readonly project_databaseContext _context;
+
+        public TermekekController(project_databaseContext context)
         {
-            using (var context = new project_databaseContext())
+            _context = context;
+        }
+
+        [HttpGet/*, Authorize*/]
+        public async Task<ActionResult> Get()
+        {
+            try
             {
-                return Ok(context.Termekek.ToList());
+                var result = await _context.Termekek.ToListAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpGet("{id}")/*, Authorize*/]
-        public ActionResult Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            using (var context = new project_databaseContext())
+            try
             {
-                var result = context.Termekek.Where(x => x.TermekId == id);
+                var result = await _context.Termekek.Where(x => x.TermekId == id).ToListAsync();
                 return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpPost/*, Authorize(Roles = "Admin")*/]
-        public ActionResult<TermekekDto> Post(CreatedTermekekDto createdTermekekDto)
+        public async Task<ActionResult<TermekekDto>> Post(CreatedTermekekDto createdTermekekDto)
         {
-            using (var context = new project_databaseContext())
+            try
             {
                 var request = new Termekek
                 {
@@ -43,19 +60,23 @@ namespace Webárúház_Nagy_Project.Controllers
                     Keputvonal = createdTermekekDto.Keputvonal,
                 };
 
-                context.Termekek.Add(request);
-                context.SaveChanges();
+                _context.Termekek.Add(request);
+                _context.SaveChanges();
 
                 return Ok(/*request.AsDto()*/);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpPut("{id}")/*, Authorize(Roles = "Admin")*/]
-        public ActionResult Put(int id, UpdateTermekekDto updateTermekedDto)
+        public async Task<ActionResult> Put(int id, UpdateTermekekDto updateTermekedDto)
         {
-            using (var context = new project_databaseContext())
+            try
             {
-                var existingTermek = context.Termekek.FirstOrDefault(x => x.TermekId == id);
+                var existingTermek = _context.Termekek.FirstOrDefault(x => x.TermekId == id);
 
                 existingTermek.TermekNev = updateTermekedDto.TermekNev;
                 existingTermek.Leiras = updateTermekedDto.Leiras;
@@ -64,22 +85,30 @@ namespace Webárúház_Nagy_Project.Controllers
                 existingTermek.TagId = updateTermekedDto.TagId;
                 existingTermek.Keputvonal = updateTermekedDto.Keputvonal;
 
-                context.Termekek.Update(existingTermek);
-                context.SaveChanges();
+                _context.Termekek.Update(existingTermek);
+                _context.SaveChanges();
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 
-        [HttpDelete("{id}")/*, Authorize(Roles = "Admin")*/]
-        public ActionResult Delete(int id)
+        [HttpDelete("{id}"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Delete(int id)
         {
-            using (var context = new project_databaseContext())
+            try
             {
-                var existingTermek = context.Termekek.FirstOrDefault(x => x.TermekId == id);
+                var existingTermek = _context.Termekek.FirstOrDefault(x => x.TermekId == id);
 
-                context.Termekek.Remove(existingTermek);
-                context.SaveChanges();
+                _context.Termekek.Remove(existingTermek);
+                _context.SaveChanges();
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }

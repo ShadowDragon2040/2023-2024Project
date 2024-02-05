@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Webárúház_Nagy_Project.DTOs;
 using Webárúház_Nagy_Project.Models;
 
@@ -10,31 +13,46 @@ namespace Webárúház_Nagy_Project.Controllers
     [ApiController]
     public class HozzaszolasController : ControllerBase
     {
-        [HttpGet/*, Authorize*/]
-        public ActionResult Get()
+        private readonly project_databaseContext _context;
+
+        public HozzaszolasController(project_databaseContext context)
         {
-            using (var context = new project_databaseContext())
-            {
-                return Ok(context.Hozzaszolasok.ToList());
-            }
+            _context = context;
         }
 
-        [HttpGet("{id}")/*, Authorize*/]
-        public ActionResult Get(int id)
+        [HttpGet]
+        public async Task<ActionResult<Hozzaszolasok>> Get()
         {
-            using (var context = new project_databaseContext())
+            try
             {
-                var result = context.Hozzaszolasok.Where(x => x.HozzaszolasId == id);
+                var result = await _context.Hozzaszolasok.ToListAsync();
                 return Ok(result);
             }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        [HttpPost/*, Authorize*/]
-        public ActionResult<HozzaszolasokDto> Post(CreatedHozzaszolasokDto createdHozzaszolasokDto)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Hozzaszolasok>> Get(int id)
         {
-            using (var context = new project_databaseContext())
+            try
             {
+                var result = await _context.Hozzaszolasok.Where(x => x.HozzaszolasId == id).ToListAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
+        [HttpPost]
+        public async Task<ActionResult<HozzaszolasokDto>> Post(CreatedHozzaszolasokDto createdHozzaszolasokDto)
+        {
+            try
+            {
                 var request = new Hozzaszolasok
                 {
                     FelhasznaloId = createdHozzaszolasokDto.FelhasznaloId,
@@ -43,40 +61,55 @@ namespace Webárúház_Nagy_Project.Controllers
                     Ertekeles = createdHozzaszolasokDto.Ertekeles
                 };
 
-                context.Hozzaszolasok.Add(request);
-                context.SaveChanges();
+                _context.Hozzaszolasok.Add(request);
+                await _context.SaveChangesAsync();
 
                 return Ok(/*request.AsDto()*/);
             }
-        }
-        
-        [HttpPut("{id}")]
-        public ActionResult Put(int Id, UpdateHozzaszolasokDto updateHozzaszolasokDto)
-        {
-            using (var context = new project_databaseContext())
+            catch (Exception ex)
             {
-                var existingHozzaszolas = context.Hozzaszolasok.FirstOrDefault(x => x.HozzaszolasId == Id);
-
-                existingHozzaszolas.Leiras = updateHozzaszolasokDto.Leiras;
-                existingHozzaszolas.Ertekeles = updateHozzaszolasokDto.Ertekeles;
-
-
-                context.Hozzaszolasok.Update(existingHozzaszolas);
-                context.SaveChanges();
-                return Ok();
+                return BadRequest(ex.Message);
             }
         }
 
-        [HttpDelete("{id}")/*, Authorize(Roles = "Admin")*/]
-        public ActionResult Delete(int id)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Put(int Id, UpdateHozzaszolasokDto updateHozzaszolasokDto)
         {
-            using (var context = new project_databaseContext())
+            try
             {
-                var existingHozzaszolas = context.Hozzaszolasok.FirstOrDefault(x => x.HozzaszolasId == id);
+                var existingHozzaszolas = await _context.Hozzaszolasok.FirstOrDefaultAsync(x => x.HozzaszolasId == Id);
 
-                context.Hozzaszolasok.Remove(existingHozzaszolas);
-                context.SaveChanges();
-                return Ok();
+                if (existingHozzaszolas != null)
+                {
+                    existingHozzaszolas.Leiras = updateHozzaszolasokDto.Leiras;
+                    existingHozzaszolas.Ertekeles = updateHozzaszolasokDto.Ertekeles;
+
+                    await _context.SaveChangesAsync();
+                    return Ok();
+                }
+
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                var existingHozzaszolas = await _context.Hozzaszolasok.FirstOrDefaultAsync(x => x.HozzaszolasId == id);
+
+                 _context.Hozzaszolasok.Remove(existingHozzaszolas);
+                 await _context.SaveChangesAsync();
+                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }
