@@ -5,8 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdatKarbantarto"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        ResizeMode="NoResize"
+        >
     <Grid>
+        <!-- Define Rows -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100px" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
+        <!-- Define Columns -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Panel 1 -->
+        <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
+            <!-- Content for Panel 1 -->
+            <Image Source="Images/logo1.png" Stretch="UniformToFill" />
+        </Border>
+
+        <!-- Panel 2 -->
+        <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
+            <!-- Content for Panel 2 -->
+            <TextBlock Text="Panel 2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+
+        <!-- Panel 3 -->
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
+            <!-- Content for Panel 3 -->
+            <TextBlock Text="Panel 3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+
+        <!-- Panel 4 -->
+        <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
+            <!-- Content for Panel 4 -->
+            <TextBlock Text="Panel 4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
     </Grid>
 </Window>
