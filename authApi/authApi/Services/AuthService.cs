@@ -5,6 +5,8 @@ using authApi.Services.IServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Mail;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace authApi.Services
 {
@@ -66,21 +68,6 @@ namespace authApi.Services
             return false;
         }
 
-        public static void SendMail(string mailAddressTo, string subject, string body)
-        {
-            MailMessage mail = new MailMessage();
-            SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
-            mail.From = new MailAddress("printfusionpage@gmail.com");
-            mail.To.Add(mailAddressTo);
-            mail.Subject = subject;
-            mail.Body = body;
-            smtpServer.Credentials = new System.Net.NetworkCredential("printfusionpage@gmail.com", "huci yvoe bmqw thaz");
-
-            smtpServer.Port = 587;
-            smtpServer.EnableSsl = true;
-            smtpServer.Send(mail);
-        }
-
         public async Task<string> Register(RegisterRequestDto registrationRequestDto)
         {
             ApplicationUser user = new()
@@ -106,7 +93,16 @@ namespace authApi.Services
                         FullName = userToReturn.FullName,
                         Age = userToReturn.Age,
                     };
-                    SendMail(userToReturn.Email, "PrintFusion Regisztráció megerősítése", "Ez egy automatikusan generált üzenet, kattintson a linkre hogy a fiókját hitelesítje!");
+
+                    using (SHA256 sha256 = SHA256.Create())
+                    {
+                        byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(userToReturn.Email));
+                        var hashedEmail = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+
+                        var confirmationLink = $"https://localhost:7240/confirm?email={userToReturn.Email}&hash={hashedEmail}";
+
+                        EmailService.SendMail(userToReturn.Email, "PrintFusion regisztráció megerősítése", $"Ez egy automatikusan generált üzenet, kattintson a linkre hogy a fiókját hitelesítje! {confirmationLink}");
+                    }
                     return "";
                 }
                 else
