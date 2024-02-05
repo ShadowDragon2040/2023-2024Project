@@ -1,11 +1,14 @@
-﻿namespace AdatKarbantarto;
+﻿using System.Configuration;
+using System.Data;
+using System.Windows;
 
-public partial class App : Application
+namespace AdatKarbantarto
 {
-	public App()
-	{
-		InitializeComponent();
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : Application
+    {
+    }
 
-		MainPage = new AppShell();
-	}
 }
