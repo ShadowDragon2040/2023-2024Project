@@ -614,7 +614,7 @@ export const SidebarContainer=styled.aside`
     top: ${({isOpen}) => (isOpen ? '0' : '-100%')};
 `
 export const ShopSidebarContainer=styled.aside`
-    width:20%;
+    width:16%;
     margin-top:80px;
     float:left;
     height:100%;
@@ -631,7 +631,7 @@ export const ShopSidebarContainer=styled.aside`
 `
 
 export const ProfileDisplayPageContainer=styled.aside`
-    width:20%;
+    width:16%;
     margin-top:80px;
     float:right;
     position:absolute;

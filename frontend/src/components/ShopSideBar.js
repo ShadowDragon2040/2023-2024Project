@@ -1,11 +1,26 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { FaHome, FaNewspaper,FaPaintBrush,FaGitlab } from 'react-icons/fa';
 import { IoGiftSharp } from "react-icons/io5";
 import CategorySelectorBox from './CategoryBox/CategorySelectorBox';
 import { ShopSidebarContainer } from './TextElements';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
+
 
 function ShopSideBar() {
+  
+  
+  
+  const [tagsList, setTagsList] = useState([]);
+  
+    const url="http://localhost:5219/Tagek";
+    useEffect(() => {
+      axios.get(url)
+        .then(response => setTagsList(response.data))
+        .catch(error => console.error('Hiba a lekérdezés során:', error));
+    }, []);
+
+    
   return (
     <div>
       <ShopSidebarContainer>
@@ -24,7 +39,7 @@ function ShopSideBar() {
           </h5>
         </NavLink>
         
-        <CategorySelectorBox />
+        <CategorySelectorBox tagsList={tagsList}/>
 
         <NavLink to={'/paints'} className='nav-link'>
         <h5 className='p-2 menupont'>

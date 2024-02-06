@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { BiCategory } from "react-icons/bi";
 
 
-const CategorySelector = () => {
+const CategorySelector = (props) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [displayedCategory, setDisplayedCategory] = useState('');
   const inputRef = useRef(null);
@@ -21,7 +21,6 @@ const CategorySelector = () => {
   };
 
   useEffect(() => {
-    // Adjust the height of the input field based on its content
     if (inputRef.current) {
       inputRef.current.style.height = 'auto';
       inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
@@ -37,7 +36,7 @@ const CategorySelector = () => {
       <div>
         <ul>
 
-        {['Tag 1', 'Tag 2', 'Tag 3'].map((category) => (
+        {props.tagsList.map((category) => (
           
               <div key={category} className='form-check form-switch menupont'>
             <label>

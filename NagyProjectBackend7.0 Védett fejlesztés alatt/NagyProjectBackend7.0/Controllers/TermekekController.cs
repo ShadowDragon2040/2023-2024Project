@@ -31,6 +31,20 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
+        [HttpGet("/Tagek")/*, Authorize*/]
+        public async Task<ActionResult> GetTagek()
+        {
+            try
+            {
+                var result = await _context.Tagek.ToListAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("{id}")/*, Authorize*/]
         public async Task<ActionResult> Get(int id)
         {
