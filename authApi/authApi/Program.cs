@@ -16,7 +16,7 @@ namespace authApi
 
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
-                var connectionString = builder.Configuration.GetConnectionString("XampMySql");
+                var connectionString = builder.Configuration.GetConnectionString("XampDockerenKivul");
                 options.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString));
             });
 

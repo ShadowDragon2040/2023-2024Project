@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Jan 15. 12:35
+-- Létrehozás ideje: 2024. Feb 07. 08:54
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -115,6 +115,17 @@ INSERT INTO `hozzaszolasok` (`HozzaszolasId`, `FelhasznaloId`, `TermekId`, `Leir
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `kategoriak`
+--
+
+CREATE TABLE `kategoriak` (
+  `KategoriaId` int(11) NOT NULL,
+  `KategoriaNev` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `orszagok`
 --
 
@@ -159,6 +170,7 @@ CREATE TABLE `szamlazas` (
   `SzamlazasId` int(11) NOT NULL,
   `FelhasznaloId` int(11) NOT NULL,
   `TermekId` int(11) NOT NULL,
+  `SzinHex` int(11) NOT NULL,
   `VasarlasIdopontja` date NOT NULL,
   `SikeresSzalitas` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
@@ -167,28 +179,27 @@ CREATE TABLE `szamlazas` (
 -- A tábla adatainak kiíratása `szamlazas`
 --
 
-INSERT INTO `szamlazas` (`SzamlazasId`, `FelhasznaloId`, `TermekId`, `VasarlasIdopontja`, `SikeresSzalitas`) VALUES
-(1, 1, 1, '2023-11-01', 1),
-(2, 2, 2, '2023-11-02', 1),
-(3, 3, 3, '2023-11-03', 0),
-(4, 4, 4, '2023-11-04', 1),
-(5, 5, 5, '2023-11-05', 1),
-(6, 6, 6, '2023-11-06', 1),
-(7, 7, 7, '2023-11-07', 0),
-(8, 8, 8, '2023-11-08', 1),
-(9, 9, 9, '2023-11-09', 0),
-(10, 10, 10, '2023-11-10', 1),
-(11, 11, 11, '2023-11-11', 1),
-(12, 12, 12, '2023-11-12', 0),
-(13, 13, 13, '2023-11-13', 1),
-(14, 14, 14, '2023-11-14', 1),
-(15, 15, 15, '2023-11-15', 1),
-(16, 16, 16, '2023-11-16', 0),
-(17, 17, 17, '2023-11-17', 1),
-(18, 18, 18, '2023-11-18', 0),
-(19, 19, 19, '2023-11-19', 1),
-(20, 20, 20, '2023-11-20', 1);
-
+INSERT INTO `szamlazas` (`SzamlazasId`, `FelhasznaloId`, `TermekId`, `SzinHex`, `VasarlasIdopontja`, `SikeresSzalitas`) VALUES
+(1, 1, 1, 0, '2023-11-01', 1),
+(2, 2, 2, 0, '2023-11-02', 1),
+(3, 3, 3, 0, '2023-11-03', 0),
+(4, 4, 4, 0, '2023-11-04', 1),
+(5, 5, 5, 0, '2023-11-05', 1),
+(6, 6, 6, 0, '2023-11-06', 1),
+(7, 7, 7, 0, '2023-11-07', 0),
+(8, 8, 8, 0, '2023-11-08', 1),
+(9, 9, 9, 0, '2023-11-09', 0),
+(10, 10, 10, 0, '2023-11-10', 1),
+(11, 11, 11, 0, '2023-11-11', 1),
+(12, 12, 12, 0, '2023-11-12', 0),
+(13, 13, 13, 0, '2023-11-13', 1),
+(14, 14, 14, 0, '2023-11-14', 1),
+(15, 15, 15, 0, '2023-11-15', 1),
+(16, 16, 16, 0, '2023-11-16', 0),
+(17, 17, 17, 0, '2023-11-17', 1),
+(18, 18, 18, 0, '2023-11-18', 0),
+(19, 19, 19, 0, '2023-11-19', 1),
+(20, 20, 20, 0, '2023-11-20', 1);
 
 -- --------------------------------------------------------
 
@@ -277,6 +288,7 @@ CREATE TABLE `termekek` (
   `Ar` int(11) NOT NULL,
   `Leiras` varchar(255) NOT NULL,
   `Menyiseg` int(11) NOT NULL,
+  `KategoriaId` int(11) NOT NULL,
   `TagId` int(11) NOT NULL,
   `Keputvonal` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
@@ -285,27 +297,27 @@ CREATE TABLE `termekek` (
 -- A tábla adatainak kiíratása `termekek`
 --
 
-INSERT INTO `termekek` (`TermekId`, `TermekNev`, `Ar`, `Leiras`, `Menyiseg`, `TagId`, `Keputvonal`) VALUES
-(1, '3D Printed House', 5503, 'A 2-bedroom 3D printed house', 8, 1, 1, 'images/3D_Printed_House.jpg'),
-(2, 'Animal Wall Lamps', 6870, 'Decorative Animal Inspired Wall Lamps', 80, 5, 5, 'images/3D_Printed_Animal_Lamps.jpg'),
-(3, '3D_Printed_Chair', 8050, 'A fully 3D printed chair with ergonomic and natural looking design.', 200, 16, 16, 'images/3D_Printed_Chair.jpg'),
-(4, 'Mini Christmas Tree Decor', 1110, 'Adorable tabletop-sized mini Christmas tree for festive decor', 36, 6, 6, 'images/Mini_Christmass_Tree_Decoration.jpg'),
-(5, 'Christmass Tree Decoration', 260, 'Beautiful Christmass Tree Decoration', 75, 14, 14, 'images/3D_Printed_Christmass_Decoration.jpg'),
-(6, 'Designer Office Chair', 1415, 'Ergonomically designed office chair for a stylish and comfortable workspace', 190, 18, 18, 'path/to/image18.jpg'),
-(7, 'Concrete Bench and Table', 22000, 'An affordable City Bench and table combo made with 3D printed concrete.', 230, 20, 20, 'images/City_Bench.jpg'),
-(8, 'Printed Vase Containers', 2000, '3D Printed Vase Containers for all of your needs.', 120, 4, 4, 'images/3D_Printed_Containers.jpg'),
-(9, 'Portable Electric Blender', 6755, 'Compact and portable electric blender for on-the-go smoothies', 95, 11, 11, 'path/to/image11.jpg'),
-(10, 'Ultra HD Smart TV', 13670, 'Ultra HD smart TV with advanced features for an immersive viewing experience', 220, 15, 15, 'path/to/image15.jpg'),
-(11, 'Professional DSLR Camera', 1080, 'High-performance professional DSLR camera for photography enthusiasts', 180, 10, 10, 'path/to/image10.jpg'),
-(12, 'Modern Coffee Table', 7523, 'Elegant 3D printed coffee table with metal legs', 12, 2, 2, 'path/to/image2.jpg'),
-(13, 'Premium Wireless Speaker', 1075, 'Premium wireless speaker for high-quality audio streaming', 170, 17, 17, 'path/to/image17.jpg'),
-(14, 'Smart Home Security Camera', 8572, 'Advanced smart home security camera for monitoring your space', 130, 7, 7, 'path/to/image7.jpg'),
-(15, 'Contemporary Dining Chair', 12750, 'Comfortable 3D printed dining chair with sleek design', 20, 3, 3, 'path/to/image3.jpg'),
-(16, 'Outdoor Adventure Backpack', 1225, 'Durable outdoor adventure backpack with multiple compartments', 210, 19, 19, 'path/to/image19.jpg'),
-(17, 'Home Theater Sound System', 150, 'Immersive home theater sound system for a cinematic experience', 250, 12, 12, 'path/to/image12.jpg'),
-(18, 'Compact Air Purifier', 7057, 'Compact air purifier for maintaining clean and fresh indoor air', 110, 9, 9, 'path/to/image9.jpg'),
-(19, 'Wireless Noise-Canceling Headphones', 96785, 'Premium wireless headphones with noise-canceling technology', 140, 8, 8, 'path/to/image8.jpg'),
-(20, 'Smart Fitness Tracker', 880, 'Intelligent fitness tracker for tracking your health and workouts', 135, 13, 13, 'path/to/image13.jpg');
+INSERT INTO `termekek` (`TermekId`, `TermekNev`, `Ar`, `Leiras`, `Menyiseg`, `KategoriaId`, `TagId`, `Keputvonal`) VALUES
+(1, '3D Printed House', 5503, 'A 2-bedroom 3D printed house', 8, 0, 1, 'images/3D_Printed_House.jpg'),
+(2, 'Animal Wall Lamps', 6870, 'Decorative Animal Inspired Wall Lamps', 80, 0, 5, 'images/3D_Printed_Animal_Lamps.jpg'),
+(3, '3D_Printed_Chair', 8050, 'A fully 3D printed chair with ergonomic and natural looking design.', 200, 0, 16, 'images/3D_Printed_Chair.jpg'),
+(4, 'Mini Christmas Tree Decor', 1110, 'Adorable tabletop-sized mini Christmas tree for festive decor', 36, 0, 6, 'images/Mini_Christmass_Tree_Decoration.jpg'),
+(5, 'Christmass Tree Decoration', 260, 'Beautiful Christmass Tree Decoration', 75, 0, 14, 'images/3D_Printed_Christmass_Decoration.jpg'),
+(6, 'Designer Office Chair', 1415, 'Ergonomically designed office chair for a stylish and comfortable workspace', 190, 0, 18, 'path/to/image18.jpg'),
+(7, 'Concrete Bench and Table', 22000, 'An affordable City Bench and table combo made with 3D printed concrete.', 230, 0, 20, 'images/City_Bench.jpg'),
+(8, 'Printed Vase Containers', 2000, '3D Printed Vase Containers for all of your needs.', 120, 0, 4, 'images/3D_Printed_Containers.jpg'),
+(9, 'Portable Electric Blender', 6755, 'Compact and portable electric blender for on-the-go smoothies', 95, 0, 11, 'path/to/image11.jpg'),
+(10, 'Ultra HD Smart TV', 13670, 'Ultra HD smart TV with advanced features for an immersive viewing experience', 220, 0, 15, 'path/to/image15.jpg'),
+(11, 'Professional DSLR Camera', 1080, 'High-performance professional DSLR camera for photography enthusiasts', 180, 0, 10, 'path/to/image10.jpg'),
+(12, 'Modern Coffee Table', 7523, 'Elegant 3D printed coffee table with metal legs', 12, 0, 2, 'path/to/image2.jpg'),
+(13, 'Premium Wireless Speaker', 1075, 'Premium wireless speaker for high-quality audio streaming', 170, 0, 17, 'path/to/image17.jpg'),
+(14, 'Smart Home Security Camera', 8572, 'Advanced smart home security camera for monitoring your space', 130, 0, 7, 'path/to/image7.jpg'),
+(15, 'Contemporary Dining Chair', 12750, 'Comfortable 3D printed dining chair with sleek design', 20, 0, 3, 'path/to/image3.jpg'),
+(16, 'Outdoor Adventure Backpack', 1225, 'Durable outdoor adventure backpack with multiple compartments', 210, 0, 19, 'path/to/image19.jpg'),
+(17, 'Home Theater Sound System', 150, 'Immersive home theater sound system for a cinematic experience', 250, 0, 12, 'path/to/image12.jpg'),
+(18, 'Compact Air Purifier', 7057, 'Compact air purifier for maintaining clean and fresh indoor air', 110, 0, 9, 'path/to/image9.jpg'),
+(19, 'Wireless Noise-Canceling Headphones', 96785, 'Premium wireless headphones with noise-canceling technology', 140, 0, 8, 'path/to/image8.jpg'),
+(20, 'Smart Fitness Tracker', 880, 'Intelligent fitness tracker for tracking your health and workouts', 135, 0, 13, 'path/to/image13.jpg');
 
 -- --------------------------------------------------------
 
@@ -365,6 +377,12 @@ ALTER TABLE `hozzaszolasok`
   ADD KEY `hozzaszolas_ibfk_1` (`TermekId`);
 
 --
+-- A tábla indexei `kategoriak`
+--
+ALTER TABLE `kategoriak`
+  ADD PRIMARY KEY (`KategoriaId`);
+
+--
 -- A tábla indexei `orszagok`
 --
 ALTER TABLE `orszagok`
@@ -397,7 +415,8 @@ ALTER TABLE `tagkapcsolo`
 --
 ALTER TABLE `termekek`
   ADD PRIMARY KEY (`TermekId`),
-  ADD KEY `TagId` (`TagId`);
+  ADD KEY `TagId` (`TagId`),
+  ADD KEY `KategoriaIndex` (`KategoriaId`);
 
 --
 -- A tábla indexei `varosok`
@@ -420,6 +439,12 @@ ALTER TABLE `felhasznalok`
 --
 ALTER TABLE `hozzaszolasok`
   MODIFY `HozzaszolasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT a táblához `kategoriak`
+--
+ALTER TABLE `kategoriak`
+  MODIFY `KategoriaId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT a táblához `orszagok`
@@ -474,6 +499,12 @@ ALTER TABLE `felhasznalok`
 ALTER TABLE `hozzaszolasok`
   ADD CONSTRAINT `hozzaszolasok_ibfk_1` FOREIGN KEY (`TermekId`) REFERENCES `termekek` (`TermekId`),
   ADD CONSTRAINT `hozzaszolasok_ibfk_2` FOREIGN KEY (`FelhasznaloId`) REFERENCES `felhasznalok` (`FelhasznaloId`);
+
+--
+-- Megkötések a táblához `kategoriak`
+--
+ALTER TABLE `kategoriak`
+  ADD CONSTRAINT `kategoriak_ibfk_1` FOREIGN KEY (`KategoriaId`) REFERENCES `termekek` (`KategoriaId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `szamlazas`
