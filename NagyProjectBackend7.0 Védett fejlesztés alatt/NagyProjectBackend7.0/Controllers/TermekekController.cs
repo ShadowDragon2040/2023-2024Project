@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Webárúház_Nagy_Project.DTOs;
-using Webárúház_Nagy_Project.Models;
+using NagyProjectBackend7.Models;
 
 namespace Webárúház_Nagy_Project.Controllers
 {
@@ -10,9 +10,9 @@ namespace Webárúház_Nagy_Project.Controllers
     [ApiController]
     public class TermekekController : ControllerBase
     {
-        private readonly project_databaseContext _context;
+        private readonly ProjectDatabaseContext _context;
 
-        public TermekekController(project_databaseContext context)
+        public TermekekController(ProjectDatabaseContext context)
         {
             _context = context;
         }
@@ -69,7 +69,6 @@ namespace Webárúház_Nagy_Project.Controllers
                     TermekNev = createdTermekekDto.TermekNev,
                     Leiras = createdTermekekDto.Leiras,
                     Menyiseg = createdTermekekDto.Menyiseg,
-                    SzinId = createdTermekekDto.SzinId,
                     TagId = createdTermekekDto.TagId,
                     Keputvonal = createdTermekekDto.Keputvonal,
                 };
@@ -95,7 +94,6 @@ namespace Webárúház_Nagy_Project.Controllers
                 existingTermek.TermekNev = updateTermekedDto.TermekNev;
                 existingTermek.Leiras = updateTermekedDto.Leiras;
                 existingTermek.Menyiseg = updateTermekedDto.Menyiseg;
-                existingTermek.SzinId = updateTermekedDto.SzinId;
                 existingTermek.TagId = updateTermekedDto.TagId;
                 existingTermek.Keputvonal = updateTermekedDto.Keputvonal;
 

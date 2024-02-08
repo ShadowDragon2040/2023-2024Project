@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webárúház_Nagy_Project.DTOs;
-using Webárúház_Nagy_Project.Models;
+using NagyProjectBackend7.Models;
 
 namespace Webárúház_Nagy_Project.Controllers
 {
@@ -13,9 +13,9 @@ namespace Webárúház_Nagy_Project.Controllers
     [ApiController]
     public class HozzaszolasController : ControllerBase
     {
-        private readonly project_databaseContext _context;
+        private readonly ProjectDatabaseContext _context;
 
-        public HozzaszolasController(project_databaseContext context)
+        public HozzaszolasController(ProjectDatabaseContext context)
         {
             _context = context;
         }

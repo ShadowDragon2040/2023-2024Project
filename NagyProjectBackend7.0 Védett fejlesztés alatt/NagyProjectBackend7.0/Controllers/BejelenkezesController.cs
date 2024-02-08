@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Webárúház_Nagy_Project.Models;
+using NagyProjectBackend7.Models;
 using Webárúház_Nagy_Project.DTOs;
 using Org.BouncyCastle.Crypto.Generators;
 using System.Security.Claims;

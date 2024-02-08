@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Webárúház_Nagy_Project.DTOs;
-using Webárúház_Nagy_Project.Models;
+using NagyProjectBackend7.Models;
 
 namespace Webárúház_Nagy_Project.Controllers
 {
@@ -11,9 +11,9 @@ namespace Webárúház_Nagy_Project.Controllers
     [ApiController]
     public class SzamlazasController : ControllerBase
     {
-        private readonly project_databaseContext _context;
+        private readonly ProjectDatabaseContext _context;
 
-        public SzamlazasController(project_databaseContext context)
+        public SzamlazasController(ProjectDatabaseContext context)
         {
             _context = context;
         }
@@ -23,7 +23,7 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             try
             {
-                var result = await _context.Szamlazasok.ToListAsync();
+                var result = await _context.Szamlazas.ToListAsync();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -37,7 +37,7 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             try
             {
-                var result = await _context.Szamlazasok.Where(x => x.SzamlazasId == id).ToListAsync();
+                var result = await _context.Szamlazas.Where(x => x.SzamlazasId == id).ToListAsync();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -51,15 +51,15 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             try
             {
-                var request = new Szamlazasok
+                var request = new Szamlaza
                 {
-                    Felhasznalok = createdSzamlazasokDto.FelhasznaloId,
-                    Termekek = createdSzamlazasokDto.TermekId,
+                    Felhasznalo = createdSzamlazasokDto.FelhasznaloId,
+                    Termek = createdSzamlazasokDto.TermekId,
                     VasarlasIdopontja = DateTime.Now,
                     SikeresSzalitas = false,
                 };
 
-                _context.Szamlazasok.Add(request);
+                _context.Szamlazas.Add(request);
                 _context.SaveChanges();
 
                 return Ok(/*request.AsDto()*/);
@@ -76,12 +76,12 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             try
             {
-                var existingSzamlazas = _context.Szamlazasok.FirstOrDefault(x => x.SzamlazasId == Id);
+                var existingSzamlazas = _context.Szamlazas.FirstOrDefault(x => x.SzamlazasId == Id);
 
                 /*existingSzamlazas.VasarlasIdopontja = updateSzamlazasokDto.VasarlasIdopontja;*/
                 existingSzamlazas.SikeresSzalitas = updateSzamlazasokDto.SikeresSzalitas;
 
-                _context.Szamlazasok.Update(existingSzamlazas);
+                _context.Szamlazas.Update(existingSzamlazas);
                 _context.SaveChanges();
                 return Ok();
             }
@@ -97,9 +97,9 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             try
             {
-                var existingSzamlazas = _context.Szamlazasok.FirstOrDefault(x => x.SzamlazasId == id);
+                var existingSzamlazas = _context.Szamlazas.FirstOrDefault(x => x.SzamlazasId == id);
 
-                _context.Szamlazasok.Remove(existingSzamlazas);
+                _context.Szamlazas.Remove(existingSzamlazas);
                 _context.SaveChanges();
                 return Ok();
             }

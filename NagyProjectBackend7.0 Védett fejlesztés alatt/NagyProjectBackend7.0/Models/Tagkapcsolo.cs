@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
-namespace Webárúház_Nagy_Project.Models
+namespace NagyProjectBackend7.Models;
+
+public partial class Tagkapcsolo
 {
-    public partial class Tagkapcsolo
-    {
-        public int Id { get; set; }
-        public int TagKapcsoloId { get; set; }
-        public int TermekTagKapcsoloId { get; set; }
+    public int Id { get; set; }
 
-        [JsonIgnore]
-        public virtual Tagek TagKapcsolo { get; set; } = null!;
-    }
+    public int TagKapcsoloId { get; set; }
+
+    public int TermekTagKapcsoloId { get; set; }
+
+    public virtual Tagek TagKapcsolo { get; set; } = null!;
 }

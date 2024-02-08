@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Policy;
 using Webárúház_Nagy_Project.DTOs;
-using Webárúház_Nagy_Project.Models;
+using NagyProjectBackend7.Models;
 
 namespace Webárúház_Nagy_Project.Controllers
 {
@@ -12,9 +12,9 @@ namespace Webárúház_Nagy_Project.Controllers
     [ApiController]
     public class FelhasznalokController : ControllerBase
     {
-        private readonly project_databaseContext _context;
+        private readonly ProjectDatabaseContext _context;
 
-        public FelhasznalokController(project_databaseContext context)
+        public FelhasznalokController(ProjectDatabaseContext context)
         {
             _context = context;
         }
