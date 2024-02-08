@@ -74,7 +74,7 @@ namespace Webárúház_Nagy_Project.Controllers
                 };
 
                 _context.Termekek.Add(request);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 return Ok(/*request.AsDto()*/);
             }
@@ -98,7 +98,7 @@ namespace Webárúház_Nagy_Project.Controllers
                 existingTermek.Keputvonal = updateTermekedDto.Keputvonal;
 
                 _context.Termekek.Update(existingTermek);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
                 return Ok();
             }
             catch (Exception ex)
@@ -115,7 +115,7 @@ namespace Webárúház_Nagy_Project.Controllers
                 var existingTermek = _context.Termekek.FirstOrDefault(x => x.TermekId == id);
 
                 _context.Termekek.Remove(existingTermek);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return Ok();
             }
             catch (Exception ex)

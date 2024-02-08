@@ -21,6 +21,8 @@ public partial class Termekek
 
     public string Keputvonal { get; set; } = null!;
 
+    public virtual Kategoriak Kategoriak { get; set; } = null!;
+
     public virtual ICollection<Hozzaszolasok> Hozzaszolasoks { get; set; } = new List<Hozzaszolasok>();
 
     public virtual ICollection<Szamlaza> Szamlazas { get; set; } = new List<Szamlaza>();

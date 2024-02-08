@@ -60,7 +60,7 @@ namespace Webárúház_Nagy_Project.Controllers
                 };
 
                 _context.Szamlazas.Add(request);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
 
                 return Ok(/*request.AsDto()*/);
             }
@@ -82,7 +82,7 @@ namespace Webárúház_Nagy_Project.Controllers
                 existingSzamlazas.SikeresSzalitas = updateSzamlazasokDto.SikeresSzalitas;
 
                 _context.Szamlazas.Update(existingSzamlazas);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
                 return Ok();
             }
             catch (Exception ex)
@@ -100,7 +100,7 @@ namespace Webárúház_Nagy_Project.Controllers
                 var existingSzamlazas = _context.Szamlazas.FirstOrDefault(x => x.SzamlazasId == id);
 
                 _context.Szamlazas.Remove(existingSzamlazas);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return Ok();
             }
             catch (Exception ex)
