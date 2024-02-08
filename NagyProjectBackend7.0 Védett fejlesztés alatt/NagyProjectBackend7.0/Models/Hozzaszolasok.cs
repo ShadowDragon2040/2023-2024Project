@@ -13,7 +13,7 @@ public partial class Hozzaszolasok
 
     public string Leiras { get; set; } = null!;
 
-    public bool Ertekeles { get; set; }
+    public int Ertekeles { get; set; }
 
     public virtual Felhasznalok Felhasznalo { get; set; } = null!;
 
