@@ -13,13 +13,13 @@ function ShopSideBar() {
   
   const [tagsList, setTagsList] = useState([]);
   
-    const url="http://localhost:5219/Tagek";
+   /* const url="http://localhost:5219/Tagek";
     useEffect(() => {
       axios.get(url)
         .then(response => setTagsList(response.data))
         .catch(error => console.error('Hiba a lekérdezés során:', error));
     }, []);
-
+*/
     
   return (
     <div>
