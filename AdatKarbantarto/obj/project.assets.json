@@ -2,6 +2,30 @@
   "version": 3,
   "targets": {
     "net7.0-windows7.0": {
+      "Material.Icons/2.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Material.Icons.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Material.Icons.dll": {}
+        }
+      },
+      "Material.Icons.WPF/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Material.Icons": "2.1.0"
+        },
+        "compile": {
+          "lib/net7.0-windows7.0/Material.Icons.WPF.dll": {}
+        },
+        "runtime": {
+          "lib/net7.0-windows7.0/Material.Icons.WPF.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "MaterialDesignColors/1.2.7": {
         "type": "package",
         "compile": {
@@ -89,6 +113,35 @@
     }
   },
   "libraries": {
+    "Material.Icons/2.1.0": {
+      "sha512": "oMMrh8mKnZwOKZJEI3hc4Y18+/FQDfXSMv21xbX4kq05gcvcD1M2zxrjgNQvygHhP4DTcFmDidqUJRmuPyV9Fg==",
+      "type": "package",
+      "path": "material.icons/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/netstandard2.0/Material.Icons.dll",
+        "material.icons.2.1.0.nupkg.sha512",
+        "material.icons.nuspec"
+      ]
+    },
+    "Material.Icons.WPF/2.1.0": {
+      "sha512": "yG5CQA1CdezXXgeZB6fosCFW/jZVro7R2QAk95KK2051C1qqbECD4mZCJFnsX53TTxRQTQER6/It1kuoAtnalw==",
+      "type": "package",
+      "path": "material.icons.wpf/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net461/Material.Icons.WPF.dll",
+        "lib/net6.0-windows7.0/Material.Icons.WPF.dll",
+        "lib/net7.0-windows7.0/Material.Icons.WPF.dll",
+        "lib/netcoreapp3.1/Material.Icons.WPF.dll",
+        "material.icons.wpf.2.1.0.nupkg.sha512",
+        "material.icons.wpf.nuspec"
+      ]
+    },
     "MaterialDesignColors/1.2.7": {
       "sha512": "e+shDlaSAJcuTArqtfWjVUgAOlwQlgWq8akkzCGe1MvfV1ozmOqqXyWxg5w0vC/3/KZ84wnPUJeI1wzEpI0uJQ==",
       "type": "package",
@@ -187,6 +240,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0-windows7.0": [
+      "Material.Icons.WPF >= 2.1.0",
       "MaterialDesignExtensions >= 3.3.0"
     ]
   },
@@ -229,6 +283,10 @@
       "net7.0-windows7.0": {
         "targetAlias": "net7.0-windows",
         "dependencies": {
+          "Material.Icons.WPF": {
+            "target": "Package",
+            "version": "[2.1.0, )"
+          },
           "MaterialDesignExtensions": {
             "target": "Package",
             "version": "[3.3.0, )"
