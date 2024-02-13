@@ -16,6 +16,7 @@
   <ItemGroup>
     <PackageReference Include="Material.Icons.WPF" Version="2.1.0" />
     <PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
     <Folder Include="ViewModel\" />
   </ItemGroup>
 
