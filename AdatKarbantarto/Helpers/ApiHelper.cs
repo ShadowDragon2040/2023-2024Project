@@ -40,10 +40,9 @@ namespace AdatKarbantarto.Helpers
             }
         }
 
-        
-        public async Task<string> PostAsync(string endpoint, string username, string password)
+
+        public async Task<AuthenticatedUser> PostAsync(string endpoint, string username, string password)
         {
-            // Create a JSON object with the username and password
             var requestData = new
             {
                 Username = username,
@@ -59,7 +58,10 @@ namespace AdatKarbantarto.Helpers
                 if (response.IsSuccessStatusCode)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
-                    return responseContent;
+
+                    // Deserialize the JSON response to a User object
+                    AuthenticatedUser user = JsonConvert.DeserializeObject<AuthenticatedUser>(responseContent);
+                    return user;
                 }
                 else
                 {
@@ -67,6 +69,7 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
+
 
 
 

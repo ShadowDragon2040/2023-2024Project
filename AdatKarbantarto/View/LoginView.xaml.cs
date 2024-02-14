@@ -51,9 +51,10 @@ namespace AdatKarbantarto.View
         {
             try
             {
-                ApiHelper apiHelper = new ApiHelper(); 
-                string users = await apiHelper.PostAsync("/Auth/Login",txtUsername.Text,txtPassword.Password);
-                MessageBox.Show(users);
+                ApiHelper apiHelper = new ApiHelper();
+                AuthenticatedUser user = await apiHelper.PostAsync("/Auth/Login", txtUsername.Text, txtPassword.Password);
+
+                MessageBox.Show($"Logged in as: {user.UserName}");
 
             }
             catch (Exception ex)
@@ -61,6 +62,7 @@ namespace AdatKarbantarto.View
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
 
 
