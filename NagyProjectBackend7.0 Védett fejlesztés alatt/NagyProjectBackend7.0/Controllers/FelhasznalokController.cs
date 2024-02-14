@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Policy;
+using NagyProjectBackend7._0.Models;
 using Webárúház_Nagy_Project.DTOs;
-using NagyProjectBackend7.Models;
 
 namespace Webárúház_Nagy_Project.Controllers
 {

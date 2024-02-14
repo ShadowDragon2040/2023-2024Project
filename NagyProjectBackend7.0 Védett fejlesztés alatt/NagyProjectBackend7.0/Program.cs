@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.OpenApi.Models;
+using NagyProjectBackend7._0.Models;
 using Swashbuckle.AspNetCore.Filters;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using NagyProjectBackend7.Models;
 
 namespace Webárúház_Nagy_Project
 {

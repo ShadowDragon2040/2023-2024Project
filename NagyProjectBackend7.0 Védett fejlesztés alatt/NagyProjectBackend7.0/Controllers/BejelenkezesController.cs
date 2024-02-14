@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NagyProjectBackend7.Models;
 using Webárúház_Nagy_Project.DTOs;
-using Org.BouncyCastle.Crypto.Generators;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authorization;
+using NagyProjectBackend7._0.Models;
 
 namespace Webárúház_Nagy_Project.Controllers
 {

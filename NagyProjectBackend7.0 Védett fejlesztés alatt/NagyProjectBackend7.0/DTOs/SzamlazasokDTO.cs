@@ -1,5 +1,5 @@
 ﻿
-using NagyProjectBackend7.Models;
+using NagyProjectBackend7._0.Models;
 
 namespace Webárúház_Nagy_Project.DTOs
 {

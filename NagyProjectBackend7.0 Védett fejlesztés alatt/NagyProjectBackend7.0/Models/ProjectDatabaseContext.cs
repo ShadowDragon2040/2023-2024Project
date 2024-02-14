@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace NagyProjectBackend7.Models;
+namespace NagyProjectBackend7._0.Models;
 
 public partial class ProjectDatabaseContext : DbContext
 {
@@ -89,6 +89,7 @@ public partial class ProjectDatabaseContext : DbContext
             entity.HasIndex(e => e.TermekId, "hozzaszolas_ibfk_1");
 
             entity.Property(e => e.HozzaszolasId).HasColumnType("int(11)");
+            entity.Property(e => e.Ertekeles).HasColumnType("int(11)");
             entity.Property(e => e.FelhasznaloId).HasColumnType("int(11)");
             entity.Property(e => e.Leiras).HasMaxLength(255);
             entity.Property(e => e.TermekId).HasColumnType("int(11)");
@@ -177,7 +178,7 @@ public partial class ProjectDatabaseContext : DbContext
 
             entity.HasOne(d => d.TagKapcsolo).WithMany(p => p.Tagkapcsolos)
                 .HasForeignKey(d => d.TagKapcsoloId)
-                .HasConstraintName("tagkapcsolo_ibfk_1");
+                .HasConstraintName("tagkapcsolo_ibfk_2");
         });
 
         modelBuilder.Entity<Termekek>(entity =>
@@ -198,6 +199,10 @@ public partial class ProjectDatabaseContext : DbContext
             entity.Property(e => e.Menyiseg).HasColumnType("int(11)");
             entity.Property(e => e.TagId).HasColumnType("int(11)");
             entity.Property(e => e.TermekNev).HasMaxLength(128);
+
+            entity.HasOne(d => d.Kategoria).WithMany(p => p.Termekeks)
+                .HasForeignKey(d => d.KategoriaId)
+                .HasConstraintName("termekek_ibfk_3");
         });
 
         modelBuilder.Entity<Varosok>(entity =>

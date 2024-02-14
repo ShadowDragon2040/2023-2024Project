@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NagyProjectBackend7.Models;
+namespace NagyProjectBackend7._0.Models;
 
 public partial class Felhasznalok
 {

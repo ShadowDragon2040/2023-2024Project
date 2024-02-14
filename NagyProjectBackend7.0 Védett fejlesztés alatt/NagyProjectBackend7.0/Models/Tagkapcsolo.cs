@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
-namespace NagyProjectBackend7.Models;
+namespace NagyProjectBackend7._0.Models;
 
 public partial class Tagkapcsolo
 {
@@ -13,7 +12,4 @@ public partial class Tagkapcsolo
     public int TermekTagKapcsoloId { get; set; }
 
     public virtual Tagek TagKapcsolo { get; set; } = null!;
-
-    [JsonIgnore]
-    public virtual ICollection<Termekek> Termekeks { get; set; } = new List<Termekek>();
 }

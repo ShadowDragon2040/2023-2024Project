@@ -3634,23 +3634,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\pbálint\\.nuget\\packages\\": {},
+    "C:\\Users\\vbalázs\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\NagyProjectBackend7.0 Védett fejlesztés alatt\\NagyProjectBackend7.0\\NagyProjectBackend7.0.csproj",
+      "projectUniqueName": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\NagyProjectBackend7.0 Védett fejlesztés alatt\\NagyProjectBackend7.0\\NagyProjectBackend7.0.csproj",
       "projectName": "NagyProjectBackend7.0",
-      "projectPath": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\NagyProjectBackend7.0 Védett fejlesztés alatt\\NagyProjectBackend7.0\\NagyProjectBackend7.0.csproj",
-      "packagesPath": "C:\\Users\\pbálint\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\NagyProjectBackend7.0 Védett fejlesztés alatt\\NagyProjectBackend7.0\\obj\\",
+      "projectPath": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\NagyProjectBackend7.0 Védett fejlesztés alatt\\NagyProjectBackend7.0\\NagyProjectBackend7.0.csproj",
+      "packagesPath": "C:\\Users\\vbalázs\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\NagyProjectBackend7.0 Védett fejlesztés alatt\\NagyProjectBackend7.0\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\pbálint\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\vbalázs\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

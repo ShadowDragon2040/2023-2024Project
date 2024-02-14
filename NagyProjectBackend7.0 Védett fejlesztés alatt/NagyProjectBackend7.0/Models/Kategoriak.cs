@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
-namespace NagyProjectBackend7.Models;
+namespace NagyProjectBackend7._0.Models;
 
 public partial class Kategoriak
 {
@@ -10,6 +9,5 @@ public partial class Kategoriak
 
     public string KategoriaNev { get; set; } = null!;
 
-    [JsonIgnore]
     public virtual ICollection<Termekek> Termekeks { get; set; } = new List<Termekek>();
 }
