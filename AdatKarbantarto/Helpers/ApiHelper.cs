@@ -19,19 +19,19 @@ namespace AdatKarbantarto.Helpers
         public ApiHelper()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("https://your-api-base-url.com/api/");
+            _httpClient.BaseAddress = new Uri("https://localhost:7026");
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<AuthenticatedUser> GetAsync<T>(string endpoint)
+        public async Task<string> GetAsync(string endpoint)
         {
             using (HttpResponseMessage response = await _httpClient.GetAsync(endpoint))
             {
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<AuthenticatedUser>(content);
+                    return JsonConvert.DeserializeObject<string>(content);
                 }
                 else
                 {
@@ -39,6 +39,39 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
+
+        
+        public async Task<string> PostAsync(string endpoint, string username, string password)
+        {
+            // Create a JSON object with the username and password
+            var requestData = new
+            {
+                Username = username,
+                Password = password
+            };
+
+            string json = JsonConvert.SerializeObject(requestData);
+
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using (HttpResponseMessage response = await _httpClient.PostAsync(endpoint, content))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    return responseContent;
+                }
+                else
+                {
+                    throw new Exception($"Failed to post data to API. Status code: {response.StatusCode}");
+                }
+            }
+        }
+
+
+
+
+
 
     }
 }

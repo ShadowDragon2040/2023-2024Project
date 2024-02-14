@@ -1,6 +1,11 @@
-﻿using System;
+﻿using AdatKarbantarto.Helpers;
+using AdatKarbantarto.Model;
+using MaterialDesignExtensions.Controls;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -42,9 +47,23 @@ namespace AdatKarbantarto.View
             Application.Current.Shutdown();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                ApiHelper apiHelper = new ApiHelper(); 
+                string users = await apiHelper.PostAsync("/Auth/Login",txtUsername.Text,txtPassword.Password);
+                MessageBox.Show(users);
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
+
+
+
     }
 }
