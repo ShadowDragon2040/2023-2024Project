@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { animateScroll as scroll } from 'react-scroll';
+import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 
 function GetTermekek(props) {
   const [newsList, setNewsList] = useState([]);
@@ -20,8 +21,8 @@ function GetTermekek(props) {
   }, []);
 
   const cards = newsList.slice(0, visibleCards).map(item => (
-
-    <div className="col-md-4 mb-2 col-sm-6" key={item.termekId}>
+    <NavLink  key={item.termekId} className="col-md-4 mb-2 col-sm-6 " to={"/ShopPage/"+item.termekId}>
+  
       <button className="btn cardbtn" onClick={() => setSingleItemData(item)}>
         <div className="card border-dark rounded">
           <div className="card-body">
@@ -32,8 +33,8 @@ function GetTermekek(props) {
           </div>
         </div>
          </button>
-    </div>
-
+ 
+    </NavLink>
   ));
 
   const handleShowMore = () => {

@@ -29,7 +29,7 @@ function ShopPage() {
               <ShopSideBar/>
             </div>
             <div className="col-sm-4 col-md-6 col-xl-8">
-              {singleItem ? <DisplaySingleItem ItemData={ItemData} setSingleItem={setSingleItem}/>: <DisplayItem setSingleItem={setSingleItem} setItemData={setItemData} />}
+              <DisplayItem setSingleItem={setSingleItem} setItemData={setItemData} />
             </div>
             <div className="col-sm-4 col-md-3 col-xl-2">
               {isProfileVisible?<ProfileDisplayPage userData={userData}/>:<></> } 

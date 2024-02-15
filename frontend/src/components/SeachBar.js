@@ -1,6 +1,7 @@
   import React, { useRef, useState, useEffect } from 'react';
   import { FaSearch, FaMicrophone } from 'react-icons/fa';
   import axios from 'axios';
+import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 
   function SearchBar(props) {
     const inputRef = useRef(null);
@@ -101,9 +102,12 @@
         {isInputFocused && filteredTermekek.length > 0 && (
           <div className="result-container">
             {filteredTermekek.map((item, index) => (
+              <NavLink to={'/ShopPage/'+item.termekId}>
               <div onClick={()=>setSingleItemData(item)} className="result-box" key={index}>
                 <p>{item.termekNev}</p>
               </div>
+              </NavLink>
+             
 
             ))}
           </div>

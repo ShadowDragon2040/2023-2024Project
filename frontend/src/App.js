@@ -12,6 +12,7 @@ import FiguraPage from './pages/Figura';
 import OtthoniDiszPage from './pages/OtthoniDisz';
 import AlkatreszPage from './pages/Alkatresz';
 import ModelltervezesPage from './pages/ModelltervezesPage';
+import SingleProductDisplay from './pages/SingleProductDisplay';
 import ShopPage from './pages/ShopPage';
 import "bootstrap/dist/css/bootstrap.css"
 
@@ -32,6 +33,7 @@ function App() {
         <Route path="/OtthoniDiszPage" component={OtthoniDiszPage} exact />
         <Route path="/AlkatreszPage" component={AlkatreszPage} exact />
         <Route path="/ShopPage" component={ShopPage} exact />
+        <Route path="/ShopPage/:ProductId" component={SingleProductDisplay} exact />
       </Switch>
     </Router>
   );
