@@ -69,7 +69,6 @@ namespace Webárúház_Nagy_Project.Controllers
                     TermekNev = createdTermekekDto.TermekNev,
                     Leiras = createdTermekekDto.Leiras,
                     Menyiseg = createdTermekekDto.Menyiseg,
-                    TagId = createdTermekekDto.TagId,
                     Keputvonal = createdTermekekDto.Keputvonal,
                 };
 
@@ -94,7 +93,6 @@ namespace Webárúház_Nagy_Project.Controllers
                 existingTermek.TermekNev = updateTermekedDto.TermekNev;
                 existingTermek.Leiras = updateTermekedDto.Leiras;
                 existingTermek.Menyiseg = updateTermekedDto.Menyiseg;
-                existingTermek.TagId = updateTermekedDto.TagId;
                 existingTermek.Keputvonal = updateTermekedDto.Keputvonal;
 
                 _context.Termekek.Update(existingTermek);

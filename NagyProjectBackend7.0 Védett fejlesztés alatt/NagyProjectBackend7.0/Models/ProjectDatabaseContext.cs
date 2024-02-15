@@ -172,9 +172,15 @@ public partial class ProjectDatabaseContext : DbContext
 
             entity.HasIndex(e => e.TermekTagKapcsoloId, "TermekTagKapcsoloId");
 
-            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .HasColumnType("int(11)");
             entity.Property(e => e.TagKapcsoloId).HasColumnType("int(11)");
             entity.Property(e => e.TermekTagKapcsoloId).HasColumnType("int(11)");
+
+            entity.HasOne(d => d.IdNavigation).WithOne(p => p.Tagkapcsolo)
+                .HasForeignKey<Tagkapcsolo>(d => d.Id)
+                .HasConstraintName("tagkapcsolo_ibfk_3");
 
             entity.HasOne(d => d.TagKapcsolo).WithMany(p => p.Tagkapcsolos)
                 .HasForeignKey(d => d.TagKapcsoloId)
@@ -189,15 +195,12 @@ public partial class ProjectDatabaseContext : DbContext
 
             entity.HasIndex(e => e.KategoriaId, "KategoriaId");
 
-            entity.HasIndex(e => e.TagId, "TagId");
-
             entity.Property(e => e.TermekId).HasColumnType("int(11)");
             entity.Property(e => e.Ar).HasColumnType("int(11)");
             entity.Property(e => e.KategoriaId).HasColumnType("int(11)");
             entity.Property(e => e.Keputvonal).HasMaxLength(128);
             entity.Property(e => e.Leiras).HasMaxLength(255);
             entity.Property(e => e.Menyiseg).HasColumnType("int(11)");
-            entity.Property(e => e.TagId).HasColumnType("int(11)");
             entity.Property(e => e.TermekNev).HasMaxLength(128);
 
             entity.HasOne(d => d.Kategoria).WithMany(p => p.Termekeks)

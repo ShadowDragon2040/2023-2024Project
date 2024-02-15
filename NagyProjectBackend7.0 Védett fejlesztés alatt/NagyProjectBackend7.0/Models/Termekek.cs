@@ -17,8 +17,6 @@ public partial class Termekek
 
     public int KategoriaId { get; set; }
 
-    public int TagId { get; set; }
-
     public string Keputvonal { get; set; } = null!;
 
     public virtual ICollection<Hozzaszolasok> Hozzaszolasoks { get; set; } = new List<Hozzaszolasok>();
@@ -26,4 +24,6 @@ public partial class Termekek
     public virtual Kategoriak Kategoria { get; set; } = null!;
 
     public virtual ICollection<Szamlaza> Szamlazas { get; set; } = new List<Szamlaza>();
+
+    public virtual Tagkapcsolo? Tagkapcsolo { get; set; }
 }

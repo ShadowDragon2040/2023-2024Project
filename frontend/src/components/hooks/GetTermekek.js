@@ -13,12 +13,12 @@ function GetTermekek(props) {
     props.setItemData(item);
   };
 
-/*  useEffect(() => {
+  useEffect(() => {
     axios.get('http://localhost:5219/Termekek')
       .then(response => setNewsList(response.data))
       .catch(error => console.error('Hiba a lekérdezés során:', error));
   }, []);
-*/
+
   const cards = newsList.slice(0, visibleCards).map(item => (
 
     <div className="col-md-4 mb-2 col-sm-6" key={item.termekId}>
