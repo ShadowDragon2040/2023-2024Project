@@ -12,11 +12,6 @@ import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 
     const url = "http://localhost:5219/Termekek";
 
-    const setSingleItemData = (item) => {
-      props.setSingleItem(true);
-      props.setItemData(item);
-    };
-
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -103,7 +98,7 @@ import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
           <div className="result-container">
             {filteredTermekek.map((item, index) => (
               <NavLink to={'/ShopPage/'+item.termekId}>
-              <div onClick={()=>setSingleItemData(item)} className="result-box" key={index}>
+              <div  className="result-box" key={index}>
                 <p>{item.termekNev}</p>
               </div>
               </NavLink>

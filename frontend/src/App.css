@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'font-family: 'Dosis', sans-serif';
+  font-family: "Poppins", sans-serif;
 }
 .form{
 
@@ -76,11 +76,11 @@ a{
   color:#01bf71;
 }
 .back-btn{
-  margin-top: 15%;
-  width: 60px;
+  display: block;
+  width: 80px;
   font-size: 2em;
   border: 1px solid black;
-  border-radius: 100px;
+  border-radius: 30px;
   text-align: center;
   background-color: #01bf71;
   @media screen and (max-width:700px) {
@@ -151,6 +151,13 @@ a{
   background-color:#01bf71;
 
 }
+
+.ImageZoom{
+  width: 120%;
+  height: 100%;
+  box-shadow: 10px 10px 10px black;
+}
+
 .carousel-thumbnails {
   width: 200px;
 }
@@ -170,18 +177,17 @@ a{
 
 }
 
-.singlecard{
-  min-height: 20vw;
-  box-shadow: 10px 10px 10px black;
-  border: 2px solid black;
-  border-radius: 10px;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  border-radius: 25px;
+.SingleItemContainer{
+  margin-top: 80px;
+  display: block;
+  background-color:#378457;
+  height: 100%;
   
- 
 }
 
+.footerContainer{
+  margin-top: 20px;
+}
 
 .card-img-top{
   height: 100%;
@@ -196,6 +202,11 @@ a{
 .cardbtn:hover{
   width: 105%;
 }
+
+.SingleItem{
+  border-radius: 35px;
+}
+
 
 
 .result-box {
