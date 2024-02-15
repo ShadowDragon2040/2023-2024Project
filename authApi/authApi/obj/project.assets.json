@@ -3297,24 +3297,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vbalázs\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj",
       "projectName": "authApi",
-      "projectPath": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj",
-      "packagesPath": "C:\\Users\\vbalázs\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\obj\\",
+      "projectPath": "C:\\Users\\User\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\vbalázs\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3322,7 +3317,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3335,6 +3329,9 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "default"
       }
     },
     "frameworks": {

@@ -467,3 +467,4 @@ C:\Users\pbálint\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védet
 C:\Users\pbálint\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\NagyProjectBackend7.0.pdb
 C:\Users\pbálint\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\NagyProjectBackend7.0.genruntimeconfig.cache
 C:\Users\pbálint\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\ref\NagyProjectBackend7.0.dll
+C:\Users\User\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\NagyProjectBackend7.0.sourcelink.json

@@ -34,6 +34,20 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
+        [HttpGet("termek/{termekId}")] 
+        public async Task<ActionResult<Hozzaszolasok>> GetByTermekId(int termekId)
+        {
+            try
+            {
+                var result = await _context.Hozzaszolasok.Where(f => f.TermekId == termekId).ToListAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Hozzaszolasok>> Get(int id)
         {

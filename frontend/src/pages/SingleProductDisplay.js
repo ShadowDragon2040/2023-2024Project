@@ -9,6 +9,7 @@ import Footer from '../components/Footer'
 function SingleProductDisplay() {
     const { ProductId } = useParams();
     const [itemData, setItemData] = useState({});
+    const [commentData, setCommentData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -16,11 +17,24 @@ function SingleProductDisplay() {
                 const response = await axios.get(`http://localhost:5219/Termekek/${ProductId}`);
                 setItemData(response.data[0]);
             } catch (error) {
+            }
+        };
+
+        const fetchComments = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5219/Hozzaszolas`);
+                if (response.data.termekId === ProductId) {
+                    setCommentData(response.data);
+                    console.log(response.data);
+                }
+            } catch (error) {
                 console.log(error);
             }
         };
-    
+        
+        console.log(commentData);
         fetchData();
+        fetchComments();
         
     }, [ProductId]);
  
