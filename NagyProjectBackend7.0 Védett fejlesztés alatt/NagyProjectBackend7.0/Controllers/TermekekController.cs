@@ -31,7 +31,46 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpGet("/Tagek")/*, Authorize*/]
+        [HttpGet("Kategoriak")/*, Authorize*/]
+        public async Task<ActionResult> GetKategoriak()
+        {
+            try
+            {
+                var result = await _context.Kategoriak.ToListAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("Termek/{kategoriaId}")/*, Authorize*/]
+        public async Task<ActionResult<IEnumerable<Termekek>>> GetTermekByKategoriaId(int kategoriaId)
+        {
+            try
+            {
+                // Retrieve all termekek with the given kategoriaId
+                var termekekList = await _context.Termekek
+                    .Where(t => t.KategoriaId == kategoriaId)
+                    .ToListAsync();
+
+                // Check if there are any termekek found
+                if (termekekList.Count == 0)
+                {
+                    return NotFound("No termekek found for the given kategoriaId.");
+                }
+
+                return Ok(termekekList);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /*
+        [HttpGet("/Tagek"), Authorize]
         public async Task<ActionResult> GetTagek()
         {
             try
@@ -44,20 +83,52 @@ namespace Webárúház_Nagy_Project.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        */
 
-        [HttpGet("{id}")/*, Authorize*/]
-        public async Task<ActionResult> Get(int id)
+        [HttpGet("EgyTermek/{id}")/*, Authorize*/]
+        public async Task<ActionResult<TermekEgyoldalAdatokWithHozzaszolasok>> Get(int id)
         {
             try
             {
-                var result = await _context.Termekek.Where(x => x.TermekId == id).ToListAsync();
-                return Ok(result);
+                // Retrieve the termek with the given id
+                var termek = await _context.Termekek.FindAsync(id);
+                if (termek == null)
+                {
+                    return NotFound();
+                }
+
+                // Retrieve all hozzaszolas associated with the termek
+                var hozzaszolasList = await _context.Hozzaszolasok
+                    .Where(h => h.TermekId == id)
+                    .Select(h => new HozzaszolasAdatok(
+                        h.HozzaszolasId,
+                        h.Leiras,
+                        h.Ertekeles,
+                        h.FelhasznaloId,
+                        h.Felhasznalo.LoginNev
+                    ))
+                    .ToListAsync();
+
+                // Construct the final DTO containing termek and hozzaszolas data
+                var termekEgyoldalAdatokWithHozzaszolasok = new TermekEgyoldalAdatokWithHozzaszolasok(
+                    termek.TermekId,
+                    termek.Ar,
+                    termek.Leiras,
+                    termek.Menyiseg,
+                    termek.KategoriaId,
+                    termek.Keputvonal,
+                    hozzaszolasList
+                );
+
+                return Ok(termekEgyoldalAdatokWithHozzaszolasok);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+
+
 
         [HttpPost/*, Authorize(Roles = "Admin")*/]
         public async Task<ActionResult<TermekekDto>> Post(CreatedTermekekDto createdTermekekDto)

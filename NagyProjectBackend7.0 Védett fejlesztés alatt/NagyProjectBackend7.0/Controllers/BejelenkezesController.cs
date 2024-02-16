@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*
+using Microsoft.AspNetCore.Mvc;
 using Webárúház_Nagy_Project.DTOs;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
@@ -80,3 +81,4 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 }
+*/
