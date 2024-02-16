@@ -84,12 +84,16 @@ a{
   padding: 8px;
   position: absolute;
   box-sizing:border-box;
-  top:33%;
+  top:30%;
   right:10px;
   transform: translateY(-50%);
   cursor: grab;
 }
 
+
+.replyBtn{
+  display: none;
+}
 .input {
   height: 50px;
   box-sizing:border-box;
