@@ -65,10 +65,9 @@ function SingleProductDisplay() {
                     <NavLink to={"/ShopPage"} className='back-btn'>
                         <MdArrowBack />
                     </NavLink>
-                    <div className="row align-items-start">
-                        <div className='mx-auto d-flex flex-row mt-2'>
+                        <div className=' rounded mx-auto d-flex flex-row mt-2 FirstRow'>
                             <InnerImageZoom
-                                className='rounded ImageZoom w-100'
+                                className='ImageZoom w-100'
                                 src={"/" + itemData.keputvonal}
                                 zoomSrc={"/" + itemData.keputvonal}
                                 fullscreenOnMobile={true}
@@ -83,16 +82,15 @@ function SingleProductDisplay() {
                                 {itemData.ar && <h3>{itemData.ar} -Ft</h3>}
                             </div>
                         </div>
-                    </div>
                     
                     <div className="row align-items-start">
-                        <div className='mx-auto d-flex flex-row'>
+                        <div className='rounded mx-auto d-flex flex-row'>
                             <div className='wrapper card-body rounded mt-3 w-100 p-2'>
                                     <Rating
                                         onClick={handleRating}
                                     />
                                     <CommentSection
-                                       
+                                      
                                         currentUser={{
                                             currentUserId: 'YourUserId',
                                             currentUserFullName: 'YourUserName',

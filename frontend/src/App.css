@@ -74,6 +74,8 @@ a{
 
 .wrapper{
   position: relative;
+  box-shadow: 10px 10px 10px black;
+
 }
 
 .sendIcon {
@@ -137,6 +139,11 @@ a{
   cursor: grab;
 }
 
+.postBtn{
+  background-color: black;
+
+}
+
 .nav-link:hover{
 
   background-color: darkslategray;
@@ -180,11 +187,14 @@ a{
   background-color:#01bf71;
 
 }
+.FirstRow{
+  box-shadow: 10px 10px 10px black;
+
+}
 
 .ImageZoom{
   width: 120%;
   height: 100%;
-  box-shadow: 10px 10px 10px black;
 }
 
 .carousel-thumbnails {
