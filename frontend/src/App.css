@@ -72,6 +72,31 @@ a{
 
 }
 
+.wrapper{
+  position: relative;
+}
+
+.sendIcon {
+  height: 2.2rem;
+  width: 2rem;
+  border-radius: 10px;
+  background-color:#01bf71;
+  padding: 8px;
+  position: absolute;
+  box-sizing:border-box;
+  top:33%;
+  right:10px;
+  transform: translateY(-50%);
+  cursor: grab;
+}
+
+.input {
+  height: 50px;
+  box-sizing:border-box;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .menupont{
   color:#01bf71;
 }
