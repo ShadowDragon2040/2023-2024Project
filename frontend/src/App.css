@@ -185,7 +185,7 @@ a{
 
 .card-body{
   background-color:#01bf71;
-
+  margin-left: 5px;
 }
 .FirstRow{
   box-shadow: 10px 10px 10px black;
