@@ -24,9 +24,8 @@ const CategorySelector = (props) => {
   return (
     <div>
       <h5 className='p-2 menupont'>
-        <BiCategory/> Sort by Tags
-      </h5>        
-      <div>
+        <BiCategory/> Kategories
+      </h5>
         <ul>
           {props.tagsList.map((category) => (
             <div key={category} className='form-check form-switch menupont'>
@@ -44,7 +43,6 @@ const CategorySelector = (props) => {
             </div>
           ))}
         </ul>
-      </div>
     </div>
   );
 }

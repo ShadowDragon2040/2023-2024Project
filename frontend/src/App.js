@@ -15,8 +15,11 @@ import ModelltervezesPage from './pages/ModelltervezesPage';
 import SingleProductDisplay from './pages/SingleProductDisplay';
 import ShopPage from './pages/ShopPage';
 import "bootstrap/dist/css/bootstrap.css"
+import CategoryPage from './pages/CategoryPage';
+import NewsPage from './pages/NewsPage';
 
 function App() {
+
   return (
     <Router>
       <Switch>
@@ -34,6 +37,8 @@ function App() {
         <Route path="/AlkatreszPage" component={AlkatreszPage} exact />
         <Route path="/ShopPage" component={ShopPage} exact />
         <Route path="/ShopPage/:ProductId" component={SingleProductDisplay} exact />
+        <Route path="/ShopPage/Categories/:CategoryId" component={CategoryPage} exact />
+        <Route path="/News" component={NewsPage} exact />
       </Switch>
     </Router>
   );
