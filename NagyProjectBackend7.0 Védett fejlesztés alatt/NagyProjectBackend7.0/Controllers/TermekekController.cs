@@ -112,6 +112,7 @@ namespace Webárúház_Nagy_Project.Controllers
                 // Construct the final DTO containing termek and hozzaszolas data
                 var termekEgyoldalAdatokWithHozzaszolasok = new TermekEgyoldalAdatokWithHozzaszolasok(
                     termek.TermekId,
+                    termek.TermekNev,
                     termek.Ar,
                     termek.Leiras,
                     termek.Menyiseg,
