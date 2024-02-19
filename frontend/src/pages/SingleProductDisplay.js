@@ -50,7 +50,7 @@ function SingleProductDisplay() {
                 setTransformedComments(transformedComments);
             })
             .catch(error => console.error('Error fetching product data:', error));
-    }, [ProductId]);
+    }, [singleProductData]);
 
     const handleSubmitComment = (data) => {
         console.log("Submitted comment data:", data);
@@ -71,18 +71,18 @@ function SingleProductDisplay() {
                     <NavLink to={"/ShopPage"} className='back-btn'>
                         <MdArrowBack />
                     </NavLink>
-                    <div className=' rounded mx-auto d-flex flex-row mt-2 FirstRow'>
+                    <div className='bg-dark p-1 rounded mx-auto d-flex flex-row mt-2 FirstRow'>
                         <InnerImageZoom
-                            className='ImageZoom w-100'
+                            className='ImageZoom rounded'
                             src={"/" + singleProductData.keputvonal}
                             zoomSrc={"/" + singleProductData.keputvonal}
                             fullscreenOnMobile={true}
                             moveType="drag"
                             zoomScale={1.3}
                             zoomPreload={true}
-                        />
+                            />
                         <div className='card-body rounded w-100 p-4'>
-                            <h4>{singleProductData.termekNev}</h4>
+                            <h3>{singleProductData.termekNev}</h3>
                             <p>{singleProductData.termekLeiras}</p>
                             {singleProductData.menyiseg && <p>Available: {singleProductData.menyiseg} pieces</p>}
                             {singleProductData.ar && <h3>{singleProductData.ar} -Ft</h3>}
@@ -91,23 +91,40 @@ function SingleProductDisplay() {
 
                     <div className="row align-items-start">
                         <div className='rounded mx-auto d-flex flex-row'>
-                            <div className='wrapper card-body rounded mt-3 w-100 p-2'>
+                            <div className='wrapper card-body bg-dark rounded mt-3 w-100 p-2'>
                                 <Rating
+                                className='m-2'
                                     onClick={handleRating}
                                 />
                                 <CommentSection
                                     logIn={{
                                         loginLink: 'http://localhost:3000/Login',
-                                        signupLink: 'http://localhost:3000/SignUp'
-                                      }}
-                                    currentUser={{
+                                        signupLink: 'http://localhost:3000/SignUp',
+                                        style: {
+                                            button: {
+                                                backgroundColor: 'red', 
+                                                color: 'white', 
+                                                borderRadius: '5px', 
+                                                padding: '10px 20px', 
+                                                border: 'none', 
+                                                cursor: 'pointer',
+                                                marginRight: '10px', 
+                                            }
+                                      }}}
+
+                                      //A currentUser bejelentkezett felhasználó esetén enged kommentelni
+                                      //Bejelentkezés után kell beállítani alapesetben null
+                                     currentUser={{
                                         currentUserId: 'YourUserId',
                                         currentUserFullName: 'YourUserName',
                                         currentUserImg: 'YourUserImageURL'
-                                    }}
+                                        }}
+                                    overlayStyle={{ backgroundColor: '#fff', color: 'black' }}
+                                    //currentUser={null}
                                     submitBtnStyle={{ border: '1px solid black', backgroundColor: 'black' }}
                                     commentData={transformedComments}
                                     onSubmitAction={handleSubmitComment}
+                                    titleStyle={{ color: '#378457' }}
                                 />
                             </div>
                         </div>
