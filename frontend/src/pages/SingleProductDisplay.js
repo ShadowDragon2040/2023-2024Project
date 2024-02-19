@@ -6,8 +6,9 @@ import InnerImageZoom from 'react-inner-image-zoom';
 import { CommentSection } from 'react-comments-section';
 import 'react-comments-section/dist/index.css';
 import Navbar from '../components/Navbar';
-import {Rating} from 'react-simple-star-rating';
+import { Rating } from 'react-simple-star-rating';
 import Footer from '../components/Footer';
+import placeholder from "../images/ppp.jpg"
 
 function SingleProductDisplay() {
     const { ProductId } = useParams();
@@ -29,10 +30,10 @@ function SingleProductDisplay() {
         }
     };
 
-    const [singleProductData, setSingleProductData] = useState([]);
+    const [singleProductData, setSingleProductData] = useState({});
     const [transformedComments, setTransformedComments] = useState(null);
     const url = "http://localhost:5219/Termekek/EgyTermek/";
-    
+
     useEffect(() => {
         axios.get(url + ProductId)
             .then(response => {
@@ -41,16 +42,26 @@ function SingleProductDisplay() {
                     userId: productData.felhasznaloId.toString(),
                     comId: productData.hozzaszolasId.toString(),
                     fullName: productData.loginNev,
-                    avatarUrl: '', 
+                    avatarUrl: placeholder,
                     text: productData.leiras,
-                    userProfile: '', 
+                    userProfile: '',
                     replies: []
                 }));
                 setTransformedComments(transformedComments);
             })
             .catch(error => console.error('Error fetching product data:', error));
     }, [ProductId]);
-    
+
+    const handleSubmitComment = (data) => {
+        console.log("Submitted comment data:", data);
+        axios.post("http://localhost:5219/Hozzaszolas",{
+            "hozzaszolasId": 0,
+            "felhasznaloId": 1,
+            "termekId": ProductId,
+            "leiras": data.text,
+            "ertekeles": rating
+          })
+    }
 
     return (
         <>
@@ -85,14 +96,18 @@ function SingleProductDisplay() {
                                     onClick={handleRating}
                                 />
                                 <CommentSection
+                                    logIn={{
+                                        loginLink: 'http://localhost:3000/Login',
+                                        signupLink: 'http://localhost:3000/SignUp'
+                                      }}
                                     currentUser={{
                                         currentUserId: 'YourUserId',
                                         currentUserFullName: 'YourUserName',
                                         currentUserImg: 'YourUserImageURL'
                                     }}
-
+                                    submitBtnStyle={{ border: '1px solid black', backgroundColor: 'black' }}
                                     commentData={transformedComments}
-                                    
+                                    onSubmitAction={handleSubmitComment}
                                 />
                             </div>
                         </div>
