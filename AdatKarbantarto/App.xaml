@@ -8,7 +8,20 @@
              StartupUri="View/LoginView.xaml">
     <Application.Resources>
         <ResourceDictionary>
+
+           
+            
+            
             <ResourceDictionary.MergedDictionaries>
+
+
+                <!--Styles folder styles -->
+                <ResourceDictionary Source="Styles/Button.xaml"/>
+                <ResourceDictionary Source="Styles/Text.xaml"/>
+                <ResourceDictionary Source="Styles/Page.xaml"/>
+                <ResourceDictionary Source="Styles/Image.xaml"/>
+                <ResourceDictionary Source="Utilities/DataTemplate.xaml"/>
+                
                 <!-- material design styles -->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/Generic.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

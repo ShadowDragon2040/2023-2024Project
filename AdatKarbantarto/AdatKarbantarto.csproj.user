@@ -7,12 +7,30 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="View\LoginView.xaml.cs">
+    <Compile Update="ViewModel\LoginView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\Button.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\Image.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\Page.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\Text.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Utilities\DataTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Home.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\LoginView.xaml">
