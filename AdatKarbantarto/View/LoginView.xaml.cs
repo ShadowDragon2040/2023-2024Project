@@ -54,7 +54,7 @@ namespace AdatKarbantarto.View
                 ApiHelper apiHelper = new ApiHelper();
                 AuthenticatedUser user = await apiHelper.PostAsync("/Auth/Login", txtUsername.Text, txtPassword.Password);
 
-                MessageBox.Show($"Logged in as: {user.UserName}");
+                MessageBox.Show($"Logged in as: {user.User.UserName}");
 
             }
             catch (Exception ex)

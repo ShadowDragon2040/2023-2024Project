@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AdatKarbantarto.Helpers;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +10,8 @@ namespace AdatKarbantarto.Model
 {
     public class AuthenticatedUser
     {
-        public string AccesToken { get; set; }
-        public string UserName { get; set;}
+        public User User { get; set; }
+        public string Token { get; set; }
     }
+
 }

@@ -12,6 +12,11 @@ using System.Threading.Tasks;
 
 namespace AdatKarbantarto.Helpers
 {
+
+   
+   
+
+
     public class ApiHelper 
     {
         private readonly HttpClient _httpClient;
@@ -59,9 +64,8 @@ namespace AdatKarbantarto.Helpers
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
 
-                    // Deserialize the JSON response to a User object
-                    AuthenticatedUser user = JsonConvert.DeserializeObject<AuthenticatedUser>(responseContent);
-                    return user;
+                    AuthenticatedUser authenticatedUser = JsonConvert.DeserializeObject<AuthenticatedUser>(responseContent);
+                    return authenticatedUser;
                 }
                 else
                 {
@@ -69,8 +73,6 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
-
-
 
 
 
