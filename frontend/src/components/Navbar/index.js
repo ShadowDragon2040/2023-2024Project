@@ -54,7 +54,9 @@ function Navbar(props) {
               <CgProfile />
             </NavBtnLink>
           </NavBtn>
-
+          <NavBtn>
+            <NavBtnLink to='ShopPage'>Cart</NavBtnLink>
+          </NavBtn>
           <NavBtn>
             <NavBtnLink to='ShopPage'>Login</NavBtnLink>
           </NavBtn>

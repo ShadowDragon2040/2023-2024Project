@@ -9,11 +9,15 @@ import Navbar from '../components/Navbar';
 import { Rating } from 'react-simple-star-rating';
 import Footer from '../components/Footer';
 import placeholder from "../images/ppp.jpg"
+import ColorPicker from './ColorPicker';
+
 
 function SingleProductDisplay() {
     const { ProductId } = useParams();
     const [rating, setRating] = useState(0);
     const [commentString, setCommentString] = useState("");
+    const [cart, setCart] = useState([]);
+
 
     const handleRating = (rate) => {
         setRating(rate);
@@ -29,7 +33,7 @@ function SingleProductDisplay() {
             console.log(error);
         }
     };
-
+   
     const [singleProductData, setSingleProductData] = useState({});
     const [transformedComments, setTransformedComments] = useState(null);
     const url = "http://localhost:5219/Termekek/EgyTermek/";
@@ -87,6 +91,8 @@ function SingleProductDisplay() {
                             <p>{singleProductData.termekLeiras}</p>
                             {singleProductData.menyiseg && <p>Available: {singleProductData.menyiseg} pieces</p>}
                             {singleProductData.ar && <h3>{singleProductData.ar} -Ft</h3>}
+                            <ColorPicker />
+                            
                         </div>
                     </div>
 
