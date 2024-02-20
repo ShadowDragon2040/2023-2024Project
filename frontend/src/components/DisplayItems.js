@@ -44,7 +44,7 @@ function NewItemsComponent (props) {
           <div className="row w-100">
               {
                 data.map(item => (
-                  <TermekCard item={item} key={item.id}/>
+                  <TermekCard  item={item} key={item.id}/>
                 ))
               }
           </div>

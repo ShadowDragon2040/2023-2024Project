@@ -9,7 +9,7 @@ import { BiCategory } from "react-icons/bi";
 function ShopSideBar() {
   const [categoryList, setCategoryList] = useState([]);
   
-    const url="https://localhost:7240/Termekek/Kategoriak";
+    const url="http://localhost:5219/Termekek/Kategoriak";
     useEffect(() => {
       axios.get(url)
         .then(response => setCategoryList(response.data))

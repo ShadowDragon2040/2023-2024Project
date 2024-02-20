@@ -73,12 +73,13 @@ function SingleProductDisplay() {
                     </NavLink>
                     <div className='bg-dark p-1 rounded mx-auto d-flex flex-row mt-2 FirstRow'>
                         <InnerImageZoom
+                            width={1300}
                             className='ImageZoom rounded'
                             src={"/" + singleProductData.keputvonal}
                             zoomSrc={"/" + singleProductData.keputvonal}
                             fullscreenOnMobile={true}
                             moveType="drag"
-                            zoomScale={1.3}
+                            zoomScale={3}
                             zoomPreload={true}
                             />
                         <div className='card-body rounded w-100 p-4'>
@@ -100,17 +101,7 @@ function SingleProductDisplay() {
                                     logIn={{
                                         loginLink: 'http://localhost:3000/Login',
                                         signupLink: 'http://localhost:3000/SignUp',
-                                        style: {
-                                            button: {
-                                                backgroundColor: 'red', 
-                                                color: 'white', 
-                                                borderRadius: '5px', 
-                                                padding: '10px 20px', 
-                                                border: 'none', 
-                                                cursor: 'pointer',
-                                                marginRight: '10px', 
-                                            }
-                                      }}}
+                                    }}
 
                                       //A currentUser bejelentkezett felhasználó esetén enged kommentelni
                                       //Bejelentkezés után kell beállítani alapesetben null
