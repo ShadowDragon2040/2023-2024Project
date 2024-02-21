@@ -7,7 +7,7 @@
         xmlns:Menu="clr-namespace:AdatKarbantarto.Utilities"
         xmlns:local="clr-namespace:AdatKarbantarto"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="600" Width="800"
         ResizeMode="NoResize"
         >
     <Window.DataContext>
@@ -49,7 +49,7 @@
 
                         <Grid>
 
-                            <Image Source="Images/img_home.png"
+                            <Image Source="Images/home.png"
                                    Style="{StaticResource Image_Style}" />
 
                             <TextBlock Text="Home"
@@ -66,7 +66,7 @@
 
                         <Grid>
 
-                            <Image Source="Images/img_customer.png"
+                            <Image Source="Images/user.png"
                                    Style="{StaticResource Image_Style}" />
 
                             <TextBlock Text="Customer"
@@ -83,7 +83,7 @@
 
                         <Grid>
 
-                            <Image Source="Images/img_product.png"
+                            <Image Source="Images/products.png"
                                    Style="{StaticResource Image_Style}" />
 
                             <TextBlock Text="Products"
@@ -100,7 +100,7 @@
 
                         <Grid>
 
-                            <Image Source="Images/img_order.png"
+                            <Image Source="Images/comments.png"
                                    Style="{StaticResource Image_Style}" />
 
                             <TextBlock Text="Orders"
@@ -110,56 +110,7 @@
 
                     </Menu:Btn>
 
-                    <!--// Transactions //-->
 
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding TransactionsCommand}">
-
-                        <Grid>
-
-                            <Image Source="Images/img_transaction.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Transactions"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </Menu:Btn>
-
-                    <!--// Shipments //-->
-
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding ShipmentsCommand}">
-
-                        <Grid>
-
-                            <Image Source="Images/img_shipment.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Shipments"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </Menu:Btn>
-
-                    <!--// Settings //-->
-
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding SettingsCommand}">
-
-                        <Grid>
-
-                            <Image Source="Images/img_setting.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Settings"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </Menu:Btn>
 
                 </StackPanel>
 
@@ -174,9 +125,6 @@
 
         </Grid>
 
-        <Button x:Name="CloseApp"
-                Style="{StaticResource ExitApp}"
-                Click="CloseApp_Click" />
-
+        
     </Grid>
 </Window>
