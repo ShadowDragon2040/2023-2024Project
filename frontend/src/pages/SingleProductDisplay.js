@@ -5,7 +5,7 @@ import { MdArrowBack } from "react-icons/md";
 import InnerImageZoom from 'react-inner-image-zoom';
 import { CommentSection } from 'react-comments-section';
 import 'react-comments-section/dist/index.css';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/ShopNavbar';
 import { Rating } from 'react-simple-star-rating';
 import Footer from '../components/Footer';
 import placeholder from "../images/ppp.jpg"

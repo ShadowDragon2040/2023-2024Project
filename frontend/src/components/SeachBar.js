@@ -3,7 +3,7 @@
   import axios from 'axios';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 
-  function SearchBar(props) {
+  function SearchBar() {
     const inputRef = useRef(null);
     const [listening, setListening] = useState(false);
     const [query, setQuery] = useState("");

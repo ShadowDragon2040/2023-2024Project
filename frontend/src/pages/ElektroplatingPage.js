@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import Navbar from '../components/Navbar'
+import Navbar from '../components/ShopNavbar'
 import Sidebar from '../components/Sidebar'
 import Elektroplating from '../components/Elektroplating'
 import Footer from '../components/Footer'

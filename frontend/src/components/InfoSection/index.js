@@ -10,7 +10,9 @@ TopLine,
 Heading,
 Subtitle,
 ImgWrap,
-Img
+Img,
+NavBtn,
+NavBtnLink
 } from '../TextElements'
 
 export const homeObjOne={
@@ -44,6 +46,9 @@ const InfoSection = () => {
               A cégnél hisszük hogy a képzelet a határ, a 3D nyomtatási technológiával ez meg is oldható. Mindenkinek tudunk valamit ajánlani és akinek valami egyedi kell, azt reméljük hogy biztosítani tudjuk. Nézzen körbe az oldalunkon és válassza ki ami önnek tetszik, ha nem találja külde el e-mail-ben mit szeretne. 3D nyomtatáson kívűl foglalkozunk festéssel és elektroplaing-el. 
               </Subtitle>
             </TextWrapper>
+            <NavBtn>
+              <NavBtnLink  to='CompanyInfoPage'>About us</NavBtnLink>
+            </NavBtn>
             </Column1>
              <Column2>
               <ImgWrap>
