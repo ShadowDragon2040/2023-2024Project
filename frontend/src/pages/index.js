@@ -4,7 +4,6 @@ import MainNavbar from "../components/MainNavbar"
 import Sidebar from '../components/Sidebar'
 import InfoSection from '../components/InfoSection'
 import PrinterTools from '../components/PrinterTools'
-import Products from '../components/Products'
 import Services from '../components/Services'
 import Footer from '../components/Footer'
 import ModelSection from '../components/ModelSection'
@@ -23,7 +22,6 @@ const Home = () => {
       <HeroSection/>
       <InfoSection />
       <PrinterTools/>
-      <Products/>
       <ModelSection/>
       <Services/>
       

@@ -7,10 +7,6 @@ import EnderPage from './pages/Ender';
 import AnycubicPage from './pages/Anycubic';
 import ElektroplatingPage from './pages/ElektroplatingPage';
 import PaintPage from './pages/PaintPage';
-import SzemuvegPage from './pages/Szemuveg';
-import FiguraPage from './pages/Figura';
-import OtthoniDiszPage from './pages/OtthoniDisz';
-import AlkatreszPage from './pages/Alkatresz';
 import ModelltervezesPage from './pages/ModelltervezesPage';
 import SingleProductDisplay from './pages/SingleProductDisplay';
 import ShopPage from './pages/ShopPage';
@@ -31,10 +27,6 @@ function App() {
         <Route path="/ElektroplatingPage" component={ElektroplatingPage} exact />
         <Route path="/ModelltervezesPage" component={ModelltervezesPage} exact />
         <Route path="/PaintPage" component={PaintPage} exact />
-        <Route path="/SzemuvegPage" component={SzemuvegPage} exact />
-        <Route path="/FiguraPage" component={FiguraPage} exact />
-        <Route path="/OtthoniDiszPage" component={OtthoniDiszPage} exact />
-        <Route path="/AlkatreszPage" component={AlkatreszPage} exact />
         <Route path="/ShopPage" component={ShopPage} exact />
         <Route path="/ShopPage/:ProductId" component={SingleProductDisplay} exact />
         <Route path="/ShopPage/Categories/:CategoryId" component={CategoryPage} exact />

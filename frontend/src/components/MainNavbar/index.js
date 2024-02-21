@@ -73,15 +73,6 @@ const NavbarA = ({toggle}) => {
                 >Nyomtatóink</NavLinks>
               </NavItem>
               <NavItem>
-                <NavLinks to='products'
-                smooth={true} 
-                duration={500} 
-                spy={true}
-                exact='true' 
-                offset={-80}
-                >Termékeink</NavLinks>
-              </NavItem>
-              <NavItem>
                 <NavLinks to='models'
                 smooth={true} 
                 duration={500} 
