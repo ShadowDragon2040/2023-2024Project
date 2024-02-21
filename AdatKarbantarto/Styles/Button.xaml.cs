@@ -11,7 +11,7 @@ namespace AdatKarbantarto.Styles
     {
         public Button()
         {
-            this.InitializeComponent();
+
         }
     }
 }

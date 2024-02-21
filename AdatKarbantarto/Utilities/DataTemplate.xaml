@@ -3,17 +3,18 @@
                     xmlns:vm="clr-namespace:AdatKarbantarto.ViewModel"
                     xmlns:view="clr-namespace:AdatKarbantarto.View">
 
+
     <DataTemplate DataType="{x:Type vm:HomeVM}">
-        <view:Home />
+        <view:HomeView/>
     </DataTemplate>
-
     <DataTemplate DataType="{x:Type vm:FelhasznalokVM}">
-        <view:Felhasznalok />
+        <view:FelhasznaloView/>
     </DataTemplate>
-
     <DataTemplate DataType="{x:Type vm:TermekekVM}">
-        <view:Termekek />
+        <view:TermekView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:HozzaszolasokVM}">
+        <view:HozzaszolasView/>
     </DataTemplate>
 
-    
 </ResourceDictionary>

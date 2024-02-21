@@ -11,7 +11,7 @@ namespace AdatKarbantarto.Utilities
     {
         public DataTemplate()
         {
-            this.InitializeComponent();
+          
         }
     }
 }

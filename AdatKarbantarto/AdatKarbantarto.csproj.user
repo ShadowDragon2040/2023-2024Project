@@ -7,7 +7,19 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="ViewModel\LoginView.xaml.cs">
+    <Compile Update="View\FelhasznaloView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\HomeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\HozzaszolasView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LoginView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\TermekView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -30,10 +42,19 @@
     <Page Update="Utilities\DataTemplate.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Home.xaml">
+    <Page Update="View\FelhasznaloView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\HomeView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\HozzaszolasView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\LoginView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\TermekView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

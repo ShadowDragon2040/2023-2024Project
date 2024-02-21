@@ -8,13 +8,7 @@
              StartupUri="View/LoginView.xaml">
     <Application.Resources>
         <ResourceDictionary>
-
-           
-            
-            
             <ResourceDictionary.MergedDictionaries>
-
-
                 <!--Styles folder styles -->
                 <ResourceDictionary Source="Styles/Button.xaml"/>
                 <ResourceDictionary Source="Styles/Text.xaml"/>
