@@ -37,7 +37,28 @@ bld/
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
+authApi\authApi\obj\Debug\net8.0\authApi.AssemblyInfo.cs
+authApi\authApi\obj\Debug\net8.0\authApi.dll
 
+authApi\authApi\bin\Debug\net8.0\authApi.dll
+authApi\authApi\bin\Debug\net8.0\authApi.exe
+authApi\authApi\bin\Debug\net8.0\authApi.pdb
+authApi\authApi\obj\authApi.csproj.nuget.dgspec.json
+authApi\authApi\obj\authApi.csproj.nuget.g.props
+authApi\authApi\obj\Debug\net8.0\apphost.exe
+authApi\authApi\obj\Debug\net8.0\authApi.AssemblyInfo.cs
+authApi\authApi\obj\Debug\net8.0\authApi.AssemblyInfolnputs.cache
+authApi\authApi\obj\Debug\net8.0\authApi.assets.cache
+authApi\authApi\obj\Debug\net8.0\authApi.csproj.CoreCompileInputs.cache
+authApi\authApi\obj\Debug\net8.0\authApi.dll
+authApi\authApi\obj\Debug\net8.0\authApi.genruntimeconfig.cache
+authApi\authApi\obj\Debug\net8.0\authApi.pdb
+authApi\authApi\obj\Debug\net8.0\authApi.sourcelink.json
+authApi\authApi\obj\Debug\net8.0\authApi.sourcelink.json
+authApi\authApi\obj\Debug\net8.0\ref\authApi.dll
+authApi\authApi\obj\Debug\net8.0\refint\authApi.dll
+authApi\authApi\obj\project.assets.json
+authApi\authApi\obj\project.nuget.cache
 # Visual Studio 2017 auto generated files
 Generated\ Files/
 
