@@ -7,16 +7,22 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1000">
     <Grid>
+        <Border BorderBrush="Green" BorderThickness="4">
+            
         <DataGrid
+            ItemsSource="{Binding users}"
+            x:Name="dtg_Adatok"
             HorizontalAlignment="Left"
             Width="350"
-            Margin="40,40,20,40"
+            Margin="40,40,20,40" SelectionChanged="DataGrid_SelectionChanged"
             >
+           
         </DataGrid>
+        </Border>
         <Button
             x:Name="btn_Uj"
             Width="100"
-            Margin="300,50,20,20"
+            Margin="350,50,20,20"
             VerticalAlignment="Top"
             HorizontalAlignment="Center"
             Background="DarkGreen"
@@ -28,7 +34,7 @@
         <Button 
              x:Name="btn_Modosit"
              Width="100"
-             Margin="300,100,20,20"
+             Margin="350,100,20,20"
              HorizontalAlignment="Center"
              VerticalAlignment="Top"
              Background="Orange"
@@ -40,7 +46,7 @@
         <Button
             x:Name="btn_Torles"
             Width="100"
-            Margin="300,150,20,20"
+            Margin="350,150,20,20"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Background="OrangeRed"

@@ -26,5 +26,7 @@ namespace AdatKarbantarto.Model
 
         [JsonProperty("role")]
         public string Role { get; set; }
+
+        
     }
 }

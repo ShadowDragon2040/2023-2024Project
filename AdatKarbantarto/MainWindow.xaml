@@ -79,7 +79,7 @@
                     <!--// Products //-->
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding ProductsCommand}">
+                              Command="{Binding TermekCommand}">
 
                         <Grid>
 
@@ -96,7 +96,7 @@
                     <!--// Orders //-->
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding OrdersCommand}">
+                              Command="{Binding HozzaszolasCommand}">
 
                         <Grid>
 

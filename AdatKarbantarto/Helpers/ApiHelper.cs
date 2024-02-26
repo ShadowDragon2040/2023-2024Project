@@ -2,9 +2,6 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.DirectoryServices.ActiveDirectory;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -12,21 +9,16 @@ using System.Threading.Tasks;
 
 namespace AdatKarbantarto.Helpers
 {
-
-   
-   
-
-
-    public class ApiHelper 
+    public class ApiHelper
     {
         private readonly HttpClient _httpClient;
 
         public ApiHelper()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("https://localhost:7026");
+            _httpClient.BaseAddress = new Uri("https://localhost:7240");
             _httpClient.DefaultRequestHeaders.Accept.Clear();
-            _httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task<string> GetAsync(string endpoint)
@@ -35,8 +27,7 @@ namespace AdatKarbantarto.Helpers
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    string content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<string>(content);
+                    return await response.Content.ReadAsStringAsync();
                 }
                 else
                 {
@@ -44,7 +35,6 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
-
 
         public async Task<AuthenticatedUser> PostAsync(string endpoint, string username, string password)
         {
@@ -63,9 +53,7 @@ namespace AdatKarbantarto.Helpers
                 if (response.IsSuccessStatusCode)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
-
-                    AuthenticatedUser authenticatedUser = JsonConvert.DeserializeObject<AuthenticatedUser>(responseContent);
-                    return authenticatedUser;
+                    return JsonConvert.DeserializeObject<AuthenticatedUser>(responseContent);
                 }
                 else
                 {
@@ -74,9 +62,20 @@ namespace AdatKarbantarto.Helpers
             }
         }
 
-
-
-
-
+        public async Task<List<Felhasznalo>> GetFelhasznalokAsync(string endpoint)
+        {
+            using (HttpResponseMessage response = await _httpClient.GetAsync(endpoint))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<Felhasznalo>>(content);
+                }
+                else
+                {
+                    throw new Exception($"Failed to fetch data from API. Status code: {response.StatusCode}");
+                }
+            }
+        }
     }
 }
