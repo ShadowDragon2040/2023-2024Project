@@ -9,6 +9,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800"
         ResizeMode="NoResize"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
         >
     <Window.DataContext>
         <vm:NavigationVM />

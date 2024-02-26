@@ -1,5 +1,6 @@
 ﻿using AdatKarbantarto.Helpers;
 using AdatKarbantarto.Model;
+using AdatKarbantarto.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,22 @@ namespace AdatKarbantarto.View
         private async void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
+        }
+
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            var confirmationDialog = new ConfirmationDialog("Are you sure you want to delete?");
+            confirmationDialog.ShowDialog();
+
+            bool result = await Task.Run(() => confirmationDialog.Result);
+
+            if (result)
+            {
+     
+            }
+            else
+            {
+            }
         }
     }
 }

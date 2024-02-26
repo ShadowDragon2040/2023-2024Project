@@ -14,6 +14,7 @@
     <None Remove="Images\logo1.png" />
     <None Remove="Images\OIG4.jpg" />
     <None Remove="Images\products.png" />
+    <None Remove="Images\trash.jpg" />
     <None Remove="Images\user.png" />
   </ItemGroup>
 
@@ -37,6 +38,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\products.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\trash.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\user.png">
