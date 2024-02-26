@@ -35,7 +35,7 @@
             <Grid HorizontalAlignment="Left"
                   Width="228">
 
-                <Border Background="#272B2F"
+                <Border Background="Green"
                         CornerRadius="20,0,0,20" />
 
                 <StackPanel Height="400"
@@ -62,7 +62,7 @@
                     <!--// Customer //-->
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding CustomersCommand}">
+                              Command="{Binding FelhasznaloCommand}">
 
                         <Grid>
 

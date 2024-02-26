@@ -22,7 +22,7 @@
 
                         <Border.Background>
                             <SolidColorBrush x:Name="BorderBackground"
-                                             Color="#272B2F" />
+                                             Color="DarkGreen" />
                         </Border.Background>
 
                         <Grid>
