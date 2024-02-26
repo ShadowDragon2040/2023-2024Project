@@ -56,7 +56,6 @@ namespace Webárúház_Nagy_Project.Controllers
                     Salt = createdFelhasznalokDto.Salt,
                     Nev = createdFelhasznalokDto.Nev,
                     Jog = createdFelhasznalokDto.Jog,
-                    Aktivalva = createdFelhasznalokDto.Aktivalva,
                     Email = createdFelhasznalokDto.Email,
                     ProfilKep = createdFelhasznalokDto.ProfilKep,
                     OrszagKod = createdFelhasznalokDto.OrszágKod,
@@ -94,7 +93,6 @@ namespace Webárúház_Nagy_Project.Controllers
                 existingFelhasznalo.Salt = updateFelhasznalokDto.Salt;
                 existingFelhasznalo.Nev = updateFelhasznalokDto.Nev;
                 existingFelhasznalo.Jog = updateFelhasznalokDto.Jog;
-                existingFelhasznalo.Aktivalva = updateFelhasznalokDto.Aktivalva;
                 existingFelhasznalo.Email = updateFelhasznalokDto.Email;
                 existingFelhasznalo.ProfilKep = updateFelhasznalokDto.ProfilKep;
                 existingFelhasznalo.OrszagKod = updateFelhasznalokDto.OrszágKod;

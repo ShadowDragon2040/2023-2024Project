@@ -3,11 +3,14 @@ using authApi.Models;
 using authApi.Models.Dtos;
 using authApi.Services.IServices;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace authApi.Services
 {
@@ -92,9 +95,7 @@ namespace authApi.Services
             {
                 UserName = registrationRequestDto.UserName,
                 NormalizedUserName = registrationRequestDto.UserName.ToUpper(),
-                FullName = registrationRequestDto.FullName,
                 Email = registrationRequestDto.Email,
-                Age = registrationRequestDto.Age,
             };
             try
             {
@@ -129,5 +130,25 @@ namespace authApi.Services
                 return ex.Message;
             }
         }
+
+        /*
+        public async Task<IActionResult> VerifyEmailCode(VerificationRequestDto model)
+        {
+            var user = dataBase.AppUsers.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
+
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+            if (user.EmailCode == model.EmailCode)
+            {
+                return Ok("Email code verified successfully.");
+            }
+            else
+            {
+                return BadRequest("Invalid email code.");
+            }
+        }
+        */
     }
 }

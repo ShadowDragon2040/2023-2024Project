@@ -41,6 +41,31 @@ namespace authApi.Controllers
             return Ok();
         }
 
+        /*
+        [HttpPost("verify-email")]
+        public async Task<ActionResult> VerifyEmailCode([FromBody] VerificationRequestDto model)
+        {
+            var result = await authService.VerifyEmailCode(model);
+
+            if (result is OkResult)
+            {
+                var assignedRoleSuccesful = await authService.AssignRole(model.Email, model.Role.ToUpper());
+
+                if (assignedRoleSuccesful)
+                {
+                    return Ok("Email code verified successfully and role assigned.");
+                }
+                else
+                {
+                    return StatusCode(500, "Error assigning role.");
+                }
+            }
+            else
+            {
+                return result;
+            }
+        }
+        */
 
         [HttpPost("AssignRole")]
         [Authorize(Roles = "Admin")]

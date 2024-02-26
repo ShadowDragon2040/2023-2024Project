@@ -1,4 +1,5 @@
 ﻿using authApi.Models.Dtos;
+using Microsoft.AspNetCore.Mvc;
 
 namespace authApi.Services.IServices
 {
