@@ -16,9 +16,10 @@ namespace authApi
 
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
-                var connectionString = builder.Configuration.GetConnectionString("XampDockerenKivul");
+                var connectionString = builder.Configuration.GetConnectionString("Xampmashogyan");
                 options.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString));
             });
+
 
             builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("AuthSettings:JwtOptions"));
 

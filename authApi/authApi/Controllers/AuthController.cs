@@ -7,6 +7,9 @@ using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using authApi.Models;
+using Microsoft.Extensions.Configuration;
+using System.Net.Mail;
+using authApi.Datas;
 
 namespace authApi.Controllers
 {
@@ -17,51 +20,32 @@ namespace authApi.Controllers
     {
         private readonly IAuth authService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IConfiguration _configuration;
+        private readonly AppDbContext dataBase;
 
-        public AuthController(IAuth authService, UserManager<ApplicationUser> userManager)
+        public AuthController(IAuth authService, UserManager<ApplicationUser> userManager, IConfiguration configuration, AppDbContext dataBase)
         {
             this.userManager = userManager;
             this.authService = authService;
+            _configuration = configuration;
+            this.dataBase = dataBase;
         }
 
-        [HttpPost("confirm")]
-        public async Task<IActionResult> ConfirmEmail(string email, string hash)
+        private void SaveVerificationCodeToDatabase(string email, int code)
         {
-            try
+            var user = dataBase.AppUsers.FirstOrDefault(u => u.Email.ToLower() == email.ToLower());
+
+            if (user != null)
             {
-                using (SHA256 sha256 = SHA256.Create())
-                {
-                    byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(email));
-                    var calculatedHash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-
-                    if (calculatedHash.Equals(hash, StringComparison.OrdinalIgnoreCase))
-                    {
-                        var user = await userManager.FindByEmailAsync(email);
-
-                        if (user != null && !user.EmailConfirmed)
-                        {
-                            user.EmailConfirmed = true;
-                            await userManager.UpdateAsync(user);
-                        }
-                        else
-                        {
-                            return BadRequest("Email is already confirmed or user not found.");
-                        }
-                    }
-                    else
-                    {
-                        return BadRequest("Invalid email verification link.");
-                    }
-                }
-
-                EmailService.SendMail(email, "Sikeres regisztráció", $"Ön sikeresen regisztrált a PrintFusion oldalra mostantól az oldal összes funkciója elérhető!");
+                user.EmailCode = code;
+                dataBase.SaveChanges();
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex.Message);
+                throw new Exception($"User with email '{email}' not found.");
             }
-            return Ok("Email verified successfully!");
         }
+
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto model)
@@ -71,8 +55,24 @@ namespace authApi.Controllers
             {
                 return StatusCode(400, errorMessage);
             }
-            return StatusCode(201, "Sikeres Regisztráció.");
+
+            // Registration successful, send verification email
+            try
+            {
+                Random rand = new Random();
+                int randomCode = rand.Next(1000, 10000);
+                SaveVerificationCodeToDatabase(model.Email, randomCode);
+                EmailService.SendVerificationMail(model.Email,randomCode, _configuration);
+
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Error occurred while sending verification email.");
+            }
+
+            return StatusCode(201, "Successful registration. Verification email has been sent.");
         }
+
 
         [HttpPost("AssignRole")]
         [Authorize(Roles = "Admin")]

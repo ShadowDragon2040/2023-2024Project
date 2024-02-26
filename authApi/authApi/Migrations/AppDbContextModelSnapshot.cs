@@ -166,6 +166,9 @@ namespace authApi.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
+                    b.Property<int>("EmailCode")
+                        .HasColumnType("int");
+
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
 

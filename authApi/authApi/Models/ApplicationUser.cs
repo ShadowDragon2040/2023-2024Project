@@ -8,5 +8,7 @@ namespace authApi.Models
 
         public int Age { get; set; }
 
+        public int EmailCode { get; set; }
+
     }
 }

@@ -93,17 +93,7 @@ namespace authApi.Services
                         FullName = userToReturn.FullName,
                         Age = userToReturn.Age,
                     };
-
-                    using (SHA256 sha256 = SHA256.Create())
-                    {
-                        byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(userToReturn.Email));
-                        var hashedEmail = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-
-                        var confirmationLink = $"https://localhost:7240/confirm?email={userToReturn.Email}&hash={hashedEmail}";
-
-                        EmailService.SendMail(userToReturn.Email, "PrintFusion regisztráció megerősítése", $"Ez egy automatikusan generált üzenet, kattintson a linkre hogy a fiókját hitelesítje! {confirmationLink}");
-                    }
-                    return "";
+                    return userDto.FullName;
                 }
                 else
                 {
