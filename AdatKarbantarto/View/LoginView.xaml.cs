@@ -51,7 +51,7 @@ namespace AdatKarbantarto.View
         {
             try
             {
-                ApiHelper apiHelper = new ApiHelper();
+                AuthApiHelper apiHelper = new AuthApiHelper();
                 AuthenticatedUser user = await apiHelper.PostAsync("/Auth/Login", txtUsername.Text, txtPassword.Password);
 
                 if (user != null)

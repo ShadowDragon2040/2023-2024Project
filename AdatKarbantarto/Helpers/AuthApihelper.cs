@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace AdatKarbantarto.Helpers
 {
-    public class ApiHelper
+    public class AuthApiHelper
     {
         private readonly HttpClient _httpClient;
 
-        public ApiHelper()
+        public AuthApiHelper()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("https://localhost:7240");
+            _httpClient.BaseAddress = new Uri("https://localhost:7026");
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
@@ -35,7 +35,6 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
-
         public async Task<AuthenticatedUser> PostAsync(string endpoint, string username, string password)
         {
             var requestData = new
@@ -58,22 +57,6 @@ namespace AdatKarbantarto.Helpers
                 else
                 {
                     throw new Exception($"Failed to post data to API. Status code: {response.StatusCode}");
-                }
-            }
-        }
-
-        public async Task<List<Felhasznalo>> GetFelhasznalokAsync(string endpoint)
-        {
-            using (HttpResponseMessage response = await _httpClient.GetAsync(endpoint))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<Felhasznalo>>(content);
-                }
-                else
-                {
-                    throw new Exception($"Failed to fetch data from API. Status code: {response.StatusCode}");
                 }
             }
         }

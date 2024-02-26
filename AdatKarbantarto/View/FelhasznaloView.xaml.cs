@@ -39,7 +39,7 @@ namespace AdatKarbantarto.View
         {
             try
             {
-                ApiHelper apiHelper = new ApiHelper();
+                BackendApiHelper apiHelper = new BackendApiHelper();
                 List<Felhasznalo> users = await apiHelper.GetFelhasznalokAsync("/Felhasznalok");
                 dtg_Adatok.ItemsSource = users;
             }

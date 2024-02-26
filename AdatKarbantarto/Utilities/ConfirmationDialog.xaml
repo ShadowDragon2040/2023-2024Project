@@ -9,7 +9,7 @@
     <Grid>
         <TextBlock Text="{Binding Message}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
-            <Button Content="Yes" Click="YesButton_Click" Margin="5"/>
+            <Button Background="Red" Content="Yes" Click="YesButton_Click" Margin="5"/>
             <Button Content="No" Click="NoButton_Click" Margin="5"/>
         </StackPanel>
     </Grid>
