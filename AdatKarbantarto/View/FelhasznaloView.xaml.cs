@@ -63,7 +63,9 @@ namespace AdatKarbantarto.View
 
             if (result)
             {
-     
+                BackendApiHelper deleteHelper= new BackendApiHelper();
+                var response=await deleteHelper.DeleteFelhasznaloAsync("/Felhasznalok/", dtg_Adatok.SelectedIndex+1);
+                MessageBox.Show(response.ToString());
             }
             else
             {

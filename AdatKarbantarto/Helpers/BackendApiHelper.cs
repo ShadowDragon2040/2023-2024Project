@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AdatKarbantarto.Model;
 using Newtonsoft.Json;
+using System.Windows;
 
 namespace AdatKarbantarto.Helpers
 {
@@ -36,5 +37,21 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
+        public async Task<bool> DeleteFelhasznaloAsync(string endpoint, int id)
+        {
+            using (HttpResponseMessage response = await _httpClient.DeleteAsync($"{endpoint}/{id}"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show(response.ToString());
+                    throw new Exception($"Failed to delete data from API. Status code: {response.StatusCode}");
+                }
+            }
+        }
+
     }
 }
