@@ -20,32 +20,14 @@ namespace authApi.Controllers
     {
         private readonly IAuth authService;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly IConfiguration _configuration;
-        private readonly AppDbContext dataBase;
 
-        public AuthController(IAuth authService, UserManager<ApplicationUser> userManager, IConfiguration configuration, AppDbContext dataBase)
+
+        public AuthController(IAuth authService, UserManager<ApplicationUser> userManager)
         {
             this.userManager = userManager;
             this.authService = authService;
-            _configuration = configuration;
-            this.dataBase = dataBase;
+
         }
-
-        private void SaveVerificationCodeToDatabase(string email, int code)
-        {
-            var user = dataBase.AppUsers.FirstOrDefault(u => u.Email.ToLower() == email.ToLower());
-
-            if (user != null)
-            {
-                user.EmailCode = code;
-                dataBase.SaveChanges();
-            }
-            else
-            {
-                throw new Exception($"User with email '{email}' not found.");
-            }
-        }
-
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto model)
@@ -56,21 +38,7 @@ namespace authApi.Controllers
                 return StatusCode(400, errorMessage);
             }
 
-            // Registration successful, send verification email
-            try
-            {
-                Random rand = new Random();
-                int randomCode = rand.Next(1000, 10000);
-                SaveVerificationCodeToDatabase(model.Email, randomCode);
-                EmailService.SendVerificationMail(model.Email,randomCode, _configuration);
-
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Error occurred while sending verification email.");
-            }
-
-            return StatusCode(201, "Successful registration. Verification email has been sent.");
+            return Ok();
         }
 
 

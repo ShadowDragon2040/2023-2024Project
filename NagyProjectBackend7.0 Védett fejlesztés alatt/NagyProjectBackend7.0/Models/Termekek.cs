@@ -22,10 +22,13 @@ public partial class Termekek
 
     [JsonIgnore]
     public virtual ICollection<Hozzaszolasok> Hozzaszolasoks { get; set; } = new List<Hozzaszolasok>();
+
     [JsonIgnore]
     public virtual Kategoriak Kategoria { get; set; } = null!;
+
     [JsonIgnore]
     public virtual ICollection<Szamlaza> Szamlazas { get; set; } = new List<Szamlaza>();
+
     [JsonIgnore]
     public virtual Tagkapcsolo? Tagkapcsolo { get; set; }
 }

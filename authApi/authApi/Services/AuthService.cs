@@ -4,6 +4,7 @@ using authApi.Models.Dtos;
 using authApi.Services.IServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,13 +17,15 @@ namespace authApi.Services
         private readonly AppDbContext dataBase;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly IConfiguration _configuration;
 
-        public AuthService(IJwtTokenGenerator jwtTokenGenerator, AppDbContext dataBase, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public AuthService(IJwtTokenGenerator jwtTokenGenerator, AppDbContext dataBase, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {
             this.jwtTokenGenerator = jwtTokenGenerator;
             this.dataBase = dataBase;
             this.userManager = userManager;
             this.roleManager = roleManager;
+            _configuration = configuration;
         }
 
         public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
@@ -68,6 +71,21 @@ namespace authApi.Services
             return false;
         }
 
+        private void SaveVerificationCodeToDatabase(string email, int code)
+        {
+            var user = dataBase.AppUsers.FirstOrDefault(u => u.Email.ToLower() == email.ToLower());
+
+            if (user != null)
+            {
+                user.EmailCode = code;
+                dataBase.SaveChanges();
+            }
+            else
+            {
+                throw new Exception($"User with email '{email}' not found.");
+            }
+        }
+
         public async Task<string> Register(RegisterRequestDto registrationRequestDto)
         {
             ApplicationUser user = new()
@@ -81,6 +99,12 @@ namespace authApi.Services
             try
             {
                 var result = await userManager.CreateAsync(user, registrationRequestDto.Password);
+
+                Random rand = new Random();
+                int randomCode = rand.Next(1000, 10000);
+                SaveVerificationCodeToDatabase(registrationRequestDto.Email, randomCode);
+                EmailService.SendVerificationMail(registrationRequestDto.Email, randomCode, _configuration);
+
                 if (result.Succeeded)
                 {
                     var userToReturn = dataBase.AppUsers.First(user => user.UserName == registrationRequestDto.UserName);

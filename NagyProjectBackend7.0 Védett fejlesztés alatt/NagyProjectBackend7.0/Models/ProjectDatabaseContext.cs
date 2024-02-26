@@ -50,6 +50,9 @@ public partial class ProjectDatabaseContext : DbContext
             entity.HasIndex(e => e.VarosNevId, "VarosNevId");
 
             entity.Property(e => e.FelhasznaloId).HasColumnType("int(11)");
+            entity.Property(e => e.AktivalasIdopotja)
+                .HasDefaultValueSql("'current_timestamp()'")
+                .HasColumnType("datetime");
             entity.Property(e => e.Email).HasMaxLength(128);
             entity.Property(e => e.Hash)
                 .HasMaxLength(128)

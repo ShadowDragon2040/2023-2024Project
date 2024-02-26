@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace NagyProjectBackend7._0.Models;
 
@@ -9,5 +10,6 @@ public partial class Varosok
 
     public string VarosNev { get; set; } = null!;
 
+    [JsonIgnore]
     public virtual ICollection<Felhasznalok> Felhasznaloks { get; set; } = new List<Felhasznalok>();
 }
