@@ -22,14 +22,29 @@ namespace AdatKarbantarto.Helpers
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
-        public async Task<List<Felhasznalo>> GetFelhasznalokAsync(string endpoint)
+        public async Task<List<Felhasznalo>> GetFelhasznalokAsync()
         {
-            using (HttpResponseMessage response = await _httpClient.GetAsync(endpoint))
+            using (HttpResponseMessage response = await _httpClient.GetAsync("/Felhasznalok"))
             {
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     return JsonConvert.DeserializeObject<List<Felhasznalo>>(content);
+                }
+                else
+                {
+                    throw new Exception($"Failed to fetch data from API. Status code: {response.StatusCode}");
+                }
+            }
+        }
+        public async Task<List<Hozzaszolas>> GetHozzaszolasokAsync()
+        {
+            using (HttpResponseMessage response = await _httpClient.GetAsync("/Hozzaszolas"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<Hozzaszolas>>(content);
                 }
                 else
                 {

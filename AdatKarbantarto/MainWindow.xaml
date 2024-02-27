@@ -95,7 +95,7 @@
 
                     </Menu:Btn>
 
-                    <!--// Orders //-->
+                    <!--// Comments //-->
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding HozzaszolasCommand}">
@@ -105,7 +105,7 @@
                             <Image Source="Images/comments.png"
                                    Style="{StaticResource Image_Style}" />
 
-                            <TextBlock Text="Orders"
+                            <TextBlock Text="Comments"
                                        Style="{StaticResource Text_Style}" />
 
                         </Grid>

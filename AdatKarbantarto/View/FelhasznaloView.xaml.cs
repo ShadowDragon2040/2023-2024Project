@@ -24,10 +24,6 @@ namespace AdatKarbantarto.View
     /// </summary>
     public partial class FelhasznaloView : UserControl
     {
-
-      
-
-
         public FelhasznaloView()
         {
             InitializeComponent();
@@ -40,7 +36,7 @@ namespace AdatKarbantarto.View
             try
             {
                 BackendApiHelper apiHelper = new BackendApiHelper();
-                List<Felhasznalo> users = await apiHelper.GetFelhasznalokAsync("/Felhasznalok");
+                List<Felhasznalo> users = await apiHelper.GetFelhasznalokAsync();
                 dtg_Adatok.ItemsSource = users;
             }
             catch (Exception ex)

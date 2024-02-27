@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AdatKarbantarto.Helpers;
+using AdatKarbantarto.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,21 @@ namespace AdatKarbantarto.View
         public HozzaszolasView()
         {
             InitializeComponent();
+            GetComments();
         }
+        public async void GetComments()
+        {
+            try
+            {
+                BackendApiHelper apiHelper = new BackendApiHelper();
+                List<Hozzaszolas> comments = await apiHelper.GetHozzaszolasokAsync();
+                dtg_Adatok.ItemsSource = comments;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        
     }
 }
