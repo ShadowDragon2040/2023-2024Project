@@ -52,6 +52,8 @@ namespace AdatKarbantarto.View
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            Felhasznalo kivalasztott = dtg_Adatok.SelectedItem as Felhasznalo;
+            int kivalasztottId = kivalasztott.FelhasznaloId;
             var confirmationDialog = new ConfirmationDialog("Are you sure you want to delete?");
             confirmationDialog.ShowDialog();
 
@@ -60,8 +62,9 @@ namespace AdatKarbantarto.View
             if (result)
             {
                 BackendApiHelper deleteHelper= new BackendApiHelper();
-                var response=await deleteHelper.DeleteFelhasznaloAsync("/Felhasznalok/", dtg_Adatok.SelectedIndex+1);
+                var response=await deleteHelper.DeleteFelhasznaloAsync(kivalasztottId);
                 MessageBox.Show(response.ToString());
+                GetFelhasznalok();
             }
             else
             {

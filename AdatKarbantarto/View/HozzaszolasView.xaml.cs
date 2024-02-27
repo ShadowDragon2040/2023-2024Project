@@ -1,5 +1,6 @@
 ﻿using AdatKarbantarto.Helpers;
 using AdatKarbantarto.Model;
+using AdatKarbantarto.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,28 @@ namespace AdatKarbantarto.View
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        
+
+        private async void DeleteComment_Click(object sender, RoutedEventArgs e)
+        {
+            Hozzaszolas kivalasztott=dtg_Adatok.SelectedItem as Hozzaszolas;
+            int kivalasztottId = kivalasztott.hozzaszolasId;
+            var confirmationDialog = new ConfirmationDialog("Are you sure you want to delete?");
+            confirmationDialog.ShowDialog();
+
+            bool result = await Task.Run(() => confirmationDialog.Result);
+
+            if (result)
+            {
+                BackendApiHelper deleteHelper = new BackendApiHelper();
+                var response = await deleteHelper.DeleteHozzaszolasAsync(kivalasztottId);
+                MessageBox.Show(response.ToString());
+                GetComments();
+            }
+            else
+            {
+            }
+        }
+
+
     }
 }

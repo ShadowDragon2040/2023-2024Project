@@ -67,9 +67,9 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
-        public async Task<bool> DeleteFelhasznaloAsync(string endpoint, int id)
+        public async Task<bool> DeleteFelhasznaloAsync( int id)
         {
-            using (HttpResponseMessage response = await _httpClient.DeleteAsync($"{endpoint}/{id}"))
+            using (HttpResponseMessage response = await _httpClient.DeleteAsync("/Felhasznalo/" + id))
             {
                 if (response.IsSuccessStatusCode)
                 {
@@ -82,6 +82,31 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
+
+        public async Task<bool> DeleteHozzaszolasAsync(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.DeleteAsync("/Hozzaszolas/" + id);
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show(responseBody);
+                    throw new Exception($"Failed to delete data from API. Status code: {response.StatusCode}. Response: {responseBody}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+
 
     }
 }
