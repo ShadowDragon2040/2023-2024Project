@@ -19,7 +19,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button>
+                            <Button Background="Red">
                                 <Image Source="Images/trash.jpg" Width="20" Height="20"/>
                             </Button>
                         </DataTemplate>

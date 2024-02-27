@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AdatKarbantarto.Helpers;
+using AdatKarbantarto.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,20 @@ namespace AdatKarbantarto.View
         public TermekView()
         {
             InitializeComponent();
+            GetProducts();
+        }
+        public async void GetProducts()
+        {
+            try
+            {
+                BackendApiHelper apiHelper = new BackendApiHelper();
+                List<Termek> products = await apiHelper.GetTermekekAsync();
+                dtg_Adatok.ItemsSource = products;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

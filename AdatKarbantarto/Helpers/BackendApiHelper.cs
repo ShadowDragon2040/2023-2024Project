@@ -52,6 +52,21 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
+        public async Task<List<Termek>> GetTermekekAsync()
+        {
+            using (HttpResponseMessage response = await _httpClient.GetAsync("/Termekek"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<Termek>>(content);
+                }
+                else
+                {
+                    throw new Exception($"Failed to fetch data from API. Status code: {response.StatusCode}");
+                }
+            }
+        }
         public async Task<bool> DeleteFelhasznaloAsync(string endpoint, int id)
         {
             using (HttpResponseMessage response = await _httpClient.DeleteAsync($"{endpoint}/{id}"))
