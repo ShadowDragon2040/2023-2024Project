@@ -1,12 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "M34PiCfEP1L3D6fKan5UJS/iteJg3a2hpMqSpIvlUZ/AK63XlX5wqOCOZLFgavm2O6dT6YNM4Ny5B2KI1mZMzA==",
+  "dgSpecHash": "m5E+MTQGiYHhQetAQZfK3ljYjkSPl6lqVE6wRkfuXdygrbSSgVoiGvP95z031wHNpX0+8o3GkSebLIkoXk6/RA==",
   "success": true,
   "projectFilePath": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\AdatKarbantarto\\AdatKarbantarto.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\pbálint\\.nuget\\packages\\material.icons\\2.1.0\\material.icons.2.1.0.nupkg.sha512",
+    "C:\\Users\\pbálint\\.nuget\\packages\\material.icons.wpf\\2.1.0\\material.icons.wpf.2.1.0.nupkg.sha512",
     "C:\\Users\\pbálint\\.nuget\\packages\\materialdesigncolors\\1.2.7\\materialdesigncolors.1.2.7.nupkg.sha512",
     "C:\\Users\\pbálint\\.nuget\\packages\\materialdesignextensions\\3.3.0\\materialdesignextensions.3.3.0.nupkg.sha512",
-    "C:\\Users\\pbálint\\.nuget\\packages\\materialdesignthemes\\3.2.0\\materialdesignthemes.3.2.0.nupkg.sha512"
+    "C:\\Users\\pbálint\\.nuget\\packages\\materialdesignthemes\\3.2.0\\materialdesignthemes.3.2.0.nupkg.sha512",
+    "C:\\Users\\pbálint\\.nuget\\packages\\microsoft.aspnet.webapi.client\\6.0.0\\microsoft.aspnet.webapi.client.6.0.0.nupkg.sha512",
+    "C:\\Users\\pbálint\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\pbálint\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
+    "C:\\Users\\pbálint\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\pbálint\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
   ],
   "logs": []
 }
