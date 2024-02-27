@@ -45,9 +45,17 @@
         "net7.0-windows7.0": {
           "targetAlias": "net7.0-windows",
           "dependencies": {
+            "Material.Icons.WPF": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "MaterialDesignExtensions": {
               "target": "Package",
               "version": "[3.3.0, )"
+            },
+            "Microsoft.AspNet.WebApi.Client": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             }
           },
           "imports": [

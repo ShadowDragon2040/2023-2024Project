@@ -3,46 +3,130 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:AdatKarbantarto.ViewModel"
+        xmlns:Menu="clr-namespace:AdatKarbantarto.Utilities"
         xmlns:local="clr-namespace:AdatKarbantarto"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="600" Width="800"
         ResizeMode="NoResize"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
         >
+    <Window.DataContext>
+        <vm:NavigationVM />
+    </Window.DataContext>
+
     <Grid>
-        <!-- Define Rows -->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100px" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
-        <!-- Define Columns -->
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <!--// Window Border //-->
 
-        <!-- Panel 1 -->
-        <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
-            <!-- Content for Panel 1 -->
-            <Image Source="Images/logo1.png" Stretch="UniformToFill" />
-        </Border>
+        <Border Background="#212529"
+                CornerRadius="10" />
 
-        <!-- Panel 2 -->
-        <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
-            <!-- Content for Panel 2 -->
-            <TextBlock Text="Panel 2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Border>
+        <Grid>
 
-        <!-- Panel 3 -->
-        <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
-            <!-- Content for Panel 3 -->
-            <TextBlock Text="Panel 3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Border>
+            <!--// Base Grid //-->
 
-        <!-- Panel 4 -->
-        <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
-            <!-- Content for Panel 4 -->
-            <TextBlock Text="Panel 4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Border>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="228" />
+                <ColumnDefinition Width="622" />
+            </Grid.ColumnDefinitions>
+
+            <!--// Navigation Panel //-->
+
+            <Grid HorizontalAlignment="Left"
+                  Width="228">
+
+                <Border Background="Green"
+                        CornerRadius="20,0,0,20" />
+
+                <StackPanel Height="400"
+                            Width="228">
+
+                    <!--// Home //-->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding HomeCommand}"
+                              IsChecked="True">
+
+                        <Grid>
+
+                            <Image Source="Images/home.png"
+                                   Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Home"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
+
+                    <!--// Customer //-->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding FelhasznaloCommand}">
+
+                        <Grid>
+
+                            <Image Source="Images/user.png"
+                                   Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Customer"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
+
+                    <!--// Products //-->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding TermekCommand}">
+
+                        <Grid>
+
+                            <Image Source="Images/products.png"
+                                   Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Products"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
+
+                    <!--// Comments //-->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding HozzaszolasCommand}">
+
+                        <Grid>
+
+                            <Image Source="Images/comments.png"
+                                   Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Comments"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
+
+
+
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Column="1">
+
+                <ContentControl x:Name="Pages"
+                                Content="{Binding CurrentView}" />
+
+            </Grid>
+
+        </Grid>
+
+        
     </Grid>
 </Window>
