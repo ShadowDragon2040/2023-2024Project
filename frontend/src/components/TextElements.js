@@ -288,11 +288,37 @@ export const NavBtn=styled.nav`
     align-items: center;
     @media screen and (max-width: 768px) {
         display:none;
-
-        
     }
-
 `
+
+export const NavBtn2=styled.nav`
+    margin-left: 10px;
+    margin-right: 10px;
+    display:inline-flex;
+    align-items: center;
+    vertical-align: middle;
+`
+
+export const LogoutButton=styled.button`
+    border-radius:50px;
+    background:#01bf71;
+    white-space:nowrap;
+    padding: 10px 22px;
+    color:#010606;
+    justify-self:end;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration:none;
+    &:hover{
+        transition: all 0.2s ease-in-out;
+        background:black;
+        color:white;
+    }
+`
+
 export const NavBtnLink=styled(LinkR)`
     border-radius:50px;
     background:#01bf71;
@@ -306,14 +332,11 @@ export const NavBtnLink=styled(LinkR)`
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     text-decoration:none;
-    
     &:hover{
         transition: all 0.2s ease-in-out;
         background:black;
         color:white;
     }
-
-
 `
 export const MobileIcon=styled.div`
     display: none;
@@ -363,6 +386,7 @@ export const NavLogo=styled(LinkR)`
 `
 export const Nav=styled.nav`
     background: ${({scrollNav}) => (scrollNav ? '#000' : 'transparent')};
+    background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg,rgba(0,0,0,0.2) 0%,transparent 100%);
     height:80px;
     margin-top:-80px;
     display:flex;
