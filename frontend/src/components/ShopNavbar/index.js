@@ -33,6 +33,24 @@ function ShopNavbar(props) {
   const toggleHome = () => {
     scroll.scrollToTop();
   };
+  
+  const [cart, setCart] = useState([]);
+  const handleAddToCart = (props) => {
+    const newItem = { 
+        id: props.TermekId, 
+        name: props.TermekNev, 
+        price: props.Ar, 
+        quantity: props.Menyiseg, 
+        color: props.selectedColor 
+    };
+    setCart([...cart, newItem]);
+};
+
+const handleRemoveFromCart = (itemId) => {
+    const updatedCart = cart.filter(item => item.id !== itemId);
+    setCart(updatedCart);
+};
+
 
   return (
     <>
@@ -54,7 +72,7 @@ function ShopNavbar(props) {
                 </NavBtnLink>
               </NavBtn>
               <NavBtn>
-                <NavBtnLink to='CartPage'>Cart</NavBtnLink>
+                <NavBtnLink to='CartPage' onClick={handleAddToCart} ><span class="glyphicon">&#xe116;</span>Cart</NavBtnLink>
               </NavBtn>
               <NavBtn>
               <NavBtnLink to='LogoutPage'>Logout</NavBtnLink>

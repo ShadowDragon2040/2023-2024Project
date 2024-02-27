@@ -10,14 +10,15 @@ import { Rating } from 'react-simple-star-rating';
 import Footer from '../components/Footer';
 import placeholder from "../images/ppp.jpg"
 import ColorPicker from './ColorPicker';
-
+import Button from 'react-bootstrap/Button';
 
 function SingleProductDisplay() {
     const { ProductId } = useParams();
     const [rating, setRating] = useState(0);
     const [commentString, setCommentString] = useState("");
+    const [selectedColor, setSelectedColor] = useState("");
+    const [quantity, setQuantity] = useState(1); 
     const [cart, setCart] = useState([]);
-
 
     const handleRating = (rate) => {
         setRating(rate);
@@ -27,13 +28,37 @@ function SingleProductDisplay() {
         try {
             console.log(commentString);
             console.log(rating);
-
             setCommentString("");
         } catch (error) {
             console.log(error);
         }
     };
-   
+
+    const handleColorChange = (color) => {
+        setSelectedColor(color);
+    };
+
+    const handleQuantityChange = (e) => {
+        setQuantity(parseInt(e.target.value));
+    };
+
+    const handleAddToCart = (props) => {
+        const newItem = { 
+            id: ProductId, 
+            name: props.name, 
+            price: props.price, 
+            quantity: props.quantity, 
+            color: props.selectedColor 
+        };
+        setCart([...cart, newItem]);
+    };
+
+    const handleRemoveFromCart = (itemId) => {
+        const updatedCart = cart.filter(item => item.id !== itemId);
+        setCart(updatedCart);
+    };
+
+
     const [singleProductData, setSingleProductData] = useState({});
     const [transformedComments, setTransformedComments] = useState(null);
     const url = "http://localhost:5219/Termekek/EgyTermek/";
@@ -58,13 +83,13 @@ function SingleProductDisplay() {
 
     const handleSubmitComment = (data) => {
         console.log("Submitted comment data:", data);
-        axios.post("http://localhost:5219/Hozzaszolas",{
+        axios.post("http://localhost:5219/Hozzaszolas", {
             "hozzaszolasId": 0,
             "felhasznaloId": 1,
             "termekId": ProductId,
             "leiras": data.text,
             "ertekeles": rating
-          })
+        })
     }
 
     return (
@@ -85,14 +110,16 @@ function SingleProductDisplay() {
                             moveType="drag"
                             zoomScale={3}
                             zoomPreload={true}
-                            />
+                        />
                         <div className='card-body rounded w-100 p-4'>
                             <h3>{singleProductData.termekNev}</h3>
                             <p>{singleProductData.termekLeiras}</p>
                             {singleProductData.menyiseg && <p>Available: {singleProductData.menyiseg} pieces</p>}
                             {singleProductData.ar && <h3>{singleProductData.ar} -Ft</h3>}
-                            <ColorPicker />
-                            
+                            <ColorPicker onColorChange={handleColorChange} />
+                            <input type="number" id="quantity" name="quantity" min="1" max="5" value={quantity} onChange={handleQuantityChange} />
+                            <Button onClick={handleAddToCart}>Kosárba</Button>
+            
                         </div>
                     </div>
 
@@ -100,7 +127,7 @@ function SingleProductDisplay() {
                         <div className='rounded mx-auto d-flex flex-row'>
                             <div className='wrapper card-body bg-dark rounded mt-3 w-100 p-2'>
                                 <Rating
-                                className='m-2'
+                                    className='m-2'
                                     onClick={handleRating}
                                 />
                                 <CommentSection
@@ -108,16 +135,12 @@ function SingleProductDisplay() {
                                         loginLink: 'http://localhost:3000/Login',
                                         signupLink: 'http://localhost:3000/SignUp',
                                     }}
-
-                                      //A currentUser bejelentkezett felhasználó esetén enged kommentelni
-                                      //Bejelentkezés után kell beállítani alapesetben null
-                                     currentUser={{
+                                    currentUser={{
                                         currentUserId: 'YourUserId',
                                         currentUserFullName: 'YourUserName',
                                         currentUserImg: 'YourUserImageURL'
-                                        }}
+                                    }}
                                     overlayStyle={{ backgroundColor: '#fff', color: 'black' }}
-                                    //currentUser={null}
                                     submitBtnStyle={{ border: '1px solid black', backgroundColor: 'black' }}
                                     commentData={transformedComments}
                                     onSubmitAction={handleSubmitComment}
