@@ -39,12 +39,13 @@ namespace AdatKarbantarto.View
             set { items = value; }
         }
 
+        List<Termek> products;
         public async void GetTermekek()
         {
             try
             {
                 BackendApiHelper apiHelper = new BackendApiHelper();
-                List<Termek> products = await apiHelper.GetTermekekAsync();
+                products = await apiHelper.GetTermekekAsync();
                 Items.Clear();
                 foreach (var item in products)
                 {
@@ -93,6 +94,12 @@ namespace AdatKarbantarto.View
             else
             {
             }
+        }
+
+        private void txb_search_KeyUp(object sender, KeyEventArgs e)
+        {
+            var filtered = products.Where(termek => termek.termekNev.ToLower().Contains(txb_search.Text.ToLower()));
+            dtg_Adatok.ItemsSource = filtered;
         }
     }
 }

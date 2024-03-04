@@ -41,12 +41,13 @@ namespace AdatKarbantarto.View
             set { items = value; }
         }
 
+        List<Felhasznalo> users;
         private async void GetFelhasznalok()
         {
             try
             {
                 BackendApiHelper apiHelper = new BackendApiHelper();
-                List<Felhasznalo> users = await apiHelper.GetFelhasznalokAsync();
+                users= await apiHelper.GetFelhasznalokAsync();
                 Items.Clear();
                 foreach (var item in users)
                 {
@@ -97,6 +98,11 @@ namespace AdatKarbantarto.View
             MessageBox.Show(response.ToString());
             GetFelhasznalok();
             btn_add.IsEnabled = true;
+        }
+        private void txb_search_KeyUp(object sender, KeyEventArgs e)
+        {
+            var filtered = users.Where(user => user.LoginNev.ToLower().Contains(txb_search.Text.ToLower()));
+            dtg_Adatok.ItemsSource = filtered;
         }
     }
 }

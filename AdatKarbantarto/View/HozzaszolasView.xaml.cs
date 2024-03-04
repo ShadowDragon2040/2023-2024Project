@@ -29,7 +29,7 @@ namespace AdatKarbantarto.View
         {
             InitializeComponent();
             GetComments();
-            DataContext = this; 
+            DataContext = this;
         }
 
         private ObservableCollection<Hozzaszolas> items;
@@ -40,16 +40,17 @@ namespace AdatKarbantarto.View
             set { items = value; }
         }
 
+        List<Hozzaszolas> comments;
         private async void GetComments()
         {
             try
             {
                 BackendApiHelper apiHelper = new BackendApiHelper();
-                List<Hozzaszolas> comments = await apiHelper.GetHozzaszolasokAsync();
+                comments = await apiHelper.GetHozzaszolasokAsync();
                 Items.Clear();
                 foreach (var comment in comments)
                 {
-                    Items.Add(comment); 
+                    Items.Add(comment);
                 }
             }
             catch (Exception ex)
@@ -92,11 +93,16 @@ namespace AdatKarbantarto.View
 
         private async void btn_save_Click(object sender, RoutedEventArgs e)
         {
-            BackendApiHelper postHelper= new BackendApiHelper();
+            BackendApiHelper postHelper = new BackendApiHelper();
             var response = await postHelper.PostHozzaszolasAsync(ujhozzaszolas);
             MessageBox.Show(response.ToString());
             GetComments();
             btn_add.IsEnabled = true;
+        }
+        private void txb_search_KeyUp(object sender, KeyEventArgs e)
+        {
+            var filtered = comments.Where(comment => comment.leiras.ToLower().Contains(txb_search.Text.ToLower()));
+            dtg_Adatok.ItemsSource = filtered;
         }
     }
 }

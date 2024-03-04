@@ -8,18 +8,19 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <DataGrid x:Name="dtg_Adatok" CanUserAddRows="False" ItemsSource="{Binding Items}" Margin="20,80,20,20" AutoGenerateColumns="True">
-        <DataGrid.Columns>
-            <DataGridTemplateColumn>
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <Button Click="DeleteButton_Click">
-                            <Image Source="Images/trash.jpg" Width="20" Height="20"/>
-                        </Button>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-        </DataGrid.Columns>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="DeleteButton_Click">
+                                <Image Source="Images/trash.jpg" Width="20" Height="20"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
         </DataGrid>
+        <TextBox x:Name="txb_search" KeyUp="txb_search_KeyUp" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" Background="Green" Margin="75,30,0,0" ></TextBox>
         <Button Content="Add Row" x:Name="btn_add" Click="AddRow_Click" HorizontalAlignment="Center" Background="Green" Command="{Binding AddItemCommand}" VerticalAlignment="Top" Margin="0,30,10,10"/>
         <Button Content="Save Changes" x:Name="btn_save" Click="btn_save_Click" Background="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="250,30,10,10"/>
 

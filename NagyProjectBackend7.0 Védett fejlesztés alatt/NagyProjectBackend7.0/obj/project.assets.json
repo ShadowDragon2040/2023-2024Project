@@ -559,7 +559,7 @@
           }
         }
       },
-      "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.18.1": {
+      "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.19.6": {
         "type": "package",
         "build": {
           "build/Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props": {},
@@ -2210,10 +2210,10 @@
         "microsoft.openapi.nuspec"
       ]
     },
-    "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.18.1": {
-      "sha512": "RtNQEQQ/bgaxzrsZEkPB+/DFaUgNiq8GtZz/R4lt+mKXPcEvEuawlbl0PB1s7ND9kvkUVZtMphPxE9Ma1VGiFg==",
+    "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.19.6": {
+      "sha512": "7GOQdMzQcH7o/bPFL/I2kQEgMnq2pYZ+exhGb9nNqs624K9w2jB2zieh4sOH9+a01i/G9iTWfeUI3IGMF7SKNg==",
       "type": "package",
-      "path": "microsoft.visualstudio.azure.containers.tools.targets/1.18.1",
+      "path": "microsoft.visualstudio.azure.containers.tools.targets/1.19.6",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -2242,7 +2242,7 @@
         "build/ToolsTarget.props",
         "build/ToolsTarget.targets",
         "icon.png",
-        "microsoft.visualstudio.azure.containers.tools.targets.1.18.1.nupkg.sha512",
+        "microsoft.visualstudio.azure.containers.tools.targets.1.19.6.nupkg.sha512",
         "microsoft.visualstudio.azure.containers.tools.targets.nuspec",
         "tools/Microsoft.VisualStudio.Containers.Tools.Common.dll",
         "tools/Microsoft.VisualStudio.Containers.Tools.Shared.dll",
@@ -3624,7 +3624,7 @@
       "Microsoft.EntityFrameworkCore >= 7.0.15",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.15",
       "Microsoft.IdentityModel.Tokens >= 7.2.0",
-      "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.18.1",
+      "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.19.6",
       "MySql.Data >= 8.2.0",
       "MySql.EntityFrameworkCore >= 7.0.10",
       "Portable.BouncyCastle >= 1.9.0",
@@ -3634,39 +3634,23 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
-    "C:\\Users\\sjuditanna\\.nuget\\packages\\": {},
-=======
     "C:\\Users\\pbálint\\.nuget\\packages\\": {},
->>>>>>> 2f71c9256eea78cc3aabd1e634b4451ee2adf8a9
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "C:\\Users\\sjuditanna\\Documents\\GitHub\\2023-2024Project\\NagyProjectBackend7.0 Védett fejlesztés alatt\\NagyProjectBackend7.0\\NagyProjectBackend7.0.csproj",
-      "projectName": "NagyProjectBackend7.0",
-      "projectPath": "C:\\Users\\sjuditanna\\Documents\\GitHub\\2023-2024Project\\NagyProjectBackend7.0 Védett fejlesztés alatt\\NagyProjectBackend7.0\\NagyProjectBackend7.0.csproj",
-      "packagesPath": "C:\\Users\\sjuditanna\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sjuditanna\\Documents\\GitHub\\2023-2024Project\\NagyProjectBackend7.0 Védett fejlesztés alatt\\NagyProjectBackend7.0\\obj\\",
-=======
       "projectUniqueName": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\NagyProjectBackend7.0 Védett fejlesztés alatt\\NagyProjectBackend7.0\\NagyProjectBackend7.0.csproj",
       "projectName": "NagyProjectBackend7.0",
       "projectPath": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\NagyProjectBackend7.0 Védett fejlesztés alatt\\NagyProjectBackend7.0\\NagyProjectBackend7.0.csproj",
       "packagesPath": "C:\\Users\\pbálint\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\NagyProjectBackend7.0 Védett fejlesztés alatt\\NagyProjectBackend7.0\\obj\\",
->>>>>>> 2f71c9256eea78cc3aabd1e634b4451ee2adf8a9
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-<<<<<<< HEAD
-        "C:\\Users\\sjuditanna\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
         "C:\\Users\\pbálint\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> 2f71c9256eea78cc3aabd1e634b4451ee2adf8a9
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3722,7 +3706,7 @@
           },
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
             "target": "Package",
-            "version": "[1.18.1, )"
+            "version": "[1.19.6, )"
           },
           "MySql.Data": {
             "target": "Package",

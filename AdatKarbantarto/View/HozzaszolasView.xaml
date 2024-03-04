@@ -21,7 +21,8 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-            <Button Content="Add Row" x:Name="btn_add" Click="AddRow_Click" HorizontalAlignment="Center" Background="Green" Command="{Binding AddItemCommand}" VerticalAlignment="Top" Margin="0,30,10,10"/>
+        <TextBox x:Name="txb_search" KeyUp="txb_search_KeyUp" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" Background="Green" Margin="75,30,0,0" ></TextBox>
+        <Button Content="Add Row" x:Name="btn_add" Click="AddRow_Click" HorizontalAlignment="Center" Background="Green" Command="{Binding AddItemCommand}" VerticalAlignment="Top" Margin="0,30,10,10"/>
         <Button Content="Save Changes" x:Name="btn_save" Click="btn_save_Click" Background="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="250,30,10,10"/>
     </Grid>
 </UserControl>
