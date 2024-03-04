@@ -137,6 +137,35 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
+
+        public async Task<bool> PostTermekAsync(Termek ujtermek)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/Termek", ujtermek);
+                response.EnsureSuccessStatusCode();
+                return true;
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception("Failed to post Felhasznalo", ex);
+            }
+        }
+        public async Task<bool> DeleteTermekAsync(int id)
+        {
+            using (HttpResponseMessage response = await _httpClient.DeleteAsync("/Termek/" + id))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show(response.ToString());
+                    throw new Exception($"Failed to delete data from API. Status code: {response.StatusCode}");
+                }
+            }
+        }
         #endregion
 
 
