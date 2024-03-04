@@ -35,7 +35,6 @@ function NewItemsComponent (props) {
       </CarouselContainer>
 
       <ItemContainer>
-        <div>
           <div className="row">
             <div className="col-md-6">
               <h2>All Products:</h2>
@@ -48,7 +47,6 @@ function NewItemsComponent (props) {
                 ))
               }
           </div>
-        </div>
       </ItemContainer>
     </>
   )

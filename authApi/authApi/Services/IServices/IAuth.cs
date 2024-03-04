@@ -5,7 +5,7 @@ namespace authApi.Services.IServices
 {
     public interface IAuth
     {
-        Task<string> Register(RegisterRequestDto registrationRequestDto);
+        Task<string> Register(RegisterRequestDto registerRequestDto);
 
         Task<bool> AssignRole(string email, string roleName);
 

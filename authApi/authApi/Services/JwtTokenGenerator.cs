@@ -27,7 +27,6 @@ namespace authApi.Services
             {
                 new Claim(JwtRegisteredClaimNames.Sub,applicationUser.Id),
                 new Claim(JwtRegisteredClaimNames.Name,applicationUser.UserName.ToString()),
-                new Claim(JwtRegisteredClaimNames.Name,applicationUser.FullName.ToString()),
             };
 
             //szerepkör hozzáadása a tokenhez

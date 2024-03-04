@@ -16,8 +16,6 @@ import {
   NavBtnLink
  } from '../TextElements';
 
-
-
 const NavbarA = ({toggle}) => {
   const [scrollNav, setScrollNav]= useState(false);
 
@@ -34,18 +32,12 @@ const NavbarA = ({toggle}) => {
   useEffect(()=>{
     window.addEventListener('scroll',changeNav);
   },[])
-  
-
 
   const toggleHome=()=>{
     scroll.scrollToTop();
   }
 
-
-
   return (
-    <>
-    
     <IconContext.Provider value={{color:'#fff'}}>
         <Nav scrollNav={scrollNav}>
           <NavbarContainer>
@@ -96,8 +88,7 @@ const NavbarA = ({toggle}) => {
             </NavBtn>
           </NavbarContainer>
         </Nav>
-        </IconContext.Provider>
-    </>
+    </IconContext.Provider>
   );
 };
 
