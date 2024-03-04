@@ -15,11 +15,13 @@ import "bootstrap/dist/css/bootstrap.css"
 import CategoryPage from './pages/CategoryPage';
 import NewsPage from './pages/NewsPage';
 import React, { useState } from 'react';
+import Cart from './pages/CartPage';
 
 function App() {
   const [bejelenkezve, setBejelenkezve] = useState(true);
   const [role, setRole] = useState('PUBLIC');
-
+  
+  
   return (
     <Router>
       <Switch>
@@ -36,6 +38,7 @@ function App() {
         <Route path="/ShopPage/:ProductId" component={SingleProductDisplay} exact />
         <Route path="/ShopPage/Categories/:CategoryId" component={CategoryPage} exact />
         <Route path="/News" component={NewsPage} exact />
+        <Route path="/Cart"component={Cart} exact />
       </Switch>
     </Router>
   );
