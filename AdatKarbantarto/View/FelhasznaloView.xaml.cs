@@ -3,6 +3,7 @@ using AdatKarbantarto.Model;
 using AdatKarbantarto.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -28,16 +29,29 @@ namespace AdatKarbantarto.View
         {
             InitializeComponent();
             GetFelhasznalok();
+            DataContext = this;
 
         }
 
-        public async void GetFelhasznalok()
+        private ObservableCollection<Felhasznalo> items;
+
+        public ObservableCollection<Felhasznalo> Items
+        {
+            get { return items ?? (items = new ObservableCollection<Felhasznalo>()); }
+            set { items = value; }
+        }
+
+        private async void GetFelhasznalok()
         {
             try
             {
                 BackendApiHelper apiHelper = new BackendApiHelper();
                 List<Felhasznalo> users = await apiHelper.GetFelhasznalokAsync();
-                dtg_Adatok.ItemsSource = users;
+                Items.Clear();
+                foreach (var item in users)
+                {
+                    Items.Add(item);
+                }
             }
             catch (Exception ex)
             {
@@ -45,10 +59,7 @@ namespace AdatKarbantarto.View
             }
         }
 
-        private async void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-           
-        }
+       
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
@@ -69,6 +80,23 @@ namespace AdatKarbantarto.View
             else
             {
             }
+        }
+        public Felhasznalo ujfelhasznalo;
+        private void AddRow_Click(object sender, RoutedEventArgs e)
+        {
+            ujfelhasznalo = new Felhasznalo();
+            Items.Add(ujfelhasznalo);
+            btn_add.IsEnabled = false;
+
+        }
+
+        private async void btn_save_Click(object sender, RoutedEventArgs e)
+        {
+            BackendApiHelper postHelper = new BackendApiHelper();
+            var response = await postHelper.PostFelhasznaloAsync(ujfelhasznalo);
+            MessageBox.Show(response.ToString());
+            GetFelhasznalok();
+            btn_add.IsEnabled = true;
         }
     }
 }

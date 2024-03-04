@@ -22,6 +22,22 @@ namespace AdatKarbantarto.Helpers
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
+        #region Felhasznalok
+        public async Task<bool> DeleteFelhasznaloAsync(int id)
+        {
+            using (HttpResponseMessage response = await _httpClient.DeleteAsync("/Felhasznalo/" + id))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show(response.ToString());
+                    throw new Exception($"Failed to delete data from API. Status code: {response.StatusCode}");
+                }
+            }
+        }
         public async Task<List<Felhasznalo>> GetFelhasznalokAsync()
         {
             using (HttpResponseMessage response = await _httpClient.GetAsync("/Felhasznalok"))
@@ -37,6 +53,21 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
+        public async Task<bool> PostFelhasznaloAsync(Felhasznalo ujfelhasznalo)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/Felhasznalok", ujfelhasznalo);
+                response.EnsureSuccessStatusCode();
+                return true;
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception("Failed to post Felhasznalo", ex);
+            }
+        }
+        #endregion
+        #region Hozzaszolasok
         public async Task<List<Hozzaszolas>> GetHozzaszolasokAsync()
         {
             using (HttpResponseMessage response = await _httpClient.GetAsync("/Hozzaszolas"))
@@ -66,37 +97,6 @@ namespace AdatKarbantarto.Helpers
                 throw new Exception("Failed to post Hozzaszolas", ex);
             }
         }
-        public async Task<List<Termek>> GetTermekekAsync()
-        {
-            using (HttpResponseMessage response = await _httpClient.GetAsync("/Termekek"))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<Termek>>(content);
-                }
-                else
-                {
-                    throw new Exception($"Failed to fetch data from API. Status code: {response.StatusCode}");
-                }
-            }
-        }
-        public async Task<bool> DeleteFelhasznaloAsync( int id)
-        {
-            using (HttpResponseMessage response = await _httpClient.DeleteAsync("/Felhasznalo/" + id))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-                else
-                {
-                    MessageBox.Show(response.ToString());
-                    throw new Exception($"Failed to delete data from API. Status code: {response.StatusCode}");
-                }
-            }
-        }
-
         public async Task<bool> DeleteHozzaszolasAsync(int id)
         {
             try
@@ -120,6 +120,26 @@ namespace AdatKarbantarto.Helpers
                 return false;
             }
         }
+        #endregion
+        #region Termekek
+        public async Task<List<Termek>> GetTermekekAsync()
+        {
+            using (HttpResponseMessage response = await _httpClient.GetAsync("/Termekek"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<Termek>>(content);
+                }
+                else
+                {
+                    throw new Exception($"Failed to fetch data from API. Status code: {response.StatusCode}");
+                }
+            }
+        }
+        #endregion
+
+
 
 
     }

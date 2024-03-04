@@ -29,7 +29,7 @@ namespace AdatKarbantarto.View
         {
             InitializeComponent();
             GetComments();
-            DataContext = this; // Set DataContext to the current instance
+            DataContext = this; 
         }
 
         private ObservableCollection<Hozzaszolas> items;
@@ -37,7 +37,7 @@ namespace AdatKarbantarto.View
         public ObservableCollection<Hozzaszolas> Items
         {
             get { return items ?? (items = new ObservableCollection<Hozzaszolas>()); }
-            set { items = value; } // Add setter for binding
+            set { items = value; }
         }
 
         private async void GetComments()
@@ -46,10 +46,10 @@ namespace AdatKarbantarto.View
             {
                 BackendApiHelper apiHelper = new BackendApiHelper();
                 List<Hozzaszolas> comments = await apiHelper.GetHozzaszolasokAsync();
-                Items.Clear(); // Clear existing items
+                Items.Clear();
                 foreach (var comment in comments)
                 {
-                    Items.Add(comment); // Add retrieved comments
+                    Items.Add(comment); 
                 }
             }
             catch (Exception ex)
