@@ -413,7 +413,6 @@ export const HeroContainer=styled.div`
     position: relative;
     z-index: 1;
 
-
     :before{
         content: '';
         position: absolute;
@@ -428,18 +427,6 @@ export const HeroContainer=styled.div`
 `
 export const ShopPageContainer=styled.div`
     background: #378457;
-    z-index: 1;
-    :before{
-        content: '';
-        position: relative;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%,
-        rgba(0,0,0,0.6) 100%),
-        linear-gradient(180deg,rgba(0,0,0,0.2) 0%, transparent 100%);
-    }
 `
 
 export const HeroContent=styled.div`
@@ -638,20 +625,10 @@ export const SidebarContainer=styled.aside`
     top: ${({isOpen}) => (isOpen ? '0' : '-100%')};
 `
 export const ShopSidebarContainer=styled.aside`
-    width:20%;
     margin-top:80px;
-    float:left;
     height:100%;
-    z-index:5;
     left:0px;
     position:fixed;
-    padding:25px;
-    background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg,rgba(0,0,0,0.2) 0%,transparent 100%);
-    @media screen and (max-width:700px) {
-        width:30%;
-        padding:10px;
-        font-size:10px;
-    }
 `
 
 export const ProfileDisplayPageContainer=styled.aside`

@@ -8,6 +8,8 @@ import ShopSideBar from '../components/ShopSideBar';
 function ShopPage(props) {
   const [userData, setUserData] = useState(null);
 
+
+
   return (
     <>
       <ShopPageContainer>

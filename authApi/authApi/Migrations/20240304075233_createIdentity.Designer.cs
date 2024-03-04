@@ -11,8 +11,8 @@ using authApi.Datas;
 namespace authApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240123121354_MyProperties")]
-    partial class MyProperties
+    [Migration("20240304075233_createIdentity")]
+    partial class createIdentity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -158,9 +158,6 @@ namespace authApi.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
@@ -169,12 +166,11 @@ namespace authApi.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
+                    b.Property<int>("EmailCode")
+                        .HasColumnType("int");
+
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");

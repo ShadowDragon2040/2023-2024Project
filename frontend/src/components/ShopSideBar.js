@@ -5,70 +5,77 @@ import { ShopSidebarContainer } from './TextElements';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { BiCategory } from "react-icons/bi";
+import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 
-function ShopSideBar() {
+function ShopSideBar(props) {
   const [categoryList, setCategoryList] = useState([]);
-  
+  const [collapsed, setCollapsed] = useState(true);
+
     const url="http://localhost:5219/Termekek/Kategoriak";
     useEffect(() => {
       axios.get(url)
         .then(response => setCategoryList(response.data))
         .catch(error => console.error('Hiba a lekérdezés során:', error));
     }, []);
-    
+
+    const handleMouseEnter = () => {
+        setCollapsed(false);
+    };
+
+    const handleMouseLeave = () => {
+        setCollapsed(true);
+    };
+
   return (
-    <div>
       <ShopSidebarContainer>
-    
-        <NavLink to={'/'} className='nav-link'>
-          <h5 className='menupont' >
-            <FaHome /> Home
-          </h5>
-        </NavLink>
+        <Sidebar collapsed={collapsed} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
+          rootStyles={{
+              height : '100%',
+              backgroundColor: 'white',
+          }}>
+          <Menu menuItemStyles={{
+              button: {
+                color: '#01bf71',
+              }
+          }}>
 
-        <NavLink to={'/ShopPage/news'} className='nav-link'>
-          <h5 className='menupont'>
-            <FaNewspaper /> News
-          </h5>
-        </NavLink>
-        
-        <h5 className='menupont'>
-          <BiCategory/> Categories
-        </h5>
-        <ul>
-          {categoryList.map((category) => (
-            <div key={category.kategoriaId} className='form-check form-switch menupont'>
-              <NavLink to={'/ShopPage/Categories/'+category.kategoriaNev} className='nav-link' style={{margin:"0px"}}>
-                <li>
-                  <ul>
-                    {category.kategoriaNev}
-                  </ul>
-                </li>
-              </NavLink>
-            </div>
-          ))}
-        </ul>
+          <NavLink to={'/'} className='nav-link'>
+            <MenuItem icon={<FaHome /> }> Home</MenuItem>
+          </NavLink>
 
-        <NavLink to={'/ShopPage/paints'} className='nav-link'>
-          <h5 className='menupont'>
-            <FaPaintBrush /> Paints
-          </h5>
-        </NavLink>
+          <NavLink to={'/ShopPage/news'} className='nav-link'>
+            <MenuItem icon={<FaNewspaper />}> News</MenuItem>
+          </NavLink>
 
-        <NavLink to={"/ShopPage/gift"} className='nav-link'>
-          <h5 className='menupont'>
-            <IoGiftSharp /> Gift
-          </h5>
-        </NavLink>
+          <SubMenu icon={<BiCategory />} label="Categories">
+            <ul>
+              {categoryList.map((category) => (
+                <div key={category.kategoriaId} className='form-check form-switch menupont'>
+                  <NavLink to={'/ShopPage/Categories/'+category.kategoriaNev} className='nav-link' style={{margin:"0px"}}>
+                    <MenuItem>
+                          {category.kategoriaNev}
+                    </MenuItem>
+                  </NavLink>
+                </div>
+              ))}
+            </ul>
+          </SubMenu>
+          
+          <NavLink to={'/ShopPage/paints'} className='nav-link'>
+            <MenuItem icon={<FaPaintBrush />}> Paints</MenuItem>
+          </NavLink>
 
-        <NavLink to={'/ShopPage/lab'} className='nav-link'>
-          <h5 className='menupont'>
-            <FaGitlab/> Lab
-          </h5>
-        </NavLink>
+          <NavLink to={"/ShopPage/gift"} className='nav-link'>
+            <MenuItem icon={<IoGiftSharp />}> Gift</MenuItem>
+          </NavLink>
 
+          <NavLink to={'/ShopPage/lab'} className='nav-link'>
+            <MenuItem icon={<FaGitlab /> }> Lab</MenuItem>
+          </NavLink>
+
+          </Menu>
+        </Sidebar>
       </ShopSidebarContainer>
-    </div>
   );
 }
 

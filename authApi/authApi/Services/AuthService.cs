@@ -47,8 +47,7 @@ namespace authApi.Services
             UserDto userDto = new()
             {
                 Id = user.Id,
-                UserName = user.UserName,
-                FullName = user.FullName
+                UserName = user.UserName
             };
             LoginResponseDto loginResponseDto = new()
             {
@@ -89,40 +88,87 @@ namespace authApi.Services
             }
         }
 
-        public async Task<string> Register(RegisterRequestDto registrationRequestDto)
+        /*
+        public async Task<string> Register(RegisterRequestDto registerRequestDto)
         {
             ApplicationUser user = new()
             {
-                UserName = registrationRequestDto.UserName,
-                NormalizedUserName = registrationRequestDto.UserName.ToUpper(),
-                Email = registrationRequestDto.Email,
+                UserName = registerRequestDto.UserName,
+                NormalizedUserName = registerRequestDto.UserName.ToUpper(),
+
+                Email = registerRequestDto.Email,
+
             };
             try
             {
-                var result = await userManager.CreateAsync(user, registrationRequestDto.Password);
-
-                Random rand = new Random();
-                int randomCode = rand.Next(1000, 10000);
-                SaveVerificationCodeToDatabase(registrationRequestDto.Email, randomCode);
-                EmailService.SendVerificationMail(registrationRequestDto.Email, randomCode, _configuration);
+                var result = await userManager.CreateAsync(user, registerRequestDto.Password);
 
                 if (result.Succeeded)
                 {
-                    var userToReturn = dataBase.AppUsers.First(user => user.UserName == registrationRequestDto.UserName);
+                    var userToReturn = dataBase.AppUsers.
+                        First(user => user.UserName == registerRequestDto.UserName);
+
 
                     UserDto userDto = new()
                     {
                         Id = userToReturn.Id,
                         Email = userToReturn.Email,
                         UserName = userToReturn.UserName,
-                        FullName = userToReturn.FullName,
-                        Age = userToReturn.Age,
+
+
                     };
-                    return userDto.FullName;
+
+                    return "";
                 }
                 else
                 {
                     return result.Errors.FirstOrDefault().Description;
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            return "Error Encountered!";
+        }*/
+        
+        public async Task<string> Register(RegisterRequestDto registerRequestDto)
+        {
+            ApplicationUser user = new()
+            {
+                UserName =registerRequestDto.UserName,
+                NormalizedUserName =registerRequestDto.UserName.ToUpper(),
+                Email =registerRequestDto.Email
+            };
+            try
+            {
+                var result = await userManager.CreateAsync(user,registerRequestDto.Password);
+
+                
+                Random rand = new Random();
+                int randomCode = rand.Next(1000, 10000);
+                SaveVerificationCodeToDatabase(registerRequestDto.Email, randomCode);
+                EmailService.SendVerificationMail(registerRequestDto.Email, randomCode, _configuration);
+                
+
+                if (result.Succeeded)
+                {
+                    var userToReturn = dataBase.AppUsers.First(user => user.UserName ==registerRequestDto.UserName);
+
+                    
+                    UserDto userDto = new()
+                    {
+                        Id = userToReturn.Id,
+                        Email = userToReturn.Email,
+                        UserName = userToReturn.UserName
+                    };
+                    
+                    return "";
+                }
+                else
+                {
+                    return "hiba";
                 }
             }
             catch (Exception ex)
@@ -130,6 +176,7 @@ namespace authApi.Services
                 return ex.Message;
             }
         }
+        
 
         /*
         public async Task<IActionResult> VerifyEmailCode(VerificationRequestDto model)
