@@ -45,12 +45,14 @@ function SingleProductDisplay() {
     const handleAddToCart = (props) => {
         const newItem = { 
             id: ProductId, 
-            name: props.name, 
-            price: props.price, 
-            quantity: props.quantity, 
+            name: props.termekNev, 
+            price: props.ar, 
+            quantity: props.menyiseg, 
             color: props.selectedColor 
         };
         setCart([...cart, newItem]);
+        console.log(newItem);
+        
     };
 
     const handleRemoveFromCart = (itemId) => {
@@ -77,6 +79,7 @@ function SingleProductDisplay() {
                     replies: []
                 }));
                 setTransformedComments(transformedComments);
+                
             })
             .catch(error => console.error('Error fetching product data:', error));
     }, [singleProductData]);
@@ -118,7 +121,9 @@ function SingleProductDisplay() {
                             {singleProductData.ar && <h3>{singleProductData.ar} -Ft</h3>}
                             <ColorPicker onColorChange={handleColorChange} />
                             <input type="number" id="quantity" name="quantity" min="1" max="5" value={quantity} onChange={handleQuantityChange} />
-                            <Button onClick={handleAddToCart}>Kosárba</Button>
+                            <Button onClick={() => {
+                                handleAddToCart(singleProductData);
+                            }}>Kosárba</Button>
             
                         </div>
                     </div>

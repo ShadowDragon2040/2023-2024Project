@@ -38,7 +38,6 @@ function ShopNavbar(props) {
   const toggleHome = () => {
     scroll.scrollToTop();
   };
-<<<<<<< HEAD
   
   const [cart, setCart] = useState([]);
   const handleAddToCart = (props) => {
@@ -57,10 +56,8 @@ const handleRemoveFromCart = (itemId) => {
     setCart(updatedCart);
 };
 
-
-=======
 //          { props.bejelenkezve==true ?
->>>>>>> 2f71c9256eea78cc3aabd1e634b4451ee2adf8a9
+
   return (
     <>
       <Nav scrollNav={scrollNav}>
@@ -78,23 +75,16 @@ const handleRemoveFromCart = (itemId) => {
                 <NavBtnLink to='/ProfilePage'>
                   <CgProfile /> Profile
                 </NavBtnLink>
-<<<<<<< HEAD
-              </NavBtn>
-              <NavBtn>
-                <NavBtnLink to='CartPage' onClick={handleAddToCart} ><span class="glyphicon">&#xe116;</span>Cart</NavBtnLink>
-              </NavBtn>
-              <NavBtn>
-              <NavBtnLink to='LogoutPage'>Logout</NavBtnLink>
-            </NavBtn>
-=======
+
               </NavBtn2>
               <NavBtn2>
-                <NavBtnLink to='/CartPage'>Cart</NavBtnLink>
+                <NavBtnLink to='CartPage' onClick={handleAddToCart} ><i class="bi bi-cart-fill"></i>Cart</NavBtnLink>
               </NavBtn2>
+          
               <NavBtn2>
                 <LogoutButton onClick={handleShow}>Logout</LogoutButton>
               </NavBtn2>
->>>>>>> 2f71c9256eea78cc3aabd1e634b4451ee2adf8a9
+
             </div>
 
             <Modal show={show} onHide={handleClose}>

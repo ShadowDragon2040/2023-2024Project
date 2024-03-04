@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NagyProjectBackend7.0")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+24d717c6df7b82d3f9bf4f79fe6bf9fcc3c2bfa5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a106ef74b271bafb677e31d17e2ba2953f9a1fc1")]
 [assembly: System.Reflection.AssemblyProductAttribute("NagyProjectBackend7.0")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NagyProjectBackend7.0")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
