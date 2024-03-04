@@ -30,6 +30,7 @@ namespace AdatKarbantarto.View
             InitializeComponent();
             GetTermekek();
             DataContext = this;
+            btn_save.IsEnabled=false;
         }
         private ObservableCollection<Termek> items;
 
@@ -63,7 +64,7 @@ namespace AdatKarbantarto.View
             ujtermek = new Termek();
             Items.Add(ujtermek);
             btn_add.IsEnabled = false;
-
+            btn_save.IsEnabled = true;
         }
 
         private async void btn_save_Click(object sender, RoutedEventArgs e)

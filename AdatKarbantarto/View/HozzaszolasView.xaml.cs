@@ -30,6 +30,8 @@ namespace AdatKarbantarto.View
             InitializeComponent();
             GetComments();
             DataContext = this;
+            btn_save.IsEnabled = false;
+
         }
 
         private ObservableCollection<Hozzaszolas> items;
@@ -88,6 +90,8 @@ namespace AdatKarbantarto.View
             ujhozzaszolas = new Hozzaszolas();
             Items.Add(ujhozzaszolas);
             btn_add.IsEnabled = false;
+            btn_save.IsEnabled = true;
+
 
         }
 

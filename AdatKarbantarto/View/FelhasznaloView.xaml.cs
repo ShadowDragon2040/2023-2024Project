@@ -30,18 +30,18 @@ namespace AdatKarbantarto.View
             InitializeComponent();
             GetFelhasznalok();
             DataContext = this;
+            btn_save.IsEnabled = false;
 
         }
 
         private ObservableCollection<Felhasznalo> items;
-
         public ObservableCollection<Felhasznalo> Items
         {
             get { return items ?? (items = new ObservableCollection<Felhasznalo>()); }
             set { items = value; }
         }
 
-        List<Felhasznalo> users;
+        public List<Felhasznalo> users;
         private async void GetFelhasznalok()
         {
             try
@@ -88,17 +88,33 @@ namespace AdatKarbantarto.View
             ujfelhasznalo = new Felhasznalo();
             Items.Add(ujfelhasznalo);
             btn_add.IsEnabled = false;
+            btn_save.IsEnabled = true;
 
         }
 
         private async void btn_save_Click(object sender, RoutedEventArgs e)
         {
-            BackendApiHelper postHelper = new BackendApiHelper();
-            var response = await postHelper.PostFelhasznaloAsync(ujfelhasznalo);
-            MessageBox.Show(response.ToString());
-            GetFelhasznalok();
-            btn_add.IsEnabled = true;
+
+            if (Vizsgalat(ujfelhasznalo))
+            {
+                BackendApiHelper postHelper = new BackendApiHelper();
+                var response = await postHelper.PostFelhasznaloAsync(ujfelhasznalo);
+                MessageBox.Show(response.ToString());
+                GetFelhasznalok();
+                btn_add.IsEnabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Nem megfelelő modell");
+            }
         }
+        
+        private bool Vizsgalat(Felhasznalo ujfelhasznalo)
+        {
+
+            throw new NotImplementedException();
+        }
+
         private void txb_search_KeyUp(object sender, KeyEventArgs e)
         {
             var filtered = users.Where(user => user.LoginNev.ToLower().Contains(txb_search.Text.ToLower()));
