@@ -52,6 +52,20 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
+
+        public async Task<bool> PostHozzaszolasAsync(Hozzaszolas hozzaszolas)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/Hozzaszolas", hozzaszolas);
+                response.EnsureSuccessStatusCode();
+                return true;
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception("Failed to post Hozzaszolas", ex);
+            }
+        }
         public async Task<List<Termek>> GetTermekekAsync()
         {
             using (HttpResponseMessage response = await _httpClient.GetAsync("/Termekek"))
