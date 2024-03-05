@@ -95,6 +95,30 @@ namespace AdatKarbantarto.View
 
         }
 
+        private async void ModifyComment_Click(object sender, RoutedEventArgs e)
+        {
+            Hozzaszolas kivalasztott = dtg_Adatok.SelectedItem as Hozzaszolas;
+            if (kivalasztott == null)
+            {
+                MessageBox.Show("Please select a comment to modify.", "Modify Comment", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            int kivalasztottId = kivalasztott.hozzaszolasId;
+            var confirmationDialog = new ConfirmationDialog("Are you sure you want to modify?");
+            confirmationDialog.ShowDialog();
+
+            bool result = await Task.Run(() => confirmationDialog.Result);
+
+            if (result)
+            {
+                BackendApiHelper deleteHelper = new BackendApiHelper();
+                var response = await deleteHelper.ModifyHozzaszolasAsync(kivalasztottId,kivalasztott);
+                MessageBox.Show(response.ToString());
+                GetComments();
+            }
+        }
+
         private async void btn_save_Click(object sender, RoutedEventArgs e)
         {
             BackendApiHelper postHelper = new BackendApiHelper();
