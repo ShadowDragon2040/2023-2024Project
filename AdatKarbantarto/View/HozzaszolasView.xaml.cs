@@ -25,16 +25,25 @@ namespace AdatKarbantarto.View
     /// </summary>
     public partial class HozzaszolasView : UserControl
     {
+        private ObservableCollection<Hozzaszolas> items;
+        private ObservableCollection<Hozzaszolas> addedItems;
+        private List<Hozzaszolas> comments;
+
         public HozzaszolasView()
         {
             InitializeComponent();
             GetComments();
             DataContext = this;
             btn_save.IsEnabled = false;
-
+            List<Hozzaszolas> putComment = new List<Hozzaszolas>();
+            dtg_add.ItemsSource = putComment;
         }
 
-        private ObservableCollection<Hozzaszolas> items;
+        public ObservableCollection<Hozzaszolas> AddedItems
+        {
+            get { return addedItems ?? (addedItems = new ObservableCollection<Hozzaszolas>()); }
+            set { addedItems = value; }
+        }
 
         public ObservableCollection<Hozzaszolas> Items
         {
@@ -42,7 +51,6 @@ namespace AdatKarbantarto.View
             set { items = value; }
         }
 
-        List<Hozzaszolas> comments;
         private async void GetComments()
         {
             try
@@ -84,40 +92,6 @@ namespace AdatKarbantarto.View
                 GetComments();
             }
         }
-        public Hozzaszolas ujhozzaszolas;
-        private void AddRow_Click(object sender, RoutedEventArgs e)
-        {
-            ujhozzaszolas = new Hozzaszolas();
-            Items.Add(ujhozzaszolas);
-            btn_add.IsEnabled = false;
-            btn_save.IsEnabled = true;
-
-
-        }
-
-        private async void ModifyComment_Click(object sender, RoutedEventArgs e)
-        {
-            Hozzaszolas kivalasztott = dtg_Adatok.SelectedItem as Hozzaszolas;
-            if (kivalasztott == null)
-            {
-                MessageBox.Show("Please select a comment to modify.", "Modify Comment", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            int kivalasztottId = kivalasztott.hozzaszolasId;
-            var confirmationDialog = new ConfirmationDialog("Are you sure you want to modify?");
-            confirmationDialog.ShowDialog();
-
-            bool result = await Task.Run(() => confirmationDialog.Result);
-
-            if (result)
-            {
-                BackendApiHelper deleteHelper = new BackendApiHelper();
-                var response = await deleteHelper.ModifyHozzaszolasAsync(kivalasztottId,kivalasztott);
-                MessageBox.Show(response.ToString());
-                GetComments();
-            }
-        }
 
         private async void btn_save_Click(object sender, RoutedEventArgs e)
         {
@@ -127,10 +101,33 @@ namespace AdatKarbantarto.View
             GetComments();
             btn_add.IsEnabled = true;
         }
+
         private void txb_search_KeyUp(object sender, KeyEventArgs e)
         {
             var filtered = comments.Where(comment => comment.leiras.ToLower().Contains(txb_search.Text.ToLower()));
             dtg_Adatok.ItemsSource = filtered;
+        }
+        private void btn_put_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        public Hozzaszolas ujhozzaszolas;
+        private void AddRow_Click(object sender, RoutedEventArgs e)
+        {
+            ujhozzaszolas = new Hozzaszolas();
+            Items.Add(ujhozzaszolas);
+            btn_add.IsEnabled = false;
+            btn_save.IsEnabled = true;
+        }
+        private void dtg_Adatok_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                int selectedId = ((Hozzaszolas)e.AddedItems[0]).hozzaszolasId;
+                Hozzaszolas newItem = new Hozzaszolas { hozzaszolasId = selectedId};
+                ((List<Hozzaszolas>)dtg_add.ItemsSource).Add(newItem);
+                dtg_add.Items.Refresh();
+            }
         }
     }
 }
