@@ -139,6 +139,8 @@ namespace Webárúház_Nagy_Project.Controllers
                 var request = new Termekek
                 {
                     TermekNev = createdTermekekDto.TermekNev,
+                    Ar= createdTermekekDto.Ar,
+                    KategoriaId = createdTermekekDto.KategoriaId,
                     Leiras = createdTermekekDto.Leiras,
                     Menyiseg = createdTermekekDto.Menyiseg,
                     Keputvonal = createdTermekekDto.Keputvonal,
@@ -164,6 +166,8 @@ namespace Webárúház_Nagy_Project.Controllers
 
                 existingTermek.TermekNev = updateTermekedDto.TermekNev;
                 existingTermek.Leiras = updateTermekedDto.Leiras;
+                existingTermek.Ar = updateTermekedDto.Ar;
+                existingTermek.KategoriaId = updateTermekedDto.KategoriaId;
                 existingTermek.Menyiseg = updateTermekedDto.Menyiseg;
                 existingTermek.Keputvonal = updateTermekedDto.Keputvonal;
 

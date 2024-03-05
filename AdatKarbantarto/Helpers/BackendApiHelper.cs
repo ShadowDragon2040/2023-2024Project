@@ -22,6 +22,7 @@ namespace AdatKarbantarto.Helpers
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
+
         #region Felhasznalok
         public async Task<bool> DeleteFelhasznaloAsync(int id)
         {
@@ -136,6 +137,17 @@ namespace AdatKarbantarto.Helpers
                     throw new Exception($"Failed to fetch data from API. Status code: {response.StatusCode}");
                 }
             }
+        }
+        public async Task<bool> ModifyTermekAsync(int modTermekId)
+        {
+            using(HttpResponseMessage response=await _httpClient.PutAsJsonAsync("/Termekek/",modTermekId))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public async Task<bool> PostTermekAsync(Termek ujtermek)

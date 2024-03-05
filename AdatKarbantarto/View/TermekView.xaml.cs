@@ -97,6 +97,26 @@ namespace AdatKarbantarto.View
             }
         }
 
+        private async void ModifyButton_Click(Object sender, RoutedEventArgs e)
+        {
+            Termek modTermek = dtg_Adatok.SelectedItem as Termek;
+            var confirmationDialog = new ConfirmationDialog("Are you sure you want to modify?");
+            confirmationDialog.ShowDialog();
+
+            bool result = await Task.Run(() => confirmationDialog.Result);
+            if (result) 
+            {
+                BackendApiHelper modHelper = new BackendApiHelper();
+                var response = await modHelper.ModifyTermekAsync(modTermek.termekId);
+                MessageBox.Show(response.ToString());
+                GetTermekek();
+            }
+            else
+            {
+
+            }
+        }
+
         private void txb_search_KeyUp(object sender, KeyEventArgs e)
         {
             var filtered = products.Where(termek => termek.termekNev.ToLower().Contains(txb_search.Text.ToLower()));

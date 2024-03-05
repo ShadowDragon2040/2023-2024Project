@@ -16,6 +16,17 @@
                                 <Image Source="Images/trash.jpg" Width="20" Height="20"/>
                             </Button>
                         </DataTemplate>
+                        
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="ModifyButton_Click">
+                                <Image Source="Images/trash.jpg" Width="20" Height="20"/>
+                            </Button>
+                        </DataTemplate>
+
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
