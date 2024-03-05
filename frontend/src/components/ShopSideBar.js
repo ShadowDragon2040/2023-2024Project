@@ -9,7 +9,6 @@ import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 
 function ShopSideBar(props) {
   const [categoryList, setCategoryList] = useState([]);
-  const [collapsed, setCollapsed] = useState(true);
 
     const url="http://localhost:5219/Termekek/Kategoriak";
     useEffect(() => {
@@ -18,17 +17,9 @@ function ShopSideBar(props) {
         .catch(error => console.error('Hiba a lekérdezés során:', error));
     }, []);
 
-    const handleMouseEnter = () => {
-        setCollapsed(false);
-    };
-
-    const handleMouseLeave = () => {
-        setCollapsed(true);
-    };
-
   return (
       <ShopSidebarContainer>
-        <Sidebar collapsed={collapsed} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
+        <Sidebar collapsed={props.collapsed} onMouseEnter={props.handleMouseEnter} onMouseLeave={props.handleMouseLeave}
           rootStyles={{
               height : '100%',
               backgroundColor: 'white',

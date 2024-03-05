@@ -21,10 +21,12 @@ const LoginPage = (props) => {
         localStorage.setItem("LoginToken",JSON.stringify(response.data.token))
         const decodedToken = jwtDecode(localStorage.getItem("LoginToken"));
         props.role(decodedToken.role);
-        props.bejelenkezve(true);
+        sessionStorage.setItem("bejelenkezve", "true");
+        //props.bejelenkezve(true);
         toast("Login successful.");
       } catch (error) {
-        props.bejelenkezve(false);
+        sessionStorage.setItem("bejelenkezve", "false");
+        //props.bejelenkezve(false);
         toast("Login failed.");
       }
     };

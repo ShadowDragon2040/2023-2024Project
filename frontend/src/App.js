@@ -18,9 +18,11 @@ import React, { useState } from 'react';
 import Cart from './pages/CartPage';
 
 function App() {
-  const [bejelenkezve, setBejelenkezve] = useState(true);
-  const [role, setRole] = useState('PUBLIC');
-  
+  //const [bejelenkezve, setBejelenkezve] = useState(true);
+  //const [role, setRole] = useState('PUBLIC');
+  //bejelenkezve={bejelenkezve} role={role} setBejelenkezve={setBejelenkezve} setRole={setRole}
+  sessionStorage.setItem("bejelenkezve", "false");
+  sessionStorage.setItem("role", "PUBLIC");
   
   return (
     <Router>
@@ -34,7 +36,7 @@ function App() {
         <Route path="/ElektroplatingPage" component={ElektroplatingPage} exact />
         <Route path="/ModelltervezesPage" component={ModelltervezesPage} exact />
         <Route path="/PaintPage" component={PaintPage} exact />
-        <Route path="/ShopPage" component={ShopPage} bejelenkezve={bejelenkezve} role={role} setBejelenkezve={setBejelenkezve} setRole={setRole} exact />
+        <Route path="/ShopPage" component={ShopPage}  exact /> 
         <Route path="/ShopPage/:ProductId" component={SingleProductDisplay} exact />
         <Route path="/ShopPage/Categories/:CategoryId" component={CategoryPage} exact />
         <Route path="/News" component={NewsPage} exact />

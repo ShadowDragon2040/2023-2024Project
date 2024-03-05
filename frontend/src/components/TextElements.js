@@ -20,7 +20,6 @@ export const InfoContainer3=styled.div`
     color: #fff;
     @media screen and (max-width:768px) {
         padding: 100px 0;
-
     }
 `
 
@@ -426,7 +425,7 @@ export const HeroContainer=styled.div`
     }
 `
 export const ShopPageContainer=styled.div`
-    background: #378457;
+    background: black;
 `
 
 export const HeroContent=styled.div`
@@ -467,19 +466,13 @@ export const HeroP=styled.p`
     }
 `
 export const CarouselContainer = styled.div`
-    box-shadow:10px 10px 10px black;
-    position:relative;
-    display:inline-block;
     margin-top:15%;
-    width:100%;
-    height:100%;
+    width:90%;
     border-radius:20px;
     background-color:#01bf71;
      @media screen and (max-width:700px) {
         display:none;
     }
-
-   
 `
 export const ItemContainer=styled.div`
         position:relative;

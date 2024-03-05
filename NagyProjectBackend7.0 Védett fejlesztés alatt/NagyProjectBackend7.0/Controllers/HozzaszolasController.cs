@@ -93,16 +93,11 @@ namespace Webárúház_Nagy_Project.Controllers
             {
                 var existingHozzaszolas = await _context.Hozzaszolasok.FirstOrDefaultAsync(x => x.HozzaszolasId == Id);
 
-                if (existingHozzaszolas != null)
-                {
                     existingHozzaszolas.Leiras = updateHozzaszolasokDto.Leiras;
                     existingHozzaszolas.Ertekeles = updateHozzaszolasokDto.Ertekeles;
 
                     await _context.SaveChangesAsync();
                     return Ok();
-                }
-
-                return NotFound();
             }
             catch (Exception ex)
             {

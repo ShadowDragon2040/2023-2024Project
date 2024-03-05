@@ -7,8 +7,15 @@ import ShopSideBar from '../components/ShopSideBar';
 
 function ShopPage(props) {
   const [userData, setUserData] = useState(null);
+  const [collapsed, setCollapsed] = useState(true);
 
+  const handleMouseEnter = () => {
+    setCollapsed(false);
+};
 
+const handleMouseLeave = () => {
+    setCollapsed(true);
+};
 
   return (
     <>
@@ -21,12 +28,12 @@ function ShopPage(props) {
         setRole={props.setRole}
         />
         <div className="container">
-          <div className="row align-items-start">
-            <div className="col-sm-4 col-md-4 col-xl-3">
-              <ShopSideBar/>
+          <div className="row">
+            <div style={{transition: 'width 0.3s'}} className={`${collapsed ? 'col-1' : 'col-3'}`}>
+              <ShopSideBar collapsed={collapsed} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave}/>
             </div>
-            <div className="col-sm-8 col-md-8 col-xl-9">
-              <DisplayItem/>
+            <div className={`col`}>
+              <DisplayItem collapsed={collapsed}/>
             </div>
           </div>
         </div>

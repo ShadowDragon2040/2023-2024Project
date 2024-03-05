@@ -10,6 +10,7 @@ import {CarouselImage} from './TextElements';
 import axios from 'axios'
 import TermekCard from './TermekCard'
 
+
 function NewItemsComponent (props) {
   const [newsList, setNewsList] = useState([]);
   const [data, setData] = useState([]);
@@ -27,10 +28,10 @@ function NewItemsComponent (props) {
             OFFER OF THE WEEK
           </InfoContainer3>
 
-          <Carousel className='bg-dark border border-dark rounded ' autoPlay={true} infiniteLoop={true} showThumbs={false} showStatus={false}>
-            <CarouselImage src={Image1}/>
-            <CarouselImage src={Image2}/>
-            <CarouselImage src={Image3}/>
+          <Carousel style={{width: props.collapsed ? '80%' : '100%',borderRadius: '20px'}} autoPlay={true} infiniteLoop={true} showThumbs={false} showStatus={false}>
+            <CarouselImage src={Image1} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s', borderRadius: '20px'}}/>
+            <CarouselImage src={Image2} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s',borderRadius: '20px'}}/>
+            <CarouselImage src={Image3} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s', borderRadius: '20px'}}/>
           </Carousel>
       </CarouselContainer>
 

@@ -38,7 +38,6 @@ function ShopNavbar(props) {
   const toggleHome = () => {
     scroll.scrollToTop();
   };
-<<<<<<< HEAD
   
   const [cart, setCart] = useState([]);
   const handleAddToCart = (props) => {
@@ -58,13 +57,10 @@ const handleRemoveFromCart = (itemId) => {
 };
 
 
-=======
-//          { props.bejelenkezve==true ?
->>>>>>> 2f71c9256eea78cc3aabd1e634b4451ee2adf8a9
   return (
     <>
       <Nav scrollNav={scrollNav}>
-
+     
           <NavLogo to='/' onClick={toggleHome}>
             PrintFusion
           </NavLogo>
@@ -72,31 +68,28 @@ const handleRemoveFromCart = (itemId) => {
           <NavBtn2>
             <SearchBar/>
           </NavBtn2>
-
+          
+          { sessionStorage.getItem("bejelenkezve")=='true' ?
             <div>
               <NavBtn2>
                 <NavBtnLink to='/ProfilePage'>
                   <CgProfile /> Profile
                 </NavBtnLink>
-<<<<<<< HEAD
-              </NavBtn>
-              <NavBtn>
-                <NavBtnLink to='CartPage' onClick={handleAddToCart} ><span class="glyphicon">&#xe116;</span>Cart</NavBtnLink>
-              </NavBtn>
-              <NavBtn>
-              <NavBtnLink to='LogoutPage'>Logout</NavBtnLink>
-            </NavBtn>
-=======
               </NavBtn2>
+              {/*
+              <NavBtn2>
+                <NavBtnLink to='CartPage' onClick={handleAddToCart} ><span class="glyphicon">&#xe116;</span>Cart</NavBtnLink>
+              </NavBtn2>
+              */}
+
               <NavBtn2>
                 <NavBtnLink to='/CartPage'>Cart</NavBtnLink>
               </NavBtn2>
+              
               <NavBtn2>
                 <LogoutButton onClick={handleShow}>Logout</LogoutButton>
               </NavBtn2>
->>>>>>> 2f71c9256eea78cc3aabd1e634b4451ee2adf8a9
-            </div>
-
+            
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title>Are you sure you want to log out?</Modal.Title>
@@ -110,15 +103,18 @@ const handleRemoveFromCart = (itemId) => {
                 </Button>
               </Modal.Footer>
             </Modal>
-
-            <div>
-            <NavBtn2>
-              <NavBtnLink to='/RegisterPage'>Register</NavBtnLink>
-            </NavBtn2>
-            <NavBtn2>
-              <NavBtnLink to='/LoginPage'>Login</NavBtnLink>
-            </NavBtn2>
             </div>
+              :
+            <div>
+              <NavBtn2>
+                <NavBtnLink to='/RegisterPage'>Register</NavBtnLink>
+              </NavBtn2>
+              <NavBtn2>
+                <NavBtnLink to='/LoginPage'>Login</NavBtnLink>
+              </NavBtn2>
+            </div>
+              }
+
       </Nav>
     </>
   );
