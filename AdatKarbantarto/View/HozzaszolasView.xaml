@@ -7,9 +7,9 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
     x:Class="AdatKarbantarto.View.HozzaszolasView"
     mc:Ignorable="d" 
-    d:DesignHeight="450" d:DesignWidth="800">
+    d:DesignHeight="450" d:DesignWidth="1200">
     <Grid>
-        <DataGrid x:Name="dtg_Adatok" CanUserAddRows="False" CanUserReorderColumns="False" ItemsSource="{Binding Items}" Margin="20,80,91,119" AutoGenerateColumns="True" SelectionChanged="dtg_Adatok_SelectionChanged">
+        <DataGrid x:Name="dtg_Adatok" CanUserAddRows="False" CanUserReorderColumns="False" ItemsSource="{Binding Items}" Margin="20,80,-309,149" AutoGenerateColumns="True">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
@@ -20,21 +20,30 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="ModifyComment_Click">
+                                <Image Source="Images/trash.jpg" Width="20" Height="20"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <TextBox x:Name="txb_search" KeyUp="txb_search_KeyUp" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" Background="Green" Margin="75,30,0,0" />
         <Button Content="Save Changes" x:Name="btn_save" Click="btn_save_Click" Background="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="250,30,10,10"/>
         <Button Content="Add Row" x:Name="btn_add" Click="AddRow_Click"  Background="Green" Command="{Binding AddItemCommand}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,26,0,0"/>
-        <DataGrid x:Name="dtg_add" ItemsSource="{Binding AddedItems}" Height="40" Margin="20,400,187,10" CanUserReorderColumns="False">
+        <DataGrid x:Name="dtg_add" AutoGenerateColumns="False" ItemsSource="{Binding AddedItems}" Margin="20,438,-202,-26" CanUserReorderColumns="False">
             <DataGrid.Columns>
-                <materialDesign:DataGridTextColumn Header="hozzaszolasId" Binding="{Binding hozzaszolasId}"/>
-                <materialDesign:DataGridTextColumn Header="felhasznaloId" Binding="{Binding felhasznaloId}"/>
-                <materialDesign:DataGridTextColumn Header="termekId" Binding="{Binding termekId}"/>
+                <materialDesign:DataGridTextColumn Header="hozzaszolasId" Binding="{Binding hozzaszolasId}" IsReadOnly="True"/>
+                <materialDesign:DataGridTextColumn Header="felhasznaloId" Binding="{Binding felhasznaloId}" IsReadOnly="True"/>
+                <materialDesign:DataGridTextColumn Header="termekId" Binding="{Binding termekId}" IsReadOnly="True"/>
                 <materialDesign:DataGridTextColumn Header="leiras" Binding="{Binding leiras}"/>
                 <materialDesign:DataGridTextColumn Header="ertekeles" Binding="{Binding ertekeles}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Put" x:Name="btn_put"   Click="btn_put_Click"  Background="YellowGreen"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="123,428,0,0"/>
+        <Button Content="Put" x:Name="btn_put"   Click="btn_put_Click"  Background="YellowGreen"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,444,-282,0" RenderTransformOrigin="0.511,0.48"/>
 
     </Grid>
 </UserControl>

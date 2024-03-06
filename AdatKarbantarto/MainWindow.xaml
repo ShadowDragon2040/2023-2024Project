@@ -7,7 +7,7 @@
         xmlns:Menu="clr-namespace:AdatKarbantarto.Utilities"
         xmlns:local="clr-namespace:AdatKarbantarto"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800"
+        Title="MainWindow" Height="600" Width="1200"
         ResizeMode="NoResize"
         HorizontalAlignment="Center"
         VerticalAlignment="Center"

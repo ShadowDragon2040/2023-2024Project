@@ -1,22 +1,12 @@
 ﻿using AdatKarbantarto.Helpers;
 using AdatKarbantarto.Model;
 using AdatKarbantarto.Utilities;
-using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace AdatKarbantarto.View
 {
@@ -35,8 +25,6 @@ namespace AdatKarbantarto.View
             GetComments();
             DataContext = this;
             btn_save.IsEnabled = false;
-            List<Hozzaszolas> putComment = new List<Hozzaszolas>();
-            dtg_add.ItemsSource = putComment;
         }
 
         public ObservableCollection<Hozzaszolas> AddedItems
@@ -95,6 +83,12 @@ namespace AdatKarbantarto.View
 
         private async void btn_save_Click(object sender, RoutedEventArgs e)
         {
+            if (ujhozzaszolas == null)
+            {
+                MessageBox.Show("Please add a comment first.", "Save Comment", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             BackendApiHelper postHelper = new BackendApiHelper();
             var response = await postHelper.PostHozzaszolasAsync(ujhozzaszolas);
             MessageBox.Show(response.ToString());
@@ -104,13 +98,13 @@ namespace AdatKarbantarto.View
 
         private void txb_search_KeyUp(object sender, KeyEventArgs e)
         {
-            var filtered = comments.Where(comment => comment.leiras.ToLower().Contains(txb_search.Text.ToLower()));
-            dtg_Adatok.ItemsSource = filtered;
+            if (comments != null)
+            {
+                var filtered = comments.Where(comment => comment.leiras.ToLower().Contains(txb_search.Text.ToLower()));
+                dtg_Adatok.ItemsSource = filtered;
+            }
         }
-        private void btn_put_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
         public Hozzaszolas ujhozzaszolas;
         private void AddRow_Click(object sender, RoutedEventArgs e)
         {
@@ -119,15 +113,25 @@ namespace AdatKarbantarto.View
             btn_add.IsEnabled = false;
             btn_save.IsEnabled = true;
         }
-        private void dtg_Adatok_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void btn_put_Click(object sender, RoutedEventArgs e)
         {
-            if (e.AddedItems.Count > 0)
+            var item = addedItems[0];
+            if (item != null)
             {
-                int selectedId = ((Hozzaszolas)e.AddedItems[0]).hozzaszolasId;
-                Hozzaszolas newItem = new Hozzaszolas { hozzaszolasId = selectedId};
-                ((List<Hozzaszolas>)dtg_add.ItemsSource).Add(newItem);
-                dtg_add.Items.Refresh();
+              BackendApiHelper modhelper= new BackendApiHelper();
+                var response =await modhelper.ModifyHozzaszolasAsync(item.hozzaszolasId, item);
+                MessageBox.Show(response.ToString());
             }
         }
+
+        private void ModifyComment_Click(object sender, RoutedEventArgs e)
+        {
+            Hozzaszolas putHozzaszolas = (Hozzaszolas)dtg_Adatok.SelectedItem;
+            addedItems.Clear();
+          
+            addedItems.Add(putHozzaszolas);
+
+        }
+
     }
 }
