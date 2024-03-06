@@ -14,8 +14,8 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="DeleteComment_Click">
-                                <Image Source="Images/trash.jpg" Width="20" Height="20"/>
+                            <Button Click="DeleteComment_Click" BorderThickness="0" Background="Transparent" HorizontalAlignment="Center">
+                                <Image Source="/Images/trash.jpg" Width="20" Height="20"/>
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -23,8 +23,10 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="ModifyComment_Click">
-                                <Image Source="Images/trash.jpg" Width="20" Height="20"/>
+                            <Button Click="ModifyComment_Click" BorderThickness="0" Background="Transparent">
+                                
+                                    <Image Source="/Images/trash.jpg"  Width="20" Height="20"/>
+                               
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
