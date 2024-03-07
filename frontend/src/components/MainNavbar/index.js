@@ -84,7 +84,7 @@ const NavbarA = ({toggle}) => {
               </NavItem>
             </NavMenu>
             <NavBtn>
-              <NavBtnLink  to='ShopPage'>Shop</NavBtnLink>
+              <NavBtnLink onClick={toggleHome} to='ShopPage'>Shop</NavBtnLink>
             </NavBtn>
           </NavbarContainer>
         </Nav>

@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { BiCategory } from "react-icons/bi";
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+//https://www.npmjs.com/package/react-pro-sidebar?activeTab=readme
 
 function ShopSideBar(props) {
   const [categoryList, setCategoryList] = useState([]);
@@ -21,15 +22,16 @@ function ShopSideBar(props) {
       <ShopSidebarContainer>
         <Sidebar collapsed={props.collapsed} onMouseEnter={props.handleMouseEnter} onMouseLeave={props.handleMouseLeave}
           rootStyles={{
+              width : '300px',
               height : '100%',
-              backgroundColor: 'white',
+              backgroundColor: 'white'
           }}>
           <Menu menuItemStyles={{
               button: {
                 color: '#01bf71',
+                marginTop: '20px'
               }
           }}>
-
           <NavLink to={'/'} className='nav-link'>
             <MenuItem icon={<FaHome /> }> Home</MenuItem>
           </NavLink>

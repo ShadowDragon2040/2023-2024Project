@@ -25,7 +25,7 @@ function NewItemsComponent (props) {
     <>
       <CarouselContainer>
           <InfoContainer3>
-            OFFER OF THE WEEK
+            OFFER OF THE WEEK:
           </InfoContainer3>
 
           <Carousel style={{width: props.collapsed ? '80%' : '100%',borderRadius: '20px'}} autoPlay={true} infiniteLoop={true} showThumbs={false} showStatus={false}>
@@ -38,7 +38,9 @@ function NewItemsComponent (props) {
       <ItemContainer>
           <div className="row">
             <div className="col-md-6">
-              <h2>All Products:</h2>
+            <InfoContainer3>
+            All products:
+          </InfoContainer3>
             </div>
           </div>
           <div className="row w-100">

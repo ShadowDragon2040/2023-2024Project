@@ -3,14 +3,16 @@ import { animateScroll as scroll } from 'react-scroll';
 import SearchBar from '../SeachBar';
 import { CgProfile } from 'react-icons/cg';
 import {
-  Nav,
+  Nav2,
   NavLogo,
   NavBtn2,
   NavBtnLink,
-  LogoutButton
+  ModalButton
 } from '../TextElements';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import RegisterModal from '../RegisterModal';
+import LoginModal from '../LoginModal';
 
 function ShopNavbar(props) {
   const [scrollNav, setScrollNav] = useState(false);
@@ -59,7 +61,7 @@ const handleRemoveFromCart = (itemId) => {
 
   return (
     <>
-      <Nav scrollNav={scrollNav}>
+      <Nav2 scrollNav={scrollNav}>
      
           <NavLogo to='/' onClick={toggleHome}>
             PrintFusion
@@ -87,7 +89,7 @@ const handleRemoveFromCart = (itemId) => {
               </NavBtn2>
               
               <NavBtn2>
-                <LogoutButton onClick={handleShow}>Logout</LogoutButton>
+                <ModalButton onClick={handleShow}>Logout</ModalButton>
               </NavBtn2>
             
             <Modal show={show} onHide={handleClose}>
@@ -106,16 +108,13 @@ const handleRemoveFromCart = (itemId) => {
             </div>
               :
             <div>
-              <NavBtn2>
-                <NavBtnLink to='/RegisterPage'>Register</NavBtnLink>
-              </NavBtn2>
-              <NavBtn2>
-                <NavBtnLink to='/LoginPage'>Login</NavBtnLink>
-              </NavBtn2>
+                <RegisterModal />
+
+                <LoginModal/>
             </div>
               }
 
-      </Nav>
+      </Nav2>
     </>
   );
 }

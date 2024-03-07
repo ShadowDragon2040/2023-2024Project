@@ -34,7 +34,6 @@ const InfoSection = () => {
   
   return (
     <>
-    
       <InfoContainer  lightBg={false} id={'about'} >
         <Heading lightText={false}>A Cégünkről</Heading>
         <InfoWrapper>

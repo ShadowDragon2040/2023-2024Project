@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 function TermekCard(props) {
 
   return (
-    <NavLink  key={props.item.termekId} className="col-md-4 mb-2 col-sm-6 " to={"/ShopPage/"+props.item.termekId}>
+    <NavLink  key={props.item.termekId} className="col-4" to={"/ShopPage/"+props.item.termekId}>
       <button className="btn cardbtn">
         <div className="card border-dark rounded ">
           <div className="card-body">

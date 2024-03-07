@@ -1,17 +1,25 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect,useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
-import { NavLink, useParams } from 'react-router-dom';
-import { MdArrowBack } from "react-icons/md";
-const RegisterPage = () => {
+import {
+  InfoContainer3,
+  NavBtn2,
+  ModalButton
+} from './TextElements';
+
+const RegisterModal = () => {
     const [userName, setUserName] = useState('');
     const [fullName, setFullName] = useState('');
     const [age, setAge] = useState(0);
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-  
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     const handleRegister = async (e) => {
       e.preventDefault();
       try {
@@ -27,15 +35,16 @@ const RegisterPage = () => {
     };
   
     return (
-        <div style={{
-            width:'50%',
-            margin:'auto',
-            }}>
-            <h1>Register</h1>
-            <NavLink to={"/ShopPage"} className='back-btn'>
-              <MdArrowBack />
-            </NavLink>
-            
+      <>
+        <NavBtn2>
+          <ModalButton onClick={handleShow}>Register</ModalButton>
+        </NavBtn2>
+
+        <Modal show={show} onHide={handleClose}>
+          <InfoContainer3>
+            Register
+          </InfoContainer3>
+
             <Form onSubmit={handleRegister}>
                 <Form.Group controlId="formUserName">
                   <Form.Label>Username</Form.Label>
@@ -63,14 +72,15 @@ const RegisterPage = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                  </Form.Group>
+                </Form.Group>
 
                 <Button variant="primary" type="submit">
                     Register
                 </Button>
             </Form>
-        </div>
+        </Modal>
+      </>   
     );
   };
 
-export default RegisterPage
+export default RegisterModal 
