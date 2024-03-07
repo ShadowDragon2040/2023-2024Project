@@ -1,22 +1,12 @@
 ﻿using AdatKarbantarto.Helpers;
 using AdatKarbantarto.Model;
 using AdatKarbantarto.Utilities;
-using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace AdatKarbantarto.View
 {
@@ -25,16 +15,23 @@ namespace AdatKarbantarto.View
     /// </summary>
     public partial class HozzaszolasView : UserControl
     {
+        private ObservableCollection<Hozzaszolas> items;
+        private ObservableCollection<Hozzaszolas> addedItems;
+        private List<Hozzaszolas> comments;
+
         public HozzaszolasView()
         {
             InitializeComponent();
             GetComments();
             DataContext = this;
             btn_save.IsEnabled = false;
-
         }
 
-        private ObservableCollection<Hozzaszolas> items;
+        public ObservableCollection<Hozzaszolas> AddedItems
+        {
+            get { return addedItems ?? (addedItems = new ObservableCollection<Hozzaszolas>()); }
+            set { addedItems = value; }
+        }
 
         public ObservableCollection<Hozzaszolas> Items
         {
@@ -42,7 +39,6 @@ namespace AdatKarbantarto.View
             set { items = value; }
         }
 
-        List<Hozzaszolas> comments;
         private async void GetComments()
         {
             try
@@ -84,6 +80,31 @@ namespace AdatKarbantarto.View
                 GetComments();
             }
         }
+
+        private async void btn_save_Click(object sender, RoutedEventArgs e)
+        {
+            if (ujhozzaszolas == null)
+            {
+                MessageBox.Show("Please add a comment first.", "Save Comment", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            BackendApiHelper postHelper = new BackendApiHelper();
+            var response = await postHelper.PostHozzaszolasAsync(ujhozzaszolas);
+            MessageBox.Show(response.ToString());
+            GetComments();
+            btn_add.IsEnabled = true;
+        }
+
+        private void txb_search_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (comments != null)
+            {
+                var filtered = comments.Where(comment => comment.leiras.ToLower().Contains(txb_search.Text.ToLower()));
+                dtg_Adatok.ItemsSource = filtered;
+            }
+        }
+
         public Hozzaszolas ujhozzaszolas;
         private void AddRow_Click(object sender, RoutedEventArgs e)
         {
@@ -91,22 +112,26 @@ namespace AdatKarbantarto.View
             Items.Add(ujhozzaszolas);
             btn_add.IsEnabled = false;
             btn_save.IsEnabled = true;
-
-
         }
-
-        private async void btn_save_Click(object sender, RoutedEventArgs e)
+        private async void btn_put_Click(object sender, RoutedEventArgs e)
         {
-            BackendApiHelper postHelper = new BackendApiHelper();
-            var response = await postHelper.PostHozzaszolasAsync(ujhozzaszolas);
-            MessageBox.Show(response.ToString());
-            GetComments();
-            btn_add.IsEnabled = true;
+            var item = addedItems[0];
+            if (item != null)
+            {
+              BackendApiHelper modhelper= new BackendApiHelper();
+                var response =await modhelper.ModifyHozzaszolasAsync(item.hozzaszolasId, item);
+                MessageBox.Show(response.ToString());
+            }
         }
-        private void txb_search_KeyUp(object sender, KeyEventArgs e)
+
+        private void ModifyComment_Click(object sender, RoutedEventArgs e)
         {
-            var filtered = comments.Where(comment => comment.leiras.ToLower().Contains(txb_search.Text.ToLower()));
-            dtg_Adatok.ItemsSource = filtered;
+            Hozzaszolas putHozzaszolas = (Hozzaszolas)dtg_Adatok.SelectedItem;
+            addedItems.Clear();
+          
+            addedItems.Add(putHozzaszolas);
+
         }
+
     }
 }

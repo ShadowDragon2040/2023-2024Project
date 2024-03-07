@@ -121,6 +121,30 @@ namespace AdatKarbantarto.Helpers
                 return false;
             }
         }
+
+        public async Task<bool> ModifyHozzaszolasAsync(int id,Hozzaszolas hozzaszolas)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.PutAsJsonAsync("/Hozzaszolas/" + id,hozzaszolas);
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show(responseBody);
+                    throw new Exception($"Failed to modify data from API. Status code: {response.StatusCode}. Response: {responseBody}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
         #endregion
         #region Termekek
         public async Task<List<Termek>> GetTermekekAsync()

@@ -382,7 +382,6 @@ C:\Users\User\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fe
 C:\Users\User\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\staticwebassets.build.json
 C:\Users\User\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\staticwebassets.development.json
 C:\Users\User\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\scopedcss\bundle\NagyProjectBackend7.0.styles.css
-C:\Users\User\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\NagyProjectBackend7.0.csproj.CopyComplete
 C:\Users\User\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\NagyProjectBackend7.0.dll
 C:\Users\User\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\refint\NagyProjectBackend7.0.dll
 C:\Users\User\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\NagyProjectBackend7.0.pdb
@@ -547,3 +546,4 @@ C:\Users\sjuditanna\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Véd
 C:\Users\sjuditanna\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\NagyProjectBackend7.0.pdb
 C:\Users\sjuditanna\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\NagyProjectBackend7.0.genruntimeconfig.cache
 C:\Users\sjuditanna\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\ref\NagyProjectBackend7.0.dll
+C:\Users\User\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\NagyProj.3D060C26.Up2Date

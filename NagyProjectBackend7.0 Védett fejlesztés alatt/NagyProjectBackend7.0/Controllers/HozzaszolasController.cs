@@ -87,23 +87,29 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int Id, UpdateHozzaszolasokDto updateHozzaszolasokDto)
+        public async Task<ActionResult> Put(int id, UpdateHozzaszolasokDto updateHozzaszolasokDto)
         {
             try
             {
-                var existingHozzaszolas = await _context.Hozzaszolasok.FirstOrDefaultAsync(x => x.HozzaszolasId == Id);
+                var existingHozzaszolas = await _context.Hozzaszolasok.FirstOrDefaultAsync(x => x.HozzaszolasId == id);
 
-                    existingHozzaszolas.Leiras = updateHozzaszolasokDto.Leiras;
-                    existingHozzaszolas.Ertekeles = updateHozzaszolasokDto.Ertekeles;
+                if (existingHozzaszolas == null)
+                {
+                    return NotFound(); // Or another appropriate response if the resource is not found
+                }
 
-                    await _context.SaveChangesAsync();
-                    return Ok();
+                existingHozzaszolas.Leiras = updateHozzaszolasokDto.Leiras;
+                existingHozzaszolas.Ertekeles = updateHozzaszolasokDto.Ertekeles;
+
+                await _context.SaveChangesAsync();
+                return Ok();
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
