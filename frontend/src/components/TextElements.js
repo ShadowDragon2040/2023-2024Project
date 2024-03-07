@@ -15,9 +15,9 @@ export const InfoContainer=styled.div`
     }
 `
 export const InfoContainer3=styled.div`
-    padding:10px; 
+    padding:10px;
     font-size:2em;
-    color: #fff;
+    color: #ffffff;
     @media screen and (max-width:768px) {
         padding: 100px 0;
     }
@@ -298,7 +298,7 @@ export const NavBtn2=styled.nav`
     vertical-align: middle;
 `
 
-export const LogoutButton=styled.button`
+export const ModalButton=styled.button`
     border-radius:50px;
     background:#01bf71;
     white-space:nowrap;
@@ -320,7 +320,7 @@ export const LogoutButton=styled.button`
 
 export const NavBtnLink=styled(LinkR)`
     border-radius:50px;
-    background:#01bf71;
+    background:#05a866;
     white-space:nowrap;
     padding: 10px 22px;
     color:#010606;
@@ -395,11 +395,25 @@ export const Nav=styled.nav`
     position: sticky;
     top: 0;
     z-index: 10;
-
     @media screen and (max-width: 960px) {
         transition:0.8s all ease ;
     }
+`
 
+export const Nav2=styled.nav`
+    background: #024f02;
+    height:80px;
+    margin-top:-80px;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    font-size: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    @media screen and (max-width: 960px) {
+        transition:0.8s all ease ;
+    }
 `
 
 export const HeroContainer=styled.div`
@@ -469,7 +483,7 @@ export const CarouselContainer = styled.div`
     margin-top:15%;
     width:90%;
     border-radius:20px;
-    background-color:#01bf71;
+    background-color:#059e60;
      @media screen and (max-width:700px) {
         display:none;
     }
@@ -618,10 +632,13 @@ export const SidebarContainer=styled.aside`
     top: ${({isOpen}) => (isOpen ? '0' : '-100%')};
 `
 export const ShopSidebarContainer=styled.aside`
+    font-size: 20px;
+    text-style: bold;
     margin-top:80px;
     height:100%;
     left:0px;
     position:fixed;
+    
 `
 
 export const ProfileDisplayPageContainer=styled.aside`

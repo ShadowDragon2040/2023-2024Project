@@ -1,15 +1,23 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect,useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
-import { NavLink, useParams } from 'react-router-dom';
-import { MdArrowBack } from "react-icons/md";
-const LoginPage = (props) => {
+import {
+  InfoContainer3,
+  NavBtn2,
+  ModalButton
+} from './TextElements';
+
+const LoginModal = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const handleLogin = async (e) => {
       e.preventDefault();
@@ -32,14 +40,15 @@ const LoginPage = (props) => {
     };
 
     return (
-        <div style={{
-            width:'50%',
-            margin:'auto',
-            }}>
-            <h1>Login</h1>
-            <NavLink to={"/ShopPage"} className='back-btn'>
-              <MdArrowBack />
-            </NavLink>
+      <>
+        <NavBtn2>
+          <ModalButton onClick={handleShow}>Login</ModalButton>
+        </NavBtn2>
+
+          <Modal show={show} onHide={handleClose}>
+          <InfoContainer3>
+            Login
+          </InfoContainer3>
 
             <Form onSubmit={handleLogin}>
                 <Form.Group controlId="formUsername">
@@ -65,8 +74,9 @@ const LoginPage = (props) => {
                     Login
                 </Button>
             </Form>
-        </div>
+          </Modal>
+      </>
     );
 };
 
-export default LoginPage
+export default LoginModal

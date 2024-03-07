@@ -1,8 +1,6 @@
 import './App.css';
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from './pages';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
 import CompanyInfoPage from './pages/CompanyInfoPage';
 import EnderPage from './pages/Ender';
 import AnycubicPage from './pages/Anycubic';
@@ -28,8 +26,6 @@ function App() {
     <Router>
       <Switch>
         <Route path="/" component={Home} exact />
-        <Route path="/LoginPage" component={LoginPage} exact />
-        <Route path="/RegisterPage" component={RegisterPage} exact />
         <Route path="/CompanyInfoPage" component={CompanyInfoPage} exact />
         <Route path="/Ender" component={EnderPage} exact />
         <Route path="/Anycubic" component={AnycubicPage} exact />
