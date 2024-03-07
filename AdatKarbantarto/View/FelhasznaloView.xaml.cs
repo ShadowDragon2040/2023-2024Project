@@ -108,7 +108,16 @@ namespace AdatKarbantarto.View
                 MessageBox.Show("Nem megfelelő modell");
             }
         }
-        
+
+        private async void btn_Put_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private async void btn_Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
         private bool Vizsgalat(Felhasznalo ujfelhasznalo)
         {
 
@@ -119,6 +128,11 @@ namespace AdatKarbantarto.View
         {
             var filtered = users.Where(user => user.LoginNev.ToLower().Contains(txb_search.Text.ToLower()));
             dtg_Adatok.ItemsSource = filtered;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -15,8 +15,8 @@ namespace AdatKarbantarto.View
     /// </summary>
     public partial class HozzaszolasView : UserControl
     {
-        private ObservableCollection<Hozzaszolas> items;
-        private ObservableCollection<Hozzaszolas> addedItems;
+        private ObservableCollection<Hozzaszolas> commentitems;
+        private ObservableCollection<Hozzaszolas> commentaddedItems;
         private List<Hozzaszolas> comments;
 
         public HozzaszolasView()
@@ -24,19 +24,19 @@ namespace AdatKarbantarto.View
             InitializeComponent();
             GetComments();
             DataContext = this;
-            btn_save.IsEnabled = false;
+            btn_savecomment.IsEnabled = false;
         }
 
         public ObservableCollection<Hozzaszolas> AddedItems
         {
-            get { return addedItems ?? (addedItems = new ObservableCollection<Hozzaszolas>()); }
-            set { addedItems = value; }
+            get { return commentaddedItems ?? (commentaddedItems = new ObservableCollection<Hozzaszolas>()); }
+            set { commentaddedItems = value; }
         }
 
         public ObservableCollection<Hozzaszolas> Items
         {
-            get { return items ?? (items = new ObservableCollection<Hozzaszolas>()); }
-            set { items = value; }
+            get { return commentitems ?? (commentitems = new ObservableCollection<Hozzaszolas>()); }
+            set { commentitems = value; }
         }
 
         private async void GetComments()
@@ -59,7 +59,7 @@ namespace AdatKarbantarto.View
 
         private async void DeleteComment_Click(object sender, RoutedEventArgs e)
         {
-            Hozzaszolas kivalasztott = dtg_Adatok.SelectedItem as Hozzaszolas;
+            Hozzaszolas kivalasztott = dtg_Adatokcomment.SelectedItem as Hozzaszolas;
             if (kivalasztott == null)
             {
                 MessageBox.Show("Please select a comment to delete.", "Delete Comment", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -93,15 +93,15 @@ namespace AdatKarbantarto.View
             var response = await postHelper.PostHozzaszolasAsync(ujhozzaszolas);
             MessageBox.Show(response.ToString());
             GetComments();
-            btn_add.IsEnabled = true;
+            btn_addcomment.IsEnabled = true;
         }
 
         private void txb_search_KeyUp(object sender, KeyEventArgs e)
         {
             if (comments != null)
             {
-                var filtered = comments.Where(comment => comment.leiras.ToLower().Contains(txb_search.Text.ToLower()));
-                dtg_Adatok.ItemsSource = filtered;
+                var filtered = comments.Where(comment => comment.leiras.ToLower().Contains(txb_searchcomment.Text.ToLower()));
+                dtg_Adatokcomment.ItemsSource = filtered;
             }
         }
 
@@ -110,12 +110,12 @@ namespace AdatKarbantarto.View
         {
             ujhozzaszolas = new Hozzaszolas();
             Items.Add(ujhozzaszolas);
-            btn_add.IsEnabled = false;
-            btn_save.IsEnabled = true;
+            btn_addcomment.IsEnabled = false;
+            btn_savecomment.IsEnabled = true;
         }
         private async void btn_put_Click(object sender, RoutedEventArgs e)
         {
-            var item = addedItems[0];
+            var item = commentaddedItems[0];
             if (item != null)
             {
               BackendApiHelper modhelper= new BackendApiHelper();
@@ -126,10 +126,10 @@ namespace AdatKarbantarto.View
 
         private void ModifyComment_Click(object sender, RoutedEventArgs e)
         {
-            Hozzaszolas putHozzaszolas = (Hozzaszolas)dtg_Adatok.SelectedItem;
-            addedItems.Clear();
+            Hozzaszolas putHozzaszolas = (Hozzaszolas)dtg_Adatokcomment.SelectedItem;
+            commentaddedItems.Clear();
           
-            addedItems.Add(putHozzaszolas);
+            commentaddedItems.Add(putHozzaszolas);
 
         }
 

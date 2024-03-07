@@ -122,5 +122,12 @@ namespace AdatKarbantarto.View
             var filtered = products.Where(termek => termek.termekNev.ToLower().Contains(txb_search.Text.ToLower()));
             dtg_Adatok.ItemsSource = filtered;
         }
+      
+      
+
+        private async void btn_put_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
