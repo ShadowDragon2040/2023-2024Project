@@ -16,5 +16,8 @@
     <DataTemplate DataType="{x:Type vm:HozzaszolasokVM}">
         <view:HozzaszolasView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:SzamlazasVM}">
+        <view:SzamlazasView/>
+    </DataTemplate>
 
 </ResourceDictionary>

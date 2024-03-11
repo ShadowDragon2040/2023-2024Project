@@ -47,7 +47,7 @@ namespace AdatKarbantarto.View
             try
             {
                 BackendApiHelper apiHelper = new BackendApiHelper();
-                users= await apiHelper.GetFelhasznalokAsync();
+                users = await apiHelper.GetFelhasznalokAsync();
                 Items.Clear();
                 foreach (var item in users)
                 {
@@ -60,7 +60,7 @@ namespace AdatKarbantarto.View
             }
         }
 
-       
+
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
@@ -73,8 +73,8 @@ namespace AdatKarbantarto.View
 
             if (result)
             {
-                BackendApiHelper deleteHelper= new BackendApiHelper();
-                var response=await deleteHelper.DeleteFelhasznaloAsync(kivalasztottId);
+                BackendApiHelper deleteHelper = new BackendApiHelper();
+                var response = await deleteHelper.DeleteFelhasznaloAsync(kivalasztottId);
                 MessageBox.Show(response.ToString());
                 GetFelhasznalok();
             }

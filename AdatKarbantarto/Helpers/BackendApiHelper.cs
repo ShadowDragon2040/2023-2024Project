@@ -196,7 +196,7 @@ namespace AdatKarbantarto.Helpers
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception("Failed to post Felhasznalo", ex);
+                throw new Exception("Failed to post Szamlazas", ex);
             }
         }
         public async Task<bool> DeleteTermekAsync(int id)
@@ -216,7 +216,76 @@ namespace AdatKarbantarto.Helpers
         }
         #endregion
 
+        #region Szamlazas
 
+        public async Task<List<Szamla>> GetSzamlaAsync()
+        {
+            using (HttpResponseMessage response = await _httpClient.GetAsync("/Szamlazas"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<Szamla>>(content);
+                }
+                else
+                {
+                    throw new Exception($"Failed to fetch data from API. Status code: {response.StatusCode}");
+                }
+            }
+        }
+        public async Task<bool> ModifySzamlaAsync(int id, Szamla szamla)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.PutAsJsonAsync("/Szamlazas/" + id, szamla);
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show(responseBody);
+                    throw new Exception($"Failed to modify data from API. Status code: {response.StatusCode}. Response: {responseBody}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> PostSzamlaAsync(Szamla ujszamla)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/Szamlazas", ujszamla);
+                response.EnsureSuccessStatusCode();
+                return true;
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception("Failed to post Szamlazas", ex);
+            }
+        }
+        public async Task<bool> DeleteSzamlaAsync(int id)
+        {
+            using (HttpResponseMessage response = await _httpClient.DeleteAsync("/Szamlazas/" + id))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show(response.ToString());
+                    throw new Exception($"Failed to delete data from API. Status code: {response.StatusCode}");
+                }
+            }
+        }
+        #endregion
 
 
     }

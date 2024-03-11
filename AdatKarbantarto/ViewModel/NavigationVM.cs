@@ -1,4 +1,5 @@
 ﻿using AdatKarbantarto.Utilities;
+using Newtonsoft.Json.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,13 @@ namespace AdatKarbantarto.ViewModel
         public ICommand FelhasznaloCommand { get; set; }
         public ICommand TermekCommand { get; set; }
         public ICommand HozzaszolasCommand { get; set; }
+        public ICommand SzamlazasCommand { get; set; }  
 
         private void Home(object obj) => CurrentView = new HomeVM();
         private void Felhasznalo(object obj) => CurrentView = new FelhasznalokVM();
         private void Termek(object obj) => CurrentView = new TermekekVM();
         private void Hozzaszolas(object obj) => CurrentView = new HozzaszolasokVM();
+        private void Szamlazas(object obj)=>CurrentView=new SzamlazasVM();
 
         public NavigationVM()
         {
@@ -34,6 +37,7 @@ namespace AdatKarbantarto.ViewModel
             FelhasznaloCommand = new RelayCommand(Felhasznalo);
             TermekCommand = new RelayCommand(Termek);
             HozzaszolasCommand = new RelayCommand(Hozzaszolas);
+            SzamlazasCommand=new RelayCommand(Szamlazas);
 
             CurrentView = new HomeVM();
         }
