@@ -67,7 +67,7 @@ namespace AdatKarbantarto.View
         }
 
 
-        private void ModifyButton_Click(object sender, RoutedEventArgs e)
+        private void Modify_Click(object sender, RoutedEventArgs e)
         {
             Felhasznalo felhasznalo = (Felhasznalo)dtg_Adatok.SelectedItem;
             addedItems.Clear();
@@ -75,7 +75,7 @@ namespace AdatKarbantarto.View
             addedItems.Add(felhasznalo);
 
         }
-        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private async void Delete_Click(object sender, RoutedEventArgs e)
         {
             Felhasznalo kivalasztott = dtg_Adatok.SelectedItem as Felhasznalo;
             int kivalasztottId = kivalasztott.FelhasznaloId;
@@ -122,10 +122,14 @@ namespace AdatKarbantarto.View
             }
         }
 
-        private async void btn_Put_Click(object sender, RoutedEventArgs e)
+
+        private async void btn_put_Click(object sender, RoutedEventArgs e)
         {
 
         }
+
+        
+
         private bool Vizsgalat(Felhasznalo ujfelhasznalo)
         {
 
@@ -138,10 +142,10 @@ namespace AdatKarbantarto.View
             dtg_Adatok.ItemsSource = filtered;
         }
 
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
         }
-
     }
 }

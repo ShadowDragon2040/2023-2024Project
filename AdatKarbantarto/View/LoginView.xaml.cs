@@ -67,7 +67,6 @@ namespace AdatKarbantarto.View
                 {
                     JwtDecode(user.Token);
                     MessageBox.Show($"Logged in as: {user.User.UserName}");
-                    MessageBox.Show($"Logged in as: {user.Token}");
                     MainWindow window = new MainWindow();
                     window.Show();
                 }

@@ -3297,23 +3297,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vbalázs\\.nuget\\packages\\": {},
+    "C:\\Users\\pbálint\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj",
+      "projectUniqueName": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj",
       "projectName": "authApi",
-      "projectPath": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj",
-      "packagesPath": "C:\\Users\\vbalázs\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\obj\\",
+      "projectPath": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj",
+      "packagesPath": "C:\\Users\\pbálint\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\vbalázs\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pbálint\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

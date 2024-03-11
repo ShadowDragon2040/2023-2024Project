@@ -24,9 +24,9 @@ namespace AdatKarbantarto.View
         public SzamlazasView()
         {
             InitializeComponent();
-            GetComments();
+            GetSzamlazas();
             DataContext = this;
-            btn_savecomment.IsEnabled = false;
+            btn_save.IsEnabled = false;
         }
 
         public ObservableCollection<Szamla> AddedItems
@@ -41,16 +41,16 @@ namespace AdatKarbantarto.View
             set { szamlazasitems = value; }
         }
 
-        private async void GetComments()
+        private async void GetSzamlazas()
         {
             try
             {
                 BackendApiHelper apiHelper = new BackendApiHelper();
                 szamla = await apiHelper.GetSzamlaAsync();
                 Items.Clear();
-                foreach (var comment in szamla)
+                foreach (var szamla  in szamla)
                 {
-                    Items.Add(comment);
+                    Items.Add(szamla);
                 }
             }
             catch (Exception ex)
@@ -59,12 +59,12 @@ namespace AdatKarbantarto.View
             }
         }
 
-        private async void DeleteComment_Click(object sender, RoutedEventArgs e)
+        private async void Delete_Click(object sender, RoutedEventArgs e)
         {
             Szamla kivalasztott = dtg_Adatokszamla.SelectedItem as Szamla;
             if (kivalasztott == null)
             {
-                MessageBox.Show("Please select a comment to delete.", "Delete Comment", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please select a  to delete.", "Delete ", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
@@ -79,7 +79,7 @@ namespace AdatKarbantarto.View
                 BackendApiHelper deleteHelper = new BackendApiHelper();
                 var response = await deleteHelper.DeleteSzamlaAsync(kivalasztottId);
                 MessageBox.Show(response.ToString());
-                GetComments();
+                GetSzamlazas();
             }
         }
 
@@ -87,15 +87,15 @@ namespace AdatKarbantarto.View
         {
             if (ujSzamla == null)
             {
-                MessageBox.Show("Please add a comment first.", "Save Comment", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please add a  first.", "Save ", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
             BackendApiHelper postHelper = new BackendApiHelper();
             var response = await postHelper.PostSzamlaAsync(ujSzamla);
             MessageBox.Show(response.ToString());
-            GetComments();
-            btn_addcomment.IsEnabled = true;
+            GetSzamlazas();
+            btn_add.IsEnabled = true;
         }
 
         private void txb_search_KeyUp(object sender, KeyEventArgs e)
@@ -110,8 +110,8 @@ namespace AdatKarbantarto.View
         {
             ujSzamla = new Szamla();
             Items.Add(ujSzamla);
-            btn_addcomment.IsEnabled = false;
-            btn_savecomment.IsEnabled = true;
+            btn_add.IsEnabled = false;
+            btn_save.IsEnabled = true;
         }
         private async void btn_put_Click(object sender, RoutedEventArgs e)
         {
@@ -124,7 +124,7 @@ namespace AdatKarbantarto.View
             }
         }
 
-        private void ModifyComment_Click(object sender, RoutedEventArgs e)
+        private void Modify_Click(object sender, RoutedEventArgs e)
         {
             Szamla putSzamla = (Szamla)dtg_Adatokszamla.SelectedItem;
             szamlaAddedItems.Clear();

@@ -120,7 +120,7 @@
                                 <Image Source="Images/comments.png"
                                        Style="{StaticResource Image_Style}" />
 
-                                <TextBlock Text="Szamlazas"
+                                <TextBlock Text="Orders"
                                            Style="{StaticResource Text_Style}" />
 
                             </Grid>

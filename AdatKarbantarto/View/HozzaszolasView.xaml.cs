@@ -22,7 +22,7 @@ namespace AdatKarbantarto.View
         public HozzaszolasView()
         {
             InitializeComponent();
-            GetComments();
+            GetHozzaszolas();
             DataContext = this;
             btn_save.IsEnabled = false;
         }
@@ -39,16 +39,16 @@ namespace AdatKarbantarto.View
             set { items = value; }
         }
 
-        private async void GetComments()
+        private async void GetHozzaszolas()
         {
             try
             {
                 BackendApiHelper apiHelper = new BackendApiHelper();
-                comments = await apiHelper.GetHozzaszolasokAsync();
+                 comments = await apiHelper.GetHozzaszolasokAsync();
                 Items.Clear();
-                foreach (var comment in comments)
+                foreach (var item  in comments)
                 {
-                    Items.Add(comment);
+                    Items.Add(item);
                 }
             }
             catch (Exception ex)
@@ -57,12 +57,12 @@ namespace AdatKarbantarto.View
             }
         }
 
-        private async void DeleteComment_Click(object sender, RoutedEventArgs e)
+        private async void Delete_Click(object sender, RoutedEventArgs e)
         {
             Hozzaszolas kivalasztott = dtg_Adatok.SelectedItem as Hozzaszolas;
             if (kivalasztott == null)
             {
-                MessageBox.Show("Please select a comment to delete.", "Delete Comment", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please select a  to delete.", "Delete ", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
@@ -77,7 +77,7 @@ namespace AdatKarbantarto.View
                 BackendApiHelper deleteHelper = new BackendApiHelper();
                 var response = await deleteHelper.DeleteHozzaszolasAsync(kivalasztottId);
                 MessageBox.Show(response.ToString());
-                GetComments();
+                GetHozzaszolas();
             }
         }
 
@@ -85,14 +85,14 @@ namespace AdatKarbantarto.View
         {
             if (ujhozzaszolas == null)
             {
-                MessageBox.Show("Please add a comment first.", "Save Comment", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please add a  first.", "Save ", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
             BackendApiHelper postHelper = new BackendApiHelper();
             var response = await postHelper.PostHozzaszolasAsync(ujhozzaszolas);
             MessageBox.Show(response.ToString());
-            GetComments();
+            GetHozzaszolas();
             btn_add.IsEnabled = true;
         }
 
@@ -100,7 +100,7 @@ namespace AdatKarbantarto.View
         {
             if (comments != null)
             {
-                var filtered = comments.Where(comment => comment.leiras.ToLower().Contains(txb_search.Text.ToLower()));
+                var filtered = comments.Where(d => d.leiras.ToLower().Contains(txb_search.Text.ToLower()));
                 dtg_Adatok.ItemsSource = filtered;
             }
         }
@@ -124,7 +124,7 @@ namespace AdatKarbantarto.View
             }
         }
 
-        private void ModifyComment_Click(object sender, RoutedEventArgs e)
+        private void Modify_Click(object sender, RoutedEventArgs e)
         {
             Hozzaszolas putHozzaszolas = (Hozzaszolas)dtg_Adatok.SelectedItem;
             addedItems.Clear();

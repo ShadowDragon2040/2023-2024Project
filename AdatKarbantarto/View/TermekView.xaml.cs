@@ -86,7 +86,7 @@ namespace AdatKarbantarto.View
             btn_add.IsEnabled = true;
         }
 
-        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private async void Delete_Click(object sender, RoutedEventArgs e)
         {
             Termek kivalasztott = dtg_Adatok.SelectedItem as Termek;
             int kivalasztottId = kivalasztott.termekId;
@@ -107,7 +107,7 @@ namespace AdatKarbantarto.View
             }
         }
 
-        private void ModifyButton_Click(object sender, RoutedEventArgs e)
+        private void Modify_Click(object sender, RoutedEventArgs e)
         {
             Termek putTermek = (Termek)dtg_Adatok.SelectedItem;
             termekaddedItems.Clear();
@@ -121,6 +121,7 @@ namespace AdatKarbantarto.View
             var filtered = products.Where(termek => termek.termekNev.ToLower().Contains(txb_search.Text.ToLower()));
             dtg_Adatok.ItemsSource = filtered;
         }
+
       
       
 
@@ -144,5 +145,6 @@ namespace AdatKarbantarto.View
           
 
         }
+
     }
 }

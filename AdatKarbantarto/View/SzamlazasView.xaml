@@ -15,16 +15,16 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Content="Keresés:" Margin="20,30,-20,284" Grid.RowSpan="2"></Label>
-        <TextBox Grid.Row="0" x:Name="txb_searchcomment" KeyUp="txb_search_KeyUp" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" Background="Green" Margin="75,30,0,0" />
-        <Button Grid.Row="0" Content="Save Changes" x:Name="btn_savecomment" Click="btn_save_Click" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="336,26,0,0"/>
-        <Button Grid.Row="0" Content="Refresh" Name="btn_refreshcomment" Margin="471,26,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></Button>
-        <Button Grid.Row="0" Content="Add Row" x:Name="btn_addcomment" Click="AddRow_Click"  Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="242,26,0,0"/>
+        <TextBox Grid.Row="0" x:Name="txb_search" KeyUp="txb_search_KeyUp" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" Background="Green" Margin="75,30,0,0" />
+        <Button Grid.Row="0" Content="Save Changes" x:Name="btn_save" Click="btn_save_Click" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="336,26,0,0"/>
+        <Button Grid.Row="0" Content="Refresh" Name="btn_refresh" Margin="471,26,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></Button>
+        <Button Grid.Row="0" Content="Add Row" x:Name="btn_add" Click="AddRow_Click"  Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="242,26,0,0"/>
         <DataGrid Grid.Row="1" x:Name="dtg_Adatokszamla" CanUserAddRows="False" CanUserReorderColumns="False" ItemsSource="{Binding Items}" Margin="20,42,-309,10" Height="600" AutoGenerateColumns="True">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="DeleteComment_Click" BorderThickness="0" Background="Transparent" HorizontalAlignment="Center">
+                            <Button Click="Delete_Click" BorderThickness="0" Background="Transparent" HorizontalAlignment="Center">
                                 <Image Source="/Images/trash.jpg" Width="20" Height="20"/>
                             </Button>
                         </DataTemplate>
@@ -33,7 +33,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="ModifyComment_Click" BorderThickness="0" Background="Transparent">
+                            <Button Click="Modify_Click" BorderThickness="0" Background="Transparent">
                                 <Image Source="/Images/modify.jpg" Width="20" Height="20"/>
                             </Button>
                         </DataTemplate>
@@ -41,7 +41,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Grid.Row="2" x:Name="dtg_addszamla" AutoGenerateColumns="False" Height="70" ItemsSource="{Binding AddedItems}" Margin="20,10,-140,20" CanUserReorderColumns="False">
+        <DataGrid  Grid.Row="2" x:Name="dtg_addszamla" AutoGenerateColumns="False" Height="90" ItemsSource="{Binding AddedItems}" Margin="20,10,-140,20" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn Header="hozzaszolasId" Binding="{Binding szamlazasId}" IsReadOnly="True"/>
                 <materialDesign:DataGridTextColumn Header="hozzaszolasId" Binding="{Binding felhasznaloId}" IsReadOnly="True"/>
