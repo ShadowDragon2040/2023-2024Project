@@ -14,6 +14,8 @@ namespace authApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(c => { c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); });
+
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
                 var connectionString = builder.Configuration.GetConnectionString("Xampmashogyan");
@@ -45,6 +47,8 @@ namespace authApi
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowOrigin");
 
             app.UseAuthentication();
 

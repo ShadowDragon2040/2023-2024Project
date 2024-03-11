@@ -1,12 +1,11 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect,useState } from 'react';
+import {useState } from 'react';
 import { Form, Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
 import {
-  InfoContainer3,
   NavBtn2,
   ModalButton
 } from './TextElements';
@@ -18,7 +17,7 @@ const LoginModal = (props) => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    
     const handleLogin = async (e) => {
       e.preventDefault();
       try {
@@ -28,13 +27,14 @@ const LoginModal = (props) => {
         });
         localStorage.setItem("LoginToken",JSON.stringify(response.data.token))
         const decodedToken = jwtDecode(localStorage.getItem("LoginToken"));
-        props.role(decodedToken.role);
-        sessionStorage.setItem("bejelenkezve", "true");
-        //props.bejelenkezve(true);
+        sessionStorage.setItem("decodedTokenRole", decodedToken.role);
+        sessionStorage.setItem("bejelenkezve", "true");   
+        console.log(decodedToken);
+        console.log("Login successful.");
         toast("Login successful.");
       } catch (error) {
         sessionStorage.setItem("bejelenkezve", "false");
-        //props.bejelenkezve(false);
+        console.log("Login failed.", error);
         toast("Login failed.");
       }
     };
@@ -46,11 +46,11 @@ const LoginModal = (props) => {
         </NavBtn2>
 
           <Modal show={show} onHide={handleClose}>
-          <InfoContainer3>
-            Login
-          </InfoContainer3>
+            <Modal.Header style={{margin: "10px"}} closeButton>
+              <Modal.Title>Login:</Modal.Title>
+            </Modal.Header>
 
-            <Form onSubmit={handleLogin}>
+            <Form  style={{margin: "10px"}} onSubmit={handleLogin}>
                 <Form.Group controlId="formUsername">
                   <Form.Label>Username</Form.Label>
                     <Form.Control
@@ -70,7 +70,7 @@ const LoginModal = (props) => {
                     />
                   </Form.Group>
 
-                <Button variant="primary" type="submit">
+                <Button onClick={handleClose} style={{margin: "10px",backgroundColor: "#01BF71", border: "none"}} variant="primary" type="submit">
                     Login
                 </Button>
             </Form>

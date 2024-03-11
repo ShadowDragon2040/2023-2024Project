@@ -181,7 +181,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpDelete("{id}"), Authorize(Roles = "Admin")]
+        [HttpDelete("{id}")/*, Authorize(Roles = "Admin")*/]
         public async Task<ActionResult> Delete(int id)
         {
             try

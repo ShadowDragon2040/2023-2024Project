@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NagyProjectBackend7._0.Models;
 using Webárúház_Nagy_Project.DTOs;
@@ -44,7 +45,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpPost/*, Authorize(Roles = "Admin")*/]
+        [HttpPost/*, Authorize(Roles = "ADMIN")*/]
         public async Task<ActionResult<FelhasznalokDto>> Post(CreatedFelhasznalokDto createdFelhasznalokDto)
         {
             try
@@ -76,7 +77,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpPut("{id}")/*, Authorize(Roles = "Admin")*/]
+        [HttpPut("{id}")/*, Authorize(Roles = "ADMIN")*/]
         public async Task<ActionResult> Put(int id, UpdateFelhasznalokDto updateFelhasznalokDto)
         {
             try
@@ -111,7 +112,7 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}")/*, Authorize(Roles = "ADMIN")*/]
         public async Task<ActionResult> Delete(int id)
         {
             try

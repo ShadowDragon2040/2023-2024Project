@@ -18,7 +18,7 @@ namespace Webárúház_Nagy_Project.Controllers
             _context = context;
         }
 
-        [HttpGet/*, Authorize(Roles = "Admin")*/]
+        [HttpGet/*, Authorize(Roles = "ADMIN")*/]
         public async Task<ActionResult> Get()
         {
             try
@@ -32,7 +32,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpGet("{id}")/*, Authorize(Roles = "Admin")*/]
+        [HttpGet("{id}")/*, Authorize(Roles = "ADMIN")*/]
         public async Task<ActionResult> Get(int id)
         {
             try
