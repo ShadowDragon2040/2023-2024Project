@@ -33,6 +33,16 @@ namespace AdatKarbantarto.View
             btn_save.IsEnabled=false;
         }
         private ObservableCollection<Termek> items;
+        private ObservableCollection<Termek> termekaddedItems;
+        private List<Hozzaszolas> termekek;
+
+        public ObservableCollection<Termek> AddedItems
+        {
+            get { return termekaddedItems ?? (termekaddedItems = new ObservableCollection<Termek>()); }
+            set { termekaddedItems = value; }
+        }
+
+
 
         public ObservableCollection<Termek> Items
         {
@@ -97,24 +107,13 @@ namespace AdatKarbantarto.View
             }
         }
 
-        private async void ModifyButton_Click(Object sender, RoutedEventArgs e)
+        private void ModifyButton_Click(object sender, RoutedEventArgs e)
         {
-            Termek modTermek = dtg_Adatok.SelectedItem as Termek;
-            var confirmationDialog = new ConfirmationDialog("Are you sure you want to modify?");
-            confirmationDialog.ShowDialog();
+            Termek putTermek = (Termek)dtg_Adatok.SelectedItem;
+            termekaddedItems.Clear();
 
-            bool result = await Task.Run(() => confirmationDialog.Result);
-            if (result) 
-            {
-                BackendApiHelper modHelper = new BackendApiHelper();
-                var response = await modHelper.ModifyTermekAsync(modTermek.termekId);
-                MessageBox.Show(response.ToString());
-                GetTermekek();
-            }
-            else
-            {
+            termekaddedItems.Add(putTermek);
 
-            }
         }
 
         private void txb_search_KeyUp(object sender, KeyEventArgs e)
@@ -127,6 +126,22 @@ namespace AdatKarbantarto.View
 
         private async void btn_put_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                var item = termekaddedItems[0];
+                if (item != null)
+                {
+                    BackendApiHelper modhelper = new BackendApiHelper();
+                    var response = await modhelper.ModifyTermekAsync(item.termekId, item);
+                    MessageBox.Show(response.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            
+          
 
         }
     }

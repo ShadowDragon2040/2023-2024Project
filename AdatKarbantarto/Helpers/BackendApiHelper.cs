@@ -162,16 +162,28 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
-        public async Task<bool> ModifyTermekAsync(int modTermekId)
+        public async Task<bool> ModifyTermekAsync(int id, Termek termek)
         {
-            using(HttpResponseMessage response=await _httpClient.PutAsJsonAsync("/Termekek/",modTermekId))
+            try
             {
+                HttpResponseMessage response = await _httpClient.PutAsJsonAsync("/Termekek/" + id, termek);
+                string responseBody = await response.Content.ReadAsStringAsync();
+
                 if (response.IsSuccessStatusCode)
                 {
                     return true;
                 }
+                else
+                {
+                    MessageBox.Show(responseBody);
+                    throw new Exception($"Failed to modify data from API. Status code: {response.StatusCode}. Response: {responseBody}");
+                }
             }
-            return false;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
         }
 
         public async Task<bool> PostTermekAsync(Termek ujtermek)
