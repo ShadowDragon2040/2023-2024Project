@@ -4,6 +4,7 @@ using MaterialDesignExtensions.Controls;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -47,6 +48,14 @@ namespace AdatKarbantarto.View
             Application.Current.Shutdown();
         }
 
+        private void JwtDecode(string token)
+        {
+            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+           
+           var decoded= handler.ReadToken(token);
+            MessageBox.Show(decoded.ToString());
+        }
+
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -56,8 +65,9 @@ namespace AdatKarbantarto.View
 
                 if (user != null)
                 {
-
+                    JwtDecode(user.Token);
                     MessageBox.Show($"Logged in as: {user.User.UserName}");
+                    MessageBox.Show($"Logged in as: {user.Token}");
                     MainWindow window = new MainWindow();
                     window.Show();
                 }
