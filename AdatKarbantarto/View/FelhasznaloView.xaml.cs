@@ -35,10 +35,16 @@ namespace AdatKarbantarto.View
         }
 
         private ObservableCollection<Felhasznalo> items;
+        private ObservableCollection<Felhasznalo> addedItems;
         public ObservableCollection<Felhasznalo> Items
         {
             get { return items ?? (items = new ObservableCollection<Felhasznalo>()); }
             set { items = value; }
+        }
+        public ObservableCollection<Felhasznalo> AddedItems
+        {
+            get { return addedItems ?? (addedItems = new ObservableCollection<Felhasznalo>()); }
+            set { addedItems = value; }
         }
 
         public List<Felhasznalo> users;
@@ -61,7 +67,14 @@ namespace AdatKarbantarto.View
         }
 
 
+        private void ModifyButton_Click(object sender, RoutedEventArgs e)
+        {
+            Felhasznalo felhasznalo = (Felhasznalo)dtg_Adatok.SelectedItem;
+            addedItems.Clear();
 
+            addedItems.Add(felhasznalo);
+
+        }
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             Felhasznalo kivalasztott = dtg_Adatok.SelectedItem as Felhasznalo;
@@ -113,11 +126,6 @@ namespace AdatKarbantarto.View
         {
 
         }
-
-        private async void btn_Delete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         private bool Vizsgalat(Felhasznalo ujfelhasznalo)
         {
 
@@ -134,5 +142,6 @@ namespace AdatKarbantarto.View
         {
 
         }
+
     }
 }

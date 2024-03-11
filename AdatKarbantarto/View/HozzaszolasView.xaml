@@ -19,7 +19,7 @@
         <Button Grid.Row="0" Content="Save Changes" x:Name="btn_savecomment" Click="btn_save_Click" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="336,26,0,0"/>
         <Button Grid.Row="0" Content="Refresh" Name="btn_refreshcomment" Margin="471,26,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></Button>
         <Button Grid.Row="0" Content="Add Row" x:Name="btn_addcomment" Click="AddRow_Click"  Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="242,26,0,0"/>
-        <DataGrid Grid.Row="1" x:Name="dtg_Adatokcomment" CanUserAddRows="False" CanUserReorderColumns="False" ItemsSource="{Binding Items}" Margin="20,42,-309,10" AutoGenerateColumns="True">
+        <DataGrid Grid.Row="1" x:Name="dtg_Adatokcomment" Height="600" CanUserAddRows="False" CanUserReorderColumns="False" ItemsSource="{Binding Items}" Margin="20,42,-310,65" AutoGenerateColumns="True">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
@@ -41,7 +41,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Grid.Row="2" x:Name="dtg_addcomment" AutoGenerateColumns="False" ItemsSource="{Binding AddedItems}" Margin="20,10,-140,20" CanUserReorderColumns="False">
+        <DataGrid Height="70" Grid.Row="1" x:Name="dtg_add" AutoGenerateColumns="False" ItemsSource="{Binding AddedItems}" Margin="20,380,-140,-11" CanUserReorderColumns="False" Grid.RowSpan="2">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn Header="hozzaszolasId" Binding="{Binding hozzaszolasId}" IsReadOnly="True"/>
                 <materialDesign:DataGridTextColumn Header="felhasznaloId" Binding="{Binding felhasznaloId}" IsReadOnly="True"/>
