@@ -35,6 +35,7 @@ namespace authApi.Services
             var rokenDescription = new SecurityTokenDescriptor
             {
                 Audience = jwtOptions.Audience,
+                
                 Issuer = jwtOptions.Issuer,
                 Subject = new ClaimsIdentity(claimList),
                 Expires = DateTime.Now.AddDays(1),

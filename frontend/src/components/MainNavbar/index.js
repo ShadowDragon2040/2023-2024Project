@@ -19,9 +19,6 @@ import {
 const NavbarA = ({toggle}) => {
   const [scrollNav, setScrollNav]= useState(false);
 
- /* const location = useLocation();
-  const path = location.pathname;
-*/
   const changeNav=()=>{
     if(window.scrollY >= 80){
       setScrollNav(true);

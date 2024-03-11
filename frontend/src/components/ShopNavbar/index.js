@@ -22,7 +22,7 @@ function ShopNavbar(props) {
   const handleShow = () => setShow(true);
 
   const handleLogout = () => {
-    props.setBejelenkezve(false);
+    sessionStorage.setItem("bejelenkezve", "false");
     handleClose();
   }
   const changeNav = () => {

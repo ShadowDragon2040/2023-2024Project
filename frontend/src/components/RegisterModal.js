@@ -1,25 +1,22 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect,useState } from 'react';
+import {useState } from 'react';
 import { Form, Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import {
-  InfoContainer3,
   NavBtn2,
   ModalButton
 } from './TextElements';
 
 const RegisterModal = () => {
     const [userName, setUserName] = useState('');
-    const [fullName, setFullName] = useState('');
-    const [age, setAge] = useState(0);
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    
     const handleRegister = async (e) => {
       e.preventDefault();
       try {
@@ -41,11 +38,11 @@ const RegisterModal = () => {
         </NavBtn2>
 
         <Modal show={show} onHide={handleClose}>
-          <InfoContainer3>
-            Register
-          </InfoContainer3>
+            <Modal.Header style={{margin: "10px"}} closeButton>
+              <Modal.Title>Register:</Modal.Title>
+            </Modal.Header>
 
-            <Form onSubmit={handleRegister}>
+            <Form style={{margin: "10px"}} onSubmit={handleRegister}>
                 <Form.Group controlId="formUserName">
                   <Form.Label>Username</Form.Label>
                     <Form.Control
@@ -74,7 +71,7 @@ const RegisterModal = () => {
                     />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
+                <Button onClick={handleClose} style={{margin: "10px",backgroundColor: "#01BF71", border: "none"}} variant="primary" type="submit">
                     Register
                 </Button>
             </Form>
