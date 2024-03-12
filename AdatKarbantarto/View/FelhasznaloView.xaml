@@ -19,7 +19,7 @@
         <Button Grid.Row="0" Content="Save Changes" x:Name="btn_save" Click="btn_save_Click" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="336,26,0,0"/>
         <Button Grid.Row="0" Content="Refresh" Name="btn_refresh" Margin="471,26,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></Button>
         <Button Grid.Row="0" Content="Add Row" x:Name="btn_add" Click="AddRow_Click"  Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="242,26,0,0"/>
-        <DataGrid Grid.Row="1" x:Name="dtg_Adatok" CanUserAddRows="False" CanUserReorderColumns="False" ItemsSource="{Binding Items}" Margin="20,42,-309,10" Height="600" AutoGenerateColumns="True">
+        <DataGrid Grid.Row="1" x:Name="dtg_Adatok" CanUserAddRows="False" CanUserReorderColumns="False" ItemsSource="{Binding Items}" Margin="20,42,-309,10"  AutoGenerateColumns="True">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
@@ -41,12 +41,12 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Grid.Row="2" x:Name="dtg_addszamla" AutoGenerateColumns="False" Height="90" ItemsSource="{Binding AddedItems}" Margin="20,10,-140,20" CanUserReorderColumns="False">
+        <DataGrid Grid.Row="2" x:Name="dtg_addszamla" CanUserAddRows="False" AutoGenerateColumns="False" Height="90" ItemsSource="{Binding AddedItems}" Margin="20,10,-140,20" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn Header="FelhasznaloId" Binding="{Binding FelhasznaloId}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="LoginNev" Binding="{Binding LoginNev}" IsReadOnly="True"/>
                 <materialDesign:DataGridTextColumn Header="Hash" Binding="{Binding Hash}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="Salt" Binding="{Binding Salt}" />
+                <materialDesign:DataGridTextColumn Header="Salt" Binding="{Binding Salt}" IsReadOnly="True" />
+                <materialDesign:DataGridTextColumn Header="LoginNev" Binding="{Binding LoginNev}"/>
                 <materialDesign:DataGridTextColumn Header="Nev" Binding="{Binding Nev}"/>
                 <materialDesign:DataGridTextColumn Header="Jog" Binding="{Binding Jog}" />
                 <materialDesign:DataGridTextColumn Header="Aktivalva" Binding="{Binding Aktivalva}" />

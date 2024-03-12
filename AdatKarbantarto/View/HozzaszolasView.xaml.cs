@@ -52,7 +52,6 @@ namespace AdatKarbantarto.View
                 {
                     Items.Add(item);
                 }
-                MessageBox.Show(Items.Count.ToString());
             }
             catch (Exception ex)
             {
