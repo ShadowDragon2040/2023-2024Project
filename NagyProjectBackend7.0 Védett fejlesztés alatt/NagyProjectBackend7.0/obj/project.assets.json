@@ -668,6 +668,18 @@
           }
         }
       },
+      "MySqlBackup/1.0.1": {
+        "type": "package",
+        "dependencies": {
+          "MySql.Data": "6.9.9"
+        },
+        "compile": {
+          "lib/MySqlBackup.dll": {}
+        },
+        "runtime": {
+          "lib/MySqlBackup.dll": {}
+        }
+      },
       "Portable.BouncyCastle/1.9.0": {
         "type": "package",
         "compile": {
@@ -2377,6 +2389,18 @@
         "mysql.entityframeworkcore.nuspec"
       ]
     },
+    "MySqlBackup/1.0.1": {
+      "sha512": "SfNkN09nAE4ZU8fyOUHyMJR2e2RW6fWGyiudowPGsZOrfeFML8K6x1yzB+C7dkXLccw6A58kFwkPzZP1b/E76g==",
+      "type": "package",
+      "path": "mysqlbackup/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/MySqlBackup.dll",
+        "mysqlbackup.1.0.1.nupkg.sha512",
+        "mysqlbackup.nuspec"
+      ]
+    },
     "Portable.BouncyCastle/1.9.0": {
       "sha512": "eZZBCABzVOek+id9Xy04HhmgykF0wZg9wpByzrWN7q8qEI0Qen9b7tfd7w8VA3dOeesumMG7C5ZPy0jk7PSRHw==",
       "type": "package",
@@ -3627,6 +3651,7 @@
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.19.6",
       "MySql.Data >= 8.2.0",
       "MySql.EntityFrameworkCore >= 7.0.10",
+      "MySqlBackup >= 1.0.1",
       "Portable.BouncyCastle >= 1.9.0",
       "Swashbuckle.AspNetCore >= 6.5.0",
       "Swashbuckle.AspNetCore.Filters >= 8.0.0",
@@ -3716,6 +3741,10 @@
             "target": "Package",
             "version": "[7.0.10, )"
           },
+          "MySqlBackup": {
+            "target": "Package",
+            "version": "[1.0.1, )"
+          },
           "Portable.BouncyCastle": {
             "target": "Package",
             "version": "[1.9.0, )"
@@ -3755,5 +3784,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'MySqlBackup 1.0.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "MySqlBackup",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    }
+  ]
 }

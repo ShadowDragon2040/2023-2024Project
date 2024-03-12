@@ -83,6 +83,10 @@
               "target": "Package",
               "version": "[7.0.10, )"
             },
+            "MySqlBackup": {
+              "target": "Package",
+              "version": "[1.0.1, )"
+            },
             "Portable.BouncyCastle": {
               "target": "Package",
               "version": "[1.9.0, )"
