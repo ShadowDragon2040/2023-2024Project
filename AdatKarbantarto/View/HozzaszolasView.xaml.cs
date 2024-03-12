@@ -22,6 +22,8 @@ namespace AdatKarbantarto.View
         public HozzaszolasView()
         {
             InitializeComponent();
+            items = new ObservableCollection<Hozzaszolas>(); 
+            addedItems = new ObservableCollection<Hozzaszolas>(); 
             GetHozzaszolas();
             DataContext = this;
             btn_save.IsEnabled = false;
@@ -44,12 +46,13 @@ namespace AdatKarbantarto.View
             try
             {
                 BackendApiHelper apiHelper = new BackendApiHelper();
-                 comments = await apiHelper.GetHozzaszolasokAsync();
+                comments = await apiHelper.GetHozzaszolasokAsync();
                 Items.Clear();
                 foreach (var item  in comments)
                 {
                     Items.Add(item);
                 }
+                MessageBox.Show(Items.Count.ToString());
             }
             catch (Exception ex)
             {
@@ -62,7 +65,7 @@ namespace AdatKarbantarto.View
             Hozzaszolas kivalasztott = dtg_Adatok.SelectedItem as Hozzaszolas;
             if (kivalasztott == null)
             {
-                MessageBox.Show("Please select a  to delete.", "Delete ", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please select a to delete.", "Delete ", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
@@ -77,61 +80,70 @@ namespace AdatKarbantarto.View
                 BackendApiHelper deleteHelper = new BackendApiHelper();
                 var response = await deleteHelper.DeleteHozzaszolasAsync(kivalasztottId);
                 MessageBox.Show(response.ToString());
-                GetHozzaszolas();
+
+                Items.Remove(kivalasztott);
             }
         }
 
+        public Hozzaszolas ujhozzaszolas;
+
+        private void AddRow_Click(object sender, RoutedEventArgs e)
+        {
+            ujhozzaszolas = new Hozzaszolas();
+            Items.Add(ujhozzaszolas);
+
+            btn_save.IsEnabled = true;
+        }
+
+
         private async void btn_save_Click(object sender, RoutedEventArgs e)
         {
-            if (ujhozzaszolas == null)
+            try
             {
-                MessageBox.Show("Please add a  first.", "Save ", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
+                BackendApiHelper postHelper = new BackendApiHelper();
+                var response = await postHelper.PostHozzaszolasAsync(ujhozzaszolas);
+                MessageBox.Show(response.ToString());
+                GetHozzaszolas();
+                btn_add.IsEnabled = true;
             }
-
-            BackendApiHelper postHelper = new BackendApiHelper();
-            var response = await postHelper.PostHozzaszolasAsync(ujhozzaszolas);
-            MessageBox.Show(response.ToString());
-            GetHozzaszolas();
-            btn_add.IsEnabled = true;
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while saving: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void txb_search_KeyUp(object sender, KeyEventArgs e)
         {
             if (comments != null)
             {
-                var filtered = comments.Where(d => d.leiras.ToLower().Contains(txb_search.Text.ToLower()));
+                var filtered = comments.Where(d => d.Leiras.ToLower().Contains(txb_search.Text.ToLower())).ToList();
                 dtg_Adatok.ItemsSource = filtered;
             }
         }
 
-        public Hozzaszolas ujhozzaszolas;
-        private void AddRow_Click(object sender, RoutedEventArgs e)
-        {
-            ujhozzaszolas = new Hozzaszolas();
-            Items.Add(ujhozzaszolas);
-            btn_add.IsEnabled = false;
-            btn_save.IsEnabled = true;
-        }
+
         private async void btn_put_Click(object sender, RoutedEventArgs e)
         {
-            var item = addedItems[0];
-            if (item != null)
+            if (addedItems != null && addedItems.Count > 0)
             {
-              BackendApiHelper modhelper= new BackendApiHelper();
-                var response =await modhelper.ModifyHozzaszolasAsync(item.hozzaszolasId, item);
+                var item = addedItems[0];
+                BackendApiHelper modhelper = new BackendApiHelper();
+                var response = await modhelper.ModifyHozzaszolasAsync(item.hozzaszolasId, item);
                 MessageBox.Show(response.ToString());
             }
         }
 
+
         private void Modify_Click(object sender, RoutedEventArgs e)
         {
             Hozzaszolas putHozzaszolas = (Hozzaszolas)dtg_Adatok.SelectedItem;
-            addedItems.Clear();
-          
-            addedItems.Add(putHozzaszolas);
-
+            if (putHozzaszolas != null)
+            {
+                addedItems.Clear();
+                addedItems.Add(putHozzaszolas);
+            }
         }
+
 
     }
 }

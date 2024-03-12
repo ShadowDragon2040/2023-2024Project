@@ -76,7 +76,7 @@ namespace AdatKarbantarto.Helpers
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<Hozzaszolas>>(content);
+                    return JsonConvert.DeserializeObject<List<Hozzaszolas>>(content).ToList();
                 }
                 else
                 {
@@ -196,7 +196,7 @@ namespace AdatKarbantarto.Helpers
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception("Failed to post Szamlazas", ex);
+                throw new Exception("Failed to post Termek", ex);
             }
         }
         public async Task<bool> DeleteTermekAsync(int id)

@@ -44,10 +44,10 @@
         <DataGrid Grid.Row="2" x:Name="dtg_addszamla" AutoGenerateColumns="False" Height="90" ItemsSource="{Binding AddedItems}" Margin="20,10,-140,20" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn Header="hozzaszolasId" Binding="{Binding hozzaszolasId}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="felhasznaloId" Binding="{Binding felhasznaloId}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="termekId" Binding="{Binding termekId}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="leiras" Binding="{Binding leiras}" />
-                <materialDesign:DataGridTextColumn Header="ertekeles" Binding="{Binding ertekeles}"/>
+                <materialDesign:DataGridTextColumn Header="FelhasznaloId" Binding="{Binding FelhasznaloId}" IsReadOnly="True"/>
+                <materialDesign:DataGridTextColumn Header="TermekId" Binding="{Binding TermekId}" IsReadOnly="True"/>
+                <materialDesign:DataGridTextColumn Header="Leiras" Binding="{Binding Leiras}" />
+                <materialDesign:DataGridTextColumn Header="Ertekeles" Binding="{Binding Ertekeles}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Grid.Row="2" Content="Put" x:Name="btn_put"   Click="btn_put_Click"  Background="YellowGreen"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,16,-213,0"/>

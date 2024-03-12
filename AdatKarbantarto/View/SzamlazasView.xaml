@@ -44,11 +44,11 @@
         <DataGrid  Grid.Row="2" x:Name="dtg_addszamla" AutoGenerateColumns="False" Height="90" ItemsSource="{Binding AddedItems}" Margin="20,10,-140,20" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn Header="hozzaszolasId" Binding="{Binding szamlazasId}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="hozzaszolasId" Binding="{Binding felhasznaloId}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="hozzaszolasId" Binding="{Binding termekId}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="hozzaszolasId" Binding="{Binding szinHex}" />
-                <materialDesign:DataGridTextColumn Header="hozzaszolasId" Binding="{Binding vasarlasIdopontja}"/>
-                <materialDesign:DataGridTextColumn Header="hozzaszolasId" Binding="{Binding sikeresSzallitas}" />
+                <materialDesign:DataGridTextColumn Header="felhasznaloId" Binding="{Binding felhasznaloId}" IsReadOnly="True"/>
+                <materialDesign:DataGridTextColumn Header="termekId" Binding="{Binding termekId}" IsReadOnly="True"/>
+                <materialDesign:DataGridTextColumn Header="szinHex" Binding="{Binding szinHex}" />
+                <materialDesign:DataGridTextColumn Header="vasarlasIdopontja" Binding="{Binding vasarlasIdopontja}"/>
+                <materialDesign:DataGridTextColumn Header="sikeresSzallitas" Binding="{Binding sikeresSzallitas}" />
                
             </DataGrid.Columns>
         </DataGrid>
