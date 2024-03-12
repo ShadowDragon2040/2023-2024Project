@@ -71,19 +71,27 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        
-        [HttpPut("{id}")/*, Authorize(Roles = "Admin")*/]
-        public async Task<ActionResult> Put(int Id, UpdateSzamlazasokDto updateSzamlazasokDto)
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Put(int id, UpdateSzamlazasokDto updateSzamlazasokDto)
         {
             try
             {
-                var existingSzamlazas = _context.Szamlazas.FirstOrDefault(x => x.SzamlazasId == Id);
+                var existingSzamlazas = await _context.Szamlazas.FirstOrDefaultAsync(x => x.SzamlazasId == id);
 
-                /*existingSzamlazas.VasarlasIdopontja = updateSzamlazasokDto.VasarlasIdopontja;*/
+                if (existingSzamlazas == null)
+                {
+                    return NotFound(); 
+                }
+
+                existingSzamlazas.Felhasznalo = await _context.Felhasznalok.FindAsync(updateSzamlazasokDto.FelhasznaloId);
+                existingSzamlazas.Termek = await _context.Termekek.FindAsync(updateSzamlazasokDto.TermekId);
+                existingSzamlazas.SzinHex = updateSzamlazasokDto.szinHex;
+                existingSzamlazas.VasarlasIdopontja = updateSzamlazasokDto.VasarlasIdopontja;
                 existingSzamlazas.SikeresSzalitas = updateSzamlazasokDto.SikeresSzalitas;
 
                 _context.Szamlazas.Update(existingSzamlazas);
-               await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
                 return Ok();
             }
             catch (Exception ex)
@@ -91,6 +99,7 @@ namespace Webárúház_Nagy_Project.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
 
 
         [HttpDelete("{id}")/*, Authorize(Roles = "Admin")*/]
