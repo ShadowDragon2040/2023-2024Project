@@ -53,8 +53,9 @@ namespace Webárúház_Nagy_Project.Controllers
             {
                 var request = new Szamlaza
                 {
-                    Felhasznalo = createdSzamlazasokDto.FelhasznaloId,
-                    Termek = createdSzamlazasokDto.TermekId,
+                    Felhasznalo = await _context.Felhasznalok.FindAsync(createdSzamlazasokDto.FelhasznaloId),
+                    Termek = await _context.Termekek.FindAsync(createdSzamlazasokDto.TermekId),
+                    SzinHex = createdSzamlazasokDto.szinHex,
                     VasarlasIdopontja = DateTime.Now,
                     SikeresSzalitas = false,
                 };
