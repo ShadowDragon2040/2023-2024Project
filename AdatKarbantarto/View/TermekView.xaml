@@ -44,12 +44,12 @@
         <DataGrid Grid.Row="2" x:Name="dtg_addszamla" CanUserAddRows="False" AutoGenerateColumns="False" Height="90" ItemsSource="{Binding AddedItems}" Margin="20,10,-140,20" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn Header="termekId" Binding="{Binding termekId}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="termekNev" Binding="{Binding termekNev}"/>
-                <materialDesign:DataGridTextColumn Header="ar" Binding="{Binding ar}"/>
-                <materialDesign:DataGridTextColumn Header="leiras" Binding="{Binding leiras}" />
-                <materialDesign:DataGridTextColumn Header="menyiseg" Binding="{Binding menyiseg}"/>
-                <materialDesign:DataGridTextColumn Header="kategoriaId" Binding="{Binding kategoriaId}" />
-                <materialDesign:DataGridTextColumn Header="kepUtvonal" Binding="{Binding kepUtvonal}" />
+                <materialDesign:DataGridTextColumn Header="TermekNev" Binding="{Binding TermekNev}"/>
+                <materialDesign:DataGridTextColumn Header="Ar" Binding="{Binding Ar}"/>
+                <materialDesign:DataGridTextColumn Header="Leiras" Binding="{Binding Leiras}" />
+                <materialDesign:DataGridTextColumn Header="Menyiseg" Binding="{Binding Menyiseg}"/>
+                <materialDesign:DataGridTextColumn Header="KategoriaId" Binding="{Binding KategoriaId}" />
+                <materialDesign:DataGridTextColumn Header="KepUtvonal" Binding="{Binding KepUtvonal}" />
 
             </DataGrid.Columns>
         </DataGrid>

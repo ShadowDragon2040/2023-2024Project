@@ -118,7 +118,7 @@ namespace AdatKarbantarto.View
 
         private void txb_search_KeyUp(object sender, KeyEventArgs e)
         {
-            var filtered = products.Where(termek => termek.termekNev.ToLower().Contains(txb_search.Text.ToLower()));
+            var filtered = products.Where(termek => termek.TermekNev.ToLower().Contains(txb_search.Text.ToLower()));
             dtg_Adatok.ItemsSource = filtered;
         }
 

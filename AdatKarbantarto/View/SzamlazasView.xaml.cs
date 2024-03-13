@@ -82,6 +82,13 @@ namespace AdatKarbantarto.View
                 GetSzamlazas();
             }
         }
+        private void AddRow_Click(object sender, RoutedEventArgs e)
+        {
+            ujSzamla = new Szamla();
+            Items.Add(ujSzamla);
+            btn_add.IsEnabled = false;
+            btn_save.IsEnabled = true;
+        }
 
         private async void btn_save_Click(object sender, RoutedEventArgs e)
         {
@@ -106,13 +113,7 @@ namespace AdatKarbantarto.View
             }
         }
 
-        private void AddRow_Click(object sender, RoutedEventArgs e)
-        {
-            ujSzamla = new Szamla();
-            Items.Add(ujSzamla);
-            btn_add.IsEnabled = false;
-            btn_save.IsEnabled = true;
-        }
+    
         private async void btn_put_Click(object sender, RoutedEventArgs e)
         {
             var item = szamlaAddedItems[0];

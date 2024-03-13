@@ -190,7 +190,8 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
-                HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/Termek", ujtermek);
+               
+                HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/Termekek", ujtermek);
                 response.EnsureSuccessStatusCode();
                 return true;
             }
@@ -201,7 +202,7 @@ namespace AdatKarbantarto.Helpers
         }
         public async Task<bool> DeleteTermekAsync(int id)
         {
-            using (HttpResponseMessage response = await _httpClient.DeleteAsync("/Termek/" + id))
+            using (HttpResponseMessage response = await _httpClient.DeleteAsync("/Termekek/" + id))
             {
                 if (response.IsSuccessStatusCode)
                 {
