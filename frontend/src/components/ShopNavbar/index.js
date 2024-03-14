@@ -108,9 +108,9 @@ const handleRemoveFromCart = (itemId) => {
             </div>
               :
             <div>
-                <RegisterModal />
+                <RegisterModal iincrementCounter={props.incrementCounter} />
 
-                <LoginModal/>
+                <LoginModal incrementCounter={props.incrementCounter}/>
             </div>
               }
 

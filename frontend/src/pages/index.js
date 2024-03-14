@@ -11,10 +11,12 @@ import ModelSection from '../components/ModelSection'
 const Home = () => {
 
   const[isOpen,setIsOpen]=useState(false)
+
   const toggle=()=>{
     setIsOpen(!isOpen)
   }
-  
+
+
   return (
     <>
       <Sidebar isOpen={isOpen} toggle={toggle}/>

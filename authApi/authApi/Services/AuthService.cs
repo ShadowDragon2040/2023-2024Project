@@ -88,50 +88,6 @@ namespace authApi.Services
             }
         }
 
-        /*
-        public async Task<string> Register(RegisterRequestDto registerRequestDto)
-        {
-            ApplicationUser user = new()
-            {
-                UserName = registerRequestDto.UserName,
-                NormalizedUserName = registerRequestDto.UserName.ToUpper(),
-
-                Email = registerRequestDto.Email,
-
-            };
-            try
-            {
-                var result = await userManager.CreateAsync(user, registerRequestDto.Password);
-
-                if (result.Succeeded)
-                {
-                    var userToReturn = dataBase.AppUsers.
-                        First(user => user.UserName == registerRequestDto.UserName);
-
-
-                    UserDto userDto = new()
-                    {
-                        Id = userToReturn.Id,
-                        Email = userToReturn.Email,
-                        UserName = userToReturn.UserName,
-
-
-                    };
-
-                    return "";
-                }
-                else
-                {
-                    return result.Errors.FirstOrDefault().Description;
-                }
-            }
-            catch (Exception e)
-            {
-
-            }
-
-            return "Error Encountered!";
-        }*/
         
         public async Task<string> Register(RegisterRequestDto registerRequestDto)
         {
@@ -140,12 +96,15 @@ namespace authApi.Services
                 UserName =registerRequestDto.UserName,
                 NormalizedUserName =registerRequestDto.UserName.ToUpper(),
                 Email =registerRequestDto.Email
+              
             };
             try
             {
                 var result = await userManager.CreateAsync(user,registerRequestDto.Password);
-
-                
+                //role táblába berakja a USER-t
+                roleManager.CreateAsync(new IdentityRole("USER")).GetAwaiter().GetResult();
+                //kapcsoló táblába be kell rakni a kapcsolatot
+                // nincs még itt
                 Random rand = new Random();
                 int randomCode = rand.Next(1000, 10000);
                 SaveVerificationCodeToDatabase(registerRequestDto.Email, randomCode);
@@ -156,7 +115,6 @@ namespace authApi.Services
                 {
                     var userToReturn = dataBase.AppUsers.First(user => user.UserName ==registerRequestDto.UserName);
 
-                    
                     UserDto userDto = new()
                     {
                         Id = userToReturn.Id,

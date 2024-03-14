@@ -28,7 +28,7 @@ const LoginModal = (props) => {
         localStorage.setItem("LoginToken",JSON.stringify(response.data.token))
         const decodedToken = jwtDecode(localStorage.getItem("LoginToken"));
         sessionStorage.setItem("decodedTokenRole", decodedToken.role);
-        sessionStorage.setItem("bejelenkezve", "true");   
+        sessionStorage.setItem("bejelenkezve", "true");
         console.log(decodedToken);
         console.log("Login successful.");
         toast("Login successful.");
@@ -36,6 +36,13 @@ const LoginModal = (props) => {
         sessionStorage.setItem("bejelenkezve", "false");
         console.log("Login failed.", error);
         toast("Login failed.");
+      }finally{
+        /*ha benne van az inkrement akkor refresselődik az oldalde
+        a megjelenés rossz lesz mert a session storage kitisztul ha
+        nincs ez a kódrészlet benne akkor meg történnie kell egy refresh
+        eseménynek hogy az oldal kinézete frissüljön a megfelelő állapotba.
+        props.incrementCounter();*/
+        handleClose();
       }
     };
 
@@ -52,7 +59,7 @@ const LoginModal = (props) => {
 
             <Form  style={{margin: "10px"}} onSubmit={handleLogin}>
                 <Form.Group controlId="formUsername">
-                  <Form.Label>Username</Form.Label>
+                  <Form.Label>Username:</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Enter username"
@@ -61,7 +68,7 @@ const LoginModal = (props) => {
                     />
                   </Form.Group>
                 <Form.Group controlId="formPassword">
-                  <Form.Label>Password</Form.Label>
+                  <Form.Label>Password:</Form.Label>
                     <Form.Control
                         type="password"
                         placeholder="Password"
@@ -70,7 +77,7 @@ const LoginModal = (props) => {
                     />
                   </Form.Group>
 
-                <Button onClick={handleClose} style={{margin: "10px",backgroundColor: "#01BF71", border: "none"}} variant="primary" type="submit">
+                <Button style={{margin: "10px",backgroundColor: "#01BF71", border: "none"}} variant="primary" type="submit">
                     Login
                 </Button>
             </Form>

@@ -7,10 +7,12 @@ import {
   NavBtn2,
   ModalButton
 } from './TextElements';
+import { toast } from 'react-toastify';
 
-const RegisterModal = () => {
+const RegisterModal = (props) => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
     const [show, setShow] = useState(false);
 
@@ -19,6 +21,10 @@ const RegisterModal = () => {
     
     const handleRegister = async (e) => {
       e.preventDefault();
+      if (password !== confirmPassword) {
+        toast("Passwords do not match!");
+        return;
+      }
       try {
         const response = await axios.post('https://localhost:7026/Auth/register', {
           userName: userName,
@@ -28,9 +34,16 @@ const RegisterModal = () => {
         console.log("Registration successful:", response.data);
       } catch (error) {
         console.error("Registration failed:", error);
+      } finally {
+        /*ha benne van az inkrement akkor refresselődik az oldalde
+        a megjelenés rossz lesz mert a session storage kitisztul ha
+        nincs ez a kódrészlet benne akkor meg történnie kell egy refresh
+        eseménynek hogy az oldal kinézete frissüljön a megfelelő állapotba.
+        props.incrementCounter();*/
+        handleClose();
       }
     };
-  
+
     return (
       <>
         <NavBtn2>
@@ -44,25 +57,37 @@ const RegisterModal = () => {
 
             <Form style={{margin: "10px"}} onSubmit={handleRegister}>
                 <Form.Group controlId="formUserName">
-                  <Form.Label>Username</Form.Label>
+                  <Form.Label>Username:</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Enter username"
                         value={userName}
                         onChange={(e) => setUserName(e.target.value)}
                     />
-                  </Form.Group>
+                </Form.Group>
+
                 <Form.Group controlId="formPassword">
-                  <Form.Label>Password</Form.Label>
+                  <Form.Label>Password:</Form.Label>
                     <Form.Control
                         type="password"
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                  </Form.Group>
+                </Form.Group>
+
+                <Form.Group controlId="formPasswordAgain">
+                  <Form.Label>Password again:</Form.Label>
+                    <Form.Control
+                        type="password"
+                        placeholder="Enter password again"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                </Form.Group>
+
                 <Form.Group controlId="formEmail">
-                  <Form.Label>Email address</Form.Label>
+                  <Form.Label>Email address:</Form.Label>
                     <Form.Control
                         type="email"
                         placeholder="Enter email"
@@ -71,7 +96,7 @@ const RegisterModal = () => {
                     />
                 </Form.Group>
 
-                <Button onClick={handleClose} style={{margin: "10px",backgroundColor: "#01BF71", border: "none"}} variant="primary" type="submit">
+                <Button style={{margin: "10px",backgroundColor: "#01BF71", border: "none"}} variant="primary" type="submit">
                     Register
                 </Button>
             </Form>

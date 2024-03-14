@@ -21,6 +21,7 @@ const handleMouseLeave = () => {
     <>
       <ShopPageContainer>
         <Navbar
+        incrementCounter={props.incrementCounter}
         setUserData={setUserData}
         bejelenkezve={props.bejelenkezve}
         role={props.role}
