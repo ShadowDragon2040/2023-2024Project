@@ -12,12 +12,17 @@ namespace AdatKarbantarto.ViewModel
         private bool isAddEnabled;
         private List<Termek> ListData;
         public ObservableCollection<Termek> Items { get; set; }
+        public ObservableCollection<Termek> UpdateItem { get; set; }
+
+        #region Commands
         public RelayCommand RefreshCommand { get; private set; }
         public RelayCommand AddCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
         public RelayCommand ModifyCommand { get; private set; }
         public RelayCommand SaveCommand { get; private set; }
-
+        public RelayCommand PutCommand { get; private set; }    
+        #endregion
+        #region Getters/Setters
         private Termek selectedItem;
         public Termek SelectedItem
         {
@@ -27,20 +32,6 @@ namespace AdatKarbantarto.ViewModel
                 selectedItem = value;
                 OnPropertyChanged(nameof(SelectedItem));
             }
-        }
-
-        public TermekekVM()
-        {
-            isSaveEnabled = false;
-            isAddEnabled = true;
-            Items = new ObservableCollection<Termek>();
-            RefreshCommand = new RelayCommand(execute => RefreshItems());
-            AddCommand = new RelayCommand(execute => AddItem());
-            DeleteCommand = new RelayCommand(execute => DeleteItem(), canExecute => SelectedItem != null);
-            ModifyCommand = new RelayCommand(execute => ModifyItem(), canExecute => CanModify());
-            SaveCommand = new RelayCommand(execute => SaveItem(), canExecute => CanSave());
-
-            LoadInitialData();
         }
         public bool IsSaveEnabled
         {
@@ -66,7 +57,26 @@ namespace AdatKarbantarto.ViewModel
                 }
             }
         }
+        #endregion
 
+
+        public TermekekVM()
+        {
+            isSaveEnabled = false;
+            isAddEnabled = true;
+            Items = new ObservableCollection<Termek>();
+            UpdateItem = new ObservableCollection<Termek>();
+            RefreshCommand = new RelayCommand(execute => RefreshItems());
+            AddCommand = new RelayCommand(execute => AddItem());
+            DeleteCommand = new RelayCommand(execute => DeleteItem(execute as Termek), canExecute => SelectedItem != null);
+            ModifyCommand = new RelayCommand(execute => ModifyItem(execute as Termek), canExecute => CanModify());
+            SaveCommand = new RelayCommand(execute => SaveItem(), canExecute => CanSave());
+            PutCommand = new RelayCommand(execute => PutItem());
+            
+
+            LoadInitialData();
+        }
+ 
         private async void LoadInitialData()
         {
             // Load data into Items collection 
@@ -101,9 +111,23 @@ namespace AdatKarbantarto.ViewModel
             AddCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate AddCommand's CanExecute
         }
 
-        private void SaveItem()
+        private async void SaveItem()
         {
             // Implement logic to save items here
+
+            Termek newProduct = new Termek()
+            {
+                TermekNev = SelectedItem.TermekNev,
+                Ar = SelectedItem.Ar,
+                Leiras = SelectedItem.Leiras,
+                Menyiseg = SelectedItem.Menyiseg,
+                KategoriaId = SelectedItem.KategoriaId,
+                KepUtvonal = SelectedItem.KepUtvonal,
+            };
+            BackendApiHelper postHelper = new BackendApiHelper();
+            var response = await postHelper.PostTermekAsync(newProduct);
+            MessageBox.Show(response.ToString());
+          
 
             IsAddEnabled = true;
             IsSaveEnabled = false;
@@ -111,14 +135,43 @@ namespace AdatKarbantarto.ViewModel
         }
 
 
-        private void DeleteItem()
+        private async void DeleteItem(Termek itemToDelete)
         {
-            Items.Remove(SelectedItem);
+            var confirmationDialog = new ConfirmationDialog("Are you sure you want to delete?");
+            confirmationDialog.ShowDialog();
+
+            bool result = await Task.Run(() => confirmationDialog.Result);
+
+            if (result)
+            {
+                BackendApiHelper deleteHelper = new BackendApiHelper();
+                var response = await deleteHelper.DeleteTermekAsync(itemToDelete.termekId);
+                MessageBox.Show(response.ToString());
+             
+            }
         }
 
-        private void ModifyItem()
+        private  void ModifyItem(Termek itemToModify)
         {
             // Implement logic to modify the selected item here
+           
+            UpdateItem.Clear();
+            UpdateItem.Add(itemToModify);
+        }
+
+        private async void PutItem()
+        {
+            var confirmationDialog = new ConfirmationDialog("Are you sure you want to modify?");
+            confirmationDialog.ShowDialog();
+
+            bool result = await Task.Run(() => confirmationDialog.Result);
+
+            if (result)
+            {
+                BackendApiHelper modhelper = new BackendApiHelper();
+                var response = await modhelper.ModifyTermekAsync(UpdateItem[0].termekId, UpdateItem[0]);
+                MessageBox.Show(response.ToString());
+            }
         }
 
         private bool CanModify() => SelectedItem != null;
