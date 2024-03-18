@@ -12,8 +12,8 @@ namespace AdatKarbantarto.ViewModel
 {
     public class TermekekVM : ViewModelBase
     {
-        private static readonly Regex _regex = new Regex("[^0-9]+");
-        private string _searchProductID;
+        private static readonly Regex _regex = new Regex("[^0-9 ]+");
+        private string _searchProductID="";
         private bool _isSaveEnabled;
         private bool _isAddEnabled;
         private List<Termek> _ListData;
@@ -215,21 +215,18 @@ namespace AdatKarbantarto.ViewModel
         {
             if (_filteredView != null)
             {
-                if (SearchProductID == null) 
-                {
-                    _filteredView.Filter = null; 
-                }
                 if (SearchProductID == "") 
                 {
                     _filteredView.Filter = null; 
                 }
+                
                 else
                 {
                     _filteredView.Filter = obj =>
                     {
                         if (obj is Termek termek)
                         {
-                            // Filter by ProductID (assuming ProductID is an integer property)
+                            // Filter by ProductID 
                             return termek.termekId ==Convert.ToInt32(SearchProductID);
                         }
                         return false;
