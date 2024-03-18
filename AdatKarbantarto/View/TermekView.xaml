@@ -14,8 +14,8 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="Keresés:" Margin="20,30,-20,284" Grid.RowSpan="2"></Label>
-        <TextBox Grid.Row="0" x:Name="txb_search" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" Background="Green" Margin="75,30,0,0" />
+        <Label Grid.Row="0" Content="Search ID:" Margin="20,30,-20,12"/>
+        <TextBox Grid.Row="0" x:Name="txb_search"  VerticalAlignment="Top" Text="{Binding SearchProductID, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Width="150" Background="DarkSlateGray" Margin="75,30,0,0" />
         <Button Grid.Row="0" Content="Save Changes" x:Name="btn_save" Command="{Binding SaveCommand}"  IsEnabled="{Binding IsSaveEnabled}" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="336,26,0,0"/>
         <Button Grid.Row="0" Content="Refresh" Name="btn_refresh" Command="{Binding RefreshCommand}" Margin="471,26,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></Button>
         <Button Grid.Row="0" Content="Add Row" x:Name="btn_add" Command="{Binding AddCommand}"  IsEnabled="{Binding IsAddEnabled}"  Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="242,26,0,0"/>
