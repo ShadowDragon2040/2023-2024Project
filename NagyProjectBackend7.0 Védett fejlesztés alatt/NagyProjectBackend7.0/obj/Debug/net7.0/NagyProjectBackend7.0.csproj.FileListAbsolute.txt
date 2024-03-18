@@ -548,3 +548,4 @@ C:\Users\sjuditanna\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Véd
 C:\Users\sjuditanna\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\ref\NagyProjectBackend7.0.dll
 C:\Users\User\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\obj\Debug\net7.0\NagyProj.3D060C26.Up2Date
 C:\Users\pbálint\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\bin\Debug\net7.0\MySqlBackup.dll
+C:\Users\User\Documents\GitHub\2023-2024Project\NagyProjectBackend7.0 Védett fejlesztés alatt\NagyProjectBackend7.0\bin\Debug\net7.0\MySqlBackup.dll
