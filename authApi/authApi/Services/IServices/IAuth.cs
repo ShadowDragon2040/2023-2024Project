@@ -1,4 +1,4 @@
-﻿using authApi.Models.Dtos;
+﻿using authApi.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace authApi.Services.IServices
@@ -10,5 +10,6 @@ namespace authApi.Services.IServices
         Task<bool> AssignRole(string email, string roleName);
 
         Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto);
+
     }
 }

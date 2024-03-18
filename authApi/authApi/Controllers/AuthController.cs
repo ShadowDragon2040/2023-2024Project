@@ -1,5 +1,4 @@
-﻿using authApi.Models.Dtos;
-using authApi.Services.IServices;
+﻿using authApi.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 using authApi.Services;
 using System.Text;
@@ -10,6 +9,9 @@ using authApi.Models;
 using Microsoft.Extensions.Configuration;
 using System.Net.Mail;
 using authApi.Datas;
+using authApi.Services;
+using Microsoft.EntityFrameworkCore;
+using authApi.DTOs;
 
 namespace authApi.Controllers
 {
@@ -18,15 +20,16 @@ namespace authApi.Controllers
 
     public class AuthController : Controller
     {
+        private readonly AppDbContext dataBase;
         private readonly IAuth authService;
         private readonly UserManager<ApplicationUser> userManager;
 
 
-        public AuthController(IAuth authService, UserManager<ApplicationUser> userManager)
+        public AuthController(AppDbContext dataBase, IAuth authService, UserManager<ApplicationUser> userManager)
         {
             this.userManager = userManager;
             this.authService = authService;
-
+            this.dataBase = dataBase;
         }
 
         [HttpPost("register")]
@@ -41,31 +44,39 @@ namespace authApi.Controllers
             return Ok();
         }
 
-        /*
         [HttpPost("verify-email")]
         public async Task<ActionResult> VerifyEmailCode([FromBody] VerificationRequestDto model)
         {
-            var result = await authService.VerifyEmailCode(model);
+            var user = await dataBase.AppUsers.FirstOrDefaultAsync(u => u.Email.ToLower() == model.Email.ToLower());
 
-            if (result is OkResult)
+            if (user != null)
             {
-                var assignedRoleSuccesful = await authService.AssignRole(model.Email, model.Role.ToUpper());
-
-                if (assignedRoleSuccesful)
+                if (user.EmailCode == model.EmailCode)
                 {
-                    return Ok("Email code verified successfully and role assigned.");
+                    var assignedRoleSuccessful = await authService.AssignRole(model.Email, "USER");
+
+                    if (assignedRoleSuccessful)
+                    {
+                        return Ok("Email code verified successfully and role assigned.");
+                    }
+                    else
+                    {
+                        return StatusCode(500, "Error assigning role.");
+                    }
                 }
                 else
                 {
-                    return StatusCode(500, "Error assigning role.");
+                    return BadRequest("Incorrect email code.");
                 }
             }
             else
             {
-                return result;
+                return NotFound("User not found.");
             }
         }
-        */
+
+
+
 
         [HttpPost("AssignRole")]
         [Authorize(Roles = "Admin")]

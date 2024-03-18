@@ -1,6 +1,5 @@
 ﻿using authApi.Datas;
 using authApi.Models;
-using authApi.Models.Dtos;
 using authApi.Services.IServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
+using authApi.DTOs;
 
 namespace authApi.Services
 {
@@ -21,6 +21,7 @@ namespace authApi.Services
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IConfiguration _configuration;
+
 
         public AuthService(IJwtTokenGenerator jwtTokenGenerator, AppDbContext dataBase, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {
@@ -134,26 +135,5 @@ namespace authApi.Services
                 return ex.Message;
             }
         }
-        
-
-        /*
-        public async Task<IActionResult> VerifyEmailCode(VerificationRequestDto model)
-        {
-            var user = dataBase.AppUsers.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
-
-            if (user == null)
-            {
-                return NotFound("User not found.");
-            }
-            if (user.EmailCode == model.EmailCode)
-            {
-                return Ok("Email code verified successfully.");
-            }
-            else
-            {
-                return BadRequest("Invalid email code.");
-            }
-        }
-        */
     }
 }
