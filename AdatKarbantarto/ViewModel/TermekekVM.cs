@@ -18,7 +18,7 @@ namespace AdatKarbantarto.ViewModel
         private bool _isAddEnabled;
         private List<Termek> _ListData;
         private ObservableCollection<Termek> _items;
-        private ObservableCollection<Termek> _UpdateItem { get; set; }
+        private ObservableCollection<Termek> _updateItem;
         private ICollectionView _filteredView;
 
         #region Commands
@@ -46,6 +46,18 @@ namespace AdatKarbantarto.ViewModel
             }
         }
 
+        public ObservableCollection<Termek> UpdateItem
+        {
+            get { return _updateItem; }
+            set
+            {
+                if (_updateItem != value)
+                {
+                    _updateItem = value;
+                    OnPropertyChanged(nameof(_updateItem));
+                }
+            }
+        }
     
         public ObservableCollection<Termek> Items
         {
@@ -98,7 +110,7 @@ namespace AdatKarbantarto.ViewModel
             _isSaveEnabled = false;
             _isAddEnabled = true;
             Items = new ObservableCollection<Termek>();
-            _UpdateItem = new ObservableCollection<Termek>();
+            UpdateItem = new ObservableCollection<Termek>();
             RefreshCommand = new RelayCommand(execute => RefreshItems());
             AddCommand = new RelayCommand(execute => AddItem());
             DeleteCommand = new RelayCommand(execute => DeleteItem(execute as Termek), canExecute => SelectedItem != null);
@@ -141,7 +153,7 @@ namespace AdatKarbantarto.ViewModel
 
         private void AddItem()
         {
-            Items.Add(new Termek());
+            UpdateItem.Add(new Termek());
             IsAddEnabled = false;
             IsSaveEnabled = true;
             AddCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate AddCommand's CanExecute
@@ -188,8 +200,8 @@ namespace AdatKarbantarto.ViewModel
 
         private void ModifyItem(Termek itemToModify)
         {
-            _UpdateItem.Clear();
-            _UpdateItem.Add(itemToModify);
+            UpdateItem.Clear();
+            UpdateItem.Add(itemToModify);
         }
 
         private async void PutItem()
@@ -202,7 +214,7 @@ namespace AdatKarbantarto.ViewModel
             if (result)
             {
                 BackendApiHelper modhelper = new BackendApiHelper();
-                var response = await modhelper.ModifyTermekAsync(_UpdateItem[0].TermekId, _UpdateItem[0]);
+                var response = await modhelper.ModifyTermekAsync(UpdateItem[0].TermekId, UpdateItem[0]);
                 MessageBox.Show(response.ToString());
             }
         }

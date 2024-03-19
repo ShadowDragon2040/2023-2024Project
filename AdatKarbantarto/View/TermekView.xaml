@@ -21,7 +21,7 @@
         <Button Grid.Row="0" Content="Add Row" x:Name="btn_add" Command="{Binding AddCommand}"  IsEnabled="{Binding IsAddEnabled}"  Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="242,26,0,0"/>
         <DataGrid Grid.Row="1" x:Name="dtg_Adatok" CanUserAddRows="False" CanUserReorderColumns="False"
           SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding Items}" Margin="20,42,-309,10"
-          AutoGenerateColumns="False">
+          AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <!-- Delete button column -->
                 <DataGridTemplateColumn Header="Actions">
