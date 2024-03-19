@@ -1,8 +1,8 @@
-﻿using NagyProjectBackend7._0.Models;
+﻿using authApi.Models;
 
-namespace Webárúház_Nagy_Project.DTOs
+namespace authApi.DTOs
 {
-    public record HozzaszolasokDto(int HozzaszolasId, int FelhasznaloId, int TermekId, string Leiras, int Ertekeles);
-    public record CreatedHozzaszolasokDto(int FelhasznaloId, int TermekId, string Leiras, int Ertekeles);
+    public record HozzaszolasokDto(int HozzaszolasId, Aspnetuser UserId, int TermekId, string Leiras, int Ertekeles);
+    public record CreatedHozzaszolasokDto(string UserId, int TermekId, string Leiras, int Ertekeles);
     public record UpdateHozzaszolasokDto(string Leiras, int Ertekeles);
 }

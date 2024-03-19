@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Webárúház_Nagy_Project.DTOs;
-using NagyProjectBackend7._0.Models;
+using authApi.DTOs;
+using authApi.Models;
 
 namespace Webárúház_Nagy_Project.Controllers
 {
@@ -13,9 +13,9 @@ namespace Webárúház_Nagy_Project.Controllers
     [ApiController]
     public class HozzaszolasController : ControllerBase
     {
-        private readonly ProjectDatabaseContext _context;
+        private readonly AuthContext _context;
 
-        public HozzaszolasController(ProjectDatabaseContext context)
+        public HozzaszolasController(AuthContext context)
         {
             _context = context;
         }
@@ -69,7 +69,7 @@ namespace Webárúház_Nagy_Project.Controllers
             {
                 var request = new Hozzaszolasok
                 {
-                    FelhasznaloId = createdHozzaszolasokDto.FelhasznaloId,
+                    UserId = createdHozzaszolasokDto.UserId,
                     TermekId = createdHozzaszolasokDto.TermekId,
                     Leiras = createdHozzaszolasokDto.Leiras,
                     Ertekeles = createdHozzaszolasokDto.Ertekeles

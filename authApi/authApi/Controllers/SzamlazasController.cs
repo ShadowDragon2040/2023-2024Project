@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Webárúház_Nagy_Project.DTOs;
-using NagyProjectBackend7._0.Models;
+using authApi.DTOs;
+using authApi.Models;
 
 namespace Webárúház_Nagy_Project.Controllers
 {
@@ -11,9 +11,9 @@ namespace Webárúház_Nagy_Project.Controllers
     [ApiController]
     public class SzamlazasController : ControllerBase
     {
-        private readonly ProjectDatabaseContext _context;
+        private readonly AuthContext _context;
 
-        public SzamlazasController(ProjectDatabaseContext context)
+        public SzamlazasController(AuthContext context)
         {
             _context = context;
         }
@@ -53,7 +53,7 @@ namespace Webárúház_Nagy_Project.Controllers
             {
                 var request = new Szamlaza
                 {
-                    Felhasznalo = createdSzamlazasokDto.FelhasznaloId,
+                    User = createdSzamlazasokDto.UserId,
                     Termek = createdSzamlazasokDto.TermekId,
                     VasarlasIdopontja = DateTime.Now,
                     SikeresSzalitas = false,

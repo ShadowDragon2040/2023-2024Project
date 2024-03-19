@@ -1,9 +1,9 @@
 ﻿
-using NagyProjectBackend7._0.Models;
+using authApi.Models;
 
-namespace Webárúház_Nagy_Project.DTOs
+namespace authApi.DTOs
 {
-    public record SzamlazasokDto(int Id, Felhasznalok FelhasznaloId, Termekek TermekId, DateTime VasarlasIdopontja, bool SikeresSzalitas);
-    public record CreatedSzamlazasokDto(Felhasznalok FelhasznaloId, Termekek TermekId, DateTime VasarlasIdopontja, bool SikeresSzalitas);
-    public record UpdateSzamlazasokDto(Felhasznalok FelhasznaloId, Termekek TermekId, DateTime VasarlasIdopontja, bool SikeresSzalitas);
+    public record SzamlazasokDto(int Id, Aspnetuser UserId, Termekek TermekId, DateTime VasarlasIdopontja, bool SikeresSzalitas);
+    public record CreatedSzamlazasokDto(Aspnetuser UserId, Termekek TermekId, DateTime VasarlasIdopontja, bool SikeresSzalitas);
+    public record UpdateSzamlazasokDto(Aspnetuser UserId, Termekek TermekId, DateTime VasarlasIdopontja, bool SikeresSzalitas);
 }

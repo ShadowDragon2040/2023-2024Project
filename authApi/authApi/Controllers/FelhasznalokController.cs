@@ -1,18 +1,18 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NagyProjectBackend7._0.Models;
-using Webárúház_Nagy_Project.DTOs;
+using authApi.Models;
+using authApi.DTOs;
 
-namespace Webárúház_Nagy_Project.Controllers
+namespace authApi.Controllers
 {
     [Route("[controller]")]
     [ApiController]
     public class FelhasznalokController : ControllerBase
     {
-        private readonly ProjectDatabaseContext _context;
+        private readonly AuthContext _context;
 
-        public FelhasznalokController(ProjectDatabaseContext context)
+        public FelhasznalokController(AuthContext context)
         {
             _context = context;
         }
@@ -22,7 +22,7 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             try
             {
-                var result = await _context.Felhasznalok.ToListAsync();
+                var result = await _context.Aspnetusers.ToListAsync();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -32,11 +32,11 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> Get(int id)
+        public async Task<ActionResult> Get(string id)
         {
             try
             {
-                var result = await _context.Felhasznalok.Where(x => x.FelhasznaloId == id).ToListAsync();
+                var result = await _context.Aspnetusers.Where(x => x.Id == id).ToListAsync();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -54,19 +54,13 @@ namespace Webárúház_Nagy_Project.Controllers
                 {
                     LoginNev = createdFelhasznalokDto.LoginNev,
                     Hash = createdFelhasznalokDto.Hash,
-                    Salt = createdFelhasznalokDto.Salt,
                     Nev = createdFelhasznalokDto.Nev,
                     Jog = createdFelhasznalokDto.Jog,
                     Email = createdFelhasznalokDto.Email,
-                    ProfilKep = createdFelhasznalokDto.ProfilKep,
-                    OrszagKod = createdFelhasznalokDto.OrszágKod,
-                    VarosNev = createdFelhasznalokDto.VarosNev,
-                    UtcaNev = createdFelhasznalokDto.UtcaNev,
-                    IranyitoSzam = createdFelhasznalokDto.IranyitoSzam,
-                    Hazszam = createdFelhasznalokDto.Hazszam,
+                    ProfilKep = createdFelhasznalokDto.ProfilKep
                 };
 
-                _context.Felhasznalok.Add(request);
+                _context.Aspnetusers.Add(request);
                 await _context.SaveChangesAsync();
 
                 return Ok(/*request.AsDto()*/);
@@ -78,11 +72,11 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
         [HttpPut("{id}")/*, Authorize(Roles = "ADMIN")*/]
-        public async Task<ActionResult> Put(int id, UpdateFelhasznalokDto updateFelhasznalokDto)
+        public async Task<ActionResult> Put(string id, UpdateFelhasznalokDto updateFelhasznalokDto)
         {
             try
             {
-                var existingFelhasznalo = await _context.Felhasznalok.FirstOrDefaultAsync(x => x.FelhasznaloId == id);
+                var existingFelhasznalo = await _context.Aspnetusers.FirstOrDefaultAsync(x => x.Id == id);
 
                 if (existingFelhasznalo == null)
                 {
@@ -91,16 +85,10 @@ namespace Webárúház_Nagy_Project.Controllers
 
                 existingFelhasznalo.LoginNev = updateFelhasznalokDto.LoginNev;
                 existingFelhasznalo.Hash = updateFelhasznalokDto.Hash;
-                existingFelhasznalo.Salt = updateFelhasznalokDto.Salt;
                 existingFelhasznalo.Nev = updateFelhasznalokDto.Nev;
                 existingFelhasznalo.Jog = updateFelhasznalokDto.Jog;
                 existingFelhasznalo.Email = updateFelhasznalokDto.Email;
                 existingFelhasznalo.ProfilKep = updateFelhasznalokDto.ProfilKep;
-                existingFelhasznalo.OrszagKod = updateFelhasznalokDto.OrszágKod;
-                existingFelhasznalo.VarosNev = updateFelhasznalokDto.VarosNev;
-                existingFelhasznalo.UtcaNev = updateFelhasznalokDto.UtcaNev;
-                existingFelhasznalo.IranyitoSzam = updateFelhasznalokDto.IranyitoSzam;
-                existingFelhasznalo.Hazszam = updateFelhasznalokDto.Hazszam;
 
                 await _context.SaveChangesAsync();
                 return Ok();
@@ -113,13 +101,13 @@ namespace Webárúház_Nagy_Project.Controllers
 
 
         [HttpDelete("{id}")/*, Authorize(Roles = "ADMIN")*/]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(string id)
         {
             try
             {
-                var existingFelhasznalo = await _context.Felhasznalok.FirstOrDefaultAsync(x => x.FelhasznaloId == id);
+                var existingFelhasznalo = await _context.Aspnetusers.FirstOrDefaultAsync(x => x.Id == id);
 
-                _context.Felhasznalok.Remove(existingFelhasznalo);
+                _context.Aspnetusers.Remove(existingFelhasznalo);
                 await _context.SaveChangesAsync();
 
                 return Ok();

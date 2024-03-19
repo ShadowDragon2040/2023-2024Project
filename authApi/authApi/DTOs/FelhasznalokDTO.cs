@@ -1,16 +1,8 @@
-﻿using NagyProjectBackend7._0.Models;
+﻿using authApi.Models;
 
-namespace Webárúház_Nagy_Project.DTOs
+namespace authApi.DTOs
 {
-    public record FelhasznalokDto(int Id, string LoginNev, string Hash, string Salt, string Nev, int Jog, bool Aktivalva, string Email, string ProfilKep, Orszagok OrszágKod, Varosok VarosNev, string UtcaNev, string IranyitoSzam, int Hazszam);
-    public record CreatedFelhasznalokDto(string LoginNev, string Hash, string Salt, string Nev, int Jog, bool Aktivalva, string Email, string ProfilKep, Orszagok OrszágKod, Varosok VarosNev, string UtcaNev, string IranyitoSzam, int Hazszam);
-    public record UpdateFelhasznalokDto(string LoginNev, string Hash, string Salt, string Nev, int Jog, bool Aktivalva, string Email, string ProfilKep, Orszagok OrszágKod, Varosok VarosNev, string UtcaNev, string IranyitoSzam, int Hazszam);
-
-    /*
-    public class UserDto
-    {
-        public string? Username { get; set; }
-        public string? Password { get; set; }
-    }
-    */
+    public record FelhasznalokDto(int Id, string LoginNev, string Hash, string Nev, int Jog, bool Aktivalva, string Email, string ProfilKep);
+    public record CreatedFelhasznalokDto(string LoginNev, string Hash, string Nev, int Jog, bool Aktivalva, string Email, string ProfilKep);
+    public record UpdateFelhasznalokDto(string LoginNev, string Hash, string Nev, int Jog, bool Aktivalva, string Email, string ProfilKep);
 }

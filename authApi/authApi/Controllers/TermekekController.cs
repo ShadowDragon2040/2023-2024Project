@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Webárúház_Nagy_Project.DTOs;
-using NagyProjectBackend7._0.Models;
+using authApi.DTOs;
+using authApi.Models;
 
 namespace Webárúház_Nagy_Project.Controllers
 {
@@ -10,9 +10,9 @@ namespace Webárúház_Nagy_Project.Controllers
     [ApiController]
     public class TermekekController : ControllerBase
     {
-        private readonly ProjectDatabaseContext _context;
+        private readonly AuthContext _context;
 
-        public TermekekController(ProjectDatabaseContext context)
+        public TermekekController(AuthContext context)
         {
             _context = context;
         }
@@ -104,7 +104,7 @@ namespace Webárúház_Nagy_Project.Controllers
                         h.HozzaszolasId,
                         h.Leiras,
                         h.Ertekeles,
-                        h.FelhasznaloId,
+                        h.UserId,
                         h.Felhasznalo.LoginNev
                     ))
                     .ToListAsync();
