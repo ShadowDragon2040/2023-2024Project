@@ -2,7 +2,7 @@
 
 namespace authApi.DTOs
 {
-    public record FelhasznalokDto(int Id, string LoginNev, string Hash, string Nev, int Jog, bool Aktivalva, string Email, string ProfilKep);
-    public record CreatedFelhasznalokDto(string LoginNev, string Hash, string Nev, int Jog, bool Aktivalva, string Email, string ProfilKep);
-    public record UpdateFelhasznalokDto(string LoginNev, string Hash, string Nev, int Jog, bool Aktivalva, string Email, string ProfilKep);
+    public record FelhasznalokDto(string Id, string UserName, string PasswordHash, bool EmailConfirmed, string Email, byte[] ProfilKep);
+    public record CreatedFelhasznalokDto(string UserName, string PasswordHash, bool EmailConfirmed, string Email, byte[] ProfilKep);
+    public record UpdateFelhasznalokDto(string UserName, string PasswordHash, bool EmailConfirmed, string Email, byte[] ProfilKep);
 }

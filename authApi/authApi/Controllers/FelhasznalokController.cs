@@ -50,13 +50,12 @@ namespace authApi.Controllers
         {
             try
             {
-                var request = new Felhasznalok
+                var request = new Aspnetuser
                 {
-                    LoginNev = createdFelhasznalokDto.LoginNev,
-                    Hash = createdFelhasznalokDto.Hash,
-                    Nev = createdFelhasznalokDto.Nev,
-                    Jog = createdFelhasznalokDto.Jog,
+                    UserName = createdFelhasznalokDto.UserName,
+                    PasswordHash = createdFelhasznalokDto.PasswordHash,
                     Email = createdFelhasznalokDto.Email,
+                    EmailConfirmed = createdFelhasznalokDto.EmailConfirmed,
                     ProfilKep = createdFelhasznalokDto.ProfilKep
                 };
 
@@ -83,10 +82,8 @@ namespace authApi.Controllers
                     return NotFound();
                 }
 
-                existingFelhasznalo.LoginNev = updateFelhasznalokDto.LoginNev;
-                existingFelhasznalo.Hash = updateFelhasznalokDto.Hash;
-                existingFelhasznalo.Nev = updateFelhasznalokDto.Nev;
-                existingFelhasznalo.Jog = updateFelhasznalokDto.Jog;
+                existingFelhasznalo.UserName = updateFelhasznalokDto.UserName;
+                existingFelhasznalo.PasswordHash = updateFelhasznalokDto.PasswordHash;
                 existingFelhasznalo.Email = updateFelhasznalokDto.Email;
                 existingFelhasznalo.ProfilKep = updateFelhasznalokDto.ProfilKep;
 

@@ -104,8 +104,8 @@ namespace Webárúház_Nagy_Project.Controllers
                         h.HozzaszolasId,
                         h.Leiras,
                         h.Ertekeles,
-                        h.UserId,
-                        h.Felhasznalo.LoginNev
+                        h.UserId
+                        
                     ))
                     .ToListAsync();
 
