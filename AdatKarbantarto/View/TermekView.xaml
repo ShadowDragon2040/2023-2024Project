@@ -46,7 +46,7 @@
                 </DataGridTemplateColumn>
 
                 <!-- Define other columns for your data properties as needed -->
-                <DataGridTextColumn Header="ID" Binding="{Binding termekId}" />
+                <DataGridTextColumn Header="ID" Binding="{Binding TermekId}" />
                 <DataGridTextColumn Header="Name" Binding="{Binding TermekNev}" />
                 <DataGridTextColumn Header="Price" Binding="{Binding Ar}" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Leiras}" />
@@ -60,13 +60,13 @@
 
         <DataGrid Grid.Row="2" x:Name="dtg_addszamla" CanUserAddRows="False" AutoGenerateColumns="False" Height="90" ItemsSource="{Binding UpdateItem}" Margin="20,10,-140,20" CanUserReorderColumns="False">
             <DataGrid.Columns>
-                <materialDesign:DataGridTextColumn Header="termekId" Binding="{Binding termekId}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="TermekNev" Binding="{Binding TermekNev}"/>
-                <materialDesign:DataGridTextColumn Header="Ar" Binding="{Binding Ar}"/>
-                <materialDesign:DataGridTextColumn Header="Leiras" Binding="{Binding Leiras}" />
-                <materialDesign:DataGridTextColumn Header="Menyiseg" Binding="{Binding Menyiseg}"/>
-                <materialDesign:DataGridTextColumn Header="KategoriaId" Binding="{Binding KategoriaId}" />
-                <materialDesign:DataGridTextColumn Header="KepUtvonal" Binding="{Binding KepUtvonal}" />
+                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding TermekId}" IsReadOnly="True"/>
+                <materialDesign:DataGridTextColumn Header="ProductName" Binding="{Binding TermekNev}"/>
+                <materialDesign:DataGridTextColumn Header="Price" Binding="{Binding Ar}"/>
+                <materialDesign:DataGridTextColumn Header="Description" Binding="{Binding Leiras}" />
+                <materialDesign:DataGridTextColumn Header="Amount" Binding="{Binding Menyiseg}"/>
+                <materialDesign:DataGridTextColumn Header="CategoryID" Binding="{Binding KategoriaId}" />
+                <materialDesign:DataGridTextColumn Header="FilePath" Binding="{Binding KepUtvonal}" />
 
             </DataGrid.Columns>
         </DataGrid>

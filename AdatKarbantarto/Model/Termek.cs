@@ -8,12 +8,12 @@ namespace AdatKarbantarto.Model
 {
     public class Termek
     {
-        public int termekId {  get; set; }
-        public string termekNev { get; set; }
-        public int ar {  get; set; }
-        public string leiras { get; set; }
-        public int menyiseg { get; set; }
-        public int kategoriaId { get; set; }
-        public string kepUtvonal{ get; set; }
+        public int TermekId {  get; set; }
+        public string TermekNev { get; set; }
+        public int Ar {  get; set; }
+        public string Leiras { get; set; }
+        public int Menyiseg { get; set; }
+        public int KategoriaId { get; set; }
+        public string KepUtvonal{ get; set; }
     }
 }

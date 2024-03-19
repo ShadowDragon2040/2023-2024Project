@@ -18,7 +18,7 @@ namespace AdatKarbantarto.ViewModel
         private bool _isAddEnabled;
         private List<Termek> _ListData;
         private ObservableCollection<Termek> _items;
-        public ObservableCollection<Termek> UpdateItem { get; set; }
+        private ObservableCollection<Termek> _UpdateItem { get; set; }
         private ICollectionView _filteredView;
 
         #region Commands
@@ -36,7 +36,7 @@ namespace AdatKarbantarto.ViewModel
             get { return _searchProductID; }
             set
             {
-                
+                   
                 if (_searchProductID != value&& isTextAllowed(value))
                 {
                     _searchProductID = value;
@@ -98,7 +98,7 @@ namespace AdatKarbantarto.ViewModel
             _isSaveEnabled = false;
             _isAddEnabled = true;
             Items = new ObservableCollection<Termek>();
-            UpdateItem = new ObservableCollection<Termek>();
+            _UpdateItem = new ObservableCollection<Termek>();
             RefreshCommand = new RelayCommand(execute => RefreshItems());
             AddCommand = new RelayCommand(execute => AddItem());
             DeleteCommand = new RelayCommand(execute => DeleteItem(execute as Termek), canExecute => SelectedItem != null);
@@ -180,7 +180,7 @@ namespace AdatKarbantarto.ViewModel
             if (result)
             {
                 BackendApiHelper deleteHelper = new BackendApiHelper();
-                var response = await deleteHelper.DeleteTermekAsync(itemToDelete.termekId);
+                var response = await deleteHelper.DeleteTermekAsync(itemToDelete.TermekId);
                 MessageBox.Show(response.ToString());
 
             }
@@ -188,8 +188,8 @@ namespace AdatKarbantarto.ViewModel
 
         private void ModifyItem(Termek itemToModify)
         {
-            UpdateItem.Clear();
-            UpdateItem.Add(itemToModify);
+            _UpdateItem.Clear();
+            _UpdateItem.Add(itemToModify);
         }
 
         private async void PutItem()
@@ -202,13 +202,12 @@ namespace AdatKarbantarto.ViewModel
             if (result)
             {
                 BackendApiHelper modhelper = new BackendApiHelper();
-                var response = await modhelper.ModifyTermekAsync(UpdateItem[0].termekId, UpdateItem[0]);
+                var response = await modhelper.ModifyTermekAsync(_UpdateItem[0].TermekId, _UpdateItem[0]);
                 MessageBox.Show(response.ToString());
             }
         }
         private bool CanSave()
         {
-
             return true;
         }
         private void ApplyFilter()
@@ -227,7 +226,19 @@ namespace AdatKarbantarto.ViewModel
                         if (obj is Termek termek)
                         {
                             // Filter by ProductID 
-                            return termek.termekId ==Convert.ToInt32(SearchProductID);
+                            if (int.TryParse(SearchProductID,out int result))
+                            {
+                                if (result<=int.MaxValue)
+                                {
+                                  return termek.TermekId ==Convert.ToInt32(SearchProductID);
+                                }
+                            
+                            }
+                            else
+                            {
+                                MessageBox.Show("Failed to convert the string to an integer.", "Warning!", MessageBoxButton.OK);
+                                SearchProductID = "";
+                            }
                         }
                         return false;
                     };

@@ -78,7 +78,7 @@ namespace AdatKarbantarto.View
         private async void Delete_Click(object sender, RoutedEventArgs e)
         {
             Felhasznalo kivalasztott = dtg_Adatok.SelectedItem as Felhasznalo;
-            int kivalasztottId = kivalasztott.FelhasznaloId;
+            string kivalasztottId = kivalasztott.Id;
             var confirmationDialog = new ConfirmationDialog("Are you sure you want to delete?");
             confirmationDialog.ShowDialog();
 
@@ -138,7 +138,7 @@ namespace AdatKarbantarto.View
 
         private void txb_search_KeyUp(object sender, KeyEventArgs e)
         {
-            var filtered = users.Where(user => user.LoginNev.ToLower().Contains(txb_search.Text.ToLower()));
+            var filtered = users.Where(user => user.UserName.ToLower().Contains(txb_search.Text.ToLower()));
             dtg_Adatok.ItemsSource = filtered;
         }
 

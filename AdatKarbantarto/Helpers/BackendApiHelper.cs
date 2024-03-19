@@ -18,13 +18,13 @@ namespace AdatKarbantarto.Helpers
         public BackendApiHelper()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("https://localhost:7240");
+            _httpClient.BaseAddress = new Uri("https://localhost:7026");
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         #region Felhasznalok
-        public async Task<bool> DeleteFelhasznaloAsync(int id)
+        public async Task<bool> DeleteFelhasznaloAsync(string id)
         {
             using (HttpResponseMessage response = await _httpClient.DeleteAsync("/Felhasznalo/" + id))
             {
@@ -190,18 +190,18 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
-                HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/Termek", ujtermek);
+                HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/Termekek", ujtermek);
                 response.EnsureSuccessStatusCode();
                 return true;
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception("Failed to post Szamlazas", ex);
+                throw new Exception("Failed to post Termek", ex);
             }
         }
         public async Task<bool> DeleteTermekAsync(int id)
         {
-            using (HttpResponseMessage response = await _httpClient.DeleteAsync("/Termek/" + id))
+            using (HttpResponseMessage response = await _httpClient.DeleteAsync("/Termekek/" + id))
             {
                 if (response.IsSuccessStatusCode)
                 {
