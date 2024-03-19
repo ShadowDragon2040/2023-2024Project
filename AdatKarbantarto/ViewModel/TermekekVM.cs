@@ -1,12 +1,240 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AdatKarbantarto.Helpers;
+using AdatKarbantarto.Model;
+using AdatKarbantarto.Utilities;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Data;
+using System.Xml.Linq;
 
 namespace AdatKarbantarto.ViewModel
 {
-    class TermekekVM
+    public class TermekekVM : ViewModelBase
     {
+        private static readonly Regex _regex = new Regex("[^0-9 ]+");
+        private string _searchProductID="";
+        private bool _isSaveEnabled;
+        private bool _isAddEnabled;
+        private List<Termek> _ListData;
+        private ObservableCollection<Termek> _items;
+        public ObservableCollection<Termek> UpdateItem { get; set; }
+        private ICollectionView _filteredView;
+
+        #region Commands
+        public RelayCommand RefreshCommand { get; private set; }
+        public RelayCommand AddCommand { get; private set; }
+        public RelayCommand DeleteCommand { get; private set; }
+        public RelayCommand ModifyCommand { get; private set; }
+        public RelayCommand SaveCommand { get; private set; }
+        public RelayCommand PutCommand { get; private set; }
+        #endregion
+        #region Getters/Setters
+
+        public string SearchProductID
+        {
+            get { return _searchProductID; }
+            set
+            {
+                
+                if (_searchProductID != value&& isTextAllowed(value))
+                {
+                    _searchProductID = value;
+                    OnPropertyChanged(nameof(_searchProductID));
+                    ApplyFilter();
+                }
+            }
+        }
+
+    
+        public ObservableCollection<Termek> Items
+        {
+            get { return _items; }
+            set
+            {
+                _items = value;
+                _filteredView = CollectionViewSource.GetDefaultView(_items);
+                ApplyFilter();
+            }
+        }
+        private Termek selectedItem;
+        public Termek SelectedItem
+        {
+            get { return selectedItem; }
+            set
+            {
+                selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+            }
+        }
+        public bool IsSaveEnabled
+        {
+            get { return _isSaveEnabled; }
+            set
+            {
+                if (_isSaveEnabled != value)
+                {
+                    _isSaveEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public bool IsAddEnabled
+        {
+            get { return _isAddEnabled; }
+            set
+            {
+                if (_isAddEnabled != value)
+                {
+                    _isAddEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        #endregion
+
+        public TermekekVM()
+        {
+            _isSaveEnabled = false;
+            _isAddEnabled = true;
+            Items = new ObservableCollection<Termek>();
+            UpdateItem = new ObservableCollection<Termek>();
+            RefreshCommand = new RelayCommand(execute => RefreshItems());
+            AddCommand = new RelayCommand(execute => AddItem());
+            DeleteCommand = new RelayCommand(execute => DeleteItem(execute as Termek), canExecute => SelectedItem != null);
+            ModifyCommand = new RelayCommand(execute => ModifyItem(execute as Termek), canExecute => SelectedItem != null);
+            SaveCommand = new RelayCommand(execute => SaveItem(), canExecute => CanSave());
+            PutCommand = new RelayCommand(execute => PutItem());
+
+
+            LoadInitialData();
+        }
+        private static bool isTextAllowed(string value)
+        {
+            return !_regex.IsMatch(value);
+        }
+
+        private async void LoadInitialData()
+        {
+            // Load data into Items collection 
+            try
+            {
+                BackendApiHelper apiHelper = new BackendApiHelper();
+                _ListData = await apiHelper.GetTermekekAsync();
+                Items.Clear();
+                foreach (var szamla in _ListData)
+                {
+                    Items.Add(szamla);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+        private void RefreshItems()
+        {
+            Items.Clear();
+            LoadInitialData();
+        }
+
+        private void AddItem()
+        {
+            Items.Add(new Termek());
+            IsAddEnabled = false;
+            IsSaveEnabled = true;
+            AddCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate AddCommand's CanExecute
+        }
+
+        private async void SaveItem()
+        {
+
+            Termek newProduct = new Termek()
+            {
+                TermekNev = SelectedItem.TermekNev,
+                Ar = SelectedItem.Ar,
+                Leiras = SelectedItem.Leiras,
+                Menyiseg = SelectedItem.Menyiseg,
+                KategoriaId = SelectedItem.KategoriaId,
+                KepUtvonal = SelectedItem.KepUtvonal,
+            };
+            BackendApiHelper postHelper = new BackendApiHelper();
+            var response = await postHelper.PostTermekAsync(newProduct);
+            MessageBox.Show(response.ToString());
+
+
+            IsAddEnabled = true;
+            IsSaveEnabled = false;
+            SaveCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate SaveCommand's CanExecute
+        }
+
+
+        private async void DeleteItem(Termek itemToDelete)
+        {
+            var confirmationDialog = new ConfirmationDialog("Are you sure you want to delete?");
+            confirmationDialog.ShowDialog();
+
+            bool result = await Task.Run(() => confirmationDialog.Result);
+
+            if (result)
+            {
+                BackendApiHelper deleteHelper = new BackendApiHelper();
+                var response = await deleteHelper.DeleteTermekAsync(itemToDelete.termekId);
+                MessageBox.Show(response.ToString());
+
+            }
+        }
+
+        private void ModifyItem(Termek itemToModify)
+        {
+            UpdateItem.Clear();
+            UpdateItem.Add(itemToModify);
+        }
+
+        private async void PutItem()
+        {
+            var confirmationDialog = new ConfirmationDialog("Are you sure you want to modify?");
+            confirmationDialog.ShowDialog();
+
+            bool result = await Task.Run(() => confirmationDialog.Result);
+
+            if (result)
+            {
+                BackendApiHelper modhelper = new BackendApiHelper();
+                var response = await modhelper.ModifyTermekAsync(UpdateItem[0].termekId, UpdateItem[0]);
+                MessageBox.Show(response.ToString());
+            }
+        }
+        private bool CanSave()
+        {
+
+            return true;
+        }
+        private void ApplyFilter()
+        {
+            if (_filteredView != null)
+            {
+                if (SearchProductID == "") 
+                {
+                    _filteredView.Filter = null; 
+                }
+                
+                else
+                {
+                    _filteredView.Filter = obj =>
+                    {
+                        if (obj is Termek termek)
+                        {
+                            // Filter by ProductID 
+                            return termek.termekId ==Convert.ToInt32(SearchProductID);
+                        }
+                        return false;
+                    };
+                }
+            }
+
+
+        }
     }
 }

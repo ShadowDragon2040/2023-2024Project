@@ -14,45 +14,62 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="Keresés:" Margin="20,30,-20,284" Grid.RowSpan="2"></Label>
-        <TextBox Grid.Row="0" x:Name="txb_search" KeyUp="txb_search_KeyUp" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" Background="Green" Margin="75,30,0,0" />
-        <Button Grid.Row="0" Content="Save Changes" x:Name="btn_save" Click="btn_save_Click" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="336,26,0,0"/>
-        <Button Grid.Row="0" Content="Refresh" Name="btn_refresh" Margin="471,26,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></Button>
-        <Button Grid.Row="0" Content="Add Row" x:Name="btn_add" Click="AddRow_Click"  Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="242,26,0,0"/>
-        <DataGrid Grid.Row="1" x:Name="dtg_Adatok" CanUserAddRows="False" CanUserReorderColumns="False" ItemsSource="{Binding Items}" Margin="20,42,-309,10" Height="600" AutoGenerateColumns="True">
+        <Label Grid.Row="0" Content="Search ID:" Margin="20,30,-20,12"/>
+        <TextBox Grid.Row="0" x:Name="txb_search"  VerticalAlignment="Top" Text="{Binding SearchProductID, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Width="150" Background="DarkSlateGray" Margin="75,30,0,0" />
+        <Button Grid.Row="0" Content="Save Changes" x:Name="btn_save" Command="{Binding SaveCommand}"  IsEnabled="{Binding IsSaveEnabled}" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="336,26,0,0"/>
+        <Button Grid.Row="0" Content="Refresh" Name="btn_refresh" Command="{Binding RefreshCommand}" Margin="471,26,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></Button>
+        <Button Grid.Row="0" Content="Add Row" x:Name="btn_add" Command="{Binding AddCommand}"  IsEnabled="{Binding IsAddEnabled}"  Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="242,26,0,0"/>
+        <DataGrid Grid.Row="1" x:Name="dtg_Adatok" CanUserAddRows="False" CanUserReorderColumns="False"
+          SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding Items}" Margin="20,42,-309,10"
+          AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTemplateColumn>
+                <!-- Delete button column -->
+                <DataGridTemplateColumn Header="Actions">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="Delete_Click" BorderThickness="0" Background="Transparent" HorizontalAlignment="Center">
-                                <Image Source="/Images/trash.jpg" Width="20" Height="20"/>
-                            </Button>
+                            <Button Content="Delete" CommandParameter="{Binding}" 
+                            Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                            HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+
+                <!-- Modify button column -->
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="Modify_Click" BorderThickness="0" Background="Transparent">
-                                <Image Source="/Images/modify.jpg" Width="20" Height="20"/>
-                            </Button>
+                            <Button Content="Modify" Command="{Binding DataContext.ModifyCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                            CommandParameter="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+
+                <!-- Define other columns for your data properties as needed -->
+                <DataGridTextColumn Header="ID" Binding="{Binding termekId}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding TermekNev}" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Ar}" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Leiras}" />
+                <DataGridTextColumn Header="Amount" Binding="{Binding Menyiseg}" />
+                <DataGridTextColumn Header="Category ID" Binding="{Binding KategoriaId}" />
+                <DataGridTextColumn Header="File Path" Binding="{Binding KepUtvonal}" />
+                <!-- Add more columns as needed -->
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Grid.Row="2" x:Name="dtg_addszamla" AutoGenerateColumns="False" Height="90" ItemsSource="{Binding AddedItems}" Margin="20,10,-140,20" CanUserReorderColumns="False">
+
+
+        <DataGrid Grid.Row="2" x:Name="dtg_addszamla" CanUserAddRows="False" AutoGenerateColumns="False" Height="90" ItemsSource="{Binding UpdateItem}" Margin="20,10,-140,20" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn Header="termekId" Binding="{Binding termekId}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="termekNev" Binding="{Binding termekNev}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="ar" Binding="{Binding ar}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="leiras" Binding="{Binding leiras}" />
-                <materialDesign:DataGridTextColumn Header="menyiseg" Binding="{Binding menyiseg}"/>
-                <materialDesign:DataGridTextColumn Header="kategoriaId" Binding="{Binding kategoriaId}" />
-                <materialDesign:DataGridTextColumn Header="kepUtvonal" Binding="{Binding kepUtvonal}" />
+                <materialDesign:DataGridTextColumn Header="TermekNev" Binding="{Binding TermekNev}"/>
+                <materialDesign:DataGridTextColumn Header="Ar" Binding="{Binding Ar}"/>
+                <materialDesign:DataGridTextColumn Header="Leiras" Binding="{Binding Leiras}" />
+                <materialDesign:DataGridTextColumn Header="Menyiseg" Binding="{Binding Menyiseg}"/>
+                <materialDesign:DataGridTextColumn Header="KategoriaId" Binding="{Binding KategoriaId}" />
+                <materialDesign:DataGridTextColumn Header="KepUtvonal" Binding="{Binding KepUtvonal}" />
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="2" Content="Put" x:Name="btn_put"   Click="btn_put_Click"  Background="YellowGreen"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,16,-213,0"/>
+        <Button Grid.Row="2" Content="Put" x:Name="btn_put"   Command="{Binding PutCommand}"  Background="YellowGreen"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,16,-213,0"/>
     </Grid>
 </UserControl>
