@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
     const [termekek, setTermekek] = useState([]);
     const [isInputFocused, setIsInputFocused] = useState(false);
 
-    const url = "http://localhost:5219/Termekek";
+    const url = "https://localhost:7026/Termekek";
 
     useEffect(() => {
       const fetchData = async () => {
@@ -95,18 +95,21 @@ import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
         </div>
 
         {isInputFocused && filteredTermekek.length > 0 && (
-          <div className="result-container">
-            {filteredTermekek.map((item, index) => (
-              <NavLink to={'/ShopPage/'+item.termekId}>
-              <div  className="result-box" key={index}>
-                <p>{item.termekNev}</p>
-              </div>
-              </NavLink>
-             
-
-            ))}
+          <div className='result-k'>
+            <div className="result-container">
+              {filteredTermekek.map((item, index) => (
+                <NavLink style={{ textDecoration: 'none'}} to={'/ShopPage/'+item.termekId}>
+                <div className='result-row' key={index}>
+                  <div className="result-box">
+                    <p key={index}>{item.termekNev}</p>
+                  </div>
+                </div>
+                </NavLink>
+              ))}
+            </div>
           </div>
         )}
+
       </div>
     );
   }

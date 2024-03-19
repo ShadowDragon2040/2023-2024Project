@@ -26,7 +26,7 @@ const Footer = () => {
             <FooterLinksContainer>
                 <FooterLinksWrapper>
                     <FooterLinkItems>
-                        <FooterLinkTitle>Csatlakozz</FooterLinkTitle>
+                        <FooterLinkTitle>Join us</FooterLinkTitle>
                             <FooterLink to="/signin">About us</FooterLink>
                     </FooterLinkItems>
                 </FooterLinksWrapper>

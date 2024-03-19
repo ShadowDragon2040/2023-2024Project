@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { InfoContainer3, ItemContainer,CarouselContainer } from './TextElements'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
-import Image1 from "./ComponentImages/image1.png"
-import Image2 from "./ComponentImages/image2.jpg"
-import Image3 from "./ComponentImages/image3.jpg"
+import Image1 from "../images/image1.png"
+import Image2 from "../images/image2.jpg"
+import Image3 from "../images/image3.jpg"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import {CarouselImage} from './TextElements';
@@ -16,7 +16,7 @@ function NewItemsComponent (props) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5219/Termekek')
+    axios.get('https://localhost:7026/Termekek')
       .then(response => setData(response.data))
       .catch(error => console.error('Hiba a lekérdezés során:', error));
   }, []);

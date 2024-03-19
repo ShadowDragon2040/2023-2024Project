@@ -1,8 +1,8 @@
 {
-  "name": "react-website-smooth-scroll-yt",
+  "name": "printfusion",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://myusername.github.io/my-app",
+  "homepage": "https://myusername.github.io/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -35,7 +35,6 @@
     "styled-components": "^5.3.5"
   },
   "scripts": {
-    
     "predeploy": "npm run build",
     "deploy": "gh-pages -b master -d build",
     "start": "react-scripts start",

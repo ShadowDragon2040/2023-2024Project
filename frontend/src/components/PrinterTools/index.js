@@ -41,7 +41,7 @@ const PrinterTools = () => {
   return (
     <>
       <InfoContainer2  lightBg={false} id={'tools'} >
-        <Heading lightText={false}>A nyomtatóink</Heading>
+        <Heading lightText={false}>Our printers</Heading>
         <InfoWrapper>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>

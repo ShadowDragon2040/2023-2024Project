@@ -50,7 +50,7 @@ const NavbarA = ({toggle}) => {
                 spy={true}
                 exact='true' 
                 offset={-80}
-                >Bemutatkozás</NavLinks>
+                >Introduction</NavLinks>
               </NavItem>
               <NavItem>
                 <NavLinks to='tools'
@@ -59,7 +59,7 @@ const NavbarA = ({toggle}) => {
                 spy={true}
                 exact='true'
                 offset={-80}
-                >Nyomtatóink</NavLinks>
+                >Our Printers</NavLinks>
               </NavItem>
               <NavItem>
                 <NavLinks to='models'
@@ -68,7 +68,7 @@ const NavbarA = ({toggle}) => {
                 spy={true}
                 exact='true' 
                 offset={-80}
-                >Modellek</NavLinks>
+                >Modells</NavLinks>
               </NavItem>
               <NavItem>
                 <NavLinks to='services'
@@ -77,7 +77,7 @@ const NavbarA = ({toggle}) => {
                 spy={true}
                 exact='true' 
                 offset={-80}
-                >Utómunkák</NavLinks>
+                >Other services</NavLinks>
               </NavItem>
             </NavMenu>
             <NavBtn>

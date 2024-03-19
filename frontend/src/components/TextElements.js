@@ -117,7 +117,7 @@ export const TextWrapper=styled.div`
 `
 export const TopLine=styled.p`
     color: #01bf71;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 16px;
     font-weight: 700;
     letter-spacing: 1.4px;
@@ -139,7 +139,7 @@ export const Heading =styled.h1`
 `
 export const Subtitle=styled.p`
     max-width: 440px;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 24px;
     margin-bottom: 35px;
     font-weight: bold;
@@ -157,7 +157,6 @@ export const ImgWrap=styled.div`
     height: 100%;
 `
 export const Img =styled.img`
-    
     margin: 0 0 10px 0;
     padding-right: 0;
     width:100%;

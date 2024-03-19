@@ -34,14 +34,14 @@ const ModelSection = () => {
     <>
     
       <InfoContainer  lightBg={false} id={'models'} >
-        <Heading lightText={false}>3D Modellek</Heading>
+        <Heading lightText={false}>3D Modells</Heading>
         <InfoWrapper>
           <InfoRow  imgStart={false} >
             <Column1>
             <TextWrapper>
              <TopLine></TopLine>
               <Subtitle darkText={true}>
-              A 3D nyomtatáshoz szükséges 3D modelleket be lehet szerezni különböző oldalakon, a legismertebbek között van a MyMiniFactory és a Thingiverse ahol ingyen letölthető modelleket is be lehet szerezni. A leggyakoribb 3D modell formátum az STL, lehetőség szerint ebben adják meg a modelleket. Külön kérésre egy 3D modellt megváltoztathatunk tetszés szerint, ennek modellenként változó ára lehet.
+              The 3D models needed for 3D printing can be obtained from various sites, among the most well-known are MyMiniFactory and Thingiverse, where you can also obtain free downloadable models. The most common 3D model format is STL, where possible the models are entered in this format. On special request, we can change a 3D model to your liking, the price of this may vary depending on the model.
               </Subtitle>
             </TextWrapper>
             </Column1>

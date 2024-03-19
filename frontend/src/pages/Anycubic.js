@@ -34,40 +34,53 @@ function AnycubicPage(){
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                    <Img></Img>
+                  <Img/>
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
-            <TopLine>Technológia</TopLine>
+            <TopLine>Technology</TopLine>
                 <Subtitle darkText={true}>
-                Az Anycubic Photon Mono egy SLA 3D nyomtató, amely UV fény hatására megkötő műgyantával nyomtat.
+                Anycubic Photon Mono is an SLA 3D printer that prints with resin that cures under UV light.
                 </Subtitle>
             </Column2>
           </InfoRow>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
-            <TopLine>Méretek</TopLine>
+            <TopLine>Size</TopLine>
                 <Subtitle darkText={true}>
-                A belső maximum nyomtatható méret: 13cm x 8cm x 16,5cm.
+                The maximum printable size inside: 13cm x 8cm x 16.5cm.
                 </Subtitle>
             </Column1>
             <Column2 style={{position: 'relative'}}>
                 <ImgWrap>
-                    <Img></Img>
+                  <Img/>
                 </ImgWrap>
             </Column2>
           </InfoRow>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                    <Img></Img>
+                  <Img/>
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
-            <TopLine>Felbontás</TopLine>
+            <TopLine>Printing resolution</TopLine>
                 <Subtitle darkText={true}>
-                A minimális rétegmagasság 0,01mm és az LCD képernyő 2k részletességű.
+                The minimum layer height is 0.01mm and the LCD screen has 4k detail.
                 </Subtitle>
+            </Column2>
+          </InfoRow>
+          <InfoRow  imgStart={false} >
+            <Column1 style={{position: 'relative'}}>
+            <TopLine>Material</TopLine>
+                <Subtitle darkText={true}>
+                The material is abs-like-resin, which is a strong and durable material that cures under UV light.
+                </Subtitle>
+            </Column1>
+            <Column2 style={{position: 'relative'}}>
+                <ImgWrap>
+                    <Img/>
+                </ImgWrap>
             </Column2>
           </InfoRow>
         </InfoWrapper>
