@@ -24,6 +24,33 @@ namespace AdatKarbantarto.Helpers
         }
 
         #region Felhasznalok
+
+        public async Task<AuthenticatedUser> PostAsync(string username, string password)
+        {
+            var requestData = new
+            {
+                Username = username,
+                Password = password
+            };
+
+            string json = JsonConvert.SerializeObject(requestData);
+
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using (HttpResponseMessage response = await _httpClient.PostAsync("/Auth/Login", content))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<AuthenticatedUser>(responseContent);
+                }
+                else
+                {
+                    throw new Exception($"Failed to post data to API. Status code: {response.StatusCode}");
+                }
+            }
+        }
+
         public async Task<bool> DeleteFelhasznaloAsync(string id)
         {
             using (HttpResponseMessage response = await _httpClient.DeleteAsync("/Felhasznalo/" + id))
