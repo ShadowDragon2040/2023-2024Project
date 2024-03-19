@@ -244,25 +244,41 @@ a{
 .SingleItem{
   border-radius: 35px;
 }
-
-
+.result-row{
+  margin-right: 10px;
+  margin-left: 10px;
+  border-bottom: 2px solid #01bf71;
+}
 
 .result-box {
-  min-width: 100%;
-  padding: 5px 0px 0px 10px;
+  transform: translateY(12px);
+  min-width: 80%;
+  padding-top: 10px;
   font-weight: bold;
   text-align: left;
-  border: black solid 1px;
-  border-radius: 15px;
-  background-color: lightgray;
-  cursor: grab;
+  margin-left: 10px;
+  color: #0d910d;
+  
+}
+.result-k{
+  /*nem jó
+  overflow: hidden;*/
 }
 
 .result-container {
+  /*nem jó
+  overflow-y: scroll;*/
   min-width: 100%;
+  border-radius: 5px;
+  background-color: white;
+  text-decoration: none;
   position: absolute;
   overflow-y:scroll;
   max-height: 500px;
+  :hover{
+    background-color: rgb(210, 210, 210);
+    transition: background-color 0.5s ease; 
+  }
 }
 
 /*DisplaySingleItem card image viewer*/

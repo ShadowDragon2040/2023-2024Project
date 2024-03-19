@@ -11,7 +11,7 @@ import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 function ShopSideBar(props) {
   const [categoryList, setCategoryList] = useState([]);
 
-    const url="http://localhost:5219/Termekek/Kategoriak";
+    const url="https://localhost:7026/Termekek/Kategoriak";
     useEffect(() => {
       axios.get(url)
         .then(response => setCategoryList(response.data))

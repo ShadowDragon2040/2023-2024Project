@@ -11,8 +11,8 @@ const HeroSection = () => {
   return (
     <HeroContainer>
         <HeroContent>
-            <HeroH1>3D Hobbinyomtatás</HeroH1>
-            <HeroP>Képzeld el, mi megvalósítjuk!</HeroP>
+            <HeroH1>3D Printing</HeroH1>
+            <HeroP>We will make it possible!</HeroP>
         </HeroContent>
     </HeroContainer>
   )

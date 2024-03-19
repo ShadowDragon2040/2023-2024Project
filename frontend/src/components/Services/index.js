@@ -19,26 +19,26 @@ const Services = () => {
 
   return (
     <ServicesContainer id="services">
-        <ServicesH1>Utómunkák</ServicesH1>
+        <ServicesH1>Other services</ServicesH1>
         <ServicesWrapper>
-            <Link onClick={handleClick} to={'PaintPage'}>
+            <Link style={{textDecoration: 'none'}} onClick={handleClick} to={'PaintPage'}>
             <ServicesCard>
                 <ServicesIcon src={Icon1}/>
-                <TopLine>Festés</TopLine>
+                <TopLine>Painting</TopLine>
                 <ServicesP></ServicesP>
             </ServicesCard>
             </Link>
-            <Link onClick={handleClick} to={'ElektroplatingPage'}>
+            <Link style={{textDecoration: 'none'}} onClick={handleClick} to={'ElektroplatingPage'}>
             <ServicesCard>
                 <ServicesIcon src={Icon1}/>
                 <TopLine>Elektroplating</TopLine>
                 <ServicesP></ServicesP>
             </ServicesCard>
             </Link>
-            <Link onClick={handleClick} to={'ModelltervezesPage'}>
+            <Link style={{textDecoration: 'none'}} onClick={handleClick} to={'ModelltervezesPage'}>
             <ServicesCard>
                 <ServicesIcon src={Icon1}/>
-                <TopLine>Modelltervezés</TopLine>
+                <TopLine>Modell designing</TopLine>
                 <ServicesP></ServicesP>
             </ServicesCard>
             </Link>

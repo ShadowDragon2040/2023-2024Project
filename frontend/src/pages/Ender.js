@@ -26,8 +26,8 @@ function EnderPage(){
       <>
       <Sidebar isOpen={isOpen} toggle={toggle}/>
       <Navbar toggle={toggle}/>
-      <InfoContainer  lightBg={false} id={'Ender'} >
-        <Heading lightText={false}>Ender 3 V2</Heading>
+      <InfoContainer  lightBg={false} id={'Elektroplating'} >
+        <Heading lightText={false}>Ender 3V2</Heading>
         <InfoWrapper>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
@@ -36,17 +36,17 @@ function EnderPage(){
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
-            <TopLine>Technológia</TopLine>
+            <TopLine>Technology</TopLine>
                 <Subtitle darkText={true}>
-                Az Ender 3 V2 egy FDM 3D nyomtató, amely folyékony műanyag felhasználásával rétegről rétegre felépíti a kívánt tárgyat.
+                The Ender 3 V2 is an FDM 3D printer that builds the desired object layer by layer using liquid plastic.
                 </Subtitle>
             </Column2>
           </InfoRow>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
-            <TopLine>Méretek</TopLine>
+            <TopLine>Size</TopLine>
                 <Subtitle darkText={true}>
-                A belső maximum nyomtatható méret: 22cm x 22cm x 25cm.
+                The maximum printable size inside: 22cm x 22cm x 25cm.
                 </Subtitle>
             </Column1>
             <Column2 style={{position: 'relative'}}>
@@ -58,26 +58,26 @@ function EnderPage(){
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img></Img>
+                  <Img src='../../components/ComponentImages/PEIsheet.jpg' />
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
-            <TopLine>PEI nyomtatólap</TopLine>
+            <TopLine>PEI Buildplate</TopLine>
                 <Subtitle darkText={true}>
-                Kíváló nyomtatási felület amely erős tapadást biztosít és egyedi mintázatot ad.
+                An excellent printing surface that provides strong adhesion and gives a unique pattern.
                 </Subtitle>
             </Column2>
           </InfoRow>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
-            <TopLine>Felbontás</TopLine>
+            <TopLine>Printing resolution</TopLine>
                 <Subtitle darkText={true}>
-                A minimális rétegmagasság 0,1mm és a maximális rétegmagasság 0,4mm.
+                The minimum layer height is 0.1 mm and the maximum layer height is 0.4 mm.
                 </Subtitle>
             </Column1>
             <Column2 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img></Img>
+                  <Img src='../components/ComponentImages/PEIsheet.jpg'></Img>
                 </ImgWrap>
             </Column2>
           </InfoRow>

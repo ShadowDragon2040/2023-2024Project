@@ -40,17 +40,17 @@ const Paint = () => {
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
-            <TopLine>Spray festés</TopLine>
+            <TopLine>Spray painting</TopLine>
                 <Subtitle darkText={true}>
-                Spray festéssel egyszínű egyenletes festékréteget tudunk készíteni, ajánlott a burkolati elemeknél és az otthoni díszeknél.
+                With spray painting, we can create an even paint layer of one color, recommended for covering elements and home decorations.
                 </Subtitle>
             </Column2>
           </InfoRow>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
-            <TopLine>Kézi festés</TopLine>
+            <TopLine>Hand painting</TopLine>
                 <Subtitle darkText={true}>
-                Kézi festéssel a figurákat és a bábúkat festjük le, a részleteket kiemeli és megtartja, a részletességtől fűggően eltérő árakat adunk.
+                We paint the figures and parts by hand, the details are highlighted and preserved, we give different prices depending on the modell.
                 </Subtitle>
             </Column1>
             <Column2 style={{position: 'relative'}}>
@@ -59,7 +59,7 @@ const Paint = () => {
                 </ImgWrap>
             </Column2>
           </InfoRow>
-          <Heading lightText={false}>Galléria</Heading>
+          <Heading lightText={false}>Gallery</Heading>
         </InfoWrapper>
       </InfoContainer>
     </>
