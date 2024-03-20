@@ -231,7 +231,7 @@ public partial class AuthContext : DbContext
 
             entity.HasOne(d => d.Termek).WithMany(p => p.Hozzaszolasoks)
                 .HasForeignKey(d => d.TermekId)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("hozzaszolasok_ibfk_1");
 
             entity.HasOne(d => d.User).WithMany(p => p.Hozzaszolasoks)
@@ -268,7 +268,7 @@ public partial class AuthContext : DbContext
 
             entity.HasOne(d => d.Termek).WithMany(p => p.Szamlazas)
                 .HasForeignKey(d => d.TermekId)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("szamlazas_ibfk_1");
 
             entity.HasOne(d => d.User).WithMany(p => p.Szamlazas)
