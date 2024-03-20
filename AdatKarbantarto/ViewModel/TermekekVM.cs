@@ -14,9 +14,11 @@ namespace AdatKarbantarto.ViewModel
     {
         private static readonly Regex _regex = new Regex("[^0-9 ]+");
         private string _searchProductID="";
+        private string _selectedCategory;
         private bool _isSaveEnabled;
         private bool _isAddEnabled;
         private List<Termek> _ListData;
+        private List<Kategoria> _CategoryList;
         private ObservableCollection<Termek> _items;
         private ObservableCollection<Termek> _updateItem;
         private ICollectionView _filteredView;
@@ -31,6 +33,20 @@ namespace AdatKarbantarto.ViewModel
         #endregion
         #region Getters/Setters
 
+        public ObservableCollection<string> Categories { get; }=new ObservableCollection<string>();
+
+        public string SelectedCategory
+        {
+            get { return _selectedCategory; }
+            set
+            {
+                if (_selectedCategory != value)
+                {
+                    _selectedCategory = value;
+                    OnPropertyChanged(nameof(SelectedCategory));
+                }
+            }
+        }
         public string SearchProductID
         {
             get { return _searchProductID; }
@@ -133,7 +149,13 @@ namespace AdatKarbantarto.ViewModel
             {
                 BackendApiHelper apiHelper = new BackendApiHelper();
                 _ListData = await apiHelper.GetTermekekAsync();
+                _CategoryList= await apiHelper.GetKategoriaAsync();
                 Items.Clear();
+                foreach (var categories in _CategoryList)
+                {
+                    Categories.Add($"{categories.KategoriaId}- {categories.KategoriaNev}");
+                }
+                
                 foreach (var szamla in _ListData)
                 {
                     Items.Add(szamla);
@@ -153,6 +175,7 @@ namespace AdatKarbantarto.ViewModel
 
         private void AddItem()
         {
+            UpdateItem.Clear();
             UpdateItem.Add(new Termek());
             IsAddEnabled = false;
             IsSaveEnabled = true;
@@ -185,6 +208,7 @@ namespace AdatKarbantarto.ViewModel
         private async void DeleteItem(Termek itemToDelete)
         {
             var confirmationDialog = new ConfirmationDialog("Are you sure you want to delete?");
+            
             confirmationDialog.ShowDialog();
 
             bool result = await Task.Run(() => confirmationDialog.Result);
@@ -193,7 +217,11 @@ namespace AdatKarbantarto.ViewModel
             {
                 BackendApiHelper deleteHelper = new BackendApiHelper();
                 var response = await deleteHelper.DeleteTermekAsync(itemToDelete.TermekId);
-                MessageBox.Show(response.ToString());
+                if (response)
+                {
+                    MessageBox.Show("Product deleted successfully!", "Success!", MessageBoxButton.OK);
+                }
+                else MessageBox.Show("Something went wrong!", "Warning!", MessageBoxButton.OKCancel);
 
             }
         }
@@ -202,6 +230,7 @@ namespace AdatKarbantarto.ViewModel
         {
             UpdateItem.Clear();
             UpdateItem.Add(itemToModify);
+            IsAddEnabled = true;
         }
 
         private async void PutItem()
@@ -215,7 +244,11 @@ namespace AdatKarbantarto.ViewModel
             {
                 BackendApiHelper modhelper = new BackendApiHelper();
                 var response = await modhelper.ModifyTermekAsync(UpdateItem[0].TermekId, UpdateItem[0]);
-                MessageBox.Show(response.ToString());
+                if (response)
+                {
+                    MessageBox.Show("Product edited successfully!","Success!",MessageBoxButton.OK);
+                }
+                else MessageBox.Show("Something went wrong!","Warning!",MessageBoxButton.OKCancel);
             }
         }
         private bool CanSave()
