@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj": {}
+    "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj": {
+    "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj",
+        "projectUniqueName": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj",
         "projectName": "authApi",
-        "projectPath": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj",
-        "packagesPath": "C:\\Users\\pbálint\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\obj\\",
+        "projectPath": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj",
+        "packagesPath": "C:\\Users\\vbalázs\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vbalázs\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\pbálint\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\vbalázs\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -47,27 +47,27 @@
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
@@ -87,7 +87,7 @@
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
-              "version": "[8.0.0-beta.2, )"
+              "version": "[8.0.2, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

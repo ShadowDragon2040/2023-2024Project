@@ -35,9 +35,12 @@ const Paint = () => {
         <InfoWrapper>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
-                <ImgWrap>
-                  <Img></Img>
-                </ImgWrap>
+              <ImgWrap>
+                  <Img
+                    src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                    alt={'Our Company'}
+                  />
+              </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
             <TopLine>Spray painting</TopLine>
@@ -54,9 +57,12 @@ const Paint = () => {
                 </Subtitle>
             </Column1>
             <Column2 style={{position: 'relative'}}>
-                <ImgWrap>
-                  <Img></Img>
-                </ImgWrap>
+              <ImgWrap>
+                  <Img
+                    src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                    alt={'Our Company'}
+                  />
+              </ImgWrap>
             </Column2>
           </InfoRow>
           <Heading lightText={false}>Gallery</Heading>

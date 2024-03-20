@@ -51,7 +51,10 @@ const InfoSection = () => {
             </Column1>
              <Column2>
               <ImgWrap>
-                <Img src={require('../../images/industar-kft-front.jpg')} alt={'cég'}/>
+                  <Img
+                    src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                    alt={'Our Company'}
+                  />
               </ImgWrap>
             </Column2> 
           </InfoRow>

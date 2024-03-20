@@ -12,21 +12,6 @@ Img,
 Subtitle
 } from '../TextElements'
 
-export const homeObjOne={
-  id:'tools',
-  lightBg:false,
-  lightText:true,
-  lightTextDesc:false,
-  headline:'Cég bemutató',
-  topLine:'Industár.kft',
-  imgStart:false,
-  img:require('../../images/industar-kft-front.jpg'),
-  alt:'Car',
-  dark:true,
-  primary:true,
-  darkText:true,
-};
-
 const Elektroplating = () => {
   return (
     <>
@@ -35,9 +20,12 @@ const Elektroplating = () => {
         <InfoWrapper>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
-                <ImgWrap>
-                  <Img></Img>
-                </ImgWrap>
+              <ImgWrap>
+                  <Img
+                    src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                    alt={'Our Company'}
+                  />
+              </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
             <TopLine>Technology</TopLine>
@@ -54,16 +42,22 @@ const Elektroplating = () => {
                 </Subtitle>
             </Column1>
             <Column2 style={{position: 'relative'}}>
-                <ImgWrap>
-                  <Img></Img>
-                </ImgWrap>
+              <ImgWrap>
+                  <Img
+                    src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                    alt={'Our Company'}
+                  />
+              </ImgWrap>
             </Column2>
           </InfoRow>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
-                <ImgWrap>
-                  <Img></Img>
-                </ImgWrap>
+              <ImgWrap>
+                  <Img
+                    src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                    alt={'Our Company'}
+                  />
+              </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
             <TopLine>PEI Buildplate</TopLine>
@@ -80,9 +74,12 @@ const Elektroplating = () => {
                 </Subtitle>
             </Column1>
             <Column2 style={{position: 'relative'}}>
-                <ImgWrap>
-                  <Img src='PEIsheet.jpg'></Img>
-                </ImgWrap>
+              <ImgWrap>
+                  <Img
+                    src={'http://printfusion.nhely.hu/test/PEIsheet.jpg'}
+                    alt={'Our Company'}
+                  />
+              </ImgWrap>
             </Column2>
           </InfoRow>
         </InfoWrapper>

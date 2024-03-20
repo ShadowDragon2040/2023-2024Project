@@ -1,5 +1,4 @@
 import React from 'react'
-import Icon1 from '../../images/svg-1.svg'
 import { Link } from 'react-router-dom';
 import { 
   ServicesContainer,
@@ -23,21 +22,21 @@ const Services = () => {
         <ServicesWrapper>
             <Link style={{textDecoration: 'none'}} onClick={handleClick} to={'PaintPage'}>
             <ServicesCard>
-                <ServicesIcon src={Icon1}/>
+                <ServicesIcon src={'http://printfusion.nhely.hu/test/svg-1.svg'}/>
                 <TopLine>Painting</TopLine>
                 <ServicesP></ServicesP>
             </ServicesCard>
             </Link>
             <Link style={{textDecoration: 'none'}} onClick={handleClick} to={'ElektroplatingPage'}>
             <ServicesCard>
-                <ServicesIcon src={Icon1}/>
+                <ServicesIcon src={'http://printfusion.nhely.hu/test/svg-1.svg'}/>
                 <TopLine>Elektroplating</TopLine>
                 <ServicesP></ServicesP>
             </ServicesCard>
             </Link>
             <Link style={{textDecoration: 'none'}} onClick={handleClick} to={'ModelltervezesPage'}>
             <ServicesCard>
-                <ServicesIcon src={Icon1}/>
+                <ServicesIcon src={'http://printfusion.nhely.hu/test/svg-1.svg'}/>
                 <TopLine>Modell designing</TopLine>
                 <ServicesP></ServicesP>
             </ServicesCard>

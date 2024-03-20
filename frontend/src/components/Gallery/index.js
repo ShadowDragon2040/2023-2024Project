@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import image from "../../images/industar-kft-front.jpg";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {CarouselContainer} from '../TextElements';
+import {CarouselContainer, ImgWrap, Img} from '../TextElements';
 
 function Gallery() {
   const [index, setIndex] = useState(0);
@@ -15,33 +14,39 @@ function Gallery() {
     <CarouselContainer>
       <Carousel activeIndex={index} onSelect={handleSelect}>
         <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={image}
-            alt="First slide"
-          />
+            <ImgWrap>
+                <Img
+                  src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                  alt={'Third slide'}
+                  className="d-block w-100"
+                />
+            </ImgWrap>
           <Carousel.Caption>
             <h3>First slide label</h3>
             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={image}
-            alt="Second slide"
-          />
+            <ImgWrap>
+                <Img
+                  src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                  alt={'Third slide'}
+                  className="d-block w-100"
+                />
+            </ImgWrap>
           <Carousel.Caption>
             <h3>Second slide label</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={image}
-            alt="Third slide"
-          />
+            <ImgWrap>
+                <Img
+                  src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                  alt={'Third slide'}
+                  className="d-block w-100"
+                />
+            </ImgWrap>
           <Carousel.Caption>
             <h3>Third slide label</h3>
             <p>

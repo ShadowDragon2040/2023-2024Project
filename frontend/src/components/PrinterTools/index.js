@@ -13,21 +13,6 @@ ImgWrap,
 Img
 } from '../TextElements'
 
-export const homeObjOne={
-  id:'tools',
-  lightBg:false,
-  lightText:true,
-  lightTextDesc:false,
-  headline:'Cég bemutató',
-  topLine:'Industár.kft',
-  imgStart:false,
-  img:require('../../images/industar-kft-front.jpg'),
-  alt:'Car',
-  dark:true,
-  primary:true,
-  darkText:true,
-};
-
 const PrinterTools = () => {
   const [TopLeftHovered, setTopLeftHovered] = useState(false);
   const [TopRightHovered, setTopRightHovered] = useState(false);
@@ -86,7 +71,7 @@ const PrinterTools = () => {
               <Link onClick={handleClick} to="/Anycubic">
                 <Img
                   src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
-                  alt={'cég'}
+                  alt={'anycubic photon mono'}
                   onMouseEnter={() => setTopRightHovered(true)}
                   onMouseLeave={() => setTopRightHovered(false)}
                   style={{
@@ -116,7 +101,7 @@ const PrinterTools = () => {
             <Link onClick={handleClick} to="/Carbon X1">
                 <Img
                   src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
-                  alt={'cég'}
+                  alt={'Bambu Carbon X1'}
                   onMouseEnter={() => setBottomLeftHovered(true)}
                   onMouseLeave={() => setBottomLeftHovered(false)}
                   style={{
