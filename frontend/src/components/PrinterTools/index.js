@@ -58,8 +58,8 @@ const PrinterTools = () => {
             <ImgWrap>
             <Link onClick={handleClick} to="/Ender">
                 <Img
-                  src={require('../../images/industar-kft-front.jpg')}
-                  alt={'cég'}
+                  src={'http://printfusion.nhely.hu/test/Ender3V2.jpg'}
+                  alt={'Ender3V2'}
                   onMouseEnter={() => setTopLeftHovered(true)}
                   onMouseLeave={() => setTopLeftHovered(false)}
                   style={{
@@ -85,7 +85,7 @@ const PrinterTools = () => {
               <ImgWrap>
               <Link onClick={handleClick} to="/Anycubic">
                 <Img
-                  src={require('../../images/industar-kft-front.jpg')}
+                  src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
                   alt={'cég'}
                   onMouseEnter={() => setTopRightHovered(true)}
                   onMouseLeave={() => setTopRightHovered(false)}
@@ -115,7 +115,7 @@ const PrinterTools = () => {
             <ImgWrap>
             <Link onClick={handleClick} to="/Carbon X1">
                 <Img
-                  src={require('../../images/industar-kft-front.jpg')}
+                  src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
                   alt={'cég'}
                   onMouseEnter={() => setBottomLeftHovered(true)}
                   onMouseLeave={() => setBottomLeftHovered(false)}
@@ -142,7 +142,7 @@ const PrinterTools = () => {
               <ImgWrap>
               <Link onClick={handleClick} to="/Anycubic">
                 <Img
-                  src={require('../../images/industar-kft-front.jpg')}
+                  src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
                   alt={'cég'}
                   onMouseEnter={() => setBottomRightHovered(true)}
                   onMouseLeave={() => setBottomRightHovered(false)}
