@@ -181,21 +181,29 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpDelete("{id}")/*, Authorize(Roles = "Admin")*/]
+
+        [HttpDelete("{id}")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                var existingTermek = _context.Termekek.FirstOrDefault(x => x.TermekId == id);
+                var existingTermek = await _context.Termekek.FirstOrDefaultAsync(x => x.TermekId == id);
+
+                if (existingTermek == null)
+                {
+                    return NotFound(); // Return 404 Not Found if the entity does not exist
+                }
 
                 _context.Termekek.Remove(existingTermek);
                 await _context.SaveChangesAsync();
-                return Ok();
+                return NoContent(); // Return 204 No Content upon successful deletion
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+
     }
 }

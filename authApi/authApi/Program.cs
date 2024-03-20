@@ -21,6 +21,7 @@ namespace authApi
                 var connectionString = builder.Configuration.GetConnectionString("Xampmashogyan");
                 options.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString));
             });
+            builder.Services.AddDbContext<AuthContext>();
 
 
             builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("AuthSettings:JwtOptions"));

@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using authApi.Models;
 using authApi.DTOs;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace authApi.Controllers
 {
@@ -18,7 +21,7 @@ namespace authApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Get()
+        public async Task<IActionResult> Get()
         {
             try
             {
@@ -32,7 +35,7 @@ namespace authApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> Get(string id)
+        public async Task<IActionResult> Get(string id)
         {
             try
             {
@@ -46,7 +49,7 @@ namespace authApi.Controllers
         }
 
         [HttpPost/*, Authorize(Roles = "ADMIN")*/]
-        public async Task<ActionResult<FelhasznalokDto>> Post(CreatedFelhasznalokDto createdFelhasznalokDto)
+        public async Task<IActionResult> Post(CreatedFelhasznalokDto createdFelhasznalokDto)
         {
             try
             {
@@ -62,7 +65,7 @@ namespace authApi.Controllers
                 _context.Aspnetusers.Add(request);
                 await _context.SaveChangesAsync();
 
-                return Ok(/*request.AsDto()*/);
+                return CreatedAtAction(nameof(Get), new { id = request.Id }, request);
             }
             catch (Exception ex)
             {
@@ -71,10 +74,15 @@ namespace authApi.Controllers
         }
 
         [HttpPut("{id}")/*, Authorize(Roles = "ADMIN")*/]
-        public async Task<ActionResult> Put(string id, UpdateFelhasznalokDto updateFelhasznalokDto)
+        public async Task<IActionResult> Put(string id, UpdateFelhasznalokDto updateFelhasznalokDto)
         {
             try
             {
+                if (string.IsNullOrEmpty(id) || updateFelhasznalokDto == null)
+                {
+                    return BadRequest("Invalid input");
+                }
+
                 var existingFelhasznalo = await _context.Aspnetusers.FirstOrDefaultAsync(x => x.Id == id);
 
                 if (existingFelhasznalo == null)
@@ -96,18 +104,27 @@ namespace authApi.Controllers
             }
         }
 
-
         [HttpDelete("{id}")/*, Authorize(Roles = "ADMIN")*/]
-        public async Task<ActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
             try
             {
+                if (string.IsNullOrEmpty(id))
+                {
+                    return BadRequest("Invalid id");
+                }
+
                 var existingFelhasznalo = await _context.Aspnetusers.FirstOrDefaultAsync(x => x.Id == id);
+
+                if (existingFelhasznalo == null)
+                {
+                    return NotFound();
+                }
 
                 _context.Aspnetusers.Remove(existingFelhasznalo);
                 await _context.SaveChangesAsync();
 
-                return Ok();
+                return NoContent();
             }
             catch (Exception ex)
             {

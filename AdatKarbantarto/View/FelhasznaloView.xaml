@@ -43,20 +43,15 @@
         </DataGrid>
         <DataGrid Grid.Row="2" x:Name="dtg_addszamla" AutoGenerateColumns="False" Height="90" ItemsSource="{Binding AddedItems}" Margin="20,10,-140,20" CanUserReorderColumns="False">
             <DataGrid.Columns>
-                <materialDesign:DataGridTextColumn Header="FelhasznaloId" Binding="{Binding FelhasznaloId}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="LoginNev" Binding="{Binding LoginNev}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="Hash" Binding="{Binding Hash}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="Salt" Binding="{Binding Salt}" />
-                <materialDesign:DataGridTextColumn Header="Nev" Binding="{Binding Nev}"/>
-                <materialDesign:DataGridTextColumn Header="Jog" Binding="{Binding Jog}" />
-                <materialDesign:DataGridTextColumn Header="Aktivalva" Binding="{Binding Aktivalva}" />
+                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True"/>
+                <materialDesign:DataGridTextColumn Header="UserName" Binding="{Binding UserName}" IsReadOnly="True"/>
+                <materialDesign:DataGridTextColumn Header="PasswordHash" Binding="{Binding PasswordHash}" IsReadOnly="True"/>
+                <materialDesign:DataGridTextColumn Header="EmailConfirmed" Binding="{Binding EmailConfirmed}" />
+                <materialDesign:DataGridTextColumn Header="EmailCode" Binding="{Binding EmailCode}"/>
                 <materialDesign:DataGridTextColumn Header="Email" Binding="{Binding Email}" />
                 <materialDesign:DataGridTextColumn Header="ProfilKep" Binding="{Binding ProfilKep}" />
-                <materialDesign:DataGridTextColumn Header="OrszagKodId" Binding="{Binding OrszagKodId}" />
-                <materialDesign:DataGridTextColumn Header="VarosNevId" Binding="{Binding VarosNevId}" />
-                <materialDesign:DataGridTextColumn Header="UtcaNev" Binding="{Binding UtcaNev}" />
-                <materialDesign:DataGridTextColumn Header="IranyitoSzam" Binding="{Binding IranyitoSzam}" />
-                <materialDesign:DataGridTextColumn Header="Hazszam" Binding="{Binding Hazszam}" />
+                <materialDesign:DataGridTextColumn Header="PhoneNumber" Binding="{Binding PhoneNumber}" />
+                <materialDesign:DataGridTextColumn Header="ActivateDate" Binding="{Binding ActivateDate}" />
 
             </DataGrid.Columns>
         </DataGrid>
