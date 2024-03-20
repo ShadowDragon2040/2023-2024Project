@@ -15,7 +15,7 @@ namespace AdatKarbantarto.View
             DataContext = new TermekekVM();
          
         }
-       
 
+      
     }
 }

@@ -242,7 +242,6 @@ namespace AdatKarbantarto.Helpers
             }
         }
         #endregion
-
         #region Szamlazas
 
         public async Task<List<Szamla>> GetSzamlaAsync()
@@ -253,6 +252,22 @@ namespace AdatKarbantarto.Helpers
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     return JsonConvert.DeserializeObject<List<Szamla>>(content);
+                }
+                else
+                {
+                    throw new Exception($"Failed to fetch data from API. Status code: {response.StatusCode}");
+                }
+            }
+        }
+
+        public async Task<List<Kategoria>> GetKategoriaAsync()
+        {
+            using (HttpResponseMessage response=await _httpClient.GetAsync("/Termekek/Kategoriak"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<Kategoria>>(content);
                 }
                 else
                 {
