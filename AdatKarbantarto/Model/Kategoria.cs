@@ -10,5 +10,11 @@ namespace AdatKarbantarto.Model
     {
         public int KategoriaId { get; set; }
         public string KategoriaNev { get; set; }
+
+        public override string? ToString()
+        {
+            return $"{KategoriaId}-{KategoriaNev}";
+            
+        }
     }
 }

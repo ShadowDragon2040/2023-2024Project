@@ -14,9 +14,9 @@ namespace AdatKarbantarto.ViewModel
     {
         private static readonly Regex _regex = new Regex("[^0-9 ]+");
         private string _searchProductID="";
-        private string _selectedCategory;
         private bool _isSaveEnabled;
         private bool _isAddEnabled;
+        private Kategoria _selectedCategory;
         private List<Termek> _ListData;
         private List<Kategoria> _CategoryList;
         private ObservableCollection<Termek> _items;
@@ -33,9 +33,9 @@ namespace AdatKarbantarto.ViewModel
         #endregion
         #region Getters/Setters
 
-        public ObservableCollection<string> Categories { get; }=new ObservableCollection<string>();
+        public ObservableCollection<Kategoria> Categories { get; }=new ObservableCollection<Kategoria>();
 
-        public string SelectedCategory
+        public Kategoria SelectedCategory
         {
             get { return _selectedCategory; }
             set
@@ -151,9 +151,9 @@ namespace AdatKarbantarto.ViewModel
                 _ListData = await apiHelper.GetTermekekAsync();
                 _CategoryList= await apiHelper.GetKategoriaAsync();
                 Items.Clear();
-                foreach (var categories in _CategoryList)
+                foreach (var category in _CategoryList)
                 {
-                    Categories.Add($"{categories.KategoriaId}- {categories.KategoriaNev}");
+                    Categories.Add(category);
                 }
                 
                 foreach (var szamla in _ListData)
@@ -191,7 +191,7 @@ namespace AdatKarbantarto.ViewModel
                 Ar = SelectedItem.Ar,
                 Leiras = SelectedItem.Leiras,
                 Menyiseg = SelectedItem.Menyiseg,
-                KategoriaId = SelectedItem.KategoriaId,
+                KategoriaId = SelectedCategory.KategoriaId,
                 KepUtvonal = SelectedItem.KepUtvonal,
             };
             BackendApiHelper postHelper = new BackendApiHelper();
@@ -229,6 +229,7 @@ namespace AdatKarbantarto.ViewModel
         private void ModifyItem(Termek itemToModify)
         {
             UpdateItem.Clear();
+        
             UpdateItem.Add(itemToModify);
             IsAddEnabled = true;
         }
@@ -239,10 +240,11 @@ namespace AdatKarbantarto.ViewModel
             confirmationDialog.ShowDialog();
 
             bool result = await Task.Run(() => confirmationDialog.Result);
-
+            
             if (result)
             {
                 BackendApiHelper modhelper = new BackendApiHelper();
+                UpdateItem[0].KategoriaId = SelectedCategory.KategoriaId;
                 var response = await modhelper.ModifyTermekAsync(UpdateItem[0].TermekId, UpdateItem[0]);
                 if (response)
                 {

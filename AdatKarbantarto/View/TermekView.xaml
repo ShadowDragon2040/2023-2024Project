@@ -3,11 +3,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-    xmlns:local="clr-namespace:AdatKarbantarto.View"
+    xmlns:local="clr-namespace:AdatKarbantarto.ViewModel"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
     x:Class="AdatKarbantarto.View.TermekView"
     mc:Ignorable="d" 
     d:DesignHeight="450" d:DesignWidth="1200">
+    <UserControl.DataContext>
+        <local:TermekekVM/>
+    </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -68,13 +71,14 @@
                 <DataGridTemplateColumn Header="Category">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Categories.KategoriaId}" />
+                            <TextBlock Text="{Binding DataContext.Categories.KategoriaId}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <ComboBox ItemsSource="{Binding Categories}"
-                            SelectedItem="{Binding SelectedCategory, UpdateSourceTrigger=PropertyChanged}" />
+                            <ComboBox ItemsSource="{Binding DataContext.Categories, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+          SelectedItem="{Binding DataContext.SelectedCategory, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
