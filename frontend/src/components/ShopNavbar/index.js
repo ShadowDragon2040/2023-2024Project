@@ -13,6 +13,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import RegisterModal from '../RegisterModal';
 import LoginModal from '../LoginModal';
+import { IoCartOutline } from "react-icons/io5";
+
 
 function ShopNavbar(props) {
   const [scrollNav, setScrollNav] = useState(false);
@@ -71,21 +73,15 @@ const handleRemoveFromCart = (itemId) => {
             <SearchBar/>
           </NavBtn2>
           
-          { sessionStorage.getItem("bejelenkezve")=='true' ?
+
             <div>
               <NavBtn2>
                 <NavBtnLink to='/ProfilePage'>
                   <CgProfile /> Profile
                 </NavBtnLink>
               </NavBtn2>
-              {/*
               <NavBtn2>
-                <NavBtnLink to='CartPage' onClick={handleAddToCart} ><span class="glyphicon">&#xe116;</span>Cart</NavBtnLink>
-              </NavBtn2>
-              */}
-
-              <NavBtn2>
-                <NavBtnLink to='/CartPage'>Cart</NavBtnLink>
+                <NavBtnLink to='/CartPage'><IoCartOutline />Cart</NavBtnLink>
               </NavBtn2>
               
               <NavBtn2>
@@ -106,13 +102,13 @@ const handleRemoveFromCart = (itemId) => {
               </Modal.Footer>
             </Modal>
             </div>
-              :
+
             <div>
                 <RegisterModal iincrementCounter={props.incrementCounter} />
 
                 <LoginModal incrementCounter={props.incrementCounter}/>
             </div>
-              }
+
 
       </Nav2>
     </>

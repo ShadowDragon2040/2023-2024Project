@@ -4818,23 +4818,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\pbálint\\.nuget\\packages\\": {},
+    "C:\\Users\\sjuditanna\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj",
+      "projectUniqueName": "C:\\Users\\sjuditanna\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj",
       "projectName": "authApi",
-      "projectPath": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj",
-      "packagesPath": "C:\\Users\\pbálint\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\obj\\",
+      "projectPath": "C:\\Users\\sjuditanna\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\authApi.csproj",
+      "packagesPath": "C:\\Users\\sjuditanna\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sjuditanna\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\pbálint\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sjuditanna\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4933,13 +4933,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\authApi\\authApi\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }
