@@ -70,20 +70,13 @@
                 <materialDesign:DataGridTextColumn Header="Description" Binding="{Binding Leiras}" />
                 <materialDesign:DataGridTextColumn Header="Amount" Binding="{Binding Menyiseg}"/>
                 <DataGridTemplateColumn Header="Category">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding DataContext.Categories.KategoriaId}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <ComboBox ItemsSource="{Binding DataContext.Categories, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-          SelectedItem="{Binding DataContext.SelectedCategory, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
-
+                                      SelectedItem="{Binding DataContext.SelectedCategory, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
-
                 <materialDesign:DataGridTextColumn Header="FilePath" Binding="{Binding KepUtvonal}" />
 
             </DataGrid.Columns>
