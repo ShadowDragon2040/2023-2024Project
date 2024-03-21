@@ -18,5 +18,9 @@ namespace AdatKarbantarto.Model
         public string PhoneNumber { get; set; }
         public DateTime ActivateDate { get; set; }
 
+        public override string? ToString()
+        {
+            return $"Id:{Id}";
+        }
     }
 }

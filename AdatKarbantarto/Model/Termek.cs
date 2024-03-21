@@ -15,5 +15,10 @@ namespace AdatKarbantarto.Model
         public int Menyiseg { get; set; }
         public int KategoriaId { get; set; }
         public string KepUtvonal{ get; set; }
+
+        public override string? ToString()
+        {
+            return $"ID:{TermekId}";
+        }
     }
 }
