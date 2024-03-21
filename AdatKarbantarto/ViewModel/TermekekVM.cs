@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Data;
-using System.Xml.Linq;
+
 
 namespace AdatKarbantarto.ViewModel
 {
@@ -16,13 +16,29 @@ namespace AdatKarbantarto.ViewModel
         private string _searchProductID="";
         private bool _isSaveEnabled;
         private bool _isAddEnabled;
+        private Termek _selectedItem;
         private Kategoria _selectedCategory;
         private List<Termek> _ListData;
         private List<Kategoria> _CategoryList;
         private ObservableCollection<Termek> _items;
         private ObservableCollection<Termek> _updateItem;
         private ICollectionView _filteredView;
+        public TermekekVM()
+        {
+            _isSaveEnabled = false;
+            _isAddEnabled = true;
+            Items = new ObservableCollection<Termek>();
+            UpdateItem = new ObservableCollection<Termek>();
+            RefreshCommand = new RelayCommand(execute => RefreshItems());
+            AddCommand = new RelayCommand(execute => AddItem());
+            DeleteCommand = new RelayCommand(execute => DeleteItem(execute as Termek), canExecute => SelectedItem != null);
+            ModifyCommand = new RelayCommand(execute => ModifyItem(execute as Termek), canExecute => SelectedItem != null);
+            SaveCommand = new RelayCommand(execute => SaveItem(), canExecute => CanSave());
+            PutCommand = new RelayCommand(execute => PutItem());
 
+
+            LoadInitialData();
+        }
         #region Commands
         public RelayCommand RefreshCommand { get; private set; }
         public RelayCommand AddCommand { get; private set; }
@@ -44,6 +60,7 @@ namespace AdatKarbantarto.ViewModel
                 {
                     _selectedCategory = value;
                     OnPropertyChanged(nameof(SelectedCategory));
+                  
                 }
             }
         }
@@ -85,14 +102,17 @@ namespace AdatKarbantarto.ViewModel
                 ApplyFilter();
             }
         }
-        private Termek selectedItem;
         public Termek SelectedItem
         {
-            get { return selectedItem; }
+            get { return _selectedItem; }
             set
             {
-                selectedItem = value;
+                _selectedItem = value;
                 OnPropertyChanged(nameof(SelectedItem));
+                if (SelectedCategory != null)
+                {
+                    SelectedCategory.KategoriaId = SelectedItem.KategoriaId;
+                }
             }
         }
         public bool IsSaveEnabled
@@ -120,28 +140,7 @@ namespace AdatKarbantarto.ViewModel
             }
         }
         #endregion
-
-        public TermekekVM()
-        {
-            _isSaveEnabled = false;
-            _isAddEnabled = true;
-            Items = new ObservableCollection<Termek>();
-            UpdateItem = new ObservableCollection<Termek>();
-            RefreshCommand = new RelayCommand(execute => RefreshItems());
-            AddCommand = new RelayCommand(execute => AddItem());
-            DeleteCommand = new RelayCommand(execute => DeleteItem(execute as Termek), canExecute => SelectedItem != null);
-            ModifyCommand = new RelayCommand(execute => ModifyItem(execute as Termek), canExecute => SelectedItem != null);
-            SaveCommand = new RelayCommand(execute => SaveItem(), canExecute => CanSave());
-            PutCommand = new RelayCommand(execute => PutItem());
-
-
-            LoadInitialData();
-        }
-        private static bool isTextAllowed(string value)
-        {
-            return !_regex.IsMatch(value);
-        }
-
+        #region CRUD
         private async void LoadInitialData()
         {
             // Load data into Items collection 
@@ -165,23 +164,7 @@ namespace AdatKarbantarto.ViewModel
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
-        private void RefreshItems()
-        {
-            Items.Clear();
-            LoadInitialData();
-        }
-
-        private void AddItem()
-        {
-            UpdateItem.Clear();
-            UpdateItem.Add(new Termek());
-            IsAddEnabled = false;
-            IsSaveEnabled = true;
-            AddCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate AddCommand's CanExecute
-        }
-
         private async void SaveItem()
         {
 
@@ -203,8 +186,25 @@ namespace AdatKarbantarto.ViewModel
             IsSaveEnabled = false;
             SaveCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate SaveCommand's CanExecute
         }
+        private async void PutItem()
+        {
+            var confirmationDialog = new ConfirmationDialog("Are you sure you want to modify?");
+            confirmationDialog.ShowDialog();
 
+            bool result = await Task.Run(() => confirmationDialog.Result);
 
+            if (result)
+            {
+                BackendApiHelper modhelper = new BackendApiHelper();
+                UpdateItem[0].KategoriaId = SelectedCategory.KategoriaId;
+                var response = await modhelper.ModifyTermekAsync(UpdateItem[0].TermekId, UpdateItem[0]);
+                if (response)
+                {
+                    MessageBox.Show("Product edited successfully!", "Success!", MessageBoxButton.OK);
+                }
+                else MessageBox.Show("Something went wrong!", "Warning!", MessageBoxButton.OKCancel);
+            }
+        }
         private async void DeleteItem(Termek itemToDelete)
         {
             var confirmationDialog = new ConfirmationDialog("Are you sure you want to delete?");
@@ -225,6 +225,25 @@ namespace AdatKarbantarto.ViewModel
 
             }
         }
+        #endregion
+        private static bool isTextAllowed(string value)
+        {
+            return !_regex.IsMatch(value);
+        }
+        private void RefreshItems()
+        {
+            Items.Clear();
+            LoadInitialData();
+        }
+
+        private void AddItem()
+        {
+            UpdateItem.Clear();
+            UpdateItem.Add(new Termek());
+            IsAddEnabled = false;
+            IsSaveEnabled = true;
+            AddCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate AddCommand's CanExecute
+        }
 
         private void ModifyItem(Termek itemToModify)
         {
@@ -234,25 +253,7 @@ namespace AdatKarbantarto.ViewModel
             IsAddEnabled = true;
         }
 
-        private async void PutItem()
-        {
-            var confirmationDialog = new ConfirmationDialog("Are you sure you want to modify?");
-            confirmationDialog.ShowDialog();
-
-            bool result = await Task.Run(() => confirmationDialog.Result);
-            
-            if (result)
-            {
-                BackendApiHelper modhelper = new BackendApiHelper();
-                UpdateItem[0].KategoriaId = SelectedCategory.KategoriaId;
-                var response = await modhelper.ModifyTermekAsync(UpdateItem[0].TermekId, UpdateItem[0]);
-                if (response)
-                {
-                    MessageBox.Show("Product edited successfully!","Success!",MessageBoxButton.OK);
-                }
-                else MessageBox.Show("Something went wrong!","Warning!",MessageBoxButton.OKCancel);
-            }
-        }
+       
         private bool CanSave()
         {
             return true;
@@ -261,11 +262,7 @@ namespace AdatKarbantarto.ViewModel
         {
             if (_filteredView != null)
             {
-                if (SearchProductID == "") 
-                {
-                    _filteredView.Filter = null; 
-                }
-                
+                if (SearchProductID == "") _filteredView.Filter = null;
                 else
                 {
                     _filteredView.Filter = obj =>
@@ -275,11 +272,7 @@ namespace AdatKarbantarto.ViewModel
                             // Filter by ProductID 
                             if (int.TryParse(SearchProductID,out int result))
                             {
-                                if (result<=int.MaxValue)
-                                {
-                                  return termek.TermekId ==Convert.ToInt32(SearchProductID);
-                                }
-                            
+                                if (result<=int.MaxValue) return termek.TermekId == Convert.ToInt32(SearchProductID);
                             }
                             else
                             {
@@ -291,8 +284,6 @@ namespace AdatKarbantarto.ViewModel
                     };
                 }
             }
-
-
         }
     }
 }
