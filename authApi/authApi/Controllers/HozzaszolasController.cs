@@ -95,7 +95,7 @@ namespace Webárúház_Nagy_Project.Controllers
 
                 if (existingHozzaszolas == null)
                 {
-                    return NotFound(); // Or another appropriate response if the resource is not found
+                    return NotFound();
                 }
 
                 existingHozzaszolas.Leiras = updateHozzaszolasokDto.Leiras;
