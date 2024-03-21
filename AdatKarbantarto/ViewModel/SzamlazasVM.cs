@@ -22,6 +22,8 @@ namespace AdatKarbantarto.ViewModel
         private List<Szamla> _ListData;
         private List<Felhasznalo> _userList;
         private List<Termek> _productList;
+        private ObservableCollection<Felhasznalo> _users;
+        private ObservableCollection<Termek> _products;
         private ObservableCollection<Szamla> _items;
         private ObservableCollection<Szamla> _updateItem;
         private ICollectionView _filteredView;
@@ -29,6 +31,8 @@ namespace AdatKarbantarto.ViewModel
         {
             _isSaveEnabled = false;
             _isAddEnabled = true;
+            Products = new ObservableCollection<Termek>();
+            Users = new ObservableCollection<Felhasznalo>();
             SzamlaItems = new ObservableCollection<Szamla>();
             UpdateItem = new ObservableCollection<Szamla>();
             RefreshCommand = new RelayCommand(execute => RefreshItems());
@@ -51,8 +55,26 @@ namespace AdatKarbantarto.ViewModel
         #endregion
         #region Getters/Setters
 
-        public ObservableCollection<Felhasznalo> Users { get; } = new ObservableCollection<Felhasznalo>();
-        public ObservableCollection<Termek> Products { get; } = new ObservableCollection<Termek>();
+        public ObservableCollection<Felhasznalo> Users
+        {
+            get { return _users; }
+            set
+            {
+                _users = value;
+                _filteredView = CollectionViewSource.GetDefaultView(_users);
+                ApplyFilter();
+            }
+        }
+        public ObservableCollection<Termek> Products
+        {
+            get { return _products; }
+            set
+            {
+                _products = value;
+                _filteredView = CollectionViewSource.GetDefaultView(_products);
+                ApplyFilter();
+            }
+        }
 
         public Felhasznalo SelectedUser
         {
@@ -63,7 +85,10 @@ namespace AdatKarbantarto.ViewModel
                 {
                     _selectedUser = value;
                     OnPropertyChanged(nameof(SelectedUser));
-
+                    if (SelectedItem != null)
+                    {
+                        SelectedItem.felhasznaloId = SelectedUser.Id; 
+                    }
                 }
             }
         }
@@ -76,7 +101,10 @@ namespace AdatKarbantarto.ViewModel
                 {
                     _selectedTermek = value;
                     OnPropertyChanged(nameof(SelectedTermek));
-
+                    if (SelectedItem != null)
+                    {
+                        SelectedItem.termekId = SelectedTermek.TermekId;
+                    }
                 }
             }
         }
@@ -125,9 +153,10 @@ namespace AdatKarbantarto.ViewModel
             {
                 _selectedItem = value;
                 OnPropertyChanged(nameof(SelectedItem));
-                if (SelectedUser != null)
+                if (_selectedItem != null)
                 {
-                    SelectedUser.Id = SelectedItem.felhasznaloId;
+                    _selectedItem.termekId = SelectedTermek?.TermekId??0;
+                    _selectedItem.felhasznaloId = SelectedUser?.Id; 
                 }
             }
         }

@@ -60,7 +60,7 @@
         </DataGrid>
 
 
-        <DataGrid Grid.Row="2" x:Name="dtg_addtermek" CanUserAddRows="False" AutoGenerateColumns="False" Height="100" ItemsSource="{Binding UpdateItem}" Margin="20,10,-140,20" CanUserReorderColumns="False">
+        <DataGrid Grid.Row="2" x:Name="dtg_add" CanUserAddRows="False" AutoGenerateColumns="False" Height="100" ItemsSource="{Binding UpdateItem}" Margin="20,10,-140,20" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding hozzaszolasId}" IsReadOnly="True"/>
                 <DataGridTemplateColumn Header="User ID">
