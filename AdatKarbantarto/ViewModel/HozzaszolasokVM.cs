@@ -1,12 +1,314 @@
-﻿using System;
+﻿using AdatKarbantarto.Helpers;
+using AdatKarbantarto.Model;
+using AdatKarbantarto.Utilities;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Data;
+using System.Windows;
 
 namespace AdatKarbantarto.ViewModel
 {
-    class HozzaszolasokVM
+    public class HozzaszolasokVM : ViewModelBase
     {
+        private static readonly Regex _regex = new Regex("[^0-9 ]+");
+        private string _searchProductID = "";
+        private bool _isSaveEnabled;
+        private bool _isAddEnabled;
+        private Hozzaszolas _selectedItem;
+        private Felhasznalo _selectedUser;
+        private Termek _selectedTermek;
+        private List<Hozzaszolas> _ListData;
+        private List<Felhasznalo> _userList;
+        private List<Termek> _productList;
+        private ObservableCollection<Hozzaszolas> _items;
+        private ObservableCollection<Hozzaszolas> _updateItem;
+        private ICollectionView _filteredView;
+        public HozzaszolasokVM()
+        {
+            _isSaveEnabled = false;
+            _isAddEnabled = true;
+            HozzaszolasItems = new ObservableCollection<Hozzaszolas>();
+            UpdateItem = new ObservableCollection<Hozzaszolas>();
+            RefreshCommand = new RelayCommand(execute => RefreshItems());
+            AddCommand = new RelayCommand(execute => AddItem());
+            DeleteCommand = new RelayCommand(execute => DeleteItem(execute as Hozzaszolas), canExecute => SelectedItem != null);
+            ModifyCommand = new RelayCommand(execute => ModifyItem(execute as Hozzaszolas), canExecute => SelectedItem != null);
+            SaveCommand = new RelayCommand(execute => SaveItem(), canExecute => CanSave());
+            PutCommand = new RelayCommand(execute => PutItem());
+
+
+            LoadInitialData();
+        }
+        #region Commands
+        public RelayCommand RefreshCommand { get; private set; }
+        public RelayCommand AddCommand { get; private set; }
+        public RelayCommand DeleteCommand { get; private set; }
+        public RelayCommand ModifyCommand { get; private set; }
+        public RelayCommand SaveCommand { get; private set; }
+        public RelayCommand PutCommand { get; private set; }
+        #endregion
+        #region Getters/Setters
+
+        public ObservableCollection<Felhasznalo> Users { get; } = new ObservableCollection<Felhasznalo>();
+        public ObservableCollection<Termek> Products { get; } = new ObservableCollection<Termek>();
+
+        public Felhasznalo SelectedUser
+        {
+            get { return _selectedUser; }
+            set
+            {
+                if (_selectedUser != value)
+                {
+                    _selectedUser = value;
+                    OnPropertyChanged(nameof(SelectedUser));
+
+                }
+            }
+        }
+        public Termek SelectedTermek
+        {
+            get { return _selectedTermek; }
+            set
+            {
+                if (_selectedTermek != value)
+                {
+                    _selectedTermek = value;
+                    OnPropertyChanged(nameof(SelectedTermek));
+
+                }
+            }
+        }
+        public string SearchProductID
+        {
+            get { return _searchProductID; }
+            set
+            {
+
+                if (_searchProductID != value && isTextAllowed(value))
+                {
+                    _searchProductID = value;
+                    OnPropertyChanged(nameof(_searchProductID));
+                    ApplyFilter();
+                }
+            }
+        }
+
+        public ObservableCollection<Hozzaszolas> UpdateItem
+        {
+            get { return _updateItem; }
+            set
+            {
+                if (_updateItem != value)
+                {
+                    _updateItem = value;
+                    OnPropertyChanged(nameof(_updateItem));
+                }
+            }
+        }
+
+        public ObservableCollection<Hozzaszolas> HozzaszolasItems
+        {
+            get { return _items; }
+            set
+            {
+                _items = value;
+                _filteredView = CollectionViewSource.GetDefaultView(_items);
+                ApplyFilter();
+            }
+        }
+        public Hozzaszolas SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+                if (SelectedUser != null)
+                {
+                    SelectedUser.Id = SelectedItem.felhasznaloId;
+                }
+            }
+        }
+        public bool IsSaveEnabled
+        {
+            get { return _isSaveEnabled; }
+            set
+            {
+                if (_isSaveEnabled != value)
+                {
+                    _isSaveEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public bool IsAddEnabled
+        {
+            get { return _isAddEnabled; }
+            set
+            {
+                if (_isAddEnabled != value)
+                {
+                    _isAddEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        #endregion
+        #region CRUD
+        private async void LoadInitialData()
+        {
+            // Load data into Items collection 
+            try
+            {
+                BackendApiHelper apiHelper = new BackendApiHelper();
+                _ListData = await apiHelper.GetHozzaszolasokAsync();
+                _userList = await apiHelper.GetFelhasznalokAsync();
+                _productList = await apiHelper.GetTermekekAsync();
+                HozzaszolasItems.Clear();
+                foreach (Felhasznalo user in _userList)
+                {
+                    Users.Add(user);
+                }
+                foreach (Termek prod in _productList)
+                {
+                    Products.Add(prod);
+                }
+
+                foreach (var Hozzaszolas in _ListData)
+                {
+                    HozzaszolasItems.Add(Hozzaszolas);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private async void SaveItem()
+        {
+
+            Hozzaszolas newProduct = new Hozzaszolas()
+            {
+                hozzaszolasId = SelectedItem.hozzaszolasId,
+                felhasznaloId = SelectedUser.Id,
+                termekId = SelectedTermek.TermekId,
+                leiras = SelectedItem.leiras,
+                ertekeles = SelectedItem.ertekeles,
+            };
+            BackendApiHelper postHelper = new BackendApiHelper();
+            var response = await postHelper.PostHozzaszolasAsync(newProduct);
+            MessageBox.Show(response.ToString());
+
+
+            IsAddEnabled = true;
+            IsSaveEnabled = false;
+            SaveCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate SaveCommand's CanExecute
+        }
+        private async void PutItem()
+        {
+            var confirmationDialog = new ConfirmationDialog("Are you sure you want to modify?");
+            confirmationDialog.ShowDialog();
+
+            bool result = await Task.Run(() => confirmationDialog.Result);
+
+            if (result)
+            {
+                BackendApiHelper modhelper = new BackendApiHelper();
+                UpdateItem[0].termekId = SelectedTermek.TermekId;
+                UpdateItem[0].felhasznaloId = SelectedUser.Id;
+                var response = await modhelper.ModifyHozzaszolasAsync(UpdateItem[0].hozzaszolasId, UpdateItem[0]);
+                if (response)
+                {
+                    MessageBox.Show("Product edited successfully!", "Success!", MessageBoxButton.OK);
+                }
+                else MessageBox.Show("Something went wrong!", "Warning!", MessageBoxButton.OKCancel);
+            }
+        }
+        private async void DeleteItem(Hozzaszolas itemToDelete)
+        {
+            var confirmationDialog = new ConfirmationDialog("Are you sure you want to delete?");
+
+            confirmationDialog.ShowDialog();
+
+            bool result = await Task.Run(() => confirmationDialog.Result);
+
+            if (result)
+            {
+                BackendApiHelper deleteHelper = new BackendApiHelper();
+                var response = await deleteHelper.DeleteHozzaszolasAsync(itemToDelete.hozzaszolasId);
+                if (response)
+                {
+                    MessageBox.Show("Product deleted successfully!", "Success!", MessageBoxButton.OK);
+                }
+                else MessageBox.Show("Something went wrong!", "Warning!", MessageBoxButton.OKCancel);
+
+            }
+        }
+        #endregion
+        private static bool isTextAllowed(string value)
+        {
+            return !_regex.IsMatch(value);
+        }
+        private void RefreshItems()
+        {
+            HozzaszolasItems.Clear();
+            LoadInitialData();
+        }
+
+        private void AddItem()
+        {
+            UpdateItem.Clear();
+            UpdateItem.Add(new Hozzaszolas());
+            IsAddEnabled = false;
+            IsSaveEnabled = true;
+            AddCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate AddCommand's CanExecute
+        }
+
+        private void ModifyItem(Hozzaszolas HozzaszolasToModify)
+        {
+            UpdateItem.Clear();
+
+            UpdateItem.Add(HozzaszolasToModify);
+            IsAddEnabled = true;
+        }
+
+
+        private bool CanSave()
+        {
+            return true;
+        }
+        private void ApplyFilter()
+        {
+            if (_filteredView != null)
+            {
+                if (SearchProductID == "") _filteredView.Filter = null;
+                else
+                {
+                    _filteredView.Filter = obj =>
+                    {
+                        if (obj is Hozzaszolas Hozzaszolas)
+                        {
+                            // Filter by ProductID 
+                            if (int.TryParse(SearchProductID, out int result))
+                            {
+                                if (result <= int.MaxValue) return Hozzaszolas.hozzaszolasId == Convert.ToInt32(SearchProductID);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Failed to convert the string to an integer.", "Warning!", MessageBoxButton.OK);
+                                SearchProductID = "";
+                            }
+                        }
+                        return false;
+                    };
+                }
+            }
+        }
     }
 }
