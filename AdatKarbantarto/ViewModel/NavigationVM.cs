@@ -24,12 +24,14 @@ namespace AdatKarbantarto.ViewModel
         public ICommand TermekCommand { get; set; }
         public ICommand HozzaszolasCommand { get; set; }
         public ICommand SzamlazasCommand { get; set; }  
+        public ICommand ImageUploadCommand { get; set; }
 
         private void Home(object obj) => CurrentView = new HomeVM();
         private void Felhasznalo(object obj) => CurrentView = new FelhasznalokVM();
         private void Termek(object obj) => CurrentView = new TermekekVM();
         private void Hozzaszolas(object obj) => CurrentView = new HozzaszolasokVM();
         private void Szamlazas(object obj)=>CurrentView=new SzamlazasVM();
+        private void ImageUpload(object obj)=>CurrentView = new ImageUploadVM();    
 
         public NavigationVM()
         {
@@ -38,6 +40,7 @@ namespace AdatKarbantarto.ViewModel
             TermekCommand = new RelayCommand(Termek);
             HozzaszolasCommand = new RelayCommand(Hozzaszolas);
             SzamlazasCommand=new RelayCommand(Szamlazas);
+            ImageUploadCommand = new RelayCommand(ImageUpload);
 
             CurrentView = new HomeVM();
         }

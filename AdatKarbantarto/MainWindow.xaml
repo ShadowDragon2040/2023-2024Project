@@ -127,6 +127,21 @@
 
                     </Menu:Btn>
 
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                             Command="{Binding ImageUploadCommand}">
+
+                        <Grid>
+
+                            <Image Source="Images/comments.png"
+                                       Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Image Upload"
+                                           Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
+
 
 
                 </StackPanel>

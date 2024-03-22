@@ -19,5 +19,8 @@
     <DataTemplate DataType="{x:Type vm:SzamlazasVM}">
         <view:SzamlazasView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ImageUploadVM}">
+        <view:KepFeltoltesView/>
+    </DataTemplate>
 
 </ResourceDictionary>

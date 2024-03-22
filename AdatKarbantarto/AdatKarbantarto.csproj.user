@@ -19,6 +19,9 @@
     <Compile Update="View\HozzaszolasView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\KepFeltoltesView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\LoginView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -58,6 +61,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\HozzaszolasView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\KepFeltoltesView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\LoginView.xaml">
