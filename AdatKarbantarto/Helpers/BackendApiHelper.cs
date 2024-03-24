@@ -328,6 +328,37 @@ namespace AdatKarbantarto.Helpers
             }
         }
         #endregion
+        #region FtpFile
+        public async Task<bool> PostFtpFileAsync(FtpFile file)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/FTPFile", file);
+                response.EnsureSuccessStatusCode();
+                return true;
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception("Failed to post File", ex);
+            }
+        }
+        public async Task<List<FtpFile>> GetFtpFilesAsync()
+        {
+            using (HttpResponseMessage response = await _httpClient.GetAsync("/FTPFile"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<FtpFile>>(content);
+                }
+                else
+                {
+                    throw new Exception($"Failed to fetch data from API. Status code: {response.StatusCode}");
+                }
+            }
+        }
+    
+        #endregion
 
 
     }

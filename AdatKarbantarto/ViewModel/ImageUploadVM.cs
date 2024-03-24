@@ -9,15 +9,18 @@ using Microsoft.Win32;
 using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using System.Collections.ObjectModel;
+using AdatKarbantarto.Helpers;
+using AdatKarbantarto.Model;
 
 namespace AdatKarbantarto.ViewModel
 {
-    public class ImageUploadVM : ViewModelBase, INotifyPropertyChanged
+    public class ImageUploadVM : ViewModelBase
     {
         private string _fileName;
-        private ObservableCollection<string> _uploadedFiles;
+        private List<FtpFile> _uploadedFilesList;
+        private ObservableCollection<FtpFile> _uploadedFiles;
         public string Filename { get; set; }
-        public ObservableCollection<string> UploadedFiles { get { return _uploadedFiles; } 
+        public ObservableCollection<FtpFile> UploadedFiles { get { return _uploadedFiles; } 
             set
             { 
                 _uploadedFiles = value;
@@ -46,7 +49,18 @@ namespace AdatKarbantarto.ViewModel
         {
             openfile = new RelayCommand(async execute => await OpenFile());
             uploadfile = new RelayCommand(async execute => await UploadFile());
-            UploadedFiles = new ObservableCollection<string>();
+            UploadedFiles = new ObservableCollection<FtpFile>();
+            LoadUploadedFiles();
+        }
+
+        private async void LoadUploadedFiles()
+        {
+            BackendApiHelper apiHelper = new BackendApiHelper();
+            _uploadedFilesList = await apiHelper.GetFtpFilesAsync();
+            foreach (var file in _uploadedFilesList)
+            {
+                UploadedFiles.Add(file);
+            }
         }
 
         private async Task OpenFile()
@@ -71,7 +85,15 @@ namespace AdatKarbantarto.ViewModel
                     client.Credentials = new NetworkCredential("balintpejko@gmail.com", "printfusion87877");
                     await client.UploadFileTaskAsync(new Uri("ftp://ftp.nethely.hu/test/" + Path.GetFileName(Filename)), "STOR", Filename);
                     EditorText = "Upload successful.";
-                    UploadedFiles.Add(Filename);
+                    BackendApiHelper apihelper=new BackendApiHelper();
+                    FtpFile newFtpFile = new();
+                    newFtpFile.file = Filename;
+                    newFtpFile.timestamp=DateTime.Now;
+                    await apihelper.PostFtpFileAsync(newFtpFile);
+                    UploadedFiles.Clear();
+                    LoadUploadedFiles();
+
+
                 }
             }
             catch (Exception ex)

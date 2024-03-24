@@ -15,19 +15,21 @@ public partial class AuthContext : DbContext
     {
     }
 
-    public virtual DbSet<Aspnetrole> Aspnetroles { get; set; }
+    public virtual DbSet<Aspnetrole> Aspnetrole { get; set; }
 
-    public virtual DbSet<Aspnetroleclaim> Aspnetroleclaims { get; set; }
+    public virtual DbSet<Aspnetroleclaim> Aspnetroleclaim { get; set; }
 
     public virtual DbSet<Aspnetuser> Aspnetusers { get; set; }
 
-    public virtual DbSet<Aspnetuserclaim> Aspnetuserclaims { get; set; }
+    public virtual DbSet<Aspnetuserclaim> Aspnetuserclaim { get; set; }
 
-    public virtual DbSet<Aspnetuserlogin> Aspnetuserlogins { get; set; }
+    public virtual DbSet<Aspnetuserlogin> Aspnetuserlogin { get; set; }
 
-    public virtual DbSet<Aspnetusertoken> Aspnetusertokens { get; set; }
+    public virtual DbSet<Aspnetusertoken> Aspnetusertoken { get; set; }
 
-    public virtual DbSet<Efmigrationshistory> Efmigrationshistories { get; set; }
+    public virtual DbSet<Efmigrationshistory> Efmigrationshistorie { get; set; }
+
+    public virtual DbSet<Ftpfile> Ftpfile { get; set; }
 
     public virtual DbSet<Helyadatok> Helyadatok { get; set; }
 
@@ -191,6 +193,25 @@ public partial class AuthContext : DbContext
             entity.Property(e => e.ProductVersion).HasMaxLength(32);
         });
 
+        modelBuilder.Entity<Ftpfile>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("ftpfiles");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.File)
+                .HasMaxLength(255)
+                .HasColumnName("file");
+            entity.Property(e => e.Timestamp)
+                .ValueGeneratedOnAddOrUpdate()
+                .HasDefaultValueSql("'current_timestamp()'")
+                .HasColumnType("datetime")
+                .HasColumnName("timestamp");
+        });
+
         modelBuilder.Entity<Helyadatok>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -231,7 +252,6 @@ public partial class AuthContext : DbContext
 
             entity.HasOne(d => d.Termek).WithMany(p => p.Hozzaszolasoks)
                 .HasForeignKey(d => d.TermekId)
-                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("hozzaszolasok_ibfk_1");
 
             entity.HasOne(d => d.User).WithMany(p => p.Hozzaszolasoks)
@@ -268,7 +288,6 @@ public partial class AuthContext : DbContext
 
             entity.HasOne(d => d.Termek).WithMany(p => p.Szamlazas)
                 .HasForeignKey(d => d.TermekId)
-                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("szamlazas_ibfk_1");
 
             entity.HasOne(d => d.User).WithMany(p => p.Szamlazas)
