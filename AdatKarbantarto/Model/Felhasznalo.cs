@@ -8,7 +8,7 @@ namespace AdatKarbantarto.Model
 {
     public class Felhasznalo
     {
-        public string Id { get; set; }
+        public string felhasznaloId { get; set; }
         public string UserName { get; set; }
         public string PasswordHash { get; set; }
         public bool EmailConfirmed { get; set; }
@@ -18,9 +18,6 @@ namespace AdatKarbantarto.Model
         public string PhoneNumber { get; set; }
         public DateTime ActivateDate { get; set; }
 
-        public override string? ToString()
-        {
-            return $"Id:{Id}";
-        }
+       
     }
 }

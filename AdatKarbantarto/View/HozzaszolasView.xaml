@@ -51,7 +51,7 @@
 
                 <!-- Define other columns for your data properties as needed -->
                 <DataGridTextColumn Header="ID" Binding="{Binding hozzaszolasId}" />
-                <DataGridTextColumn Header="User ID" Binding="{Binding felhasznaloId}" />
+                <DataGridTextColumn Header="User ID" Binding="{Binding userId}" />
                 <DataGridTextColumn Header="Product ID" Binding="{Binding termekId}" />
                 <DataGridTextColumn Header="Description" Binding="{Binding leiras}" />
                 <DataGridTextColumn Header="Rating" Binding="{Binding ertekeles}" />
@@ -60,25 +60,11 @@
         </DataGrid>
 
 
-        <DataGrid Grid.Row="2" x:Name="dtg_add" CanUserAddRows="False" AutoGenerateColumns="False" Height="100" ItemsSource="{Binding UpdateItem}" Margin="20,10,-140,20" CanUserReorderColumns="False">
+        <DataGrid Grid.Row="2" x:Name="dtg_add" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False"  AutoGenerateColumns="False" Height="100" ItemsSource="{Binding UpdateItem}" Margin="20,10,-140,20" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding hozzaszolasId}" IsReadOnly="True"/>
-                <DataGridTemplateColumn Header="User ID">
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <ComboBox ItemsSource="{Binding DataContext.Users, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                        SelectedItem="{Binding DataContext.SelectedUser, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Product ID">
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <ComboBox ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                        SelectedItem="{Binding DataContext.SelectedProduct, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
+                <materialDesign:DataGridTextColumn Header="User ID" Binding="{Binding userId}" />
+                <materialDesign:DataGridTextColumn Header="Product ID" Binding="{Binding termekId}" />
                 <materialDesign:DataGridTextColumn Header="Description" Binding="{Binding leiras}" />
                 <materialDesign:DataGridTextColumn Header="Rating" Binding="{Binding ertekeles}"/>
 

@@ -78,7 +78,7 @@ namespace AdatKarbantarto.View
         private async void Delete_Click(object sender, RoutedEventArgs e)
         {
             Felhasznalo kivalasztott = dtg_Adatok.SelectedItem as Felhasznalo;
-            string kivalasztottId = kivalasztott.Id;
+            string kivalasztottId = kivalasztott.felhasznaloId;
             var confirmationDialog = new ConfirmationDialog("Are you sure you want to delete?");
             confirmationDialog.ShowDialog();
 

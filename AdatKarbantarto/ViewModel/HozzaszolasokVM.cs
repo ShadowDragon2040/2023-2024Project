@@ -24,8 +24,6 @@ namespace AdatKarbantarto.ViewModel
         private Felhasznalo _selectedUser;
         private Termek _selectedTermek;
         private List<Hozzaszolas> _ListData;
-        private List<Felhasznalo> _userList;
-        private List<Termek> _productList;
         private ObservableCollection<Hozzaszolas> _items;
         private ObservableCollection<Hozzaszolas> _updateItem;
         private ICollectionView _filteredView;
@@ -55,35 +53,7 @@ namespace AdatKarbantarto.ViewModel
         #endregion
         #region Getters/Setters
 
-        public ObservableCollection<Felhasznalo> Users { get; } = new ObservableCollection<Felhasznalo>();
-        public ObservableCollection<Termek> Products { get; } = new ObservableCollection<Termek>();
-
-        public Felhasznalo SelectedUser
-        {
-            get { return _selectedUser; }
-            set
-            {
-                if (_selectedUser != value)
-                {
-                    _selectedUser = value;
-                    OnPropertyChanged(nameof(SelectedUser));
-
-                }
-            }
-        }
-        public Termek SelectedTermek
-        {
-            get { return _selectedTermek; }
-            set
-            {
-                if (_selectedTermek != value)
-                {
-                    _selectedTermek = value;
-                    OnPropertyChanged(nameof(SelectedTermek));
-
-                }
-            }
-        }
+ 
         public string SearchProductID
         {
             get { return _searchProductID; }
@@ -129,10 +99,7 @@ namespace AdatKarbantarto.ViewModel
             {
                 _selectedItem = value;
                 OnPropertyChanged(nameof(SelectedItem));
-                if (SelectedUser != null)
-                {
-                    SelectedUser.Id = SelectedItem.felhasznaloId;
-                }
+              
             }
         }
         public bool IsSaveEnabled
@@ -168,18 +135,8 @@ namespace AdatKarbantarto.ViewModel
             {
                 BackendApiHelper apiHelper = new BackendApiHelper();
                 _ListData = await apiHelper.GetHozzaszolasokAsync();
-                _userList = await apiHelper.GetFelhasznalokAsync();
-                _productList = await apiHelper.GetTermekekAsync();
+                
                 HozzaszolasItems.Clear();
-                foreach (Felhasznalo user in _userList)
-                {
-                    Users.Add(user);
-                }
-                foreach (Termek prod in _productList)
-                {
-                    Products.Add(prod);
-                }
-
                 foreach (var Hozzaszolas in _ListData)
                 {
                     HozzaszolasItems.Add(Hozzaszolas);
@@ -192,24 +149,30 @@ namespace AdatKarbantarto.ViewModel
         }
         private async void SaveItem()
         {
-
-            Hozzaszolas newProduct = new Hozzaszolas()
+            if (SelectedItem != null)
             {
-                hozzaszolasId = SelectedItem.hozzaszolasId,
-                felhasznaloId = SelectedUser.Id,
-                termekId = SelectedTermek.TermekId,
-                leiras = SelectedItem.leiras,
-                ertekeles = SelectedItem.ertekeles,
-            };
-            BackendApiHelper postHelper = new BackendApiHelper();
-            var response = await postHelper.PostHozzaszolasAsync(newProduct);
-            MessageBox.Show(response.ToString());
+                Hozzaszolas newProduct = new Hozzaszolas()
+                {
+                    hozzaszolasId = SelectedItem.hozzaszolasId,
+                    userId = SelectedItem.userId.ToString(),
+                    termekId = SelectedItem.termekId,
+                    leiras = SelectedItem.leiras,
+                    ertekeles = SelectedItem.ertekeles,
+                };
+                BackendApiHelper postHelper = new BackendApiHelper();
+                var response = await postHelper.PostHozzaszolasAsync(newProduct);
+                MessageBox.Show(response.ToString());
 
-
-            IsAddEnabled = true;
-            IsSaveEnabled = false;
-            SaveCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate SaveCommand's CanExecute
+                IsAddEnabled = true;
+                IsSaveEnabled = false;
+                SaveCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate SaveCommand's CanExecute
+            }
+            else
+            {
+                MessageBox.Show("No item selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
         private async void PutItem()
         {
             var confirmationDialog = new ConfirmationDialog("Are you sure you want to modify?");
@@ -220,8 +183,7 @@ namespace AdatKarbantarto.ViewModel
             if (result)
             {
                 BackendApiHelper modhelper = new BackendApiHelper();
-                UpdateItem[0].termekId = SelectedTermek.TermekId;
-                UpdateItem[0].felhasznaloId = SelectedUser.Id;
+               
                 var response = await modhelper.ModifyHozzaszolasAsync(UpdateItem[0].hozzaszolasId, UpdateItem[0]);
                 if (response)
                 {

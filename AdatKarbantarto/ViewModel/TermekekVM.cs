@@ -17,9 +17,7 @@ namespace AdatKarbantarto.ViewModel
         private bool _isSaveEnabled;
         private bool _isAddEnabled;
         private Termek _selectedItem;
-        private Kategoria _selectedCategory;
         private List<Termek> _ListData;
-        private List<Kategoria> _CategoryList;
         private ObservableCollection<Termek> _items;
         private ObservableCollection<Termek> _updateItem;
         private ICollectionView _filteredView;
@@ -51,19 +49,7 @@ namespace AdatKarbantarto.ViewModel
 
         public ObservableCollection<Kategoria> Categories { get; }=new ObservableCollection<Kategoria>();
 
-        public Kategoria SelectedCategory
-        {
-            get { return _selectedCategory; }
-            set
-            {
-                if (_selectedCategory != value)
-                {
-                    _selectedCategory = value;
-                    OnPropertyChanged(nameof(SelectedCategory));
-                  
-                }
-            }
-        }
+        
         public string SearchProductID
         {
             get { return _searchProductID; }
@@ -109,10 +95,7 @@ namespace AdatKarbantarto.ViewModel
             {
                 _selectedItem = value;
                 OnPropertyChanged(nameof(SelectedItem));
-                if (SelectedCategory != null)
-                {
-                    SelectedCategory.KategoriaId = SelectedItem.KategoriaId;
-                }
+              
             }
         }
         public bool IsSaveEnabled
@@ -148,12 +131,9 @@ namespace AdatKarbantarto.ViewModel
             {
                 BackendApiHelper apiHelper = new BackendApiHelper();
                 _ListData = await apiHelper.GetTermekekAsync();
-                _CategoryList= await apiHelper.GetKategoriaAsync();
+              
                 Items.Clear();
-                foreach (var category in _CategoryList)
-                {
-                    Categories.Add(category);
-                }
+             
                 
                 foreach (var szamla in _ListData)
                 {
@@ -174,7 +154,7 @@ namespace AdatKarbantarto.ViewModel
                 Ar = SelectedItem.Ar,
                 Leiras = SelectedItem.Leiras,
                 Menyiseg = SelectedItem.Menyiseg,
-                KategoriaId = SelectedCategory.KategoriaId,
+                KategoriaId = SelectedItem.KategoriaId,
                 KepUtvonal = SelectedItem.KepUtvonal,
             };
             BackendApiHelper postHelper = new BackendApiHelper();
@@ -196,7 +176,7 @@ namespace AdatKarbantarto.ViewModel
             if (result)
             {
                 BackendApiHelper modhelper = new BackendApiHelper();
-                UpdateItem[0].KategoriaId = SelectedCategory.KategoriaId;
+              
                 var response = await modhelper.ModifyTermekAsync(UpdateItem[0].TermekId, UpdateItem[0]);
                 if (response)
                 {

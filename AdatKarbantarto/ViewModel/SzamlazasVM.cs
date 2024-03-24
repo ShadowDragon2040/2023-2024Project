@@ -17,8 +17,6 @@ namespace AdatKarbantarto.ViewModel
         private bool _isSaveEnabled;
         private bool _isAddEnabled;
         private Szamla _selectedItem;
-        private Felhasznalo _selectedUser;
-        private Termek _selectedTermek;
         private List<Szamla> _ListData;
         private List<Felhasznalo> _userList;
         private List<Termek> _productList;
@@ -31,8 +29,6 @@ namespace AdatKarbantarto.ViewModel
         {
             _isSaveEnabled = false;
             _isAddEnabled = true;
-            Products = new ObservableCollection<Termek>();
-            Users = new ObservableCollection<Felhasznalo>();
             SzamlaItems = new ObservableCollection<Szamla>();
             UpdateItem = new ObservableCollection<Szamla>();
             RefreshCommand = new RelayCommand(execute => RefreshItems());
@@ -55,59 +51,9 @@ namespace AdatKarbantarto.ViewModel
         #endregion
         #region Getters/Setters
 
-        public ObservableCollection<Felhasznalo> Users
-        {
-            get { return _users; }
-            set
-            {
-                _users = value;
-                _filteredView = CollectionViewSource.GetDefaultView(_users);
-                ApplyFilter();
-            }
-        }
-        public ObservableCollection<Termek> Products
-        {
-            get { return _products; }
-            set
-            {
-                _products = value;
-                _filteredView = CollectionViewSource.GetDefaultView(_products);
-                ApplyFilter();
-            }
-        }
+        
 
-        public Felhasznalo SelectedUser
-        {
-            get { return _selectedUser; }
-            set
-            {
-                if (_selectedUser != value)
-                {
-                    _selectedUser = value;
-                    OnPropertyChanged(nameof(SelectedUser));
-                    if (SelectedItem != null)
-                    {
-                        SelectedItem.felhasznaloId = SelectedUser.Id; 
-                    }
-                }
-            }
-        }
-        public Termek SelectedTermek
-        {
-            get { return _selectedTermek; }
-            set
-            {
-                if (_selectedTermek != value)
-                {
-                    _selectedTermek = value;
-                    OnPropertyChanged(nameof(SelectedTermek));
-                    if (SelectedItem != null)
-                    {
-                        SelectedItem.termekId = SelectedTermek.TermekId;
-                    }
-                }
-            }
-        }
+      
         public string SearchProductID
         {
             get { return _searchProductID; }
@@ -153,11 +99,7 @@ namespace AdatKarbantarto.ViewModel
             {
                 _selectedItem = value;
                 OnPropertyChanged(nameof(SelectedItem));
-                if (_selectedItem != null)
-                {
-                    _selectedItem.termekId = SelectedTermek?.TermekId??0;
-                    _selectedItem.felhasznaloId = SelectedUser?.Id; 
-                }
+               
             }
         }
         public bool IsSaveEnabled
@@ -193,17 +135,9 @@ namespace AdatKarbantarto.ViewModel
             {
                 BackendApiHelper apiHelper = new BackendApiHelper();
                 _ListData = await apiHelper.GetSzamlaAsync();
-                _userList = await apiHelper.GetFelhasznalokAsync();
-                _productList = await apiHelper.GetTermekekAsync();
+               
                 SzamlaItems.Clear();
-                foreach (Felhasznalo user in _userList)
-                {
-                    Users.Add(user);
-                }
-                foreach (Termek prod in _productList)
-                {
-                    Products.Add(prod);
-                }
+              
 
                 foreach (var szamla in _ListData)
                 {
@@ -221,8 +155,8 @@ namespace AdatKarbantarto.ViewModel
             Szamla newProduct = new Szamla()
             {
                 szamlazasId = SelectedItem.szamlazasId,
-                felhasznaloId = SelectedUser.Id,
-                termekId = SelectedTermek.TermekId,
+                felhasznaloId = SelectedItem.felhasznaloId,
+                termekId = SelectedItem.termekId,
                 szinHex = SelectedItem.szinHex,
                 vasarlasIdopontja = SelectedItem.vasarlasIdopontja,
                 sikeresSzallitas = SelectedItem.sikeresSzallitas,
@@ -246,8 +180,7 @@ namespace AdatKarbantarto.ViewModel
             if (result)
             {
                 BackendApiHelper modhelper = new BackendApiHelper();
-                UpdateItem[0].termekId = SelectedTermek.TermekId;
-                UpdateItem[0].felhasznaloId=SelectedUser.Id;
+              
                 var response = await modhelper.ModifySzamlaAsync(UpdateItem[0].szamlazasId, UpdateItem[0]);
                 if (response)
                 {

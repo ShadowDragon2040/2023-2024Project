@@ -65,9 +65,7 @@
             <DataGrid.Columns>
                 
                 <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding szamlazasId}" IsReadOnly="True"/>
-                <materialDesign:DataGridComboBoxColumn Header="User ID" 
-                                       ItemsSource="{Binding DataContext.Users, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
-
+                <materialDesign:DataGridTextColumn Header="User ID" Binding="{Binding felhasznaloId}"/>
 
 
                 <materialDesign:DataGridTextColumn Header="Color HEX" Binding="{Binding szinHex}" />
