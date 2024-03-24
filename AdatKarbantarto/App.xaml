@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="Styles/Text.xaml"/>
                 <ResourceDictionary Source="Styles/Page.xaml"/>
                 <ResourceDictionary Source="Styles/Image.xaml"/>
+                <ResourceDictionary Source="Styles/StackPanel.xaml"/>
                 <ResourceDictionary Source="Utilities/DataTemplate.xaml"/>
                 
                 <!-- material design styles -->

@@ -12,8 +12,10 @@ namespace AdatKarbantarto.ViewModel
 {
     public class ImageUploadVM : ViewModelBase, INotifyPropertyChanged
     {
-        public RelayCommand buttonpressed { get; private set; }
-        public RelayCommand uploadpressed { get; private set; }
+        private string _fileName;
+        public string Filename { get;  set; }
+        public RelayCommand openfile { get; private set; }
+        public RelayCommand uploadfile { get; private set; }
 
         private string _editorText;
         public string EditorText
@@ -31,11 +33,11 @@ namespace AdatKarbantarto.ViewModel
 
         public ImageUploadVM()
         {
-            buttonpressed = new RelayCommand(async execute => await PressButton());
-            uploadpressed = new RelayCommand(async execute => await UploadButton());
+            openfile = new RelayCommand(async execute => await OpenFile());
+            uploadfile = new RelayCommand(async execute => await UploadFile());
         }
 
-        private async Task UploadButton()
+        private async Task OpenFile()
         {
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
 
@@ -43,18 +45,19 @@ namespace AdatKarbantarto.ViewModel
             {
                 EditorText = "Uploading...";
                 await Task.Delay(100); // A small delay to update the UI
-                await UploadFile(openFileDialog.FileName);
+                Filename = openFileDialog.FileName;
+                EditorText=Filename;
             }
         }
 
-        private async Task UploadFile(string filePath)
+        private async Task UploadFile()
         {
             try
             {
                 using (WebClient client = new WebClient())
                 {
                     client.Credentials = new NetworkCredential("balintpejko@gmail.com", "printfusion87877");
-                    await client.UploadFileTaskAsync(new Uri("ftp://ftp.nethely.hu/test/" + Path.GetFileName(filePath)), "STOR", filePath);
+                    await client.UploadFileTaskAsync(new Uri("ftp://ftp.nethely.hu/test/" + Path.GetFileName(Filename)), "STOR", Filename);
                     EditorText = "Upload successful.";
                 }
             }
@@ -65,28 +68,6 @@ namespace AdatKarbantarto.ViewModel
             }
         }
 
-        private async Task PressButton()
-        {
-            try
-            {
-                using (WebClient client = new WebClient())
-                {
-                    client.Credentials = new NetworkCredential("balintpejko@gmail.com", "printfusion87877");
-                    await client.UploadFileTaskAsync(new Uri("ftp://ftp.nethely.hu"), "STOR", "C:\\file.txt");
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle exception
-                Console.WriteLine("An error occurred: " + ex.Message);
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+       
     }
 }
