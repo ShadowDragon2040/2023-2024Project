@@ -14,7 +14,7 @@ namespace AdatKarbantarto.Model
 
         public override string? ToString()
         {
-            return file+".png";
+            return file;
         }
     }
 }

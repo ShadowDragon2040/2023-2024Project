@@ -15,7 +15,13 @@
         <StackPanel Grid.Column="1" Margin="50,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Center">
             <TextBox Name="txtEditor" Text="{Binding EditorText}" Background="White" Width="320" Height="30" IsReadOnly="True" />
             <Label Content="Recently Uploaded Files" FontSize="22" HorizontalAlignment="Center"  VerticalAlignment="Stretch"/>
-            <ListBox Name="lsb_uploadedFiles" Height="350" Margin="0,20,0,0"  ItemsSource="{Binding UploadedFiles}"/>
+            <ListBox Name="lsb_uploadedFiles" Height="350" Margin="0,20,0,0"  ItemsSource="{Binding UploadedFiles}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                        <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
         </StackPanel>
 
         <StackPanel

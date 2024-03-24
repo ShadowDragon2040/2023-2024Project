@@ -1,13 +1,17 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
+using System.Diagnostics;
 using System.Windows.Controls;
 using AdatKarbantarto.ViewModel;
+using Microsoft.Win32;
+using System.Runtime.InteropServices;
 
 namespace AdatKarbantarto.View
 {
     public partial class KepFeltoltesView : UserControl
     {
+        
         public KepFeltoltesView()
         {
             InitializeComponent();
@@ -35,5 +39,32 @@ namespace AdatKarbantarto.View
                 }
             }
         }
+
+        private  void ListBoxItem_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+           
+            string file = e.Source.ToString().Split("\\").Last();
+           
+           
+            string url = "http://printfusion.nhely.hu/test/"+file;
+           
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                Process.Start("xdg-open", url);
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                Process.Start("open", url);
+            }
+            else
+            {
+                // throw 
+            }
+        }
+      
     }
 }
