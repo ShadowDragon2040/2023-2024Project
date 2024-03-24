@@ -4,13 +4,14 @@ using MaterialDesignThemes.Wpf;
 using System;
 using System.IO;
 using System.Net;
-using System.Threading.Tasks;
+using System.Configuration;
 using Microsoft.Win32;
 using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using System.Collections.ObjectModel;
 using AdatKarbantarto.Helpers;
 using AdatKarbantarto.Model;
+using System.Windows;
 
 namespace AdatKarbantarto.ViewModel
 {
@@ -82,19 +83,31 @@ namespace AdatKarbantarto.ViewModel
             {
                 using (WebClient client = new WebClient())
                 {
-                    client.Credentials = new NetworkCredential("balintpejko@gmail.com", "printfusion87877");
-                    await client.UploadFileTaskAsync(new Uri("ftp://ftp.nethely.hu/test/" + Path.GetFileName(Filename)), "STOR", Filename);
-                    EditorText = "Upload successful.";
-                    BackendApiHelper apihelper=new BackendApiHelper();
-                    FtpFile newFtpFile = new();
-                    newFtpFile.file = Filename;
-                    newFtpFile.timestamp=DateTime.Now;
-                    await apihelper.PostFtpFileAsync(newFtpFile);
-                    UploadedFiles.Clear();
-                    LoadUploadedFiles();
+                    try
+                    {
+                        client.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["ftpuser"], ConfigurationManager.AppSettings["ftppass"]);
+                        await client.UploadFileTaskAsync(new Uri(ConfigurationManager.AppSettings["ftpServer"] + Path.GetFileName(Filename)), "STOR", Filename);
+                        EditorText = "Upload successful.";
 
+                        BackendApiHelper apihelper = new BackendApiHelper();
+                        FtpFile newFtpFile = new FtpFile()
+                        {
+                            file = Filename,
+                            timestamp = DateTime.Now
+                        };
+                        await apihelper.PostFtpFileAsync(newFtpFile);
 
+                        UploadedFiles.Clear();
+                        LoadUploadedFiles();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle and log exceptions appropriately
+                        Console.WriteLine($"Error uploading file: {ex.Message}");
+                        EditorText = "Upload failed.";
+                    }
                 }
+
             }
             catch (Exception ex)
             {

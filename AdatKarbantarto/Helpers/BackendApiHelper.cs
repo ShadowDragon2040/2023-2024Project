@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
+using System.Configuration;
 using AdatKarbantarto.Model;
 using Newtonsoft.Json;
 using System.Windows;
@@ -18,7 +18,7 @@ namespace AdatKarbantarto.Helpers
         public BackendApiHelper()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("https://localhost:7026");
+            _httpClient.BaseAddress = new Uri(ConfigurationManager.AppSettings["api"]);
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }

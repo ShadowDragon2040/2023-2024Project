@@ -4,7 +4,7 @@ using System.Windows;
 using System.Diagnostics;
 using System.Windows.Controls;
 using AdatKarbantarto.ViewModel;
-using Microsoft.Win32;
+using System.Configuration;
 using System.Runtime.InteropServices;
 
 namespace AdatKarbantarto.View
@@ -15,7 +15,7 @@ namespace AdatKarbantarto.View
         public KepFeltoltesView()
         {
             InitializeComponent();
-            DataContext = new ImageUploadVM(); // Set the ViewModel as DataContext
+            DataContext = new ImageUploadVM(); 
         }
 
         private async void FileDropPanel_Drop(object sender, DragEventArgs e)
@@ -28,8 +28,8 @@ namespace AdatKarbantarto.View
                     try
                     {
                         ((ImageUploadVM)DataContext).EditorText = "Dropped file(s) detected...";
-                        await Task.Delay(100); // A small delay to update the UI
-                     // Assuming only one file is dropped
+                        await Task.Delay(100); 
+                     
                      ((ImageUploadVM)DataContext).Filename= file[0];
                     }
                     catch (Exception ex)
@@ -46,7 +46,7 @@ namespace AdatKarbantarto.View
             string file = e.Source.ToString().Split("\\").Last();
            
            
-            string url = "http://printfusion.nhely.hu/test/"+file;
+            string url = ConfigurationManager.AppSettings["ftp"]+file;
            
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
