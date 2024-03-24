@@ -7,13 +7,24 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using System.ComponentModel;
+using System.Security.Cryptography.X509Certificates;
+using System.Collections.ObjectModel;
 
 namespace AdatKarbantarto.ViewModel
 {
     public class ImageUploadVM : ViewModelBase, INotifyPropertyChanged
     {
         private string _fileName;
-        public string Filename { get;  set; }
+        private ObservableCollection<string> _uploadedFiles;
+        public string Filename { get; set; }
+        public ObservableCollection<string> UploadedFiles { get { return _uploadedFiles; } 
+            set
+            { 
+                _uploadedFiles = value;
+                OnPropertyChanged(nameof(UploadedFiles));
+            }
+        }
+
         public RelayCommand openfile { get; private set; }
         public RelayCommand uploadfile { get; private set; }
 
@@ -35,6 +46,7 @@ namespace AdatKarbantarto.ViewModel
         {
             openfile = new RelayCommand(async execute => await OpenFile());
             uploadfile = new RelayCommand(async execute => await UploadFile());
+            UploadedFiles = new ObservableCollection<string>();
         }
 
         private async Task OpenFile()
@@ -59,6 +71,7 @@ namespace AdatKarbantarto.ViewModel
                     client.Credentials = new NetworkCredential("balintpejko@gmail.com", "printfusion87877");
                     await client.UploadFileTaskAsync(new Uri("ftp://ftp.nethely.hu/test/" + Path.GetFileName(Filename)), "STOR", Filename);
                     EditorText = "Upload successful.";
+                    UploadedFiles.Add(Filename);
                 }
             }
             catch (Exception ex)

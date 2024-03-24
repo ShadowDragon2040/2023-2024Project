@@ -3,25 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AdatKarbantarto.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="1200"
+             Style="{StaticResource Page_Style}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <WrapPanel Grid.Column="1" HorizontalAlignment="Center" DockPanel.Dock="Top">
-            <TextBox Name="txtEditor" Text="{Binding EditorText}" Background="White" Width="150" Height="30" />
-        </WrapPanel>
 
+        <StackPanel Grid.Column="1" Margin="50,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <TextBox Name="txtEditor" Text="{Binding EditorText}" Background="White" Width="320" Height="30" />
+            <Label Content="Recently Uploaded Files" FontSize="22" HorizontalAlignment="Center"  VerticalAlignment="Stretch"/>
+            <ListBox Name="lsb_uploadedFiles" Height="223" Margin="0,20,0,0"  ItemsSource="{Binding UploadedFiles}"/>
+        </StackPanel>
 
         <StackPanel
             Style="{StaticResource SPanelStyle}"
             x:Name="FileDropPanel"
             Grid.Column="0"
             AllowDrop="True"
-           
             Drop="FileDropPanel_Drop"
             Margin="20,30"
             >
@@ -29,8 +30,6 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    Foreground="Black"
-                   
-                
                 />
 
             <Button x:Name="btnOpenFile" Height="50"
