@@ -1,6 +1,7 @@
 ﻿using AdatKarbantarto.Helpers;
 using AdatKarbantarto.Model;
 using AdatKarbantarto.Utilities;
+using AdatKarbantarto.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,124 +29,8 @@ namespace AdatKarbantarto.View
         public FelhasznaloView()
         {
             InitializeComponent();
-            GetFelhasznalok();
-            DataContext = this;
-            btn_save.IsEnabled = false;
-
+            DataContext = new FelhasznalokVM();
         }
 
-        private ObservableCollection<Felhasznalo> items;
-        private ObservableCollection<Felhasznalo> addedItems;
-        public ObservableCollection<Felhasznalo> Items
-        {
-            get { return items ?? (items = new ObservableCollection<Felhasznalo>()); }
-            set { items = value; }
-        }
-        public ObservableCollection<Felhasznalo> AddedItems
-        {
-            get { return addedItems ?? (addedItems = new ObservableCollection<Felhasznalo>()); }
-            set { addedItems = value; }
-        }
-
-        public List<Felhasznalo> users;
-        private async void GetFelhasznalok()
-        {
-            try
-            {
-                BackendApiHelper apiHelper = new BackendApiHelper();
-                users = await apiHelper.GetFelhasznalokAsync();
-                Items.Clear();
-                foreach (var item in users)
-                {
-                    Items.Add(item);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-
-        private void Modify_Click(object sender, RoutedEventArgs e)
-        {
-            Felhasznalo felhasznalo = (Felhasznalo)dtg_Adatok.SelectedItem;
-            addedItems.Clear();
-
-            addedItems.Add(felhasznalo);
-
-        }
-        private async void Delete_Click(object sender, RoutedEventArgs e)
-        {
-            Felhasznalo kivalasztott = dtg_Adatok.SelectedItem as Felhasznalo;
-            string kivalasztottId = kivalasztott.Id;
-            var confirmationDialog = new ConfirmationDialog("Are you sure you want to delete?");
-            confirmationDialog.ShowDialog();
-
-            bool result = await Task.Run(() => confirmationDialog.Result);
-
-            if (result)
-            {
-                BackendApiHelper deleteHelper = new BackendApiHelper();
-                var response = await deleteHelper.DeleteFelhasznaloAsync(kivalasztottId);
-                MessageBox.Show(response.ToString());
-                GetFelhasznalok();
-            }
-            else
-            {
-            }
-        }
-        public Felhasznalo ujfelhasznalo;
-        private void AddRow_Click(object sender, RoutedEventArgs e)
-        {
-            ujfelhasznalo = new Felhasznalo();
-            Items.Add(ujfelhasznalo);
-            btn_add.IsEnabled = false;
-            btn_save.IsEnabled = true;
-
-        }
-
-        private async void btn_save_Click(object sender, RoutedEventArgs e)
-        {
-
-            if (Vizsgalat(ujfelhasznalo))
-            {
-                BackendApiHelper postHelper = new BackendApiHelper();
-                var response = await postHelper.PostFelhasznaloAsync(ujfelhasznalo);
-                MessageBox.Show(response.ToString());
-                GetFelhasznalok();
-                btn_add.IsEnabled = true;
-            }
-            else
-            {
-                MessageBox.Show("Nem megfelelő modell");
-            }
-        }
-
-
-        private async void btn_put_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        
-
-        private bool Vizsgalat(Felhasznalo ujfelhasznalo)
-        {
-
-            throw new NotImplementedException();
-        }
-
-        private void txb_search_KeyUp(object sender, KeyEventArgs e)
-        {
-            var filtered = users.Where(user => user.UserName.ToLower().Contains(txb_search.Text.ToLower()));
-            dtg_Adatok.ItemsSource = filtered;
-        }
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

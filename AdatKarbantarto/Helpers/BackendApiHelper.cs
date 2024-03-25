@@ -357,7 +357,12 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
-    
+
+        internal async Task<bool> ModifyFelhasznaloAsync(string id, Felhasznalo felhasznalo)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
 
