@@ -85,7 +85,7 @@ namespace AdatKarbantarto.ViewModel
                 {
                     try
                     {
-                        client.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["ftpuser"], ConfigurationManager.AppSettings["ftppass"]);
+                        client.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["ftpUser"], ConfigurationManager.AppSettings["ftpPass"]);
                         await client.UploadFileTaskAsync(new Uri(ConfigurationManager.AppSettings["ftpServer"] + Path.GetFileName(Filename)), "STOR", Filename);
                         EditorText = "Upload successful.";
 

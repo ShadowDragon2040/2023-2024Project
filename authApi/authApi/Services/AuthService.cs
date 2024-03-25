@@ -97,7 +97,6 @@ namespace authApi.Services
                 UserName =registerRequestDto.UserName,
                 NormalizedUserName =registerRequestDto.UserName.ToUpper(),
                 Email =registerRequestDto.Email
-              
             };
             try
             {
@@ -127,7 +126,7 @@ namespace authApi.Services
                 }
                 else
                 {
-                    return "hiba";
+                    return result.Errors.FirstOrDefault().Description;
                 }
             }
             catch (Exception ex)

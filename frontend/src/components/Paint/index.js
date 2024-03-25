@@ -12,21 +12,6 @@ Img,
 Subtitle
 } from '../TextElements'
 
-export const homeObjOne={
-  id:'tools',
-  lightBg:false,
-  lightText:true,
-  lightTextDesc:false,
-  headline:'Cég bemutató',
-  topLine:'Industár.kft',
-  imgStart:false,
-  img:require('../../images/industar-kft-front.jpg'),
-  alt:'Car',
-  dark:true,
-  primary:true,
-  darkText:true,
-};
-
 const Paint = () => {
   return (
     <>

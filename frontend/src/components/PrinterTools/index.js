@@ -100,7 +100,7 @@ const PrinterTools = () => {
             <ImgWrap>
             <Link onClick={handleClick} to="/Carbon X1">
                 <Img
-                  src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                  src={'http://printfusion.nhely.hu/test/bambucarbonx1.jpg'}
                   alt={'Bambu Carbon X1'}
                   onMouseEnter={() => setBottomLeftHovered(true)}
                   onMouseLeave={() => setBottomLeftHovered(false)}

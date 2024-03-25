@@ -8,7 +8,25 @@ import { FaTimes } from "react-icons/fa";
 export const InfoContainer=styled.div`
     color: #fff;
     background: ${({lightBg})=>(lightBg?'#f9f9f9':'#010606')};
+    @media screen and (max-width:768px) {
+        padding: 100px 0;
 
+    }
+`
+export const InfoContainer5=styled.div`
+    color: #fff;
+    background: ${({lightBg})=>(lightBg?'#f9f9f9':'#010606')};
+    height:1500px;
+    @media screen and (max-width:768px) {
+        padding: 100px 0;
+
+    }
+`
+
+export const InfoContainer4=styled.div`
+    color: #fff;
+    background: ${({lightBg})=>(lightBg?'#f9f9f9':'#010606')};
+    padding-top:300px;
     @media screen and (max-width:768px) {
         padding: 100px 0;
 
@@ -442,7 +460,7 @@ export const HeroContainer=styled.div`
     justify-content: center;
     align-items: center;
     padding: 0 30px;
-    height: 950px;
+    height: 100vh;
     position: relative;
     z-index: 1;
 

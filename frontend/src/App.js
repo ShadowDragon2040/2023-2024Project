@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from './pages';
 import CompanyInfoPage from './pages/CompanyInfoPage';
 import EnderPage from './pages/Ender';
+import BambuPage from './pages/Bambu';
 import AnycubicPage from './pages/Anycubic';
 import ElektroplatingPage from './pages/ElektroplatingPage';
 import PaintPage from './pages/PaintPage';
@@ -52,6 +53,7 @@ function App() {
         <Route path="/CompanyInfoPage" component={CompanyInfoPage} exact />
         <Route path="/Ender" component={EnderPage} exact />
         <Route path="/Anycubic" component={AnycubicPage} exact />
+        <Route path="/Bambu" component={BambuPage} exact />
         <Route path="/ElektroplatingPage" component={ElektroplatingPage} exact />
         <Route path="/ModelltervezesPage" component={ModelltervezesPage} exact />
         <Route path="/PaintPage" component={PaintPage} exact />
