@@ -12,12 +12,13 @@ import placeholder from "../images/ppp.jpg"
 import ColorPicker from './ColorPicker';
 import Button from 'react-bootstrap/Button';
 
+
 function SingleProductDisplay() {
     const { ProductId } = useParams();
     const [rating, setRating] = useState(0);
     const [commentString, setCommentString] = useState("");
     const [selectedColor, setSelectedColor] = useState("");
-    const [quantity, setQuantity] = useState(1); 
+    const [quantity, setQuantity] = useState(1);
     const [cart, setCart] = useState([]);
 
     const handleRating = (rate) => {
@@ -38,20 +39,38 @@ function SingleProductDisplay() {
         setSelectedColor(color);
     };
 
+
     const handleQuantityChange = (e) => {
         setQuantity(parseInt(e.target.value));
     };
 
-    const handleAddToCart = (props) => {
-        const newItem = { 
-            id: ProductId, 
-            name: props.name, 
-            price: props.price, 
-            quantity: props.quantity, 
-            color: props.selectedColor 
+    const handleAddToCart = () => {
+        const newItem = {
+            id: ProductId,
+            name: singleProductData.termekNev,
+            price: singleProductData.ar * quantity,
+            quantity: quantity,
+            color: selectedColor  // Include the selected color here
         };
-        setCart([...cart, newItem]);
+
+        const existingItemIndex = cart.findIndex(item =>
+            item.id === ProductId &&
+            item.color === selectedColor
+        );
+
+        if (existingItemIndex !== -1) {
+            const updatedCart = [...cart];
+            updatedCart[existingItemIndex].quantity += quantity;
+            updatedCart[existingItemIndex].price += singleProductData.ar * quantity;
+            setCart(updatedCart);
+            console.log('Item already exists in cart. Updated cart:', updatedCart);
+        } else {
+            setCart(prevCart => [...prevCart, newItem]);
+            console.log('Item added to cart:', newItem);
+        }
     };
+
+
 
     const handleRemoveFromCart = (itemId) => {
         const updatedCart = cart.filter(item => item.id !== itemId);
@@ -68,7 +87,7 @@ function SingleProductDisplay() {
             .then(response => {
                 setSingleProductData(response.data);
                 const transformedComments = response.data.hozzaszolasok.map(productData => ({
-                    userId: productData.felhasznaloId.toString(),
+                    //userId: productData.felhasznaloId.toString(),
                     comId: productData.hozzaszolasId.toString(),
                     fullName: productData.loginNev,
                     avatarUrl: placeholder,
@@ -95,7 +114,7 @@ function SingleProductDisplay() {
     return (
         <>
             <div className='SingleItemContainer'>
-                <Navbar />
+                <Navbar cart={cart} />
                 <div className="container mt-3">
                     <NavLink to={"/ShopPage"} className='back-btn'>
                         <MdArrowBack />
@@ -116,10 +135,13 @@ function SingleProductDisplay() {
                             <p>{singleProductData.termekLeiras}</p>
                             {singleProductData.menyiseg && <p>Available: {singleProductData.menyiseg} pieces</p>}
                             {singleProductData.ar && <h3>{singleProductData.ar} -Ft</h3>}
-                            <ColorPicker onColorChange={handleColorChange} />
+                            <ColorPicker selectedColor={selectedColor} onColorChange={handleColorChange} />
+
                             <input type="number" id="quantity" name="quantity" min="1" max="5" value={quantity} onChange={handleQuantityChange} />
+                            <br></br>
+                            <br></br>
                             <Button onClick={handleAddToCart}>Kosárba</Button>
-            
+
                         </div>
                     </div>
 

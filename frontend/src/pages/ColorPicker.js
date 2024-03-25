@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 
-const ColorPicker = () => {
+const ColorPicker = ({selectedColor, onColorChange}) => {
     
-    const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FFFFFF', '#000000'];
-    const [selectedColor, setSelectedColor] = useState(null);
+    const colors = ['red', 'green', 'blue', 'yellow', 'white', 'black'];
 
     const handleColorSelection = (color) => {
-        setSelectedColor(color);
+        onColorChange(color);
     };
 
     return (
         <div>
-            
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
                 {colors.map((color, index) => (
                     <div
@@ -30,7 +28,8 @@ const ColorPicker = () => {
                     ></div>
                 ))}
             </div>
-            {selectedColor && (
+           
+                {selectedColor && (
                 <p style={{ textAlign: 'left', marginTop: '10px' }}>
                     Selected Color: <span style={{ color: selectedColor }}>{selectedColor}</span>
                 </p>
