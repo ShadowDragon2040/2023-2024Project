@@ -97,7 +97,6 @@ namespace authApi.Services
                 UserName =registerRequestDto.UserName,
                 NormalizedUserName =registerRequestDto.UserName.ToUpper(),
                 Email =registerRequestDto.Email
-              
             };
             try
             {

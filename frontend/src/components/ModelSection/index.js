@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-InfoContainer,
+InfoContainer4,
 InfoWrapper,
 InfoRow,
 Column1,
@@ -13,28 +13,11 @@ ImgWrap,
 Img
 } from '../TextElements'
 
-export const homeObjOne={
-  id:'about',
-  lightBg:false,
-  lightText:true,
-  lightTextDesc:false,
-  headline:'Cég bemutató',
-  topLine:'Industár.kft',
-  imgStart:false,
-  img:require('../../images/industar-kft-front.jpg'),
-  alt:'Car',
-  dark:true,
-  primary:true,
-  darkText:true,
-
-};
 const ModelSection = () => {
   
   return (
-    <>
-    
-      <InfoContainer  lightBg={false} id={'models'} >
-        <Heading lightText={false}>3D Modells</Heading>
+      <InfoContainer4  lightBg={false}  >
+        <Heading id={'models'} lightText={false}>3D Modells</Heading>
         <InfoWrapper>
           <InfoRow  imgStart={false} >
             <Column1>
@@ -55,8 +38,7 @@ const ModelSection = () => {
             </Column2> 
           </InfoRow>
         </InfoWrapper>
-      </InfoContainer>
-    </>
+      </InfoContainer4>
   )
 }
 
