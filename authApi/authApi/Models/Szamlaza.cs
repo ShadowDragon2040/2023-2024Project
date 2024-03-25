@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace authApi.Models;
 
@@ -16,8 +17,8 @@ public partial class Szamlaza
     public DateTime VasarlasIdopontja { get; set; }
 
     public bool SikeresSzalitas { get; set; }
-
-    public virtual Termekek Termek { get; set; } = null!;
-
-    public virtual Aspnetuser User { get; set; } = null!;
+    [JsonIgnore]
+    public virtual Termekek? Termek { get; set; }
+    [JsonIgnore]
+    public virtual Aspnetuser? User { get; set; } 
 }

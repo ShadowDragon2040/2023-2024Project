@@ -127,7 +127,7 @@ namespace authApi.Services
                 }
                 else
                 {
-                    return "hiba";
+                    return result.Errors.FirstOrDefault().Description;
                 }
             }
             catch (Exception ex)

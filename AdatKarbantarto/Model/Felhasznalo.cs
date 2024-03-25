@@ -8,7 +8,7 @@ namespace AdatKarbantarto.Model
 {
     public class Felhasznalo
     {
-        public string felhasznaloId { get; set; }
+        public string Id { get; set; }
         public string UserName { get; set; }
         public string PasswordHash { get; set; }
         public bool EmailConfirmed { get; set; }

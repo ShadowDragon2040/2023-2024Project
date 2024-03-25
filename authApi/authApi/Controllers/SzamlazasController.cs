@@ -46,23 +46,24 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpPost/*, Authorize(Roles = "Admin")*/]
-        public async Task<ActionResult<SzamlazasokDto>> Post(CreatedSzamlazasokDto createdSzamlazasokDto)
+        [HttpPost]
+        public async Task<IActionResult> Post(CreatedSzamlazasokDto createdSzamlazasokDto)
         {
             try
             {
                 var request = new Szamlaza
                 {
-                    User = createdSzamlazasokDto.UserId,
-                    Termek = createdSzamlazasokDto.TermekId,
+                    UserId = createdSzamlazasokDto.UserId,
+                    TermekId = createdSzamlazasokDto.TermekId,
+                    SzinHex = createdSzamlazasokDto.SzinHex,
                     VasarlasIdopontja = DateTime.Now,
-                    SikeresSzalitas = false,
+                    SikeresSzalitas = false
                 };
 
                 _context.Szamlazas.Add(request);
-               await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
-                return Ok(/*request.AsDto()*/);
+                return Ok(); // Optionally, you can return a response or data
             }
             catch (Exception ex)
             {
@@ -70,7 +71,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        
+
         [HttpPut("{id}")/*, Authorize(Roles = "Admin")*/]
         public async Task<ActionResult> Put(int Id, UpdateSzamlazasokDto updateSzamlazasokDto)
         {
