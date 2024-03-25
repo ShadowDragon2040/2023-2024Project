@@ -15,7 +15,7 @@ import {
   Img,
   Subtitle
   } from '../components/TextElements'
-function EnderPage(){
+function BambuPage(){
 
   const[isOpen,setIsOpen]=useState(false)
 
@@ -27,7 +27,7 @@ function EnderPage(){
       <Sidebar isOpen={isOpen} toggle={toggle}/>
       <Navbar toggle={toggle}/>
       <InfoContainer5  lightBg={false}>
-        <Heading lightText={false}>Ender 3V2</Heading>
+        <Heading lightText={false}>Bambu Carbon X1</Heading>
         <InfoWrapper>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
@@ -38,7 +38,7 @@ function EnderPage(){
             <Column2 style={{position: 'relative'}}>
             <TopLine>Technology</TopLine>
                 <Subtitle darkText={true}>
-                The Ender 3 V2 is an FDM 3D printer that builds the desired object layer by layer using liquid plastic.
+                The Bambu 3 V2 is an FDM 3D printer that builds the desired object layer by layer using liquid plastic.
                 </Subtitle>
             </Column2>
           </InfoRow>
@@ -88,4 +88,4 @@ function EnderPage(){
     )
 }
 
-export default EnderPage
+export default BambuPage
