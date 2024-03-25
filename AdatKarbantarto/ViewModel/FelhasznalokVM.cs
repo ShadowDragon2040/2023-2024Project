@@ -145,12 +145,14 @@ namespace AdatKarbantarto.ViewModel
         private async void SaveItem()
         {
 
-            Felhasznalo newProduct = new Felhasznalo()
+            RegisterUser newUser = new RegisterUser()
             {
-               
+                UserName = UpdateItem[0].UserName,
+                Password = UpdateItem[0].PasswordHash,
+                Email = UpdateItem[0].Email
             };
             BackendApiHelper postHelper = new BackendApiHelper();
-            var response = await postHelper.PostFelhasznaloAsync(newProduct);
+            var response = await postHelper.PostFelhasznaloAsync(newUser);
             MessageBox.Show(response.ToString());
 
 
@@ -220,7 +222,6 @@ namespace AdatKarbantarto.ViewModel
         private void ModifyItem(Felhasznalo itemToModify)
         {
             UpdateItem.Clear();
-
             UpdateItem.Add(itemToModify);
             IsAddEnabled = true;
         }

@@ -81,11 +81,11 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
-        public async Task<bool> PostFelhasznaloAsync(Felhasznalo ujfelhasznalo)
+        public async Task<bool> PostFelhasznaloAsync(RegisterUser ujfelhasznalo)
         {
             try
             {
-                HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/Felhasznalok", ujfelhasznalo);
+                HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/Auth/Register", ujfelhasznalo);
                 response.EnsureSuccessStatusCode();
                 return true;
             }

@@ -44,13 +44,15 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Grid.Row="2" x:Name="dtg_addszamla" AutoGenerateColumns="False" Height="90" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding UpdateItem}" Margin="20,10,-140,20" CanUserReorderColumns="False">
+        <DataGrid Grid.Row="2" x:Name="dtg_addszamla" AutoGenerateColumns="False"
+                  Height="90" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding UpdateItem}"
+                  Margin="20,10,-140,20" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="UserName" Binding="{Binding UserName}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="PasswordHash" Binding="{Binding PasswordHash}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="EmailConfirmed" Binding="{Binding EmailConfirmed}" />
-                <materialDesign:DataGridTextColumn Header="EmailCode" Binding="{Binding EmailCode}"/>
+                <materialDesign:DataGridTextColumn Header="UserName" Binding="{Binding UserName}"/>
+                <materialDesign:DataGridTextColumn Header="PasswordHash" Binding="{Binding PasswordHash}"/>
+                <materialDesign:DataGridTextColumn Header="EmailConfirmed" Binding="{Binding EmailConfirmed}"/>
+                <materialDesign:DataGridTextColumn Header="EmailCode" Binding="{Binding EmailCode}" />
                 <materialDesign:DataGridTextColumn Header="Email" Binding="{Binding Email}" />
                 <materialDesign:DataGridTextColumn Header="ProfilKep" Binding="{Binding ProfilKep}" />
                 <materialDesign:DataGridTextColumn Header="PhoneNumber" Binding="{Binding PhoneNumber}" />
