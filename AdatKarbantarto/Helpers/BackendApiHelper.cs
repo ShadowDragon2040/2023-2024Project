@@ -8,6 +8,7 @@ using System.Configuration;
 using AdatKarbantarto.Model;
 using Newtonsoft.Json;
 using System.Windows;
+using AdatKarbantarto.Exceptions;
 
 namespace AdatKarbantarto.Helpers
 {
@@ -18,7 +19,12 @@ namespace AdatKarbantarto.Helpers
         public BackendApiHelper()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri(ConfigurationManager.AppSettings["api"]);
+            string apiBaseUrl = ConfigurationManager.AppSettings["api"];
+            if (!string.IsNullOrEmpty(apiBaseUrl))
+            {
+                _httpClient.BaseAddress = new Uri(apiBaseUrl);
+            }
+
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
@@ -172,11 +178,11 @@ namespace AdatKarbantarto.Helpers
             }
         }
 
-        public async Task<bool> ModifyHozzaszolasAsync(int id,Hozzaszolas hozzaszolas)
+        public async Task<bool> ModifyHozzaszolasAsync(int id, Hozzaszolas hozzaszolas)
         {
             try
             {
-                HttpResponseMessage response = await _httpClient.PutAsJsonAsync("/Hozzaszolas/" + id,hozzaszolas);
+                HttpResponseMessage response = await _httpClient.PutAsJsonAsync("/Hozzaszolas/" + id, hozzaszolas);
                 string responseBody = await response.Content.ReadAsStringAsync();
 
                 if (response.IsSuccessStatusCode)
@@ -197,21 +203,33 @@ namespace AdatKarbantarto.Helpers
         }
         #endregion
         #region Termekek
-        public async Task<List<Termek>> GetTermekekAsync()
+        public async Task<ApiResponse<List<Termek>>> GetTermekekAsync()
         {
-            using (HttpResponseMessage response = await _httpClient.GetAsync("/Termekek"))
+            try
             {
+                HttpResponseMessage response = await _httpClient.GetAsync("/Termekek");
+
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<Termek>>(content);
+                    var data = JsonConvert.DeserializeObject<List<Termek>>(content);
+                    return new ApiResponse<List<Termek>> { IsSuccess = true, Data = data };
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    return new ApiResponse<List<Termek>> { IsSuccess = false, ErrorMessage = "Accessing endpoint failed!" };
                 }
                 else
                 {
-                    throw new Exception($"Failed to fetch data from API. Status code: {response.StatusCode}");
+                    return new ApiResponse<List<Termek>> { IsSuccess = false, ErrorMessage = $"Failed with status code: {response.StatusCode}" };
                 }
             }
+            catch (HttpRequestException ex)
+            {
+                return new ApiResponse<List<Termek>> { IsSuccess = false, ErrorMessage = "Connection to the server failed.", Exception = ex };
+            }
         }
+
         public async Task<bool> ModifyTermekAsync(int id, Termek termek)
         {
             try
@@ -285,7 +303,7 @@ namespace AdatKarbantarto.Helpers
 
         public async Task<List<Kategoria>> GetKategoriaAsync()
         {
-            using (HttpResponseMessage response=await _httpClient.GetAsync("/Termekek/Kategoriak"))
+            using (HttpResponseMessage response = await _httpClient.GetAsync("/Termekek/Kategoriak"))
             {
                 if (response.IsSuccessStatusCode)
                 {
@@ -381,7 +399,7 @@ namespace AdatKarbantarto.Helpers
             }
         }
 
-       
+
 
         #endregion
 
