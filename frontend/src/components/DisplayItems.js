@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { InfoContainer3, ItemContainer,CarouselContainer } from './TextElements'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
-import Image1 from "../images/image1.png"
-import Image2 from "../images/image2.jpg"
-import Image3 from "../images/image3.jpg"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import {CarouselImage} from './TextElements';
 import axios from 'axios'
 import TermekCard from './TermekCard'
-
 
 function NewItemsComponent (props) {
   const [newsList, setNewsList] = useState([]);
@@ -29,9 +25,15 @@ function NewItemsComponent (props) {
           </InfoContainer3>
 
           <Carousel style={{width: props.collapsed ? '80%' : '100%',borderRadius: '20px'}} autoPlay={true} infiniteLoop={true} showThumbs={false} showStatus={false}>
-            <CarouselImage src={Image1} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s', borderRadius: '20px'}}/>
-            <CarouselImage src={Image2} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s',borderRadius: '20px'}}/>
-            <CarouselImage src={Image3} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s', borderRadius: '20px'}}/>
+            <NavLink to={"/ShopPage/"+25}>
+              <CarouselImage src={'http://printfusion.nhely.hu/test/image1.png'} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s', borderRadius: '20px'}}/>
+            </NavLink>
+            <NavLink to={"/ShopPage/"+26}>
+              <CarouselImage src={'http://printfusion.nhely.hu/test/image2.jpg'} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s',borderRadius: '20px'}}/>
+            </NavLink>
+            <NavLink to={"/ShopPage/"+27}>
+              <CarouselImage src={'http://printfusion.nhely.hu/test/image3.jpg'} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s', borderRadius: '20px'}}/>
+            </NavLink>
           </Carousel>
       </CarouselContainer>
 
@@ -40,7 +42,7 @@ function NewItemsComponent (props) {
             <div className="col-md-6">
             <InfoContainer3>
             All products:
-          </InfoContainer3>
+            </InfoContainer3>
             </div>
           </div>
           <div className="row w-100">
