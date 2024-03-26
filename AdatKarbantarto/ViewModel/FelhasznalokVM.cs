@@ -29,8 +29,8 @@ namespace AdatKarbantarto.ViewModel
             UpdateItem = new ObservableCollection<Felhasznalo>();
             RefreshCommand = new RelayCommand(execute => RefreshItems());
             AddCommand = new RelayCommand(execute => AddItem());
-            DeleteCommand = new RelayCommand(execute => DeleteItem(execute as Felhasznalo), canExecute => SelectedItem != null);
-            ModifyCommand = new RelayCommand(execute => ModifyItem(execute as Felhasznalo), canExecute => SelectedItem != null);
+            DeleteCommand = new RelayCommand(execute => DeleteItem(execute as Felhasznalo));
+            ModifyCommand = new RelayCommand(execute => ModifyItem(execute as Felhasznalo));
             SaveCommand = new RelayCommand(execute => SaveItem(), canExecute => CanSave());
             PutCommand = new RelayCommand(execute => PutItem());
 
@@ -127,6 +127,7 @@ namespace AdatKarbantarto.ViewModel
             // Load data into Items collection 
             try
             {
+                
                 BackendApiHelper apiHelper = new BackendApiHelper();
                 _ListData = await apiHelper.GetFelhasznalokAsync();
 

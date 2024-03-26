@@ -29,8 +29,8 @@ namespace AdatKarbantarto.ViewModel
             UpdateItem = new ObservableCollection<Termek>();
             RefreshCommand = new RelayCommand(execute => RefreshItems());
             AddCommand = new RelayCommand(execute => AddItem());
-            DeleteCommand = new RelayCommand(execute => DeleteItem(execute as Termek), canExecute => SelectedItem != null);
-            ModifyCommand = new RelayCommand(execute => ModifyItem(execute as Termek), canExecute => SelectedItem != null);
+            DeleteCommand = new RelayCommand(execute => DeleteItem(execute as Termek));
+            ModifyCommand = new RelayCommand(execute => ModifyItem(execute as Termek));
             SaveCommand = new RelayCommand(execute => SaveItem(), canExecute => CanSave());
             PutCommand = new RelayCommand(execute => PutItem());
 
