@@ -8,10 +8,13 @@ namespace AdatKarbantarto.Model
 {
     public class Hozzaszolas
     {
-        public int hozzaszolasId {  get; set; }
-        public string userId { get; set; }
-        public int termekId { get; set; }
-        public string leiras {  get; set; }
-        public int ertekeles { get; set; }
+        public int HozzaszolasId { get; set; }
+        public string UserId { get; set; } = null!;
+
+        public int TermekId { get; set; }
+
+        public string Leiras { get; set; } = null!;
+
+        public int Ertekeles { get; set; }
     }
 }

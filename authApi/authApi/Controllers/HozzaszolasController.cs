@@ -21,7 +21,7 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Hozzaszolasok>> Get()
+        public async Task<ActionResult> Get()
         {
             try
             {
@@ -35,7 +35,7 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
         [HttpGet("termek/{termekId}")] 
-        public async Task<ActionResult<Hozzaszolasok>> GetByTermekId(int termekId)
+        public async Task<ActionResult> GetByTermekId(int termekId)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Hozzaszolasok>> Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<HozzaszolasokDto>> Post(CreatedHozzaszolasokDto createdHozzaszolasokDto)
+        public async Task<ActionResult> Post(CreatedHozzaszolasokDto createdHozzaszolasokDto)
         {
             try
             {

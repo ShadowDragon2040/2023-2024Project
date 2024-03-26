@@ -24,25 +24,28 @@
         <Button Grid.Row="0" Command="{Binding AddCommand}" Content="Add Row" x:Name="btn_add"   Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="242,26,0,0"/>
         <DataGrid Grid.Row="1" x:Name="dtg_Adatok" CanUserAddRows="False" CanUserReorderColumns="False" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding Items}" Margin="20,42,-309,10" Height="600" AutoGenerateColumns="True">
             <DataGrid.Columns>
-                <DataGridTemplateColumn>
+                <!-- Delete button column -->
+                <DataGridTemplateColumn Header="Actions">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"  BorderThickness="0" Background="Transparent" HorizontalAlignment="Center">
-                                <Image Source="/Images/trash.jpg" Width="20" Height="20"/>
-                            </Button>
+                            <Button Content="Delete" CommandParameter="{Binding}" 
+              Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+              HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+
+                <!-- Modify button column -->
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Command="{Binding DataContext.ModifyCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" BorderThickness="0" Background="Transparent">
-                                <Image Source="/Images/modify.jpg" Width="20" Height="20"/>
-                            </Button>
+                            <Button Content="Modify" Command="{Binding DataContext.ModifyCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+              CommandParameter="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-            </DataGrid.Columns>
+                </DataGrid.Columns>
         </DataGrid>
         <DataGrid Grid.Row="2" x:Name="dtg_addszamla" AutoGenerateColumns="False"
                   Height="90" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding UpdateItem}"

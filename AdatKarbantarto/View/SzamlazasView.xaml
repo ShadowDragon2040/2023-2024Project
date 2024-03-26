@@ -50,27 +50,26 @@
                 </DataGridTemplateColumn>
 
                 <!-- Define other columns for your data properties as needed -->
-                <DataGridTextColumn Header="ID" Binding="{Binding szamlazasId}" />
-                <DataGridTextColumn Header="User ID" Binding="{Binding felhasznaloId}" />
-                <DataGridTextColumn Header="Product ID" Binding="{Binding termekId}" />
-                <DataGridTextColumn Header="Color HEX" Binding="{Binding szinHex}" />
-                <DataGridTextColumn Header="Purchase Time" Binding="{Binding vasarlasIdopontja}" />
-                <DataGridTextColumn Header="Delivered" Binding="{Binding sikeresSzallitas}" />
+                <DataGridTextColumn Header="ID" Binding="{Binding SzamlazasId}" />
+                <DataGridTextColumn Header="User ID" Binding="{Binding UserId}" />
+                <DataGridTextColumn Header="Product ID" Binding="{Binding TermekId}" />
+                <DataGridTextColumn Header="Color HEX" Binding="{Binding SzinHex}" />
+                <DataGridTextColumn Header="Purchase Time" Binding="{Binding VasarlasIdopontja}" />
+                <DataGridTextColumn Header="Delivered" Binding="{Binding SikeresSzalitas}" />
                 <!-- Add more columns as needed -->
             </DataGrid.Columns>
         </DataGrid>
 
 
-        <DataGrid Grid.Row="2" x:Name="dtg_add" CanUserAddRows="False" AutoGenerateColumns="False" Height="100" ItemsSource="{Binding UpdateItem}" Margin="20,10,-140,20" CanUserReorderColumns="False">
+        <DataGrid Grid.Row="2" x:Name="dtg_add" CanUserAddRows="False" AutoGenerateColumns="False" Height="100" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding UpdateItem}" Margin="20,10,-140,20" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 
-                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding szamlazasId}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="User ID" Binding="{Binding felhasznaloId}"/>
-
-
-                <materialDesign:DataGridTextColumn Header="Color HEX" Binding="{Binding szinHex}" />
-                <materialDesign:DataGridTextColumn Header="Purchase Time" Binding="{Binding vasarlasIdopontja}"/>
-                <materialDesign:DataGridTextColumn Header="Delivered" Binding="{Binding sikeresSzallitas}"/>
+                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding SzamlazasId}" IsReadOnly="True"/>
+                <materialDesign:DataGridTextColumn Header="Product ID" Binding="{Binding TermekId}"/>
+                <materialDesign:DataGridTextColumn Header="User ID" Binding="{Binding UserId}"/>
+                <materialDesign:DataGridTextColumn Header="Color HEX" Binding="{Binding SzinHex}" />
+                <materialDesign:DataGridTextColumn Header="Purchase Time" Binding="{Binding VasarlasIdopontja}"/>
+                <materialDesign:DataGridTextColumn Header="Delivered" Binding="{Binding SikeresSzallitas}"/>
             </DataGrid.Columns>
         </DataGrid>
 

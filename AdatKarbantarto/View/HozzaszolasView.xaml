@@ -50,11 +50,11 @@
                 </DataGridTemplateColumn>
 
                 <!-- Define other columns for your data properties as needed -->
-                <DataGridTextColumn Header="ID" Binding="{Binding hozzaszolasId}" />
-                <DataGridTextColumn Header="User ID" Binding="{Binding userId}" />
-                <DataGridTextColumn Header="Product ID" Binding="{Binding termekId}" />
-                <DataGridTextColumn Header="Description" Binding="{Binding leiras}" />
-                <DataGridTextColumn Header="Rating" Binding="{Binding ertekeles}" />
+                <DataGridTextColumn Header="ID" Binding="{Binding HozzaszolasId}" />
+                <DataGridTextColumn Header="User ID" Binding="{Binding UserId}" />
+                <DataGridTextColumn Header="Product ID" Binding="{Binding TermekId}" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Leiras}" />
+                <DataGridTextColumn Header="Rating" Binding="{Binding Ertekeles}" />
                 <!-- Add more columns as needed -->
             </DataGrid.Columns>
         </DataGrid>
@@ -62,11 +62,11 @@
 
         <DataGrid Grid.Row="2" x:Name="dtg_add" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False"  AutoGenerateColumns="False" Height="100" ItemsSource="{Binding UpdateItem}" Margin="20,10,-140,20" CanUserReorderColumns="False">
             <DataGrid.Columns>
-                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding hozzaszolasId}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="User ID" Binding="{Binding userId}" />
-                <materialDesign:DataGridTextColumn Header="Product ID" Binding="{Binding termekId}" />
-                <materialDesign:DataGridTextColumn Header="Description" Binding="{Binding leiras}" />
-                <materialDesign:DataGridTextColumn Header="Rating" Binding="{Binding ertekeles}"/>
+                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding HozzaszolasId}" IsReadOnly="True"/>
+                <materialDesign:DataGridTextColumn Header="User ID" Binding="{Binding UserId}" />
+                <materialDesign:DataGridTextColumn Header="Product ID" Binding="{Binding TermekId}" />
+                <materialDesign:DataGridTextColumn Header="Description" Binding="{Binding Leiras}" />
+                <materialDesign:DataGridTextColumn Header="Rating" Binding="{Binding Ertekeles}"/>
 
 
             </DataGrid.Columns>

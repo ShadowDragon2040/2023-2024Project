@@ -53,7 +53,7 @@ namespace AdatKarbantarto.Helpers
 
         public async Task<bool> DeleteFelhasznaloAsync(string id)
         {
-            using (HttpResponseMessage response = await _httpClient.DeleteAsync("/Felhasznalo/" + id))
+            using (HttpResponseMessage response = await _httpClient.DeleteAsync("/Felhasznalok/" + id))
             {
                 if (response.IsSuccessStatusCode)
                 {
@@ -81,6 +81,29 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
+        public async Task<bool> ModifyFelhasznaloAsync(string id, Felhasznalo felhasznalo)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.PutAsJsonAsync("/Felhasznalok/" + id, felhasznalo);
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show(responseBody);
+                    throw new Exception($"Failed to modify data from API. Status code: {response.StatusCode}. Response: {responseBody}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
         public async Task<bool> PostFelhasznaloAsync(RegisterUser ujfelhasznalo)
         {
             try
@@ -91,7 +114,7 @@ namespace AdatKarbantarto.Helpers
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception("Failed to post Felhasznalo", ex);
+                throw new Exception("Failed to post Item", ex);
             }
         }
         #endregion
@@ -122,7 +145,7 @@ namespace AdatKarbantarto.Helpers
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception("Failed to post Hozzaszolas", ex);
+                throw new Exception("Failed to post Item", ex);
             }
         }
         public async Task<bool> DeleteHozzaszolasAsync(int id)
@@ -223,7 +246,7 @@ namespace AdatKarbantarto.Helpers
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception("Failed to post Termek", ex);
+                throw new Exception("Failed to post Item", ex);
             }
         }
         public async Task<bool> DeleteTermekAsync(int id)
@@ -309,7 +332,7 @@ namespace AdatKarbantarto.Helpers
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception("Failed to post Szamlazas", ex);
+                throw new Exception("Failed to post Item", ex);
             }
         }
         public async Task<bool> DeleteSzamlaAsync(int id)
@@ -339,7 +362,7 @@ namespace AdatKarbantarto.Helpers
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception("Failed to post File", ex);
+                throw new Exception("Failed to post Item", ex);
             }
         }
         public async Task<List<FtpFile>> GetFtpFilesAsync()
@@ -358,10 +381,7 @@ namespace AdatKarbantarto.Helpers
             }
         }
 
-        internal async Task<bool> ModifyFelhasznaloAsync(string id, Felhasznalo felhasznalo)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         #endregion
 
