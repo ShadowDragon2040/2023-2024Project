@@ -113,7 +113,7 @@
                                FontFamily="Monsterra"
                                Foreground="Black">
                     </TextBlock>
-                    <TextBlock Text="Képzeld el mi megvalósitjuk"
+                    <TextBlock Text="We will make it possible."
                                TextWrapping="Wrap" 
                                TextAlignment="Center"
                                FontSize="15" 

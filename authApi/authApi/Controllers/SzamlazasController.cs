@@ -78,9 +78,12 @@ namespace Webárúház_Nagy_Project.Controllers
             try
             {
                 var existingSzamlazas = _context.Szamlazas.FirstOrDefault(x => x.SzamlazasId == Id);
-
-                /*existingSzamlazas.VasarlasIdopontja = updateSzamlazasokDto.VasarlasIdopontja;*/
+               
+                existingSzamlazas.UserId = updateSzamlazasokDto.UserId;
+                existingSzamlazas.TermekId = updateSzamlazasokDto.TermekId;
+                existingSzamlazas.VasarlasIdopontja = DateTime.Now;
                 existingSzamlazas.SikeresSzalitas = updateSzamlazasokDto.SikeresSzalitas;
+                existingSzamlazas.SzinHex = updateSzamlazasokDto.SzinHex;
 
                 _context.Szamlazas.Update(existingSzamlazas);
                await _context.SaveChangesAsync();

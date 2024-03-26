@@ -13,7 +13,7 @@ namespace AdatKarbantarto.ViewModel
     public class TermekekVM : ViewModelBase
     {
         private static readonly Regex _regex = new Regex("[^0-9 ]+");
-        private string _searchProductID="";
+        private string _searchProductID = "";
         private bool _isSaveEnabled;
         private bool _isAddEnabled;
         private Termek _selectedItem;
@@ -29,8 +29,8 @@ namespace AdatKarbantarto.ViewModel
             UpdateItem = new ObservableCollection<Termek>();
             RefreshCommand = new RelayCommand(execute => RefreshItems());
             AddCommand = new RelayCommand(execute => AddItem());
-            DeleteCommand = new RelayCommand(execute => DeleteItem(execute as Termek), canExecute => SelectedItem != null);
-            ModifyCommand = new RelayCommand(execute => ModifyItem(execute as Termek), canExecute => SelectedItem != null);
+            DeleteCommand = new RelayCommand(execute => DeleteItem(execute as Termek));
+            ModifyCommand = new RelayCommand(execute => ModifyItem(execute as Termek));
             SaveCommand = new RelayCommand(execute => SaveItem(), canExecute => CanSave());
             PutCommand = new RelayCommand(execute => PutItem());
 
@@ -47,16 +47,16 @@ namespace AdatKarbantarto.ViewModel
         #endregion
         #region Getters/Setters
 
-        public ObservableCollection<Kategoria> Categories { get; }=new ObservableCollection<Kategoria>();
+        public ObservableCollection<Kategoria> Categories { get; } = new ObservableCollection<Kategoria>();
 
-        
+
         public string SearchProductID
         {
             get { return _searchProductID; }
             set
             {
-                   
-                if (_searchProductID != value&& isTextAllowed(value))
+
+                if (_searchProductID != value && isTextAllowed(value))
                 {
                     _searchProductID = value;
                     OnPropertyChanged(nameof(_searchProductID));
@@ -77,7 +77,7 @@ namespace AdatKarbantarto.ViewModel
                 }
             }
         }
-    
+
         public ObservableCollection<Termek> Items
         {
             get { return _items; }
@@ -95,7 +95,7 @@ namespace AdatKarbantarto.ViewModel
             {
                 _selectedItem = value;
                 OnPropertyChanged(nameof(SelectedItem));
-              
+
             }
         }
         public bool IsSaveEnabled
@@ -126,25 +126,25 @@ namespace AdatKarbantarto.ViewModel
         #region CRUD
         private async void LoadInitialData()
         {
-            // Load data into Items collection 
-            try
+            BackendApiHelper apiHelper = new BackendApiHelper();
+            ApiResponse<List<Termek>> response = await apiHelper.GetTermekekAsync();
+
+            if (response.IsSuccess)
             {
-                BackendApiHelper apiHelper = new BackendApiHelper();
-                _ListData = await apiHelper.GetTermekekAsync();
-              
+                _ListData = response.Data;
                 Items.Clear();
-             
-                
                 foreach (var szamla in _ListData)
                 {
                     Items.Add(szamla);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+               
+                MessageBox.Show($"Failed to load data: {response.ErrorMessage}");
             }
         }
+
         private async void SaveItem()
         {
 
@@ -176,11 +176,11 @@ namespace AdatKarbantarto.ViewModel
             if (result)
             {
                 BackendApiHelper modhelper = new BackendApiHelper();
-              
+
                 var response = await modhelper.ModifyTermekAsync(UpdateItem[0].TermekId, UpdateItem[0]);
                 if (response)
                 {
-                    MessageBox.Show("Product edited successfully!", "Success!", MessageBoxButton.OK);
+                    MessageBox.Show("Item edited successfully!", "Success!", MessageBoxButton.OK);
                 }
                 else MessageBox.Show("Something went wrong!", "Warning!", MessageBoxButton.OKCancel);
             }
@@ -188,7 +188,7 @@ namespace AdatKarbantarto.ViewModel
         private async void DeleteItem(Termek itemToDelete)
         {
             var confirmationDialog = new ConfirmationDialog("Are you sure you want to delete?");
-            
+
             confirmationDialog.ShowDialog();
 
             bool result = await Task.Run(() => confirmationDialog.Result);
@@ -199,7 +199,7 @@ namespace AdatKarbantarto.ViewModel
                 var response = await deleteHelper.DeleteTermekAsync(itemToDelete.TermekId);
                 if (response)
                 {
-                    MessageBox.Show("Product deleted successfully!", "Success!", MessageBoxButton.OK);
+                    MessageBox.Show("Item deleted successfully!", "Success!", MessageBoxButton.OK);
                 }
                 else MessageBox.Show("Something went wrong!", "Warning!", MessageBoxButton.OKCancel);
 
@@ -228,12 +228,12 @@ namespace AdatKarbantarto.ViewModel
         private void ModifyItem(Termek itemToModify)
         {
             UpdateItem.Clear();
-        
+
             UpdateItem.Add(itemToModify);
             IsAddEnabled = true;
         }
 
-       
+
         private bool CanSave()
         {
             return true;
@@ -250,9 +250,9 @@ namespace AdatKarbantarto.ViewModel
                         if (obj is Termek termek)
                         {
                             // Filter by ProductID 
-                            if (int.TryParse(SearchProductID,out int result))
+                            if (int.TryParse(SearchProductID, out int result))
                             {
-                                if (result<=int.MaxValue) return termek.TermekId == Convert.ToInt32(SearchProductID);
+                                if (result <= int.MaxValue) return termek.TermekId == Convert.ToInt32(SearchProductID);
                             }
                             else
                             {

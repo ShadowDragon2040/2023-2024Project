@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    
     xmlns:local="clr-namespace:AdatKarbantarto.ViewModel"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
     x:Class="AdatKarbantarto.View.HozzaszolasView"
@@ -31,9 +32,14 @@
                 <DataGridTemplateColumn Header="Actions">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Delete" CommandParameter="{Binding}" 
-                            Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
-                            HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Button CommandParameter="{Binding}" Background="Transparent" BorderThickness="0"
+                       Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Button.Content>
+                                    <Image Source="{StaticResource delete_black_18dpDrawingImage}"/>
+                                </Button.Content>
+                            </Button>
+
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -42,31 +48,34 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Modify" Command="{Binding DataContext.ModifyCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
-                            CommandParameter="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+                            <Button CommandParameter="{Binding}" Background="Transparent" BorderThickness="0"
+                       Command="{Binding DataContext.ModifyCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Button.Content>
+                                    <Image Source="{StaticResource edit_black_18dpDrawingImage}"/>
+                                </Button.Content>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
-                <!-- Define other columns for your data properties as needed -->
-                <DataGridTextColumn Header="ID" Binding="{Binding hozzaszolasId}" />
-                <DataGridTextColumn Header="User ID" Binding="{Binding userId}" />
-                <DataGridTextColumn Header="Product ID" Binding="{Binding termekId}" />
-                <DataGridTextColumn Header="Description" Binding="{Binding leiras}" />
-                <DataGridTextColumn Header="Rating" Binding="{Binding ertekeles}" />
-                <!-- Add more columns as needed -->
+                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding HozzaszolasId}" IsReadOnly="True"/>
+                <materialDesign:DataGridTextColumn Header="User ID" Binding="{Binding UserId}" />
+                <materialDesign:DataGridTextColumn Header="Product ID" Binding="{Binding TermekId}" />
+                <materialDesign:DataGridTextColumn Header="Description" Binding="{Binding Leiras}" />
+                <materialDesign:DataGridTextColumn Header="Rating" Binding="{Binding Ertekeles}"/>
             </DataGrid.Columns>
         </DataGrid>
 
 
-        <DataGrid Grid.Row="2" x:Name="dtg_add" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False"  AutoGenerateColumns="False" Height="100" ItemsSource="{Binding UpdateItem}" Margin="20,10,-140,20" CanUserReorderColumns="False">
+        <DataGrid Grid.Row="2" x:Name="dtg_add" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False"
+                  AutoGenerateColumns="False" Height="100" ItemsSource="{Binding UpdateItem}" Margin="20,10,-140,20"
+                  CanUserReorderColumns="False">
             <DataGrid.Columns>
-                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding hozzaszolasId}" IsReadOnly="True"/>
-                <materialDesign:DataGridTextColumn Header="User ID" Binding="{Binding userId}" />
-                <materialDesign:DataGridTextColumn Header="Product ID" Binding="{Binding termekId}" />
-                <materialDesign:DataGridTextColumn Header="Description" Binding="{Binding leiras}" />
-                <materialDesign:DataGridTextColumn Header="Rating" Binding="{Binding ertekeles}"/>
+                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding HozzaszolasId}" IsReadOnly="True"/>
+                <materialDesign:DataGridTextColumn Header="User ID" Binding="{Binding UserId}" />
+                <materialDesign:DataGridTextColumn Header="Product ID" Binding="{Binding TermekId}" />
+                <materialDesign:DataGridTextColumn Header="Description" Binding="{Binding Leiras}" />
+                <materialDesign:DataGridTextColumn Header="Rating" Binding="{Binding Ertekeles}"/>
 
 
             </DataGrid.Columns>

@@ -18,10 +18,6 @@ namespace AdatKarbantarto.ViewModel
         private bool _isAddEnabled;
         private Szamla _selectedItem;
         private List<Szamla> _ListData;
-        private List<Felhasznalo> _userList;
-        private List<Termek> _productList;
-        private ObservableCollection<Felhasznalo> _users;
-        private ObservableCollection<Termek> _products;
         private ObservableCollection<Szamla> _items;
         private ObservableCollection<Szamla> _updateItem;
         private ICollectionView _filteredView;
@@ -33,8 +29,8 @@ namespace AdatKarbantarto.ViewModel
             UpdateItem = new ObservableCollection<Szamla>();
             RefreshCommand = new RelayCommand(execute => RefreshItems());
             AddCommand = new RelayCommand(execute => AddItem());
-            DeleteCommand = new RelayCommand(execute => DeleteItem(execute as Szamla), canExecute => SelectedItem != null);
-            ModifyCommand = new RelayCommand(execute => ModifyItem(execute as Szamla), canExecute => SelectedItem != null);
+            DeleteCommand = new RelayCommand(execute => DeleteItem(execute as Szamla));
+            ModifyCommand = new RelayCommand(execute => ModifyItem(execute as Szamla));
             SaveCommand = new RelayCommand(execute => SaveItem(), canExecute => CanSave());
             PutCommand = new RelayCommand(execute => PutItem());
 
@@ -152,17 +148,17 @@ namespace AdatKarbantarto.ViewModel
         private async void SaveItem()
         {
 
-            Szamla newProduct = new Szamla()
+            Szamla newOrder = new Szamla()
             {
-                szamlazasId = SelectedItem.szamlazasId,
-                felhasznaloId = SelectedItem.felhasznaloId,
-                termekId = SelectedItem.termekId,
-                szinHex = SelectedItem.szinHex,
-                vasarlasIdopontja = SelectedItem.vasarlasIdopontja,
-                sikeresSzallitas = SelectedItem.sikeresSzallitas,
+                SzamlazasId = SelectedItem.SzamlazasId,
+                UserId = SelectedItem.UserId,
+                TermekId = SelectedItem.TermekId,
+                SzinHex = SelectedItem.SzinHex,
+                VasarlasIdopontja = DateTime.Now,
+                SikeresSzalitas = false,
             };
             BackendApiHelper postHelper = new BackendApiHelper();
-            var response = await postHelper.PostSzamlaAsync(newProduct);
+            var response = await postHelper.PostSzamlaAsync(newOrder);
             MessageBox.Show(response.ToString());
 
 
@@ -181,10 +177,10 @@ namespace AdatKarbantarto.ViewModel
             {
                 BackendApiHelper modhelper = new BackendApiHelper();
               
-                var response = await modhelper.ModifySzamlaAsync(UpdateItem[0].szamlazasId, UpdateItem[0]);
+                var response = await modhelper.ModifySzamlaAsync(UpdateItem[0].SzamlazasId, UpdateItem[0]);
                 if (response)
                 {
-                    MessageBox.Show("Product edited successfully!", "Success!", MessageBoxButton.OK);
+                    MessageBox.Show("Item edited successfully!", "Success!", MessageBoxButton.OK);
                 }
                 else MessageBox.Show("Something went wrong!", "Warning!", MessageBoxButton.OKCancel);
             }
@@ -200,10 +196,10 @@ namespace AdatKarbantarto.ViewModel
             if (result)
             {
                 BackendApiHelper deleteHelper = new BackendApiHelper();
-                var response = await deleteHelper.DeleteSzamlaAsync(itemToDelete.szamlazasId);
+                var response = await deleteHelper.DeleteSzamlaAsync(itemToDelete.SzamlazasId);
                 if (response)
                 {
-                    MessageBox.Show("Product deleted successfully!", "Success!", MessageBoxButton.OK);
+                    MessageBox.Show("Item deleted successfully!", "Success!", MessageBoxButton.OK);
                 }
                 else MessageBox.Show("Something went wrong!", "Warning!", MessageBoxButton.OKCancel);
 
@@ -256,7 +252,7 @@ namespace AdatKarbantarto.ViewModel
                             // Filter by ProductID 
                             if (int.TryParse(SearchProductID, out int result))
                             {
-                                if (result <= int.MaxValue) return Szamla.szamlazasId == Convert.ToInt32(SearchProductID);
+                                if (result <= int.MaxValue) return Szamla.SzamlazasId == Convert.ToInt32(SearchProductID);
                             }
                             else
                             {

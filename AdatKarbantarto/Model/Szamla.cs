@@ -8,11 +8,17 @@ namespace AdatKarbantarto.Model
 {
     public class Szamla
     {
-        public int szamlazasId {  get; set; }
-        public string felhasznaloId {  get; set; }
-        public int termekId {  get; set; }
-        public int szinHex {  get; set; }
-        public string vasarlasIdopontja {  get; set; }
-        public bool sikeresSzallitas {  get; set; }
+        public int SzamlazasId { get; set; }
+
+        public string UserId { get; set; } = null!;
+
+        public int TermekId { get; set; }
+
+        public int SzinHex { get; set; }
+
+        public DateTime VasarlasIdopontja { get; set; }
+        public bool SikeresSzalitas { get; set; }
+
+
     }
 }

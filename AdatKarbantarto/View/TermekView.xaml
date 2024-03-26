@@ -31,9 +31,14 @@
                 <DataGridTemplateColumn Header="Actions">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Delete" CommandParameter="{Binding}" 
-                            Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
-                            HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Button CommandParameter="{Binding}" Background="Transparent" BorderThickness="0"
+                     Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                     HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Button.Content>
+                                    <Image Source="{StaticResource delete_black_18dpDrawingImage}"/>
+                                </Button.Content>
+                            </Button>
+
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -42,27 +47,32 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Modify" Command="{Binding DataContext.ModifyCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
-                            CommandParameter="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+                            <Button CommandParameter="{Binding}" Background="Transparent" BorderThickness="0"
+                     Command="{Binding DataContext.ModifyCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                     HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Button.Content>
+                                    <Image Source="{StaticResource edit_black_18dpDrawingImage}"/>
+                                </Button.Content>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding TermekId}" IsReadOnly="True"/>
+                <materialDesign:DataGridTextColumn Header="ProductName" Binding="{Binding TermekNev}"/>
+                <materialDesign:DataGridTextColumn Header="Price" Binding="{Binding Ar}"/>
+                <materialDesign:DataGridTextColumn Header="Description" Binding="{Binding Leiras}" />
+                <materialDesign:DataGridTextColumn Header="Amount" Binding="{Binding Menyiseg}"/>
+                <materialDesign:DataGridTextColumn Header="Category ID" Binding="{Binding KategoriaId}"/>
+                <materialDesign:DataGridTextColumn Header="FilePath" Binding="{Binding KepUtvonal}" />
 
-                <!-- Define other columns for your data properties as needed -->
-                <DataGridTextColumn Header="ID" Binding="{Binding TermekId}" />
-                <DataGridTextColumn Header="Name" Binding="{Binding TermekNev}" />
-                <DataGridTextColumn Header="Price" Binding="{Binding Ar}" />
-                <DataGridTextColumn Header="Description" Binding="{Binding Leiras}" />
-                <DataGridTextColumn Header="Amount" Binding="{Binding Menyiseg}" />
-                <DataGridTextColumn Header="Category ID" Binding="{Binding KategoriaId}" />
-                <DataGridTextColumn Header="File Path" Binding="{Binding KepUtvonal}" />
-                <!-- Add more columns as needed -->
             </DataGrid.Columns>
         </DataGrid>
 
 
-        <DataGrid Grid.Row="2" x:Name="dtg_addtermek" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False" AutoGenerateColumns="False" Height="100" ItemsSource="{Binding UpdateItem}" Margin="20,10,-140,20" CanUserReorderColumns="False">
+        <DataGrid Grid.Row="2" x:Name="dtg_addtermek" SelectedItem="{Binding SelectedItem}"
+                  CanUserAddRows="False" AutoGenerateColumns="False" Height="100" 
+                  ItemsSource="{Binding UpdateItem}" Margin="20,10,-140,20" 
+CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding TermekId}" IsReadOnly="True"/>
                 <materialDesign:DataGridTextColumn Header="ProductName" Binding="{Binding TermekNev}"/>
