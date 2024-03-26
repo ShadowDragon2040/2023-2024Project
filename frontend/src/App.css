@@ -183,9 +183,6 @@ a{
  margin:10px;
 }
 
-.card-body{
-  background-color:#059e60;
-}
 .FirstRow{
   box-shadow: 10px 10px 10px black;
 
@@ -204,17 +201,6 @@ a{
   width: 500px;
 }
 
-.card{
-  min-height: 20vw;
-  box-shadow: 10px 10px 10px black;
-  border: 5px solid black;
-  border-radius: 10px;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  border-radius: 25px;
-
-}
-
 .SingleItemContainer{
   margin-top: 80px;
   display: block;
@@ -225,20 +211,6 @@ a{
 
 .footerContainer{
   margin-top: 20px;
-}
-
-.card-img-top{
-  height: 100%;
-  object-fit: cover;
-  margin: 0vw 0vw 1vw 0vw;
-}
-
-.cardbtn {
-  transition: 0.3s;
-  border-radius: 5px;
-}
-.cardbtn:hover{
-  width: 105%;
 }
 
 .SingleItem{

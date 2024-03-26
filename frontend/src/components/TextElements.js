@@ -192,7 +192,6 @@ export const ServicesP2=styled.p`
     text-align: center;
 `
 export const ServicesCard=styled.div`
-    
     background: #fff;
     display: flex;
     flex-direction: column;
@@ -230,6 +229,29 @@ export const ServicesCard2=styled.div`
         cursor: pointer;
     }
 
+`
+
+export const TermekButtonCard=styled.button`
+    background-color:#059e60;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom:10px;
+    min-height: 400px;
+    max-height: 400px;
+    max-width:350px;
+    &:hover{
+        transform: scale(1.02);
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+    }
+`
+
+export const TermekImage=styled.img`
+    max-height: 200px;
+    margin-bottom: 10px;
 `
 
 export const ServicesIcon=styled.img`
