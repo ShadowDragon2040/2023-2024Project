@@ -180,7 +180,7 @@ namespace AdatKarbantarto.ViewModel
                 var response = await modhelper.ModifyTermekAsync(UpdateItem[0].TermekId, UpdateItem[0]);
                 if (response)
                 {
-                    MessageBox.Show("Product edited successfully!", "Success!", MessageBoxButton.OK);
+                    MessageBox.Show("Item edited successfully!", "Success!", MessageBoxButton.OK);
                 }
                 else MessageBox.Show("Something went wrong!", "Warning!", MessageBoxButton.OKCancel);
             }
@@ -199,7 +199,7 @@ namespace AdatKarbantarto.ViewModel
                 var response = await deleteHelper.DeleteTermekAsync(itemToDelete.TermekId);
                 if (response)
                 {
-                    MessageBox.Show("Product deleted successfully!", "Success!", MessageBoxButton.OK);
+                    MessageBox.Show("Item deleted successfully!", "Success!", MessageBoxButton.OK);
                 }
                 else MessageBox.Show("Something went wrong!", "Warning!", MessageBoxButton.OKCancel);
 

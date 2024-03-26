@@ -187,7 +187,7 @@ namespace AdatKarbantarto.ViewModel
                 var response = await modhelper.ModifyHozzaszolasAsync(UpdateItem[0].HozzaszolasId, UpdateItem[0]);
                 if (response)
                 {
-                    MessageBox.Show("Product edited successfully!", "Success!", MessageBoxButton.OK);
+                    MessageBox.Show("Item edited successfully!", "Success!", MessageBoxButton.OK);
                 }
                 else MessageBox.Show("Something went wrong!", "Warning!", MessageBoxButton.OKCancel);
             }
@@ -206,7 +206,7 @@ namespace AdatKarbantarto.ViewModel
                 var response = await deleteHelper.DeleteHozzaszolasAsync(itemToDelete.HozzaszolasId);
                 if (response)
                 {
-                    MessageBox.Show("Product deleted successfully!", "Success!", MessageBoxButton.OK);
+                    MessageBox.Show("Item deleted successfully!", "Success!", MessageBoxButton.OK);
                 }
                 else MessageBox.Show("Something went wrong!", "Warning!", MessageBoxButton.OKCancel);
 

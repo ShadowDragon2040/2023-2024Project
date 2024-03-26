@@ -175,7 +175,7 @@ namespace AdatKarbantarto.ViewModel
                 var response = await modhelper.ModifyFelhasznaloAsync(UpdateItem[0].Id, UpdateItem[0]);
                 if (response)
                 {
-                    MessageBox.Show("Product edited successfully!", "Success!", MessageBoxButton.OK);
+                    MessageBox.Show("Item edited successfully!", "Success!", MessageBoxButton.OK);
                 }
                 else MessageBox.Show("Something went wrong!", "Warning!", MessageBoxButton.OKCancel);
             }
@@ -194,7 +194,7 @@ namespace AdatKarbantarto.ViewModel
                 var response = await deleteHelper.DeleteFelhasznaloAsync(itemToDelete.Id);
                 if (response)
                 {
-                    MessageBox.Show("Product deleted successfully!", "Success!", MessageBoxButton.OK);
+                    MessageBox.Show("Item deleted successfully!", "Success!", MessageBoxButton.OK);
                 }
                 else MessageBox.Show("Something went wrong!", "Warning!", MessageBoxButton.OKCancel);
 

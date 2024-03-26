@@ -33,7 +33,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button CommandParameter="{Binding}" Background="Transparent" BorderThickness="0"
-                       Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                       Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
                        HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Button.Content>
                                     <Image Source="{StaticResource delete_black_18dpDrawingImage}"/>
@@ -49,7 +49,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button CommandParameter="{Binding}" Background="Transparent" BorderThickness="0"
-                       Command="{Binding DataContext.ModifyCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                       Command="{Binding DataContext.ModifyCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
                        HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Button.Content>
                                     <Image Source="{StaticResource edit_black_18dpDrawingImage}"/>
