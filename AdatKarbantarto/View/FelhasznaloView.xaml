@@ -7,10 +7,12 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
     x:Class="AdatKarbantarto.View.FelhasznaloView"
     mc:Ignorable="d" 
-    d:DesignHeight="450" d:DesignWidth="1200">
+    d:DesignHeight="450" d:DesignWidth="1200"
+    Style="{StaticResource Page_Style}">
     <UserControl.DataContext>
         <local:FelhasznalokVM/>
     </UserControl.DataContext>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -18,7 +20,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Content="Keresés:" Margin="20,30,-20,284" Grid.RowSpan="2"></Label>
-        <TextBox Grid.Row="0" Text="{Binding SearchProductID}" x:Name="txb_search"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" Background="Green" Margin="75,30,0,0" />
+        <TextBox Grid.Row="0" x:Name="txb_search"  VerticalAlignment="Top" Text="{Binding SearchProductID, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Width="150" Background="DarkSlateGray" Margin="75,30,0,0" />
         <Button Grid.Row="0" Command="{Binding SaveCommand}" Content="Save Changes" x:Name="btn_save" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="336,26,0,0"/>
         <Button Grid.Row="0" Command="{Binding RefreshCommand}" Content="Refresh" Name="btn_refresh" Margin="471,26,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></Button>
         <Button Grid.Row="0" Command="{Binding AddCommand}" Content="Add Row" x:Name="btn_add"   Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="242,26,0,0"/>
@@ -28,9 +30,14 @@
                 <DataGridTemplateColumn Header="Actions">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Delete" CommandParameter="{Binding}" 
-              Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
-              HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Button CommandParameter="{Binding}" Background="Transparent" BorderThickness="0"
+                                    Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                    HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Button.Content>
+                                    <Image Source="{StaticResource delete_black_18dpDrawingImage}"/>
+                                </Button.Content>
+                            </Button>
+
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -39,17 +46,22 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Modify" Command="{Binding DataContext.ModifyCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
-              CommandParameter="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+                            <Button CommandParameter="{Binding}" Background="Transparent" BorderThickness="0"
+                                    Command="{Binding DataContext.ModifyCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                    HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Button.Content>
+                                    <Image Source="{StaticResource edit_black_18dpDrawingImage}"/>
+                                </Button.Content>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Grid.Row="2" x:Name="dtg_addszamla" AutoGenerateColumns="False"
-                  Height="90" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding UpdateItem}"
-                  Margin="20,10,-140,20" CanUserReorderColumns="False">
+        <DataGrid Grid.Row="2" x:Name="dtg_add" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False"
+                  AutoGenerateColumns="False" Height="100" ItemsSource="{Binding UpdateItem}" Margin="20,10,-140,20"
+                  CanUserReorderColumns="False">
+
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True"/>
                 <materialDesign:DataGridTextColumn Header="UserName" Binding="{Binding UserName}"/>

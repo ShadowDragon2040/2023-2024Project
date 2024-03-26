@@ -245,7 +245,7 @@ namespace AdatKarbantarto.ViewModel
                             // Filter by ProductID 
                             if (int.TryParse(SearchProductID, out int result))
                             {
-                                if (result <= int.MaxValue) return SearchProductID.Contains(felhasznalo.Id);
+                                if (result <= int.MaxValue) return felhasznalo.Id.Contains(SearchProductID);
                             }
                             else
                             {

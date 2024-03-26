@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:AdatKarbantarto.ViewModel"
         xmlns:Menu="clr-namespace:AdatKarbantarto.Utilities"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:AdatKarbantarto"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1200"
@@ -15,7 +16,57 @@
     <Window.DataContext>
         <vm:NavigationVM />
     </Window.DataContext>
+    <Window.Resources>
 
+        <DrawingImage x:Key="home_white_36dpDrawingImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1 M24,24z M0,0z M10,20L10,14 14,14 14,20 19,20 19,12 22,12 12,3 2,12 5,12 5,20z" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="person_white_36dpDrawingImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1 M24,24z M0,0z M12,12C14.21,12 16,10.21 16,8 16,5.79 14.21,4 12,4 9.79,4 8,5.79 8,8 8,10.21 9.79,12 12,12z M12,14C9.33,14,4,15.34,4,18L4,20 20,20 20,18C20,15.34,14.67,14,12,14z" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="inventory_white_36dpDrawingImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1 M24,24z M0,0z M20,2L4,2C3,2,2,2.9,2,4L2,7.01C2,7.73,2.43,8.35,3,8.7L3,20C3,21.1,4.1,22,5,22L19,22C19.9,22,21,21.1,21,20L21,8.7C21.57,8.35,22,7.73,22,7.01L22,4C22,2.9,21,2,20,2z M15,14L9,14 9,12 15,12 15,14z M20,7L4,7 4,4 20,3.98 20,7z" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="chat_white_36dpDrawingImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1 M24,24z M0,0z M20,2L4,2C2.9,2,2.01,2.9,2.01,4L2,22 6,18 20,18C21.1,18,22,17.1,22,16L22,4C22,2.9,21.1,2,20,2z M6,9L18,9 18,11 6,11 6,9z M14,14L6,14 6,12 14,12 14,14z M18,8L6,8 6,6 18,6 18,8z" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="article_white_36dpDrawingImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1 M24,24z M0,0z M19,3L5,3C3.9,3,3,3.9,3,5L3,19C3,20.1,3.9,21,5,21L19,21C20.1,21,21,20.1,21,19L21,5C21,3.9,20.1,3,19,3z M14,17L7,17 7,15 14,15 14,17z M17,13L7,13 7,11 17,11 17,13z M17,9L7,9 7,7 17,7 17,9z" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="file_upload_white_36dpDrawingImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1 M24,24z M0,0z M9,16L15,16 15,10 19,10 12,3 5,10 9,10z M5,18L19,18 19,20 5,20z" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+        
+    </Window.Resources>
     <Grid>
 
         <!--// Window Border //-->
@@ -51,7 +102,7 @@
 
                         <Grid>
 
-                            <Image Source="Images/home.png"
+                            <Image Source="{StaticResource home_white_36dpDrawingImage}"
                                    Style="{StaticResource Image_Style}" />
 
                             <TextBlock Text="Home"
@@ -67,8 +118,8 @@
                               Command="{Binding FelhasznaloCommand}">
 
                         <Grid>
-
-                            <Image Source="Images/user.png"
+                            
+                            <Image  Source="{StaticResource person_white_36dpDrawingImage}"
                                    Style="{StaticResource Image_Style}" />
 
                             <TextBlock Text="Customer"
@@ -85,7 +136,7 @@
 
                         <Grid>
 
-                            <Image Source="Images/products.png"
+                            <Image Source="{StaticResource inventory_white_36dpDrawingImage}"
                                    Style="{StaticResource Image_Style}" />
 
                             <TextBlock Text="Products"
@@ -97,12 +148,13 @@
 
                     <!--// Comments //-->
 
+
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding HozzaszolasCommand}">
 
                         <Grid>
 
-                            <Image Source="Images/comments.png"
+                            <Image Source="{StaticResource chat_white_36dpDrawingImage}"
                                    Style="{StaticResource Image_Style}" />
 
                             <TextBlock Text="Comments"
@@ -117,8 +169,8 @@
 
                             <Grid>
 
-                                <Image Source="Images/comments.png"
-                                       Style="{StaticResource Image_Style}" />
+                            <Image Source="{StaticResource article_white_36dpDrawingImage}"
+                                   Style="{StaticResource Image_Style}" />
 
                                 <TextBlock Text="Orders"
                                            Style="{StaticResource Text_Style}" />
@@ -132,8 +184,8 @@
 
                         <Grid>
 
-                            <Image Source="Images/comments.png"
-                                       Style="{StaticResource Image_Style}" />
+                            <Image Source="{StaticResource file_upload_white_36dpDrawingImage}"
+                                   Style="{StaticResource Image_Style}" />
 
                             <TextBlock Text="Image Upload"
                                            Style="{StaticResource Text_Style}" />
