@@ -88,7 +88,8 @@
             <Grid HorizontalAlignment="Left"
                   Width="228">
 
-                <Border Background="Green"
+                <Border Background="#436437"
+                        Opacity="0.9"
                         CornerRadius="20,0,0,20" />
 
                 <StackPanel Height="400"

@@ -19,7 +19,7 @@ namespace AdatKarbantarto.Helpers
         public BackendApiHelper()
         {
             _httpClient = new HttpClient();
-            string apiBaseUrl = ConfigurationManager.AppSettings["api"];
+            string apiBaseUrl = ConfigurationManager.AppSettings["api"]??"";
             if (!string.IsNullOrEmpty(apiBaseUrl))
             {
                 _httpClient.BaseAddress = new Uri(apiBaseUrl);

@@ -16,7 +16,7 @@
         <Border.Background>
             <ImageBrush ImageSource="/Images/OIG4.jpg"></ImageBrush>
         </Border.Background>
-        <Border CornerRadius="25" Background="ForestGreen" BorderBrush="LightGreen"  BorderThickness="4" Opacity="0.8">
+        <Border CornerRadius="25" Background="#436437" BorderBrush="White"  BorderThickness="4" Opacity="0.9">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"></RowDefinition>
@@ -29,14 +29,8 @@
                         <ColumnDefinition Width="25"></ColumnDefinition>
                         <ColumnDefinition Width="5"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Log In"
-                               Foreground="Black"
-                               FontSize="10"
-                               FontFamily="Monsterrat"
-                               Grid.Column="0"
-                               VerticalAlignment="Center" 
-                               Margin="10,0,0,0">
-                    </TextBlock>
+                    
+               
                     <Button x:Name="btnMinimize"
                             BorderThickness="0"
                             Content="-"
@@ -111,7 +105,7 @@
                                FontSize="25" 
                                FontWeight="Medium"
                                FontFamily="Monsterra"
-                               Foreground="Black">
+                               Foreground="White">
                     </TextBlock>
                     <TextBlock Text="We will make it possible."
                                TextWrapping="Wrap" 
@@ -119,7 +113,7 @@
                                FontSize="15" 
                                FontWeight="Normal"
                                FontFamily="Monsterra"
-                               Foreground="DarkGray"
+                               Foreground="LightGray"
                                Margin="0,5,0,0"/>
                     <TextBlock Text="Username"
                                FontSize="15" 

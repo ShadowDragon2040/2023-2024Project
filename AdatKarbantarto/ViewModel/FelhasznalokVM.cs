@@ -23,8 +23,8 @@ namespace AdatKarbantarto.ViewModel
         private ICollectionView _filteredView;
         public FelhasznalokVM()
         {
-            _isSaveEnabled = false;
-            _isAddEnabled = true;
+            IsSaveEnabled = false;
+            IsAddEnabled = true;
             Items = new ObservableCollection<Felhasznalo>();
             UpdateItem = new ObservableCollection<Felhasznalo>();
             RefreshCommand = new RelayCommand(execute => RefreshItems());
@@ -155,7 +155,6 @@ namespace AdatKarbantarto.ViewModel
             BackendApiHelper postHelper = new BackendApiHelper();
             var response = await postHelper.PostFelhasznaloAsync(newUser);
             MessageBox.Show(response.ToString());
-
 
             IsAddEnabled = true;
             IsSaveEnabled = false;
