@@ -3,6 +3,7 @@ using AdatKarbantarto.Model;
 using AdatKarbantarto.Utilities;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Security;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Data;
@@ -12,6 +13,7 @@ namespace AdatKarbantarto.ViewModel
 {
     public class FelhasznalokVM : ViewModelBase
     {
+        private SecureString _securerString;
         private static readonly Regex _regex = new Regex("[^0-9 ]+");
         private string _searchProductID = "";
         private bool _isSaveEnabled;
@@ -37,6 +39,11 @@ namespace AdatKarbantarto.ViewModel
 
             LoadInitialData();
         }
+
+        public FelhasznalokVM(SecureString secureString) : this()
+        {
+            SecurerString = secureString;
+        }
         #region Commands
         public RelayCommand RefreshCommand { get; private set; }
         public RelayCommand AddCommand { get; private set; }
@@ -47,7 +54,8 @@ namespace AdatKarbantarto.ViewModel
         #endregion
         #region Getters/Setters
 
-       
+
+        public SecureString SecurerString { get { return _securerString; } private set { value = _securerString; } }
         public string SearchProductID
         {
             get { return _searchProductID; }
@@ -129,7 +137,7 @@ namespace AdatKarbantarto.ViewModel
             {
                 
                 BackendApiHelper apiHelper = new BackendApiHelper();
-                _ListData = await apiHelper.GetFelhasznalokAsync();
+                _ListData = await apiHelper.GetFelhasznalokAsync(SecurerString);
 
                 Items.Clear();
 

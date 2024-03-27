@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using AdatKarbantarto.ViewModel;
+using Newtonsoft.Json.Linq;
+using System.Security;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,9 +19,13 @@ namespace AdatKarbantarto
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+
+        public MainWindow(SecureString token)
         {
             InitializeComponent();
+           
+            DataContext = new NavigationVM(token);
+
         }
     }
 }

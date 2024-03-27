@@ -14,7 +14,7 @@
         VerticalAlignment="Center"
         >
     <Window.DataContext>
-        <vm:NavigationVM />
+        <vm:NavigationVM/>
     </Window.DataContext>
     <Window.Resources>
 

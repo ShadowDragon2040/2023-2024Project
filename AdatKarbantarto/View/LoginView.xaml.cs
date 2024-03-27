@@ -6,7 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Runtime.InteropServices;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -47,12 +50,26 @@ namespace AdatKarbantarto.View
         {
             Application.Current.Shutdown();
         }
+        private static string ConvertSecureStringToString(SecureString secureString)
+        {
+            IntPtr ptr = IntPtr.Zero;
+            try
+            {
+                ptr = Marshal.SecureStringToBSTR(secureString);
+                return Marshal.PtrToStringBSTR(ptr);
+            }
+            finally
+            {
+                if (ptr != IntPtr.Zero)
+                    Marshal.ZeroFreeBSTR(ptr);
+            }
+        }
 
-        private void JwtDecode(string token)
+        private void JwtDecode(SecureString token)
         {
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-           
-           var decoded= handler.ReadToken(token);
+           string tokenString= ConvertSecureStringToString(token);
+           JwtSecurityToken decoded= handler.ReadJwtToken(tokenString);
             MessageBox.Show(decoded.ToString());
         }
 
@@ -61,13 +78,15 @@ namespace AdatKarbantarto.View
             try
             {
                 BackendApiHelper apiHelper = new BackendApiHelper();
-                AuthenticatedUser user = await apiHelper.PostAsync(txtUsername.Text, txtPassword.Password);
+                string passString = new NetworkCredential("", txtPassword.Password).Password;
+                AuthenticatedUser user = await apiHelper.PostAsync(txtUsername.Text, passString);
 
                 if (user != null)
                 {
-                    JwtDecode(user.Token);
+                    SecureString token = ConvertToSecureString(user.token);
+                    JwtDecode(token);
                     MessageBox.Show($"Logged in as: {user.User.UserName}");
-                    MainWindow window = new MainWindow();
+                    MainWindow window = new MainWindow(token);
                     window.Show();
                 }
                 this.Close();
@@ -79,9 +98,16 @@ namespace AdatKarbantarto.View
             }
         }
 
-
-
-
-
+        private SecureString ConvertToSecureString(string token)
+        {
+            SecureString secureString = new SecureString();
+            foreach (char c in token)
+            {
+                secureString.AppendChar(c);
+            }
+            secureString.MakeReadOnly();
+            return secureString;
+        }
     }
 }
+

@@ -9,6 +9,7 @@ using AdatKarbantarto.Model;
 using Newtonsoft.Json;
 using System.Windows;
 using AdatKarbantarto.Exceptions;
+using System.Security;
 
 namespace AdatKarbantarto.Helpers
 {
@@ -72,7 +73,7 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
-        public async Task<List<Felhasznalo>> GetFelhasznalokAsync()
+        public async Task<List<Felhasznalo>> GetFelhasznalokAsync(SecureString secureString)
         {
             using (HttpResponseMessage response = await _httpClient.GetAsync("/Felhasznalok"))
             {
