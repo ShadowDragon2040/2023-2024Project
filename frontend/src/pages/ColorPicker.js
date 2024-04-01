@@ -9,8 +9,8 @@ const ColorPicker = ({selectedColor, onColorChange}) => {
     };
 
     return (
-        <div>
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+        <div >
+            <div style={{ display: 'flex', justifyContent: 'left', marginTop: '10px' }}>
                 {colors.map((color, index) => (
                     <div
                         key={index}
@@ -31,7 +31,7 @@ const ColorPicker = ({selectedColor, onColorChange}) => {
            
                 {selectedColor && (
                 <p style={{ textAlign: 'left', marginTop: '10px' }}>
-                    Selected Color: <span style={{ color: selectedColor }}>{selectedColor}</span>
+                    Selected Color: {selectedColor}
                 </p>
             )}
         </div>

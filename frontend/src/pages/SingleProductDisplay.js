@@ -119,7 +119,8 @@ function SingleProductDisplay() {
                     <NavLink to={"/ShopPage"} className='back-btn'>
                         <MdArrowBack />
                     </NavLink>
-                    <div className='bg-dark p-1 rounded mx-auto d-flex flex-row mt-2 FirstRow'>
+                    <div className='bg-dark p-1 rounded mx-auto d-flex flex-row mt-2 FirstRow'
+                    style={{color:'white'}}>
                         <InnerImageZoom
                             width={1300}
                             className='ImageZoom rounded'
