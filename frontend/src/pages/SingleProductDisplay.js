@@ -13,7 +13,7 @@ import ColorPicker from './ColorPicker';
 import Button from 'react-bootstrap/Button';
 
 
-function SingleProductDisplay() {
+function SingleProductDisplay(props) {
     const { ProductId } = useParams();
     const [rating, setRating] = useState(0);
     const [commentString, setCommentString] = useState("");
@@ -50,10 +50,13 @@ function SingleProductDisplay() {
             name: singleProductData.termekNev,
             price: singleProductData.ar * quantity,
             quantity: quantity,
-            color: selectedColor  // Include the selected color here
+            color: selectedColor
         };
 
-        const existingItemIndex = cart.findIndex(item =>
+        props.addToCart(newItem, quantity) 
+
+
+        /*const existingItemIndex = cart.findIndex(item =>
             item.id === ProductId &&
             item.color === selectedColor
         );
@@ -67,10 +70,10 @@ function SingleProductDisplay() {
         } else {
             setCart(prevCart => [...prevCart, newItem]);
             console.log('Item added to cart:', newItem);
-        }
+        }*/
+       
+
     };
-
-
 
     const handleRemoveFromCart = (itemId) => {
         const updatedCart = cart.filter(item => item.id !== itemId);
@@ -114,7 +117,7 @@ function SingleProductDisplay() {
     return (
         <>
             <div className='SingleItemContainer'>
-                <Navbar cart={cart} />
+                <Navbar cart={props.cart} />
                 <div className="container mt-3">
                     <NavLink to={"/ShopPage"} className='back-btn'>
                         <MdArrowBack />
@@ -141,7 +144,7 @@ function SingleProductDisplay() {
                             <input type="number" id="quantity" name="quantity" min="1" max="5" value={quantity} onChange={handleQuantityChange} />
                             <br></br>
                             <br></br>
-                            <Button onClick={handleAddToCart}>Kosárba</Button>
+                            <Button onClick={handleAddToCart}>Kosárba</Button> 
 
                         </div>
                     </div>

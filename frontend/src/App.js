@@ -13,7 +13,7 @@ import ShopPage from './pages/ShopPage';
 import "bootstrap/dist/css/bootstrap.css"
 import CategoryPage from './pages/CategoryPage';
 import NewsPage from './pages/NewsPage';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Cart from './pages/CartPage';
 
 function App() {
@@ -25,27 +25,50 @@ function App() {
   const [addedToCart, setAddedToCart] = useState([]);
   const [cartItemCount, setCartItemCount] = useState(0);
  
+  useEffect(() => {
+    console.log(cartItems)
+  }, [cartItems]);
+
   const incrementCounter=()=>{
     setCounter(counter+1)
     console.log(counter)
   }
-  const addToCart = (product, quantity) => {
-    const existingItemIndex = cartItems.findIndex(item => item.id === product.id);
-  
-    if (existingItemIndex !== -1) {
-      const updatedCartItems = [...cartItems];
-      updatedCartItems[existingItemIndex].quantity += quantity;
-      setCartItems(updatedCartItems);
-    } else {
-      setCartItems([...cartItems, { ...product, quantity }]);
-    }
-  
-    setAddedToCart([...addedToCart, product.id]);
-    // Frissítjük a kosárba helyezett termékek számát
-    setCartItemCount(prevCount => prevCount + quantity);
-    console.log(`Added to cart: ${product.name}`);
-  };
+  /*const handleRemoveFromCart = (itemId) => {
+    const updatedCart = cart.filter(item => item.id !== itemId);
+    setCart(updatedCart);
+};*/
+const addToCart = (product, quantity) => {
+  let existingItemIndex = -1;
 
+  for(let i = 0; i<cartItems.length;i++){
+    if(cartItems[i].id === product.id && cartItems[i].color === product.color){
+      existingItemIndex = i;
+      break;
+    }
+  }
+
+  if (existingItemIndex !== -1) {
+    const updatedCartItems = [...cartItems];
+    updatedCartItems[existingItemIndex].quantity += quantity;
+    setCartItems(updatedCartItems);
+  } else {
+    setCartItems(prevCart => [...prevCart, product]);
+  }
+
+  setAddedToCart([...addedToCart, product.id]);
+
+  setCartItemCount(prevCount => cartItems.length);
+  console.log("Added to cart: " + product.name);
+
+  if(cartItems.length != 0){
+    let kosarString = "";
+    cartItems.map(item =>{
+      kosarString+= item.id +" "+ item.quantity+" "+item.color+";";
+
+    })
+    localStorage.setItem("kosar", kosarString);
+  }
+}; 
   return (
     <Router>
       <Switch>
@@ -59,7 +82,7 @@ function App() {
         <Route path="/PaintPage" component={PaintPage} exact />
 
         <Route path="/ShopPage" exact component={() => <ShopPage incrementCounter={incrementCounter} />}/>
-        <Route path="/ShopPage/:ProductId" component={SingleProductDisplay} exact addToCart={addToCart} />
+        <Route path="/ShopPage/:ProductId" component={() => <SingleProductDisplay addToCart={addToCart} cart={cartItems} />}/>
         <Route path="/ShopPage/Categories/:CategoryId" component={CategoryPage} exact />
         <Route path="/News" component={NewsPage} exact />
         <Route path="/CartPage"component={Cart} exact cartItemCount={cartItemCount} cartItems={cartItems} />
