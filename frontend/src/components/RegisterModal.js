@@ -26,7 +26,7 @@ const RegisterModal = () => {
       return;
     }
     try {
-      const response = await axios.post('https://localhost:7026/Auth/register', {
+      const response = await axios.post(`${process.env.BASE_URL}/Auth/register`, {
         userName: userName,
         password: password,
         email: email
@@ -43,7 +43,7 @@ const RegisterModal = () => {
   const handleVerificationSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://localhost:7026/Auth/verify-email', {
+      const response = await axios.post(`${process.env.BASE_URL}/Auth/verify-email`, {
         email: email,
         emailCode: verificationCode
       });

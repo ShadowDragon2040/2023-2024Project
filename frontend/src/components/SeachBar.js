@@ -10,12 +10,10 @@ import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
     const [termekek, setTermekek] = useState([]);
     const [isInputFocused, setIsInputFocused] = useState(false);
 
-    const url = "https://localhost:7026/Termekek";
-
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get(url);
+          const response = await axios.get(`${process.env.BASE_URL}/Termekek`);
           setTermekek(response.data);
         } catch (error) {
           console.error('Hiba a lekérdezés során:', error);

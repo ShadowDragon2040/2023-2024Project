@@ -31,7 +31,7 @@ const ModelSection = () => {
              <Column2>
               <ImgWrap>
                   <Img
-                    src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                    src={`${process.env.KEP_URL}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>

@@ -15,23 +15,10 @@ NavBtn,
 NavBtnLink
 } from '../TextElements'
 
-export const homeObjOne={
-  id:'about',
-  lightBg:false,
-  lightText:true,
-  lightTextDesc:false,
-  headline:'Cég bemutató',
-  topLine:'Industár.kft',
-  imgStart:false,
-  img:require('../../images/industar-kft-front.jpg'),
-  alt:'Car',
-  dark:true,
-  primary:true,
-  darkText:true,
-
-};
 const InfoSection = () => {
-  
+  const PhotoBase = process.env.REACT_APP_KEP_URL;
+  console.log(PhotoBase)
+
   return (
     <>
       <InfoContainer  lightBg={false} id={'about'} >
@@ -52,7 +39,7 @@ const InfoSection = () => {
              <Column2>
               <ImgWrap>
                   <Img
-                    src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                    src={PhotoBase+'anycubicphotonmono.jpg'}
                     alt={'Our Company'}
                   />
               </ImgWrap>

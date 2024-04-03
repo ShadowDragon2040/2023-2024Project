@@ -22,21 +22,21 @@ const Services = () => {
         <ServicesWrapper>
             <Link style={{textDecoration: 'none'}} onClick={handleClick} to={'PaintPage'}>
             <ServicesCard>
-                <ServicesIcon src={'http://printfusion.nhely.hu/test/svg-1.svg'}/>
+                <ServicesIcon src={`${process.env.KEP_URL}svg-1.svg`}/>
                 <TopLine>Painting</TopLine>
                 <ServicesP></ServicesP>
             </ServicesCard>
             </Link>
             <Link style={{textDecoration: 'none'}} onClick={handleClick} to={'ElektroplatingPage'}>
             <ServicesCard>
-                <ServicesIcon src={'http://printfusion.nhely.hu/test/svg-1.svg'}/>
+                <ServicesIcon src={`${process.env.KEP_URL}svg-1.svg`}/>
                 <TopLine>Elektroplating</TopLine>
                 <ServicesP></ServicesP>
             </ServicesCard>
             </Link>
             <Link style={{textDecoration: 'none'}} onClick={handleClick} to={'ModelltervezesPage'}>
             <ServicesCard>
-                <ServicesIcon src={'http://printfusion.nhely.hu/test/svg-1.svg'}/>
+                <ServicesIcon src={`${process.env.KEP_URL}svg-1.svg`}/>
                 <TopLine>Modell designing</TopLine>
                 <ServicesP></ServicesP>
             </ServicesCard>

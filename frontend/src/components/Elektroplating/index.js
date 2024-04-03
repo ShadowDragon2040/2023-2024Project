@@ -22,7 +22,7 @@ const Elektroplating = () => {
             <Column1 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                    src={`${process.env.KEP_URL}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>
@@ -44,7 +44,7 @@ const Elektroplating = () => {
             <Column2 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                    src={`${process.env.KEP_URL}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>
@@ -54,7 +54,7 @@ const Elektroplating = () => {
             <Column1 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                    src={`${process.env.KEP_URL}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>
@@ -76,7 +76,7 @@ const Elektroplating = () => {
             <Column2 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={'http://printfusion.nhely.hu/test/PEIsheet.jpg'}
+                    src={`${process.env.KEP_URL}PEIsheet.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>

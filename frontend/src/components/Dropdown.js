@@ -1,25 +1,3 @@
-/*
-import { useEffect } from "react";
-
-export function Dropdown(ref, handler) {
-  useEffect(
-    () => {
-      const listener = (event) => {
-        if (!ref.current || ref.current.contains(event.target)) {
-          return;
-        }
-        handler(event);
-      };
-      document.addEventListener("mouseover", listener);
-      return () => {
-        document.removeEventListener("mouseout", listener);
-      };
-    },
-    [ref, handler]
-  );
-}
-*/
-
 import React, { useState } from 'react';
 import { MenuItems } from './menu';
 import { Link } from 'react-router-dom';

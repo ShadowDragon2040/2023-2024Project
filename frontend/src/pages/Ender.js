@@ -32,7 +32,7 @@ function EnderPage(){
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img src='http://printfusion.nhely.hu/test/fdmboatmodell.jpg' />
+                  <Img src={`${process.env.KEP_URL}fdmboatmodell.jpg`} />
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
@@ -58,7 +58,7 @@ function EnderPage(){
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img src='http://printfusion.nhely.hu/test/PEIsheet.jpg' />
+                  <Img src={`${process.env.KEP_URL}PEIsheet.jpg`} />
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>

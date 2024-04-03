@@ -16,7 +16,7 @@ function Gallery() {
         <Carousel.Item>
             <ImgWrap>
                 <Img
-                  src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                  src={`${process.env.KEP_URL}anycubicphotonmono.jpg`}
                   alt={'Third slide'}
                   className="d-block w-100"
                 />
@@ -29,7 +29,7 @@ function Gallery() {
         <Carousel.Item>
             <ImgWrap>
                 <Img
-                  src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                  src={`${process.env.KEP_URL}anycubicphotonmono.jpg`}
                   alt={'Third slide'}
                   className="d-block w-100"
                 />
@@ -42,7 +42,7 @@ function Gallery() {
         <Carousel.Item>
             <ImgWrap>
                 <Img
-                  src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                  src={`${process.env.KEP_URL}anycubicphotonmono.jpg`}
                   alt={'Third slide'}
                   className="d-block w-100"
                 />

@@ -14,7 +14,7 @@ import "bootstrap/dist/css/bootstrap.css"
 import CategoryPage from './pages/CategoryPage';
 import NewsPage from './pages/NewsPage';
 import React, { useState, useEffect } from 'react';
-import Cart from './pages/CartPage';
+import CartPage from './pages/CartPage';
 
 function App() {
   sessionStorage.setItem("bejelenkezve", "false");
@@ -85,7 +85,8 @@ const addToCart = (product, quantity) => {
         <Route path="/ShopPage/:ProductId" component={() => <SingleProductDisplay addToCart={addToCart} cart={cartItems} />}/>
         <Route path="/ShopPage/Categories/:CategoryId" component={CategoryPage} exact />
         <Route path="/News" component={NewsPage} exact />
-        <Route path="/CartPage"component={Cart} exact cartItemCount={cartItemCount} cartItems={cartItems} />
+        <Route path="/CartPage"component={CartPage} exact cartItemCount={cartItemCount} cartItems={cartItems} />
+        
       </Switch>
     </Router>
   );

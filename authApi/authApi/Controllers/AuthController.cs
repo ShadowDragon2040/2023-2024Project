@@ -57,6 +57,10 @@ namespace authApi.Controllers
 
                     if (assignedRoleSuccessful)
                     {
+                        user.EmailConfirmed = true;
+
+                        await dataBase.SaveChangesAsync();
+
                         return Ok("Email code verified successfully and role assigned.");
                     }
                     else
@@ -74,9 +78,6 @@ namespace authApi.Controllers
                 return NotFound("User not found.");
             }
         }
-
-
-
 
         [HttpPost("AssignRole")]
         [Authorize(Roles = "Admin")]

@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import Navbar from '../components/ShopNavbar';
-import DisplayItem from '../components/DisplayItems';
 import Footer from '../components/Footer';
 import { ShopPageContainer } from '../components/TextElements';
 import ShopSideBar from '../components/ShopSideBar';
-import ProfileDisplayPage from '../components/ProfileDisplayPage';
-import DisplaySingleItem from './DisplaySingleItem';
 
 function NewsPage() {
   const [singleItem, setSingleItem] = useState(false);

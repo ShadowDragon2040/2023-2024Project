@@ -43,7 +43,7 @@ const PrinterTools = () => {
             <ImgWrap>
             <Link onClick={handleClick} to="/Ender">
                 <Img
-                  src={'http://printfusion.nhely.hu/test/Ender3V2.jpg'}
+                  src={`${process.env.KEP_URL}Ender3V2.jpg`}
                   alt={'Ender3V2'}
                   onMouseEnter={() => setTopLeftHovered(true)}
                   onMouseLeave={() => setTopLeftHovered(false)}
@@ -70,7 +70,7 @@ const PrinterTools = () => {
               <ImgWrap>
               <Link onClick={handleClick} to="/Anycubic">
                 <Img
-                  src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                  src={`${process.env.KEP_URL}anycubicphotonmono.jpg`}
                   alt={'anycubic photon mono'}
                   onMouseEnter={() => setTopRightHovered(true)}
                   onMouseLeave={() => setTopRightHovered(false)}
@@ -100,7 +100,7 @@ const PrinterTools = () => {
             <ImgWrap>
             <Link onClick={handleClick} to="/Carbon X1">
                 <Img
-                  src={'http://printfusion.nhely.hu/test/bambucarbonx1.jpg'}
+                  src={`${process.env.KEP_URL}bambucarbonmain.jpg`}
                   alt={'Bambu Carbon X1'}
                   onMouseEnter={() => setBottomLeftHovered(true)}
                   onMouseLeave={() => setBottomLeftHovered(false)}
@@ -127,7 +127,7 @@ const PrinterTools = () => {
               <ImgWrap>
               <Link onClick={handleClick} to="/Anycubic">
                 <Img
-                  src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                  src={`${process.env.KEP_URL}anycubicphotonmono.jpg`}
                   alt={'cég'}
                   onMouseEnter={() => setBottomRightHovered(true)}
                   onMouseLeave={() => setBottomRightHovered(false)}

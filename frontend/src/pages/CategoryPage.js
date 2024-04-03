@@ -13,7 +13,7 @@ function CategoryPage() {
   const [categoryDataList, setCategoryDataList] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:7026/Termekek/Termek/'+1)
+    axios.get(`${process.env.BASE_URL}/Termekek/Termek/`+1)
       .then(response => setCategoryDataList(response.data))
       .catch(error => console.error('Hiba a lekérdezés során:', error));
   }, []);

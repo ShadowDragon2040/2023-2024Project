@@ -83,7 +83,7 @@ function SingleProductDisplay(props) {
 
     const [singleProductData, setSingleProductData] = useState({});
     const [transformedComments, setTransformedComments] = useState(null);
-    const url = "https://localhost:7026/Termekek/EgyTermek/";
+    const url = `${process.env.BASE_URL}/Termekek/EgyTermek/`;
 
     useEffect(() => {
         axios.get(url + ProductId)
@@ -105,7 +105,7 @@ function SingleProductDisplay(props) {
 
     const handleSubmitComment = (data) => {
         console.log("Submitted comment data:", data);
-        axios.post("http://localhost:7026/Hozzaszolas", {
+        axios.post(`${process.env.BASE_URL}/Hozzaszolas`, {
             "hozzaszolasId": 0,
             "felhasznaloId": 1,
             "termekId": ProductId,

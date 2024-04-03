@@ -9,7 +9,7 @@ namespace authApi.Services
         
         public static void SendVerificationMail(string mailAddressTo,int randomCode, IConfiguration configuration)
         {
-            string subject = "Verify you Email!";
+            string subject = $"Verify you Email: {randomCode}";
             string body = $"Thank you for registering to PrintFusion, after you verify your email all of the websites features are unlocked.\nYour verification code is: {randomCode}";
 
             MailMessage mail = new MailMessage();

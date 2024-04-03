@@ -11,9 +11,8 @@ import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 function ShopSideBar(props) {
   const [categoryList, setCategoryList] = useState([]);
 
-    const url="https://localhost:7026/Termekek/Kategoriak";
     useEffect(() => {
-      axios.get(url)
+      axios.get(`${process.env.BASE_URL}/Termekek/Kategoriak`)
         .then(response => setCategoryList(response.data))
         .catch(error => console.error('Hiba a lekérdezés során:', error));
     }, []);

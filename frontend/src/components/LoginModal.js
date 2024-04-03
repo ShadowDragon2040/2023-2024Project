@@ -21,7 +21,7 @@ const LoginModal = (props) => {
     const handleLogin = async (e) => {
       e.preventDefault();
       try {
-        const response = await axios.post('https://localhost:7026/Auth/login', {
+        const response = await axios.post(`${process.env.BASE_URL}/Auth/login`, {
           userName: username,
           password: password,
         });

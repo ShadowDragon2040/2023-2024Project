@@ -12,7 +12,7 @@ function NewItemsComponent (props) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get('https://localhost:7026/Termekek')
+    axios.get(`${process.env.BASE_URL}/Termekek`)
       .then(response => setData(response.data))
       .catch(error => console.error('Hiba a lekérdezés során:', error));
   }, []);
@@ -26,13 +26,13 @@ function NewItemsComponent (props) {
 
           <Carousel style={{width: props.collapsed ? '80%' : '100%',borderRadius: '20px'}} autoPlay={true} infiniteLoop={true} showThumbs={false} showStatus={false}>
             <NavLink to={"/ShopPage/"+25}>
-              <CarouselImage src={'http://printfusion.nhely.hu/test/image1.png'} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s', borderRadius: '20px'}}/>
+              <CarouselImage src={`${process.env.KEP_URL}image1.png`} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s', borderRadius: '20px'}}/>
             </NavLink>
             <NavLink to={"/ShopPage/"+26}>
-              <CarouselImage src={'http://printfusion.nhely.hu/test/image2.jpg'} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s',borderRadius: '20px'}}/>
+              <CarouselImage src={`${process.env.KEP_URL}image2.jpg`} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s',borderRadius: '20px'}}/>
             </NavLink>
             <NavLink to={"/ShopPage/"+27}>
-              <CarouselImage src={'http://printfusion.nhely.hu/test/image3.jpg'} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s', borderRadius: '20px'}}/>
+              <CarouselImage src={`${process.env.KEP_URL}image3.jpg`} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s', borderRadius: '20px'}}/>
             </NavLink>
           </Carousel>
       </CarouselContainer>

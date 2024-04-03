@@ -22,7 +22,7 @@ const Paint = () => {
             <Column1 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                    src={`${process.env.KEP_URL}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>
@@ -44,7 +44,7 @@ const Paint = () => {
             <Column2 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                    src={`${process.env.KEP_URL}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>
