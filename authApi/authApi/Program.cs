@@ -34,14 +34,16 @@ namespace authApi
             // Add services to the container.
 
             builder.Services.AddDbContext<AuthContext>();
-
+            builder.Services.AddAuthorization();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+            app.UseAuthentication();
 
+            app.UseAuthorization();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -53,9 +55,7 @@ namespace authApi
 
             app.UseCors("AllowOrigin");
 
-            app.UseAuthentication();
 
-            app.UseAuthorization();
 
             app.MapControllers();
 
@@ -101,7 +101,7 @@ namespace authApi
                 };
             });
 
-            builder.Services.AddAuthorization();
+           
 
             var app = builder.Build();
 

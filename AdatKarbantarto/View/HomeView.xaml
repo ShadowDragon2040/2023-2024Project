@@ -3,10 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AdatKarbantarto.View"
+             xmlns:local="clr-namespace:AdatKarbantarto.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <local:HomeVM/>
+    </UserControl.DataContext>
     <Grid>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="{Binding LabelContent}" Background="DarkSlateGray"
+               Foreground="Black"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Center"
+               Width="350"
+               Height="80"
+               >
             
+        </Label>
     </Grid>
 </UserControl>

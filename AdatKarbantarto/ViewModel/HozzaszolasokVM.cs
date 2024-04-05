@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows;
+using System.Security;
 
 namespace AdatKarbantarto.ViewModel
 {
@@ -42,6 +43,11 @@ namespace AdatKarbantarto.ViewModel
 
 
             LoadInitialData();
+        }
+
+        public HozzaszolasokVM(SecureString jwtToken)
+        {
+            JwtToken = jwtToken;
         }
         #region Commands
         public RelayCommand RefreshCommand { get; private set; }
@@ -126,6 +132,8 @@ namespace AdatKarbantarto.ViewModel
                 }
             }
         }
+
+        public SecureString JwtToken { get; }
         #endregion
         #region CRUD
         private async void LoadInitialData()

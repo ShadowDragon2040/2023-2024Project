@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using AdatKarbantarto.Helpers;
 using AdatKarbantarto.Model;
 using System.Windows;
+using System.Security;
 
 namespace AdatKarbantarto.ViewModel
 {
@@ -46,12 +47,19 @@ namespace AdatKarbantarto.ViewModel
             }
         }
 
+        public SecureString JwtToken { get; }
+
         public ImageUploadVM()
         {
             openfile = new RelayCommand(async execute => await OpenFile());
             uploadfile = new RelayCommand(async execute => await UploadFile());
             UploadedFiles = new ObservableCollection<FtpFile>();
             LoadUploadedFiles();
+        }
+
+        public ImageUploadVM(SecureString jwtToken)
+        {
+            JwtToken = jwtToken;
         }
 
         private async void LoadUploadedFiles()

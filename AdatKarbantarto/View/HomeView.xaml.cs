@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AdatKarbantarto.ViewModel;
+using System.Security;
 
 namespace AdatKarbantarto.View
 {
@@ -25,7 +27,9 @@ namespace AdatKarbantarto.View
         public HomeView()
         {
             InitializeComponent();
+            DataContext = new HomeVM();
+
         }
-       
+
     }
 }

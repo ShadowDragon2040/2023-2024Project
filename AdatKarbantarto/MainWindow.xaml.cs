@@ -19,13 +19,13 @@ namespace AdatKarbantarto
     /// </summary>
     public partial class MainWindow : Window
     {
-       private readonly NavigationVM _vm;
+        private readonly NavigationVM _vm;
+
         public MainWindow(SecureString token)
         {
             InitializeComponent();
-            _vm = new NavigationVM(token);
+            _vm = new NavigationVM(token); 
             DataContext = _vm;
-
         }
     }
 }

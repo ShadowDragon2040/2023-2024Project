@@ -70,7 +70,7 @@ namespace AdatKarbantarto.View
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
            string tokenString= ConvertSecureStringToString(token);
            JwtSecurityToken decoded= handler.ReadJwtToken(tokenString);
-            MessageBox.Show(decoded.ToString());
+           
         }
 
         private async void btnLogin_Click(object sender, RoutedEventArgs e)

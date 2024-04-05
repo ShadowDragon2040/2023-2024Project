@@ -30,6 +30,19 @@ namespace Webárúház_Nagy_Project.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet("testAuthorizedEndpoint"), Authorize]
+        public async Task<ActionResult> GetTest()
+        {
+            try
+            {
+                var result = await _context.Termekek.ToListAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpGet("Kategoriak")/*, Authorize*/]
         public async Task<ActionResult> GetKategoriak()

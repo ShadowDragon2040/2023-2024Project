@@ -3,6 +3,7 @@ using AdatKarbantarto.Model;
 using AdatKarbantarto.Utilities;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Security;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Data;
@@ -36,6 +37,11 @@ namespace AdatKarbantarto.ViewModel
 
 
             LoadInitialData();
+        }
+
+        public SzamlazasVM(SecureString jwtToken)
+        {
+            JwtToken = jwtToken;
         }
         #region Commands
         public RelayCommand RefreshCommand { get; private set; }
@@ -122,6 +128,8 @@ namespace AdatKarbantarto.ViewModel
                 }
             }
         }
+
+        public SecureString JwtToken { get; }
         #endregion
         #region CRUD
         private async void LoadInitialData()
