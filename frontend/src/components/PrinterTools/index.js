@@ -10,7 +10,8 @@ Column2,
 TopLine,
 Heading,
 ImgWrap,
-Img
+Img,
+baseImageUrl
 } from '../TextElements'
 
 const PrinterTools = () => {
@@ -43,7 +44,7 @@ const PrinterTools = () => {
             <ImgWrap>
             <Link onClick={handleClick} to="/Ender">
                 <Img
-                  src={`${process.env.KEP_URL}Ender3V2.jpg`}
+                  src={`${baseImageUrl}Ender3V2.jpg`}
                   alt={'Ender3V2'}
                   onMouseEnter={() => setTopLeftHovered(true)}
                   onMouseLeave={() => setTopLeftHovered(false)}
@@ -70,7 +71,7 @@ const PrinterTools = () => {
               <ImgWrap>
               <Link onClick={handleClick} to="/Anycubic">
                 <Img
-                  src={`${process.env.KEP_URL}anycubicphotonmono.jpg`}
+                  src={`${baseImageUrl}anycubicphotonmono.jpg`}
                   alt={'anycubic photon mono'}
                   onMouseEnter={() => setTopRightHovered(true)}
                   onMouseLeave={() => setTopRightHovered(false)}
@@ -100,7 +101,7 @@ const PrinterTools = () => {
             <ImgWrap>
             <Link onClick={handleClick} to="/Carbon X1">
                 <Img
-                  src={`${process.env.KEP_URL}bambucarbonmain.jpg`}
+                  src={`${baseImageUrl}bambucarbonmain.jpg`}
                   alt={'Bambu Carbon X1'}
                   onMouseEnter={() => setBottomLeftHovered(true)}
                   onMouseLeave={() => setBottomLeftHovered(false)}
@@ -127,7 +128,7 @@ const PrinterTools = () => {
               <ImgWrap>
               <Link onClick={handleClick} to="/Anycubic">
                 <Img
-                  src={`${process.env.KEP_URL}anycubicphotonmono.jpg`}
+                  src={`${baseImageUrl}anycubicphotonmono.jpg`}
                   alt={'cég'}
                   onMouseEnter={() => setBottomRightHovered(true)}
                   onMouseLeave={() => setBottomRightHovered(false)}

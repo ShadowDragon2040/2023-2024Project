@@ -4,6 +4,8 @@ import{Link as LinkS} from 'react-scroll'
 import { Link } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 
+export const baseImageUrl = "http://printfusion.nhely.hu/test/";
+export const baseUrl = "https://localhost:7026/";
 
 export const InfoContainer=styled.div`
     color: #fff;

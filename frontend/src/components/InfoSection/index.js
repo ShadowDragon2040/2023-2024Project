@@ -12,12 +12,11 @@ Subtitle,
 ImgWrap,
 Img,
 NavBtn,
-NavBtnLink
+NavBtnLink,
+baseImageUrl
 } from '../TextElements'
 
 const InfoSection = () => {
-  const PhotoBase = process.env.REACT_APP_KEP_URL;
-  console.log(PhotoBase)
 
   return (
     <>
@@ -39,7 +38,7 @@ const InfoSection = () => {
              <Column2>
               <ImgWrap>
                   <Img
-                    src={PhotoBase+'anycubicphotonmono.jpg'}
+                    src={`${baseImageUrl}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>

@@ -1,8 +1,8 @@
   import React, { useRef, useState, useEffect } from 'react';
   import { FaSearch, FaMicrophone } from 'react-icons/fa';
   import axios from 'axios';
-import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
-
+  import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+  import {baseUrl} from './TextElements';
   function SearchBar() {
     const inputRef = useRef(null);
     const [listening, setListening] = useState(false);
@@ -13,7 +13,7 @@ import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get(`${process.env.BASE_URL}/Termekek`);
+          const response = await axios.get(`${baseUrl}Termekek`);
           setTermekek(response.data);
         } catch (error) {
           console.error('Hiba a lekérdezés során:', error);

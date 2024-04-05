@@ -9,7 +9,9 @@ Heading,
 ImgWrap,
 TopLine,
 Img,
-Subtitle
+Subtitle,
+baseImageUrl,
+baseUrl
 } from '../TextElements'
 
 const Elektroplating = () => {
@@ -22,7 +24,7 @@ const Elektroplating = () => {
             <Column1 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={`${process.env.KEP_URL}anycubicphotonmono.jpg`}
+                    src={`${baseImageUrl}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>
@@ -44,7 +46,7 @@ const Elektroplating = () => {
             <Column2 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={`${process.env.KEP_URL}anycubicphotonmono.jpg`}
+                    src={`${baseImageUrl}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>
@@ -54,7 +56,7 @@ const Elektroplating = () => {
             <Column1 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={`${process.env.KEP_URL}anycubicphotonmono.jpg`}
+                    src={`${baseImageUrl}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>
@@ -76,7 +78,7 @@ const Elektroplating = () => {
             <Column2 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={`${process.env.KEP_URL}PEIsheet.jpg`}
+                    src={`${baseImageUrl}PEIsheet.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>

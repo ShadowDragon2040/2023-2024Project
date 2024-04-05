@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { InfoContainer3, ItemContainer,CarouselContainer } from './TextElements'
+import {
+  InfoContainer3,
+  ItemContainer,
+  CarouselContainer,
+  CarouselImage,
+  baseImageUrl,
+  baseUrl } from './TextElements'
+
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-import {CarouselImage} from './TextElements';
 import axios from 'axios'
 import TermekCard from './TermekCard'
 
@@ -12,7 +18,7 @@ function NewItemsComponent (props) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get(`${process.env.BASE_URL}/Termekek`)
+    axios.get(`${baseUrl}Termekek`)
       .then(response => setData(response.data))
       .catch(error => console.error('Hiba a lekérdezés során:', error));
   }, []);
@@ -26,13 +32,13 @@ function NewItemsComponent (props) {
 
           <Carousel style={{width: props.collapsed ? '80%' : '100%',borderRadius: '20px'}} autoPlay={true} infiniteLoop={true} showThumbs={false} showStatus={false}>
             <NavLink to={"/ShopPage/"+25}>
-              <CarouselImage src={`${process.env.KEP_URL}image1.png`} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s', borderRadius: '20px'}}/>
+              <CarouselImage src={`${baseImageUrl}image1.png`} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s', borderRadius: '20px'}}/>
             </NavLink>
             <NavLink to={"/ShopPage/"+26}>
-              <CarouselImage src={`${process.env.KEP_URL}image2.jpg`} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s',borderRadius: '20px'}}/>
+              <CarouselImage src={`${baseImageUrl}image2.jpg`} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s',borderRadius: '20px'}}/>
             </NavLink>
             <NavLink to={"/ShopPage/"+27}>
-              <CarouselImage src={`${process.env.KEP_URL}image3.jpg`} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s', borderRadius: '20px'}}/>
+              <CarouselImage src={`${baseImageUrl}image3.jpg`} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s', borderRadius: '20px'}}/>
             </NavLink>
           </Carousel>
       </CarouselContainer>

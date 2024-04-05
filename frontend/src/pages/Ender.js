@@ -13,7 +13,8 @@ import {
   ImgWrap,
   TopLine,
   Img,
-  Subtitle
+  Subtitle,
+  baseImageUrl
   } from '../components/TextElements'
 function EnderPage(){
 
@@ -32,7 +33,7 @@ function EnderPage(){
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img src={`${process.env.KEP_URL}fdmboatmodell.jpg`} />
+                  <Img src={`${baseImageUrl}fdmboatmodell.jpg`} />
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
@@ -58,7 +59,7 @@ function EnderPage(){
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img src={`${process.env.KEP_URL}PEIsheet.jpg`} />
+                  <Img src={`${baseImageUrl}PEIsheet.jpg`} />
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
@@ -77,7 +78,7 @@ function EnderPage(){
             </Column1>
             <Column2 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img src='../components/ComponentImages/PEIsheet.jpg'></Img>
+                  <Img src={`${baseImageUrl}PEIsheet.jpg`}></Img>
                 </ImgWrap>
             </Column2>
           </InfoRow>

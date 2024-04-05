@@ -26,7 +26,7 @@ function App() {
   const [cartItemCount, setCartItemCount] = useState(0);
  
   useEffect(() => {
-    console.log(cartItems)
+    //console.log(cartItems)
   }, [cartItems]);
 
   const incrementCounter=()=>{

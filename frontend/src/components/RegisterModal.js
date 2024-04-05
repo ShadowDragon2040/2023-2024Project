@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
-import { NavBtn2, ModalButton } from './TextElements';
+import {
+  NavBtn2,
+  ModalButton,
+  baseUrl } from './TextElements';
 import { toast } from 'react-toastify';
 
 const RegisterModal = () => {
@@ -26,7 +29,7 @@ const RegisterModal = () => {
       return;
     }
     try {
-      const response = await axios.post(`${process.env.BASE_URL}/Auth/register`, {
+      const response = await axios.post(`${baseUrl}Auth/register`, {
         userName: userName,
         password: password,
         email: email
@@ -43,7 +46,7 @@ const RegisterModal = () => {
   const handleVerificationSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${process.env.BASE_URL}/Auth/verify-email`, {
+      const response = await axios.post(`${baseUrl}Auth/verify-email`, {
         email: email,
         emailCode: verificationCode
       });

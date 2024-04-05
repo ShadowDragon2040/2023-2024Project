@@ -37,7 +37,7 @@ function ShopNavbar(props) {
   }, []);
 
   useEffect(() => {
-    console.log(props.cart);
+    //console.log(props.cart);
     let total = 0;
     if(props.cart){
         props.cart.forEach(item => {
