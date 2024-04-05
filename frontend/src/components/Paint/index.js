@@ -9,7 +9,8 @@ Heading,
 ImgWrap,
 TopLine,
 Img,
-Subtitle
+Subtitle,
+baseImageUrl
 } from '../TextElements'
 
 const Paint = () => {
@@ -22,7 +23,7 @@ const Paint = () => {
             <Column1 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                    src={`${baseImageUrl}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>
@@ -44,7 +45,7 @@ const Paint = () => {
             <Column2 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                    src={`${baseImageUrl}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Már 19. 20:14
+-- Létrehozás ideje: 2024. Ápr 05. 10:12
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -49,6 +49,13 @@ CREATE TABLE `aspnetroles` (
   `ConcurrencyStamp` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- A tábla adatainak kiíratása `aspnetroles`
+--
+
+INSERT INTO `aspnetroles` (`Id`, `Name`, `NormalizedName`, `ConcurrencyStamp`) VALUES
+('dd8fa84e-d702-4d1b-bc81-7948a2a1083f', 'USER', 'USER', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -86,6 +93,15 @@ CREATE TABLE `aspnetuserroles` (
   `RoleId` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- A tábla adatainak kiíratása `aspnetuserroles`
+--
+
+INSERT INTO `aspnetuserroles` (`UserId`, `RoleId`) VALUES
+('03c66e48-f575-4ffb-9252-f307d1b473e0', 'dd8fa84e-d702-4d1b-bc81-7948a2a1083f'),
+('0bb5579f-84d4-4120-beda-8012fe6a9816', 'dd8fa84e-d702-4d1b-bc81-7948a2a1083f'),
+('26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 'dd8fa84e-d702-4d1b-bc81-7948a2a1083f');
+
 -- --------------------------------------------------------
 
 --
@@ -118,7 +134,9 @@ CREATE TABLE `aspnetusers` (
 --
 
 INSERT INTO `aspnetusers` (`Id`, `EmailCode`, `UserName`, `NormalizedUserName`, `Email`, `NormalizedEmail`, `EmailConfirmed`, `PasswordHash`, `SecurityStamp`, `ConcurrencyStamp`, `PhoneNumber`, `PhoneNumberConfirmed`, `TwoFactorEnabled`, `LockoutEnd`, `LockoutEnabled`, `AccessFailedCount`, `AktivalasIdopotja`, `ProfilKep`) VALUES
-('', 0, 'eatrw', NULL, 'wetzs@gmail.com', NULL, 0, 'retwzrsturduztesafez5ste264578452354', NULL, NULL, NULL, 0, 0, NULL, 0, 0, '2024-03-18 09:50:06', '');
+('03c66e48-f575-4ffb-9252-f307d1b473e0', 1547, 'Balazs', 'BALAZS', 'vardai.balazs22@gmail.com', 'VARDAI.BALAZS22@GMAIL.COM', 1, 'AQAAAAIAAYagAAAAEIJgdW+Z4wG/Z7BKteT5hJbgMe6GkiWMJcpWF8fpFd/gUgZaTTb4hqLKPmQ3+dNpRQ==', '5ZHHI5SV3UKLE2OXVWS3FFAZYZFNF7X3', '7fc461ac-e756-476b-967e-f3c9ec6a7603', NULL, 0, 0, NULL, 1, 0, '2024-04-05 08:54:02', ''),
+('0bb5579f-84d4-4120-beda-8012fe6a9816', 2003, 'Balint', 'BALINT', 'pejkob@kkszki.hu', 'PEJKOB@KKSZKI.HU', 1, 'AQAAAAIAAYagAAAAEKhnQ5rzrUs87l66JuSTG1pQCl2M4X/EaH4T17rqj3pW7w/14eHoG/UEMqpzexwEiA==', '4DXEAYHC6SNQEELSXNLM6DKVGJJEXQHE', '2e10709c-dcfe-4661-ab9b-680f611b23bb', NULL, 0, 0, NULL, 1, 0, '2024-04-05 08:55:12', ''),
+('26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 8220, 'Judit', 'JUDIT', 'szaboj@kkszki.hu', 'SZABOJ@KKSZKI.HU', 1, 'AQAAAAIAAYagAAAAEE8YKq86JvUY3LJxA3mr9yljZH6LHLeBlO+h3t2ii1JbWFNZQ1Z0tPQggQSuRTizyw==', '4UDYEDEEE4S4EQICF4NHLTYB6CGQTWNO', '6e4b75cb-ca6a-49d7-95e6-4d13db91a7fa', NULL, 0, 0, NULL, 1, 0, '2024-04-05 08:56:47', '');
 
 -- --------------------------------------------------------
 
@@ -136,6 +154,42 @@ CREATE TABLE `aspnetusertokens` (
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `ftpfiles`
+--
+
+CREATE TABLE `ftpfiles` (
+  `id` int(11) NOT NULL,
+  `file` varchar(255) NOT NULL,
+  `timestamp` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `ftpfiles`
+--
+
+INSERT INTO `ftpfiles` (`id`, `file`, `timestamp`) VALUES
+(1, 'asd', '2024-03-24 14:53:45'),
+(4, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 135937.png', '2024-03-24 15:57:35'),
+(5, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 114236.png', '2024-03-24 15:58:03'),
+(6, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 114236.png', '2024-03-24 15:59:13'),
+(7, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 114236.png', '2024-03-24 16:00:42'),
+(8, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 114236.png', '2024-03-24 16:01:14'),
+(9, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 114236.png', '2024-03-24 16:02:35'),
+(10, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 135937.png', '2024-03-24 17:27:36'),
+(11, 'C:\\Users\\pbálint\\Pictures\\Screenshots\\Képernyőkép 2024-02-06 100052.png', '2024-03-25 09:34:39'),
+(12, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\3dBencyBlender.jpg', '2024-03-25 10:34:02'),
+(13, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\abslikeresin.jpg', '2024-03-25 10:34:09'),
+(14, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\fdmboatmodell.jpg', '2024-03-25 10:34:19'),
+(15, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\Pencil_Holder.jpg', '2024-03-25 10:35:11'),
+(16, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\layerheightcomparison.jpg', '2024-03-25 10:35:29'),
+(17, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\3D_Printed_House.jpg', '2024-03-25 10:35:38'),
+(18, 'C:\\Users\\pbálint\\Pictures\\Screenshots\\Képernyőkép 2024-01-24 095750.png', '2024-03-26 08:19:47'),
+(19, 'C:\\Users\\pbálint\\Pictures\\Screenshots\\Képernyőkép 2024-02-21 101309.png', '2024-03-26 12:56:19'),
+(20, 'C:\\Users\\pbálint\\Pictures\\Screenshots\\Képernyőkép 2024-01-24 095702.png', '2024-03-26 13:52:11');
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `helyadatok`
 --
 
@@ -149,6 +203,15 @@ CREATE TABLE `helyadatok` (
   `Hazszam` varchar(128) NOT NULL,
   `Egyeb` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `helyadatok`
+--
+
+INSERT INTO `helyadatok` (`Id`, `UserId`, `OrszagNev`, `VarosNev`, `UtcaNev`, `Iranyitoszam`, `Hazszam`, `Egyeb`) VALUES
+(1, '0bb5579f-84d4-4120-beda-8012fe6a9816', 'Magyarország', 'Miskolc', 'Sarok utca', '6284', '65', ''),
+(2, '03c66e48-f575-4ffb-9252-f307d1b473e0', 'Kína', 'Söul', 'CHinchin utca', '8495', '69', 'Első lépcső'),
+(3, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 'Anglia', 'Londoff', 'Temze utca', '6958', '5', 'A folyóba ne ugorj bele');
 
 -- --------------------------------------------------------
 
@@ -169,23 +232,26 @@ CREATE TABLE `hozzaszolasok` (
 --
 
 INSERT INTO `hozzaszolasok` (`HozzaszolasId`, `UserId`, `TermekId`, `Leiras`, `Ertekeles`) VALUES
-(1, '', 1, 'Great product, highly recommended!', 5),
-(2, '', 2, 'Looks amazing on my desk, very sturdy.', 4),
-(3, '', 3, 'Comfortable and stylish, love it!', 5),
-(4, '', 4, 'Excellent quality, very happy with the purchase.', 4),
-(5, '', 5, 'Unique design, I get lots of compliments.', 4),
-(6, '', 6, 'Perfect for the holiday season!', 5),
-(7, '', 7, 'Not what I expected, but still good.', 3),
-(8, '', 8, 'Could be better, but it serves its purpose.', 2),
-(9, '', 9, 'Quality is okay, expected more.', 3),
-(10, '', 10, 'Beautiful and functional, worth the price.', 5),
-(12, '', 12, 'Not what I expected, disappointed.', 2),
-(13, '', 13, 'Good quality, but a bit overpriced.', 3),
-(14, '', 14, 'Exactly what I needed, great buy.', 5),
-(15, '', 15, 'Could be improved, but overall satisfied.', 3),
-(16, '', 16, 'Well-made and durable, would buy again.', 4),
-(17, '', 17, 'Good value for money, happy with the purchase.', 4),
-(18, '', 18, 'Unique and stylish, stands out.', 5);
+(52, '0bb5579f-84d4-4120-beda-8012fe6a9816', 1, 'Great product, highly recommended!', 5),
+(53, '03c66e48-f575-4ffb-9252-f307d1b473e0', 21, 'Looks amazing on my desk, very sturdy.', 5),
+(54, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 26, 'Not what I expected, but still good.', 3),
+(55, '03c66e48-f575-4ffb-9252-f307d1b473e0', 4, 'Quality is okay, expected more.', 4),
+(56, '03c66e48-f575-4ffb-9252-f307d1b473e0', 4, 'Perfect for the holiday season!', 5),
+(57, '0bb5579f-84d4-4120-beda-8012fe6a9816', 12, 'Beautiful and functional, worth the price.', 5),
+(58, '03c66e48-f575-4ffb-9252-f307d1b473e0', 8, 'Unique design, I get lots of compliments.', 4),
+(59, '0bb5579f-84d4-4120-beda-8012fe6a9816', 6, 'Comfortable and stylish, love it!', 2),
+(60, '0bb5579f-84d4-4120-beda-8012fe6a9816', 22, 'Could be better, but it serves its purpose.', 2),
+(61, '03c66e48-f575-4ffb-9252-f307d1b473e0', 26, 'Good quality, but a bit overpriced.', 4),
+(62, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 12, 'Exactly what I needed, great buy.', 5),
+(63, '03c66e48-f575-4ffb-9252-f307d1b473e0', 6, 'Well-made and durable, would buy again.', 4),
+(64, '0bb5579f-84d4-4120-beda-8012fe6a9816', 27, 'Not what I expected, disappointed.', 1),
+(65, '03c66e48-f575-4ffb-9252-f307d1b473e0', 24, 'Not the best quality, expected more.', 3),
+(66, '03c66e48-f575-4ffb-9252-f307d1b473e0', 7, 'Could be improved, but overall satisfied.', 4),
+(67, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 15, 'Good value for money, happy with the purchase.', 4),
+(68, '03c66e48-f575-4ffb-9252-f307d1b473e0', 26, 'Quality is okay, expected more.', 4),
+(69, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 21, 'Unique and stylish, stands out.', 5),
+(70, '0bb5579f-84d4-4120-beda-8012fe6a9816', 4, 'Unique and stylish, stands out.', 3),
+(71, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 3, 'Good quality, but a bit overpriced.', 3);
 
 -- --------------------------------------------------------
 
@@ -224,8 +290,9 @@ CREATE TABLE `szamlazas` (
   `SzamlazasId` int(11) NOT NULL,
   `UserId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `TermekId` int(11) NOT NULL,
-  `SzinHex` int(11) NOT NULL,
-  `VasarlasIdopontja` date NOT NULL,
+  `SzinHex` varchar(32) NOT NULL,
+  `darab` int(11) NOT NULL,
+  `VasarlasIdopontja` datetime NOT NULL,
   `SikeresSzalitas` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
@@ -233,24 +300,16 @@ CREATE TABLE `szamlazas` (
 -- A tábla adatainak kiíratása `szamlazas`
 --
 
-INSERT INTO `szamlazas` (`SzamlazasId`, `UserId`, `TermekId`, `SzinHex`, `VasarlasIdopontja`, `SikeresSzalitas`) VALUES
-(1, '', 1, 0, '2023-11-01', 1),
-(2, '', 2, 0, '2023-11-02', 1),
-(3, '', 3, 0, '2023-11-03', 0),
-(4, '', 4, 0, '2023-11-04', 1),
-(5, '', 5, 0, '2023-11-05', 1),
-(6, '', 6, 0, '2023-11-06', 1),
-(7, '', 7, 0, '2023-11-07', 0),
-(8, '', 8, 0, '2023-11-08', 1),
-(9, '', 9, 0, '2023-11-09', 0),
-(10, '', 10, 0, '2023-11-10', 1),
-(12, '', 12, 0, '2023-11-12', 0),
-(13, '', 13, 0, '2023-11-13', 1),
-(14, '', 14, 0, '2023-11-14', 1),
-(15, '', 15, 0, '2023-11-15', 1),
-(16, '', 16, 0, '2023-11-16', 0),
-(17, '', 17, 0, '2023-11-17', 1),
-(18, '', 18, 0, '2023-11-18', 0);
+INSERT INTO `szamlazas` (`SzamlazasId`, `UserId`, `TermekId`, `SzinHex`, `darab`, `VasarlasIdopontja`, `SikeresSzalitas`) VALUES
+(39, '03c66e48-f575-4ffb-9252-f307d1b473e0', 3, '32a852', 6, '2024-04-05 09:19:44', 0),
+(40, '03c66e48-f575-4ffb-9252-f307d1b473e0', 22, '000000', 30, '2024-04-05 09:23:10', 1),
+(41, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 12, 'ab9fcc', 1, '2024-04-05 09:23:10', 0),
+(42, '03c66e48-f575-4ffb-9252-f307d1b473e0', 27, 'ffffff', 9, '2024-04-05 09:23:10', 1),
+(43, '0bb5579f-84d4-4120-beda-8012fe6a9816', 24, 'ffffff', 3, '2024-04-05 09:23:10', 0),
+(44, '03c66e48-f575-4ffb-9252-f307d1b473e0', 6, '5431b5', 4, '2024-04-05 09:23:10', 1),
+(45, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 23, 'de2393', 20, '2024-04-05 09:23:10', 1),
+(46, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 21, '820774', 5, '2024-04-05 09:23:10', 1),
+(47, '03c66e48-f575-4ffb-9252-f307d1b473e0', 6, 'f7eb81', 8, '2024-04-05 09:23:10', 0);
 
 -- --------------------------------------------------------
 
@@ -297,32 +356,35 @@ INSERT INTO `tagek` (`TagId`, `TagNev`) VALUES
 
 CREATE TABLE `tagkapcsolo` (
   `Id` int(11) NOT NULL,
-  `TagKapcsoloId` int(11) NOT NULL,
-  `TermekTagKapcsoloId` int(11) NOT NULL
+  `TagekId` int(11) NOT NULL,
+  `TermekekId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
 -- A tábla adatainak kiíratása `tagkapcsolo`
 --
 
-INSERT INTO `tagkapcsolo` (`Id`, `TagKapcsoloId`, `TermekTagKapcsoloId`) VALUES
-(1, 1, 1),
-(2, 2, 2),
-(3, 3, 3),
-(4, 4, 4),
-(5, 5, 5),
-(6, 6, 6),
-(7, 7, 7),
-(8, 8, 8),
-(9, 9, 9),
-(10, 10, 10),
-(12, 12, 12),
-(13, 13, 13),
-(14, 14, 14),
-(15, 15, 15),
-(16, 16, 16),
-(17, 17, 17),
-(18, 18, 18);
+INSERT INTO `tagkapcsolo` (`Id`, `TagekId`, `TermekekId`) VALUES
+(1, 5, 2),
+(2, 19, 12),
+(3, 15, 27),
+(4, 13, 4),
+(5, 4, 8),
+(6, 14, 22),
+(7, 3, 22),
+(8, 11, 25),
+(9, 4, 21),
+(10, 1, 7),
+(11, 12, 21),
+(12, 12, 6),
+(13, 13, 27),
+(14, 3, 8),
+(15, 7, 15),
+(16, 6, 26),
+(17, 15, 12),
+(18, 16, 12),
+(19, 11, 27),
+(20, 14, 21);
 
 -- --------------------------------------------------------
 
@@ -345,23 +407,23 @@ CREATE TABLE `termekek` (
 --
 
 INSERT INTO `termekek` (`TermekId`, `TermekNev`, `Ar`, `Leiras`, `Menyiseg`, `KategoriaId`, `Keputvonal`) VALUES
-(1, '3D Printed House', 5503, 'A 2-bedroom 3D printed house', 8, 9, 'images/3D_Printed_House.jpg'),
-(2, 'Animal Wall Lamps', 6870, 'Decorative Animal Inspired Wall Lamps', 80, 8, 'images/3D_Printed_Animal_Lamps.jpg'),
-(3, '3D_Printed_Chair', 8050, 'A fully 3D printed chair with ergonomic and natural looking design.', 200, 10, 'images/3D_Printed_Chair.jpg'),
-(4, 'Mini Christmas Tree Decor', 1110, 'Adorable tabletop-sized mini Christmas tree for festive decor', 36, 5, 'images/Mini_Christmass_Tree_Decoration.jpg'),
-(5, 'Christmass Tree Decoration', 260, 'Beautiful Christmass Tree Decoration', 75, 5, 'images/3D_Printed_Christmass_Decoration.jpg'),
-(6, 'Designer Office Chair', 1415, 'Ergonomically designed office chair for a stylish and comfortable workspace', 190, 10, 'path/to/image18.jpg'),
-(7, 'Concrete Bench and Table', 22000, 'An affordable City Bench and table combo made with 3D printed concrete.', 230, 10, 'images/City_Bench.jpg'),
-(8, 'Printed Vase Containers', 2000, '3D Printed Vase Containers for all of your needs.', 120, 1, 'images/3D_Printed_Containers.jpg'),
-(9, 'Portable Electric Blender', 6755, 'Compact and portable electric blender for on-the-go smoothies', 95, 9, 'path/to/image11.jpg'),
-(10, 'Ultra HD Smart TV', 13670, 'Ultra HD smart TV with advanced features for an immersive viewing experience', 220, 9, 'path/to/image15.jpg'),
-(12, 'Modern Coffee Table', 7523, 'Elegant 3D printed coffee table with metal legs', 12, 10, 'path/to/image2.jpg'),
-(13, 'Premium Wireless Speaker', 1075, 'Premium wireless speaker for high-quality audio streaming', 170, 9, 'path/to/image17.jpg'),
-(14, 'Smart Home Security Camera', 8572, 'Advanced smart home security camera for monitoring your space', 130, 9, 'path/to/image7.jpg'),
-(15, 'Contemporary Dining Chair', 12750, 'Comfortable 3D printed dining chair with sleek design', 20, 10, 'path/to/image3.jpg'),
-(16, 'Outdoor Adventure Backpack', 1225, 'Durable outdoor adventure backpack with multiple compartments', 210, 9, 'path/to/image19.jpg'),
-(17, 'Home Theater Sound System', 150, 'Immersive home theater sound system for a cinematic experience', 250, 9, 'path/to/image12.jpg'),
-(18, 'Compact Air Purifier', 7057, 'Compact air purifier for maintaining clean and fresh indoor air', 110, 9, 'path/to/image9.jpg');
+(1, '3D Printed House', 5503, 'A 2-bedroom 3D printed house', 8, 9, 'http://printfusion.nhely.hu/test/3D_Printed_House.jpg'),
+(2, 'Animal Wall Lamps', 6870, 'Decorative Animal Inspired Wall Lamps', 80, 8, 'http://printfusion.nhely.hu/test/3D_Printed_Animal_Lamps.jpg'),
+(3, '3D_Printed_Chair', 8050, 'A fully 3D printed chair with ergonomic and natural looking design.', 200, 10, 'http://printfusion.nhely.hu/test/3D_Printed_Chair.jpg'),
+(4, 'Mini Christmas Tree Decor', 1110, 'Adorable tabletop-sized mini Christmas tree for festive decor', 36, 5, 'http://printfusion.nhely.hu/test/Mini_Christmass_Tree_Decoration.jpg'),
+(5, 'Christmass Tree Decoration', 260, 'Beautiful Christmass Tree Decoration', 75, 5, 'http://printfusion.nhely.hu/test/3D_Printed_Christmass_Decoration.jpg'),
+(6, 'Designer Office Chair', 1415, 'Ergonomically designed office chair for a stylish and comfortable workspace', 190, 10, 'http://printfusion.nhely.hu/test/Designer_Office_Chair.jpg'),
+(7, 'Concrete Bench and Table', 22000, 'An affordable City Bench and table combo made with 3D printed concrete.', 230, 10, 'http://printfusion.nhely.hu/test/City_Bench.jpg'),
+(8, 'Printed Vase Containers', 2000, '3D Printed Vase Containers for all of your needs.', 120, 1, 'http://printfusion.nhely.hu/test/3D_Printed_Containers.jpg'),
+(12, 'Modern Coffee Table', 75200, 'Elegant 3D printed coffee table with metal legs', 12, 10, 'http://printfusion.nhely.hu/test/Coffe_Table.jpg'),
+(15, 'Contemporary Dining Chair', 12750, 'Comfortable 3D printed dining chair with sleek design', 20, 10, 'http://printfusion.nhely.hu/test/Dining_Chair.jpg'),
+(21, 'Artistic Head', 10000, 'An artistic design head.', 30, 1, 'http://printfusion.nhely.hu/test/Human_Skull.jpg'),
+(22, 'Pencil Holder', 200, 'A styled pencil holder made for any modern looking office.', 126, 4, 'http://printfusion.nhely.hu/test/Pencil_Holder.jpg'),
+(23, 'Modular Open Shelves', 3000, 'A modular open shelf, that can be made to fit any wall sizes.', 25, 8, 'http://printfusion.nhely.hu/test/Wall_Open_Cabinet.jpg'),
+(24, 'Tree Wall Decoration', 8000, 'An artistic depiction of a tree', 4, 8, 'http://printfusion.nhely.hu/test/3D_Printed_Wall_Decoration.jpg'),
+(25, 'Figure Collection', 5000, 'A small array of different figures', 1, 7, 'http://printfusion.nhely.hu/test/image1.png'),
+(26, 'Knight warriors', 3000, '3 knight figures', 7, 7, 'http://printfusion.nhely.hu/test/image2.jpg'),
+(27, 'Orc figures', 2000, '3 small figures of Orcs', 17, 7, 'http://printfusion.nhely.hu/test/image3.jpg');
 
 -- --------------------------------------------------------
 
@@ -435,6 +497,12 @@ ALTER TABLE `aspnetusertokens`
   ADD PRIMARY KEY (`UserId`,`LoginProvider`,`Name`);
 
 --
+-- A tábla indexei `ftpfiles`
+--
+ALTER TABLE `ftpfiles`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- A tábla indexei `helyadatok`
 --
 ALTER TABLE `helyadatok`
@@ -476,8 +544,8 @@ ALTER TABLE `tagek`
 --
 ALTER TABLE `tagkapcsolo`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `TagKapcsoloId` (`TagKapcsoloId`),
-  ADD KEY `TermekTagKapcsoloId` (`TermekTagKapcsoloId`);
+  ADD KEY `TagKapcsoloId` (`TagekId`),
+  ADD KEY `TermekekId` (`TermekekId`);
 
 --
 -- A tábla indexei `termekek`
@@ -509,16 +577,22 @@ ALTER TABLE `aspnetuserclaims`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT a táblához `ftpfiles`
+--
+ALTER TABLE `ftpfiles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
 -- AUTO_INCREMENT a táblához `helyadatok`
 --
 ALTER TABLE `helyadatok`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT a táblához `hozzaszolasok`
 --
 ALTER TABLE `hozzaszolasok`
-  MODIFY `HozzaszolasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `HozzaszolasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT a táblához `kategoriak`
@@ -530,7 +604,7 @@ ALTER TABLE `kategoriak`
 -- AUTO_INCREMENT a táblához `szamlazas`
 --
 ALTER TABLE `szamlazas`
-  MODIFY `SzamlazasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `SzamlazasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT a táblához `tagek`
@@ -548,7 +622,7 @@ ALTER TABLE `tagkapcsolo`
 -- AUTO_INCREMENT a táblához `termekek`
 --
 ALTER TABLE `termekek`
-  MODIFY `TermekId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `TermekId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -609,14 +683,26 @@ ALTER TABLE `szamlazas`
 -- Megkötések a táblához `tagkapcsolo`
 --
 ALTER TABLE `tagkapcsolo`
-  ADD CONSTRAINT `tagkapcsolo_ibfk_2` FOREIGN KEY (`TagKapcsoloId`) REFERENCES `tagek` (`TagId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tagkapcsolo_ibfk_3` FOREIGN KEY (`Id`) REFERENCES `termekek` (`TermekId`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tagkapcsolo_ibfk_2` FOREIGN KEY (`TagekId`) REFERENCES `tagek` (`TagId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tagkapcsolo_ibfk_3` FOREIGN KEY (`TermekekId`) REFERENCES `termekek` (`TermekId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `termekek`
 --
 ALTER TABLE `termekek`
   ADD CONSTRAINT `termekek_ibfk_3` FOREIGN KEY (`KategoriaId`) REFERENCES `kategoriak` (`KategoriaId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+DELIMITER $$
+--
+-- Események
+--
+CREATE DEFINER=`root`@`localhost` EVENT `delete_old_records` ON SCHEDULE EVERY 1 DAY STARTS '2024-03-24 15:03:43' ON COMPLETION NOT PRESERVE ENABLE DO begin
+    delete from ftpfiles
+    where 
+    Timestamp < timestamp(current_date() - interval 1 day);
+end$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

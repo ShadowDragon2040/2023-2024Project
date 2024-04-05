@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {CarouselContainer, ImgWrap, Img} from '../TextElements';
+import {CarouselContainer, ImgWrap, Img, baseImageUrl} from '../TextElements';
 
 function Gallery() {
   const [index, setIndex] = useState(0);
@@ -16,7 +16,7 @@ function Gallery() {
         <Carousel.Item>
             <ImgWrap>
                 <Img
-                  src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                  src={`${baseImageUrl}anycubicphotonmono.jpg`}
                   alt={'Third slide'}
                   className="d-block w-100"
                 />
@@ -29,7 +29,7 @@ function Gallery() {
         <Carousel.Item>
             <ImgWrap>
                 <Img
-                  src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                  src={`${baseImageUrl}anycubicphotonmono.jpg`}
                   alt={'Third slide'}
                   className="d-block w-100"
                 />
@@ -42,7 +42,7 @@ function Gallery() {
         <Carousel.Item>
             <ImgWrap>
                 <Img
-                  src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                  src={`${baseImageUrl}anycubicphotonmono.jpg`}
                   alt={'Third slide'}
                   className="d-block w-100"
                 />

@@ -12,26 +12,12 @@ Subtitle,
 ImgWrap,
 Img,
 NavBtn,
-NavBtnLink
+NavBtnLink,
+baseImageUrl
 } from '../TextElements'
 
-export const homeObjOne={
-  id:'about',
-  lightBg:false,
-  lightText:true,
-  lightTextDesc:false,
-  headline:'Cég bemutató',
-  topLine:'Industár.kft',
-  imgStart:false,
-  img:require('../../images/industar-kft-front.jpg'),
-  alt:'Car',
-  dark:true,
-  primary:true,
-  darkText:true,
-
-};
 const InfoSection = () => {
-  
+
   return (
     <>
       <InfoContainer  lightBg={false} id={'about'} >
@@ -52,7 +38,7 @@ const InfoSection = () => {
              <Column2>
               <ImgWrap>
                   <Img
-                    src={'http://printfusion.nhely.hu/test/anycubicphotonmono.jpg'}
+                    src={`${baseImageUrl}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>

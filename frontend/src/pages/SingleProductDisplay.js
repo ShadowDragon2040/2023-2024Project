@@ -11,7 +11,7 @@ import Footer from '../components/Footer';
 import placeholder from "../images/ppp.jpg"
 import ColorPicker from './ColorPicker';
 import Button from 'react-bootstrap/Button';
-
+import {baseUrl} from '../components/TextElements';
 
 function SingleProductDisplay(props) {
     const { ProductId } = useParams();
@@ -83,7 +83,7 @@ function SingleProductDisplay(props) {
 
     const [singleProductData, setSingleProductData] = useState({});
     const [transformedComments, setTransformedComments] = useState(null);
-    const url = "https://localhost:7026/Termekek/EgyTermek/";
+    const url = `${baseUrl}Termekek/EgyTermek/`;
 
     useEffect(() => {
         axios.get(url + ProductId)
@@ -105,7 +105,7 @@ function SingleProductDisplay(props) {
 
     const handleSubmitComment = (data) => {
         console.log("Submitted comment data:", data);
-        axios.post("http://localhost:7026/Hozzaszolas", {
+        axios.post(`${baseUrl}Hozzaszolas`, {
             "hozzaszolasId": 0,
             "felhasznaloId": 1,
             "termekId": ProductId,

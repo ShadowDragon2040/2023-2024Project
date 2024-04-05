@@ -6,6 +6,9 @@ import { Nav2, NavLogo, NavBtn2, NavBtnLink, ModalButton } from '../TextElements
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import CartPage from '../../pages/CartPage';
+import { FaShoppingBasket } from 'react-icons/fa';
+import RegisterModal from '../RegisterModal';
+import LoginModal from '../LoginModal';
 
 function ShopNavbar(props) {
   const [scrollNav, setScrollNav] = useState(false);
@@ -34,7 +37,7 @@ function ShopNavbar(props) {
   }, []);
 
   useEffect(() => {
-    console.log(props.cart);
+    //console.log(props.cart);
     let total = 0;
     if(props.cart){
         props.cart.forEach(item => {
@@ -59,56 +62,51 @@ function ShopNavbar(props) {
           <SearchBar />
         </NavBtn2>
 
-        <div>
-          <NavBtn2>
-            <NavBtnLink to='/ProfilePage'>
-              <CgProfile /> Profile
-            </NavBtnLink>
-          </NavBtn2>
+        { sessionStorage.getItem("bejelenkezve")=='true' ?
+          <div>
+            <NavBtn2>
+              <NavBtnLink to='/ProfilePage'>
+                <CgProfile /> Profile
+              </NavBtnLink>
+            </NavBtn2>
 
-          <NavBtn2>
-            <ModalButton onClick={handleShow}>Cart
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
-              </svg> {totalQuantity > 0 && `${totalQuantity}`}</ModalButton>
-          </NavBtn2>
+            <NavBtn2>
+              <NavBtnLink to='/CartPage'>Cart
+                <FaShoppingBasket/> {totalQuantity > 0 && `${totalQuantity}`}
+              </NavBtnLink>
+            </NavBtn2>
 
-          <NavBtn2>
-            <ModalButton onClick={handleLogout}>Logout</ModalButton>
-          </NavBtn2>
-        </div>
-        {
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Cart Items</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {
-                !props.cart ? (
-                  <div>Nincs semmi</div>
-                ) : (
-                  <div>
-                    {props.cart.map(item => (
-                      <div key={item.id}>
-                        <h5>{item.name}</h5>
-                        <p>Price: {item.price}</p>
-                        <p>Quantity: {item.quantity}</p>
-                        <p>Color: {item.color}</p>
-                      </div>
-                    ))}
-                  </div>
-                )
-              }
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>Close</Button>
-              <NavBtnLink to='/CartPage'>Go to Cart Page</NavBtnLink>
-            </Modal.Footer>
-          </Modal>
-        }
+            <NavBtn2>
+              <ModalButton onClick={handleShow}>Logout</ModalButton>
+            </NavBtn2>
+            
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Are you sure you want to log out?</Modal.Title>
+                </Modal.Header>
+                <Modal.Footer>
+                  <Button style={{backgroundColor: 'green',border: 'none'}} variant="primary" onClick={handleClose}>
+                    No
+                  </Button>
+                  <Button variant="secondary" onClick={ handleLogout}>
+                    Yes
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+
+          </div>
+          :
+          <div>
+              <RegisterModal />
+
+              <LoginModal/>
+          </div>
+          }
       </Nav2>
     </>
   );
 }
+
+          
 
 export default ShopNavbar;

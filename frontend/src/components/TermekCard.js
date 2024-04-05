@@ -1,8 +1,10 @@
 import React  from 'react';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
-import { TermekButtonCard,TermekImage } from './TextElements'
+import { TermekButtonCard,TermekImage,baseImageUrl } from './TextElements'
 
 function TermekCard(props) {
+
+  console.log(props.item)
 
   return (
     <NavLink style={{textDecoration: 'none'}} key={props.item.termekId} className="col-4" to={"/ShopPage/"+props.item.termekId}>

@@ -26,7 +26,6 @@ const Home = () => {
       <PrinterTools/>
       <ModelSection/>
       <Services/>
-      
       <Footer/>
     </>
   )

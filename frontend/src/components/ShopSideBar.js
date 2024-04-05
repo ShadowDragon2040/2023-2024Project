@@ -1,7 +1,9 @@
 import React,{useState,useEffect} from 'react';
 import { FaHome, FaNewspaper,FaPaintBrush,FaGitlab } from 'react-icons/fa';
 import { IoGiftSharp } from "react-icons/io5";
-import { ShopSidebarContainer } from './TextElements';
+import {
+  ShopSidebarContainer,
+  baseUrl } from './TextElements';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { BiCategory } from "react-icons/bi";
@@ -11,9 +13,8 @@ import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 function ShopSideBar(props) {
   const [categoryList, setCategoryList] = useState([]);
 
-    const url="https://localhost:7026/Termekek/Kategoriak";
     useEffect(() => {
-      axios.get(url)
+      axios.get(`${baseUrl}Termekek/Kategoriak`)
         .then(response => setCategoryList(response.data))
         .catch(error => console.error('Hiba a lekérdezés során:', error));
     }, []);

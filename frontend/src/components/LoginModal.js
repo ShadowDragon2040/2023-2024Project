@@ -7,7 +7,8 @@ import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
 import {
   NavBtn2,
-  ModalButton
+  ModalButton,
+  baseUrl
 } from './TextElements';
 
 const LoginModal = (props) => {
@@ -21,7 +22,7 @@ const LoginModal = (props) => {
     const handleLogin = async (e) => {
       e.preventDefault();
       try {
-        const response = await axios.post('https://localhost:7026/Auth/login', {
+        const response = await axios.post(`${baseUrl}Auth/login`, {
           userName: username,
           password: password,
         });
