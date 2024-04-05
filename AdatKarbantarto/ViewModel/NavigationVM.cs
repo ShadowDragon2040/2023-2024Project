@@ -1,5 +1,6 @@
 ﻿using AdatKarbantarto.Utilities;
 using Newtonsoft.Json.Bson;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,21 +8,22 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AdatKarbantarto.ViewModel
 {
     class NavigationVM:ViewModelBase
     {
-        private SecureString _secureString;
+        private  SecureString jwtToken;
 
         // Expose SecureString through a public property
-        public SecureString SecurerString
+        public SecureString JwtToken
         {
-            get { return _secureString; }
-            set { _secureString = value; OnPropertyChanged(); }
+            get { return jwtToken; }
+            set { jwtToken = value; OnPropertyChanged(); }
         }
-
+        
         private object _currentView;
         public object CurrentView
         {
@@ -36,8 +38,8 @@ namespace AdatKarbantarto.ViewModel
         public ICommand SzamlazasCommand { get; set; }  
         public ICommand ImageUploadCommand { get; set; }
 
-        private void Home(object obj) => CurrentView = new HomeVM();
-        private void Felhasznalo(object obj) => CurrentView = new FelhasznalokVM(SecurerString);
+        private void Home(object obj) => CurrentView = new HomeVM(JwtToken);
+        private void Felhasznalo(object obj) => CurrentView = new FelhasznalokVM();
         private void Termek(object obj) => CurrentView = new TermekekVM();
         private void Hozzaszolas(object obj) => CurrentView = new HozzaszolasokVM();
         private void Szamlazas(object obj)=>CurrentView=new SzamlazasVM();
@@ -46,14 +48,15 @@ namespace AdatKarbantarto.ViewModel
         public NavigationVM()
         {
             InitializeCommands();
-            CurrentView = new HomeVM();
         }
 
         public NavigationVM(SecureString token) : this()
         {
-            SecurerString=token;
+            JwtToken = token;
+            CurrentView=new HomeVM(JwtToken);
         }
-      
+
+
 
         private void InitializeCommands()
         {
