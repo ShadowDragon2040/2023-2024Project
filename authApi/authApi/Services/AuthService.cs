@@ -43,7 +43,7 @@ namespace authApi.Services
             }
 
             var roles = await userManager.GetRolesAsync(user);
-            var token = jwtTokenGenerator.GenerateToken(user, roles);
+            var token = jwtTokenGenerator.GenerateToken(user);
 
             UserDto userDto = new()
             {

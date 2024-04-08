@@ -18,6 +18,7 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
         [HttpGet/*, Authorize*/]
+        [Authorize(Roles = "USER")]
         public async Task<ActionResult> Get()
         {
             try
@@ -30,7 +31,8 @@ namespace Webárúház_Nagy_Project.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet("testAuthorizedEndpoint"), Authorize]
+        [HttpGet("testAuthorizedEndpoint")]
+        [Authorize(Roles ="USER")]
         public async Task<ActionResult> GetTest()
         {
             try

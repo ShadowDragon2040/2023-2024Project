@@ -17,35 +17,39 @@ namespace authApi.Services
         {
             this.jwtOptions = jwtOptions.Value;
         }
+        
 
-        public string GenerateToken(ApplicationUser applicationUser, IEnumerable<string> roles)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
+        public string GenerateToken(ApplicationUser applicationUser)
+         {
+             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var key = Encoding.ASCII.GetBytes(jwtOptions.Secret);
+             var key = Encoding.ASCII.GetBytes(jwtOptions.Secret);
 
-            var claimList = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.Sub,applicationUser.Id),
-                new Claim(JwtRegisteredClaimNames.Name,applicationUser.UserName.ToString()),
-            };
+             var claimList = new List<Claim>
+             {
+                 new Claim(JwtRegisteredClaimNames.Sub,applicationUser.Id),
+                 new Claim(JwtRegisteredClaimNames.Name,applicationUser.UserName.ToString()),
+                 new Claim("role","USER"),
+                 //new Claim("role",roles.FirstOrDefault(r_id => r_id.Id == applicationUser.Roleid)!.Name),
 
-            //szerepkör hozzáadása a tokenhez
-            claimList.AddRange(roles.Select(role=> new Claim(ClaimTypes.Role,role)));
+             };
 
-            var rokenDescription = new SecurityTokenDescriptor
-            {
-                Audience = jwtOptions.Audience,
-                
-                Issuer = jwtOptions.Issuer,
-                Subject = new ClaimsIdentity(claimList),
-                Expires = DateTime.Now.AddDays(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),SecurityAlgorithms.HmacSha256Signature)
-            };
-            
-            var token = tokenHandler.CreateToken(rokenDescription);
+             //szerepkör hozzáadása a tokenhez
+             //claimList.AddRange(roles.Select(role=> new Claim(ClaimTypes.Role,role)));
 
-            return tokenHandler.WriteToken(token);
-        }
+             var rokenDescription = new SecurityTokenDescriptor
+             {
+                 Audience = jwtOptions.Audience,
+                 Issuer = jwtOptions.Issuer,
+                 Subject = new ClaimsIdentity(claimList),
+                 Expires = DateTime.Now.AddDays(1),
+                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),SecurityAlgorithms.HmacSha256Signature)
+             };
+
+             var token = tokenHandler.CreateToken(rokenDescription);
+
+             return tokenHandler.WriteToken(token);
+         }
+        
     }
 }
