@@ -1,8 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
-import Navbar from '../components/ShopNavbar'
-import Sidebar from '../components/Sidebar'
+import NavbarA from '../components/MainNavbar'
 import Footer from '../components/Footer'
+import {NavBtn,NavBtnLink} from '../components/TextElements'
+import { MdArrowBack } from "react-icons/md";
 import {
   InfoContainer,
   InfoWrapper,
@@ -26,10 +27,12 @@ function AnycubicPage(){
   
     return(
       <>
-      <Sidebar isOpen={isOpen} toggle={toggle}/>
-      <Navbar toggle={toggle}/>
+      <NavbarA toggle={toggle}/>
       <InfoContainer  lightBg={false} id={'tools'} >
         <Heading lightText={false}>Anycubic Photon Mono</Heading>
+          <NavBtn style={{margin:'20px 0px 20px 200px'}}>
+            <NavBtnLink to='/'><MdArrowBack/>Back</NavBtnLink>
+          </NavBtn>
         <InfoWrapper>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>

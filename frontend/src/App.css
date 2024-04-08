@@ -122,9 +122,8 @@ a{
 }
 }
 .back-btn:hover{
-    background-color: black;
+    background-color: #02844e;
     color:white;
-    cursor: grab;
 }
 
 .link{

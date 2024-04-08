@@ -12,8 +12,7 @@ Subtitle,
 ImgWrap,
 Img,
 NavBtn,
-NavBtnLink,
-baseImageUrl
+NavBtnLink
 } from '../TextElements'
 
 const InfoSection = () => {
@@ -38,7 +37,7 @@ const InfoSection = () => {
              <Column2>
               <ImgWrap>
                   <Img
-                    src={`${baseImageUrl}anycubicphotonmono.jpg`}
+                    src={`${process.env.REACT_APP_KEP_URL}building.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>

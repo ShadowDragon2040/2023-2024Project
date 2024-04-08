@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import Navbar from '../components/ShopNavbar'
+import NavbarA from '../components/MainNavbar'
 import Sidebar from '../components/Sidebar'
 import Footer from '../components/Footer'
 import {
@@ -25,7 +25,7 @@ function ModellTervezesPage(){
     return(
       <>
       <Sidebar isOpen={isOpen} toggle={toggle}/>
-      <Navbar toggle={toggle}/>
+      <NavbarA toggle={toggle}/>
       <InfoContainer  lightBg={false} id={'Modelltervezes'} >
         <Heading lightText={false}>Modelltervezés</Heading>
         <InfoWrapper>

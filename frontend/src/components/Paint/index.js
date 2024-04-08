@@ -1,6 +1,9 @@
-import React from 'react'
+import React from 'react';
+import { MdArrowBack } from "react-icons/md";
+import {NavBtn,NavBtnLink} from '../TextElements';
+import { Carousel } from 'react-bootstrap';
 import {
-InfoContainer,
+InfoContainer6,
 InfoWrapper,
 InfoRow,
 Column1,
@@ -10,20 +13,24 @@ ImgWrap,
 TopLine,
 Img,
 Subtitle,
-baseImageUrl
-} from '../TextElements'
+CarouselContainer,
+CarouselImage,
+} from '../TextElements';
 
 const Paint = () => {
   return (
     <>
-      <InfoContainer  lightBg={false} id={'Paint'} >
-        <Heading lightText={false}>Festés</Heading>
+      <InfoContainer6  lightBg={false} id={'Paint'} >
+        <Heading lightText={false}>Painting</Heading>
+          <NavBtn style={{margin:'20px 0px 20px 200px'}}>
+            <NavBtnLink to='/'><MdArrowBack/>Back</NavBtnLink>
+          </NavBtn>
         <InfoWrapper>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={`${baseImageUrl}anycubicphotonmono.jpg`}
+                    src={`${process.env.REACT_APP_KEP_URL}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>
@@ -45,15 +52,22 @@ const Paint = () => {
             <Column2 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={`${baseImageUrl}anycubicphotonmono.jpg`}
+                    src={`${process.env.REACT_APP_KEP_URL}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>
             </Column2>
           </InfoRow>
           <Heading lightText={false}>Gallery</Heading>
+            <CarouselContainer style={{width: '50%'}}>
+              <Carousel style={{borderRadius: '20px'}} autoPlay={true} infiniteLoop={true} showThumbs={false} showStatus={false}>
+                  <CarouselImage src={`${process.env.REACT_APP_KEP_URL}image1.png`} style={{borderRadius: '20px'}}/>
+                  <CarouselImage src={`${process.env.REACT_APP_KEP_URL}image2.jpg`} style={{borderRadius: '20px'}}/>
+                  <CarouselImage src={`${process.env.REACT_APP_KEP_URL}image3.jpg`} style={{borderRadius: '20px'}}/>
+              </Carousel>
+            </CarouselContainer>
         </InfoWrapper>
-      </InfoContainer>
+      </InfoContainer6>
     </>
   )
 }

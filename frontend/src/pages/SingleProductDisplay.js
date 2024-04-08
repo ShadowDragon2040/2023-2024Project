@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import {useParams } from 'react-router-dom';
 import { MdArrowBack } from "react-icons/md";
 import InnerImageZoom from 'react-inner-image-zoom';
 import { CommentSection } from 'react-comments-section';
@@ -8,10 +8,9 @@ import 'react-comments-section/dist/index.css';
 import Navbar from '../components/ShopNavbar';
 import { Rating } from 'react-simple-star-rating';
 import Footer from '../components/Footer';
-import placeholder from "../images/ppp.jpg"
 import ColorPicker from './ColorPicker';
 import Button from 'react-bootstrap/Button';
-import {baseUrl} from '../components/TextElements';
+import {NavBtn,NavBtnLink} from '../components/TextElements';
 
 function SingleProductDisplay(props) {
     const { ProductId } = useParams();
@@ -83,7 +82,7 @@ function SingleProductDisplay(props) {
 
     const [singleProductData, setSingleProductData] = useState({});
     const [transformedComments, setTransformedComments] = useState(null);
-    const url = `${baseUrl}Termekek/EgyTermek/`;
+    const url = `${process.env.REACT_APP_BASE_URL}Termekek/EgyTermek/`;
 
     useEffect(() => {
         axios.get(url + ProductId)
@@ -93,7 +92,7 @@ function SingleProductDisplay(props) {
                     //userId: productData.felhasznaloId.toString(),
                     comId: productData.hozzaszolasId.toString(),
                     fullName: productData.loginNev,
-                    avatarUrl: placeholder,
+                    avatarUrl: `${process.env.REACT_APP_KEP_URL}ppp.png`,
                     text: productData.leiras,
                     userProfile: '',
                     replies: []
@@ -105,7 +104,7 @@ function SingleProductDisplay(props) {
 
     const handleSubmitComment = (data) => {
         console.log("Submitted comment data:", data);
-        axios.post(`${baseUrl}Hozzaszolas`, {
+        axios.post(`${process.env.REACT_APP_BASE_URL}Hozzaszolas`, {
             "hozzaszolasId": 0,
             "felhasznaloId": 1,
             "termekId": ProductId,
@@ -119,9 +118,9 @@ function SingleProductDisplay(props) {
             <div className='SingleItemContainer'>
                 <Navbar cart={props.cart} />
                 <div className="container mt-3">
-                    <NavLink to={"/ShopPage"} className='back-btn'>
-                        <MdArrowBack />
-                    </NavLink>
+                    <NavBtn style={{margin:'20px 0px 20px 200px'}}>
+                        <NavBtnLink to='/ShopPage'><MdArrowBack/>Back</NavBtnLink>
+                    </NavBtn>
                     <div className='bg-dark p-1 rounded mx-auto d-flex flex-row mt-2 FirstRow'
                     style={{color:'white'}}>
                         <InnerImageZoom

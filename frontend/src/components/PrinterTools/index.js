@@ -10,8 +10,7 @@ Column2,
 TopLine,
 Heading,
 ImgWrap,
-Img,
-baseImageUrl
+Img
 } from '../TextElements'
 
 const PrinterTools = () => {
@@ -44,7 +43,7 @@ const PrinterTools = () => {
             <ImgWrap>
             <Link onClick={handleClick} to="/Ender">
                 <Img
-                  src={`${baseImageUrl}Ender3V2.jpg`}
+                  src={`${process.env.REACT_APP_KEP_URL}Ender3V2.jpg`}
                   alt={'Ender3V2'}
                   onMouseEnter={() => setTopLeftHovered(true)}
                   onMouseLeave={() => setTopLeftHovered(false)}
@@ -71,7 +70,7 @@ const PrinterTools = () => {
               <ImgWrap>
               <Link onClick={handleClick} to="/Anycubic">
                 <Img
-                  src={`${baseImageUrl}anycubicphotonmono.jpg`}
+                  src={`${process.env.REACT_APP_KEP_URL}anycubicphotonmono.jpg`}
                   alt={'anycubic photon mono'}
                   onMouseEnter={() => setTopRightHovered(true)}
                   onMouseLeave={() => setTopRightHovered(false)}
@@ -99,9 +98,9 @@ const PrinterTools = () => {
               zIndex: 1
             }}>Bambu Carbon X1</TopLine>
             <ImgWrap>
-            <Link onClick={handleClick} to="/Carbon X1">
+            <Link onClick={handleClick} to="/Bambu">
                 <Img
-                  src={`${baseImageUrl}bambucarbonmain.jpg`}
+                  src={`${process.env.REACT_APP_KEP_URL}bambucarbonmain.jpg`}
                   alt={'Bambu Carbon X1'}
                   onMouseEnter={() => setBottomLeftHovered(true)}
                   onMouseLeave={() => setBottomLeftHovered(false)}
@@ -128,7 +127,7 @@ const PrinterTools = () => {
               <ImgWrap>
               <Link onClick={handleClick} to="/Anycubic">
                 <Img
-                  src={`${baseImageUrl}anycubicphotonmono.jpg`}
+                  src={`${process.env.REACT_APP_KEP_URL}anycubicphotonmono.jpg`}
                   alt={'cég'}
                   onMouseEnter={() => setBottomRightHovered(true)}
                   onMouseLeave={() => setBottomRightHovered(false)}

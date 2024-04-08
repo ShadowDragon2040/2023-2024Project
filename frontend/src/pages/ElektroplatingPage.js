@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import Navbar from '../components/ShopNavbar'
+import NavbarA from '../components/MainNavbar'
 import Sidebar from '../components/Sidebar'
 import Elektroplating from '../components/Elektroplating'
 import Footer from '../components/Footer'
@@ -15,7 +15,7 @@ function ElektroplatingPage(){
     return(
       <>
       <Sidebar isOpen={isOpen} toggle={toggle}/>
-      <Navbar toggle={toggle}/>
+      <NavbarA toggle={toggle}/>
       <Elektroplating/>
       <Footer/>
       </>

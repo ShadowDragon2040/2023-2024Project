@@ -1,6 +1,8 @@
 import React from 'react'
+import { MdArrowBack } from "react-icons/md";
+import {NavBtn,NavBtnLink} from '../TextElements'
 import {
-InfoContainer,
+InfoContainer5,
 InfoWrapper,
 InfoRow,
 Column1,
@@ -9,22 +11,23 @@ Heading,
 ImgWrap,
 TopLine,
 Img,
-Subtitle,
-baseImageUrl,
-baseUrl
+Subtitle
 } from '../TextElements'
 
 const Elektroplating = () => {
   return (
     <>
-      <InfoContainer  lightBg={false} id={'Elektroplating'} >
+      <InfoContainer5  lightBg={false} id={'Elektroplating'} >
         <Heading lightText={false}>Ender 3V2</Heading>
+          <NavBtn style={{margin:'20px 0px 20px 200px'}}>
+            <NavBtnLink to='/'><MdArrowBack/>Back</NavBtnLink>
+          </NavBtn>
         <InfoWrapper>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={`${baseImageUrl}anycubicphotonmono.jpg`}
+                    src={`${process.env.REACT_APP_KEP_URL}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>
@@ -46,7 +49,7 @@ const Elektroplating = () => {
             <Column2 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={`${baseImageUrl}anycubicphotonmono.jpg`}
+                    src={`${process.env.REACT_APP_KEP_URL}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>
@@ -56,7 +59,7 @@ const Elektroplating = () => {
             <Column1 style={{position: 'relative'}}>
               <ImgWrap>
                   <Img
-                    src={`${baseImageUrl}anycubicphotonmono.jpg`}
+                    src={`${process.env.REACT_APP_KEP_URL}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>
@@ -68,24 +71,8 @@ const Elektroplating = () => {
                 </Subtitle>
             </Column2>
           </InfoRow>
-          <InfoRow  imgStart={false} >
-            <Column1 style={{position: 'relative'}}>
-            <TopLine>Printing resolution</TopLine>
-                <Subtitle darkText={true}>
-                The minimum layer height is 0.1 mm and the maximum layer height is 0.4 mm.
-                </Subtitle>
-            </Column1>
-            <Column2 style={{position: 'relative'}}>
-              <ImgWrap>
-                  <Img
-                    src={`${baseImageUrl}PEIsheet.jpg`}
-                    alt={'Our Company'}
-                  />
-              </ImgWrap>
-            </Column2>
-          </InfoRow>
         </InfoWrapper>
-      </InfoContainer>
+      </InfoContainer5>
     </>
   )
 }

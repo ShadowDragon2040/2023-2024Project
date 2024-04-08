@@ -1,10 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
-import Navbar from '../components/ShopNavbar'
+import NavbarA from '../components/MainNavbar';
 import Sidebar from '../components/Sidebar'
 import Paint from '../components/Paint'
 import Footer from '../components/Footer'
-import Gallery from '../components/Gallery'
 
 function PaintPage(){
 
@@ -16,9 +15,8 @@ function PaintPage(){
     return(
       <>
       <Sidebar isOpen={isOpen} toggle={toggle}/>
-      <Navbar toggle={toggle}/>
+      <NavbarA toggle={toggle}/>
       <Paint/>
-      <Gallery/>
       <Footer/>
       </>
     )

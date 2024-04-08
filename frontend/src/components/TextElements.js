@@ -18,7 +18,17 @@ export const InfoContainer=styled.div`
 export const InfoContainer5=styled.div`
     color: #fff;
     background: ${({lightBg})=>(lightBg?'#f9f9f9':'#010606')};
-    height:1500px;
+    height:2100px;
+    @media screen and (max-width:768px) {
+        padding: 100px 0;
+
+    }
+`
+
+export const InfoContainer6=styled.div`
+    color: #fff;
+    background: ${({lightBg})=>(lightBg?'#f9f9f9':'#010606')};
+    height:2200px;
     @media screen and (max-width:768px) {
         padding: 100px 0;
 
@@ -395,7 +405,7 @@ export const NavBtnLink=styled(LinkR)`
     text-decoration:none;
     &:hover{
         transition: all 0.2s ease-in-out;
-        background:black;
+        background:#06c97a;
         color:white;
     }
 `
@@ -543,7 +553,7 @@ export const HeroP=styled.p`
 `
 export const CarouselContainer = styled.div`
     margin-top:15%;
-    width:90%;
+    width:95%;
     border-radius:20px;
     background-color:#059e60;
      @media screen and (max-width:700px) {

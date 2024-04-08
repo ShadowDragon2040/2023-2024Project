@@ -10,8 +10,7 @@ TopLine,
 Heading,
 Subtitle,
 ImgWrap,
-Img,
-baseImageUrl
+Img
 } from '../TextElements'
 
 const ModelSection = () => {
@@ -32,7 +31,7 @@ const ModelSection = () => {
              <Column2>
               <ImgWrap>
                   <Img
-                    src={`${baseImageUrl}anycubicphotonmono.jpg`}
+                    src={`${process.env.REACT_APP_KEP_URL}anycubicphotonmono.jpg`}
                     alt={'Our Company'}
                   />
               </ImgWrap>

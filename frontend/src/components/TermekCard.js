@@ -1,6 +1,6 @@
 import React  from 'react';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
-import { TermekButtonCard,TermekImage,baseImageUrl } from './TextElements'
+import { TermekButtonCard,TermekImage } from './TextElements'
 
 function TermekCard(props) {
 

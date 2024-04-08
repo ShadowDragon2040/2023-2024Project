@@ -2,8 +2,8 @@ import React,{useState,useEffect} from 'react';
 import { FaHome, FaNewspaper,FaPaintBrush,FaGitlab } from 'react-icons/fa';
 import { IoGiftSharp } from "react-icons/io5";
 import {
-  ShopSidebarContainer,
-  baseUrl } from './TextElements';
+  ShopSidebarContainer
+} from './TextElements';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { BiCategory } from "react-icons/bi";
@@ -14,7 +14,7 @@ function ShopSideBar(props) {
   const [categoryList, setCategoryList] = useState([]);
 
     useEffect(() => {
-      axios.get(`${baseUrl}Termekek/Kategoriak`)
+      axios.get(`${process.env.REACT_APP_BASE_URL}Termekek/Kategoriak`)
         .then(response => setCategoryList(response.data))
         .catch(error => console.error('Hiba a lekérdezés során:', error));
     }, []);

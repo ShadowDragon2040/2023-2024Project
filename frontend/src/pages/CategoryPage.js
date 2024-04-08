@@ -3,8 +3,8 @@ import Navbar from '../components/ShopNavbar';
 import Footer from '../components/Footer';
 import {
   ShopPageContainer,
-  ItemContainer,
-  baseUrl } from '../components/TextElements';
+  ItemContainer
+} from '../components/TextElements';
 import ShopSideBar from '../components/ShopSideBar';
 import axios from 'axios';
 import TermekCard from '../components/TermekCard';
@@ -16,7 +16,7 @@ function CategoryPage() {
   const [categoryDataList, setCategoryDataList] = useState([]);
 
   useEffect(() => {
-    axios.get(`${baseUrl}Termekek/Termek/`+1)
+    axios.get(`${process.env.REACT_APP_BASE_URL}Termekek/Termek/`+1)
       .then(response => setCategoryDataList(response.data))
       .catch(error => console.error('Hiba a lekérdezés során:', error));
   }, []);

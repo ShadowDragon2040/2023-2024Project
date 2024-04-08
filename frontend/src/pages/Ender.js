@@ -1,8 +1,10 @@
 import React from 'react'
 import { useState } from 'react';
-import Navbar from '../components/ShopNavbar'
-import Sidebar from '../components/Sidebar'
+import NavbarA from '../components/MainNavbar'
 import Footer from '../components/Footer'
+import {NavBtn,NavBtnLink} from '../components/TextElements'
+import { NavLink } from 'react-bootstrap';
+import { MdArrowBack } from "react-icons/md";
 import {
   InfoContainer5,
   InfoWrapper,
@@ -13,8 +15,7 @@ import {
   ImgWrap,
   TopLine,
   Img,
-  Subtitle,
-  baseImageUrl
+  Subtitle
   } from '../components/TextElements'
 function EnderPage(){
 
@@ -25,15 +26,17 @@ function EnderPage(){
   }
     return(
       <>
-      <Sidebar isOpen={isOpen} toggle={toggle}/>
-      <Navbar toggle={toggle}/>
+      <NavbarA toggle={toggle}/>
       <InfoContainer5  lightBg={false}>
         <Heading lightText={false}>Ender 3V2</Heading>
+          <NavBtn style={{margin:'20px 0px 20px 200px'}}>
+            <NavBtnLink to='/'><MdArrowBack/>Back</NavBtnLink>
+          </NavBtn>
         <InfoWrapper>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img src={`${baseImageUrl}fdmboatmodell.jpg`} />
+                  <Img src={`${process.env.REACT_APP_KEP_URL}fdmboatmodell.jpg`} />
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
@@ -52,14 +55,14 @@ function EnderPage(){
             </Column1>
             <Column2 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img></Img>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}Ender3v2_Volume.jpg`} />
                 </ImgWrap>
             </Column2>
           </InfoRow>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img src={`${baseImageUrl}PEIsheet.jpg`} />
+                  <Img src={`${process.env.REACT_APP_KEP_URL}PEIsheet.jpg`} />
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
@@ -78,7 +81,7 @@ function EnderPage(){
             </Column1>
             <Column2 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img src={`${baseImageUrl}PEIsheet.jpg`}></Img>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}fdmlayerheightcomparison.jpg`}></Img>
                 </ImgWrap>
             </Column2>
           </InfoRow>
