@@ -9,10 +9,12 @@
     <UserControl.DataContext>
         <local:HomeVM/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <BitmapImage x:Key="LogoImage" UriSource="../Images/logo1.png"/>
+    </UserControl.Resources>
+
     <Grid>
-        
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -20,14 +22,20 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="{Binding LabelContent}" Background="DarkSlateGray"
-               Foreground="Black"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Center"
-               Width="350"
-               Height="80"
-               >
-            
-        </Label>
+        <Border Grid.Row="0" Grid.Column="0" BorderThickness="0,0,0,3" BorderBrush="#FF436437" 
+                HorizontalAlignment="Left" VerticalAlignment="Center" Width="800" Height="72"
+                >
+            <Label Content="Welcome back!" Margin="15,0,0,0" Foreground="DarkGray" FontSize="40"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        </Border>
+
+        <Image Grid.Row="1" Grid.Column="0" Source="{StaticResource LogoImage}"
+               HorizontalAlignment="Left" VerticalAlignment="Top"
+               Margin="20,20,0,0"
+               Width="700"
+               Height="400"
+               Opacity="0.6"
+               />
+
     </Grid>
 </UserControl>
