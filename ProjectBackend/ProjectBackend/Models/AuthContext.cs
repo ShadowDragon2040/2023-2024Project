@@ -2,52 +2,52 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProjectBackend.Models;
+namespace authApi.Models;
 
-public partial class Auth2Context : DbContext
+public partial class AuthContext : DbContext
 {
-    public Auth2Context()
+    public AuthContext()
     {
     }
 
-    public Auth2Context(DbContextOptions<Auth2Context> options)
+    public AuthContext(DbContextOptions<AuthContext> options)
         : base(options)
     {
     }
 
-    public virtual DbSet<Aspnetrole> Aspnetroles { get; set; }
+    public virtual DbSet<Aspnetrole> Aspnetrole { get; set; }
 
-    public virtual DbSet<Aspnetroleclaim> Aspnetroleclaims { get; set; }
+    public virtual DbSet<Aspnetroleclaim> Aspnetroleclaim { get; set; }
 
     public virtual DbSet<Aspnetuser> Aspnetusers { get; set; }
 
-    public virtual DbSet<Aspnetuserclaim> Aspnetuserclaims { get; set; }
+    public virtual DbSet<Aspnetuserclaim> Aspnetuserclaim { get; set; }
 
-    public virtual DbSet<Aspnetuserlogin> Aspnetuserlogins { get; set; }
+    public virtual DbSet<Aspnetuserlogin> Aspnetuserlogin { get; set; }
 
-    public virtual DbSet<Aspnetusertoken> Aspnetusertokens { get; set; }
+    public virtual DbSet<Aspnetusertoken> Aspnetusertoken { get; set; }
 
-    public virtual DbSet<Efmigrationshistory> Efmigrationshistories { get; set; }
+    public virtual DbSet<Efmigrationshistory> Efmigrationshistorie { get; set; }
 
-    public virtual DbSet<Ftpfile> Ftpfiles { get; set; }
+    public virtual DbSet<Ftpfile> Ftpfile { get; set; }
 
-    public virtual DbSet<Helyadatok> Helyadatoks { get; set; }
+    public virtual DbSet<Helyadatok> Helyadatok { get; set; }
 
-    public virtual DbSet<Hozzaszolasok> Hozzaszolasoks { get; set; }
+    public virtual DbSet<Hozzaszolasok> Hozzaszolasok { get; set; }
 
-    public virtual DbSet<Kategoriak> Kategoriaks { get; set; }
+    public virtual DbSet<Kategoriak> Kategoriak { get; set; }
 
     public virtual DbSet<Szamlaza> Szamlazas { get; set; }
 
-    public virtual DbSet<Tagek> Tageks { get; set; }
+    public virtual DbSet<Tagek> Tagek { get; set; }
 
-    public virtual DbSet<Tagkapcsolo> Tagkapcsolos { get; set; }
+    public virtual DbSet<Tagkapcsolo> Tagkapcsolo { get; set; }
 
-    public virtual DbSet<Termekek> Termekeks { get; set; }
+    public virtual DbSet<Termekek> Termekek { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySQL("SERVER=localhost;PORT=3306;DATABASE=auth2;USER=root;PASSWORD=;SSL MODE=none;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseMySQL("SERVER=localhost;PORT=3306;DATABASE=auth;USER=root;PASSWORD=;SSL MODE=none;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -282,12 +282,9 @@ public partial class Auth2Context : DbContext
             entity.HasIndex(e => e.TermekId, "szamlazas_ibfk_1");
 
             entity.Property(e => e.SzamlazasId).HasColumnType("int(11)");
-            entity.Property(e => e.Darab)
-                .HasColumnType("int(11)")
-                .HasColumnName("darab");
-            entity.Property(e => e.SzinHex).HasMaxLength(32);
+            entity.Property(e => e.SzinHex).HasColumnType("int(11)");
             entity.Property(e => e.TermekId).HasColumnType("int(11)");
-            entity.Property(e => e.VasarlasIdopontja).HasColumnType("datetime");
+            entity.Property(e => e.VasarlasIdopontja).HasColumnType("date");
 
             entity.HasOne(d => d.Termek).WithMany(p => p.Szamlazas)
                 .HasForeignKey(d => d.TermekId)
@@ -314,21 +311,23 @@ public partial class Auth2Context : DbContext
 
             entity.ToTable("tagkapcsolo");
 
-            entity.HasIndex(e => e.TagekId, "TagKapcsoloId");
+            entity.HasIndex(e => e.TagKapcsoloId, "TagKapcsoloId");
 
-            entity.HasIndex(e => e.TermekekId, "TermekekId");
+            entity.HasIndex(e => e.TermekTagKapcsoloId, "TermekTagKapcsoloId");
 
-            entity.Property(e => e.Id).HasColumnType("int(11)");
-            entity.Property(e => e.TagekId).HasColumnType("int(11)");
-            entity.Property(e => e.TermekekId).HasColumnType("int(11)");
+            entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .HasColumnType("int(11)");
+            entity.Property(e => e.TagKapcsoloId).HasColumnType("int(11)");
+            entity.Property(e => e.TermekTagKapcsoloId).HasColumnType("int(11)");
 
-            entity.HasOne(d => d.Tagek).WithMany(p => p.Tagkapcsolos)
-                .HasForeignKey(d => d.TagekId)
-                .HasConstraintName("tagkapcsolo_ibfk_2");
-
-            entity.HasOne(d => d.Termekek).WithMany(p => p.Tagkapcsolos)
-                .HasForeignKey(d => d.TermekekId)
+            entity.HasOne(d => d.IdNavigation).WithOne(p => p.Tagkapcsolo)
+                .HasForeignKey<Tagkapcsolo>(d => d.Id)
                 .HasConstraintName("tagkapcsolo_ibfk_3");
+
+            entity.HasOne(d => d.TagKapcsolo).WithMany(p => p.Tagkapcsolos)
+                .HasForeignKey(d => d.TagKapcsoloId)
+                .HasConstraintName("tagkapcsolo_ibfk_2");
         });
 
         modelBuilder.Entity<Termekek>(entity =>

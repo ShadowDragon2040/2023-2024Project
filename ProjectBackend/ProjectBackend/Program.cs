@@ -1,4 +1,8 @@
+using authApi.Datas;
+using authApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
@@ -8,9 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddDbContext<AuthContext>();
+builder.Services.AddDbContext<AppDbContext>(option =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("Xampmashogyan");
+
+    option.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
 builder.Services.AddSwaggerGen(options=>
 {
     options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
@@ -20,25 +28,33 @@ builder.Services.AddSwaggerGen(options=>
         Type = SecuritySchemeType.ApiKey,
     });
     options.OperationFilter<SecurityRequirementsOperationFilter>();
-}); 
-builder.Services.AddAuthentication().AddJwtBearer(options =>
+});
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme=JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+
+}).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidAudience = builder.Configuration.GetValue<string>("Authentication:Schemes:Bearer:ValidAudiences:0"),
-        ValidIssuer = builder.Configuration.GetSection("Authentication:Schemes:Bearer:ValidIssuer").Value,
-        ValidateIssuer = true,
-        ValidateAudience = true,
+        ValidAudience = builder.Configuration.GetSection("AuthSettings:JwtOptions:Audience").Value!,
+        ValidIssuer= builder.Configuration.GetSection("AuthSettings:JwtOptions:Issuer").Value!,
         ValidateIssuerSigningKey = true,
+        ValidateAudience = true,
+        ValidateIssuer = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value!))
     };
 });
-builder.Services.AddAuthentication(x => {
-    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-});
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>()
+           .AddDefaultTokenProviders();
+
 builder.Services.AddAuthorization();
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using ProjectBackend.Models;
-using ProjectBackend.Models.Dtos;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using authApi.DTOs;
+using authApi.Models;
 
 namespace ProjectBackend.Controllers
 {
@@ -18,33 +18,33 @@ namespace ProjectBackend.Controllers
 
         public AuthController(IConfiguration configuration)
         {
-            _configuration=configuration;
+            _configuration = configuration;
         }
         [HttpPost("register")]
-        public ActionResult<Aspnetuser> Register(UserDto request)
+        public ActionResult<Aspnetuser> Register(RegisterRequestDto request)
         {
-            string passwordHash=BCrypt.Net.BCrypt.HashPassword(request.Password);
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
-            User.UserName = request.Username;
+            User.UserName = request.UserName;
             User.PasswordHash = passwordHash;
             return Ok(User);
 
         }
 
         [HttpPost("login")]
-        public ActionResult<Aspnetuser> Login(UserDto request)
+        public ActionResult<Aspnetuser> Login(LoginRequestDto request)
         {
-           if(User.UserName!=request.Username)
+            if (User.UserName != request.UserName)
             {
                 return BadRequest("User Not Found!");
             }
-            if (!BCrypt.Net.BCrypt.Verify(request.Password,User.PasswordHash))
+            if (!BCrypt.Net.BCrypt.Verify(request.Password, User.PasswordHash))
             {
                 return BadRequest("Wrong password!");
             }
 
             string token = CreateToken(User);
-            
+
             return Ok(token);
 
         }
@@ -61,6 +61,8 @@ namespace ProjectBackend.Controllers
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var token = new JwtSecurityToken(
+                audience: _configuration.GetSection("AuthSettings:JwtOptions:Audience").Value!,
+                issuer:_configuration.GetSection("AuthSettings:JwtOptions:Issuer").Value!,
                 claims: claims,
                 expires: DateTime.Now.AddDays(1),
                 signingCredentials: cred

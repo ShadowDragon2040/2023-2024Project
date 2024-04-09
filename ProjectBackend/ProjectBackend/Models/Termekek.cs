@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ProjectBackend.Models;
+namespace authApi.Models;
 
 public partial class Termekek
 {
@@ -25,5 +25,5 @@ public partial class Termekek
 
     public virtual ICollection<Szamlaza> Szamlazas { get; set; } = new List<Szamlaza>();
 
-    public virtual ICollection<Tagkapcsolo> Tagkapcsolos { get; set; } = new List<Tagkapcsolo>();
+    public virtual Tagkapcsolo? Tagkapcsolo { get; set; }
 }

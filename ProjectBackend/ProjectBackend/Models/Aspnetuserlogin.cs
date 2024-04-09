@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ProjectBackend.Models;
+namespace authApi.Models;
 
 public partial class Aspnetuserlogin
 {
