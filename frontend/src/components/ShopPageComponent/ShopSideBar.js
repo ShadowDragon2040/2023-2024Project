@@ -3,7 +3,7 @@ import { FaHome, FaNewspaper,FaPaintBrush,FaGitlab } from 'react-icons/fa';
 import { IoGiftSharp } from "react-icons/io5";
 import {
   ShopSidebarContainer
-} from './TextElements';
+} from '../TextElements';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { BiCategory } from "react-icons/bi";

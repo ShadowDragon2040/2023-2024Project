@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { animateScroll as scroll } from 'react-scroll';
-import SearchBar from '../SeachBar';
+import SearchBar from './SeachBar';
 import { CgProfile } from 'react-icons/cg';
 import { Nav2, NavLogo, NavBtn2, NavBtnLink, ModalButton } from '../TextElements';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import CartPage from '../../pages/CartPage';
+import CartPage from '../../pages/ShopPages/CartPage';
 import { FaShoppingBasket } from 'react-icons/fa';
-import RegisterModal from '../RegisterModal';
-import LoginModal from '../LoginModal';
+import RegisterModal from './RegisterModal';
+import LoginModal from './LoginModal';
 
 function ShopNavbar(props) {
   const [scrollNav, setScrollNav] = useState(false);

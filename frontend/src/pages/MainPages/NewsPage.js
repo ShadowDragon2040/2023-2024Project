@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Navbar from '../components/ShopNavbar';
-import Footer from '../components/Footer';
-import { ShopPageContainer } from '../components/TextElements';
-import ShopSideBar from '../components/ShopSideBar';
+import NavbarA from '../../components/MainPageComponents/MainNavbarComponent'
+import Footer from '../../components/FooterComponent'
+import { ShopPageContainer } from '../../components/TextElements';
+import ShopSideBar from '../../components/ShopPageComponent/ShopSideBar';
 
 function NewsPage() {
   const [singleItem, setSingleItem] = useState(false);
@@ -13,7 +13,7 @@ function NewsPage() {
   return (
     <>
       <ShopPageContainer>
-        <Navbar
+        <NavbarA
         isProfileVisible={isProfileVisible}
         setProfileVisible={setProfileVisible}
         setUserData={setUserData}

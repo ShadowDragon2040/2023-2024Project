@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
-import NavbarA from '../components/MainNavbar'
-import Footer from '../components/Footer'
-import {NavBtn,NavBtnLink} from '../components/TextElements'
+import NavbarA from '../../components/MainPageComponents/MainNavbarComponent'
+import Footer from '../../components/FooterComponent'
+import {NavBtn,NavBtnLink} from '../../components/TextElements'
 import { MdArrowBack } from "react-icons/md";
 import {
   InfoContainer5,
@@ -15,7 +15,7 @@ import {
   TopLine,
   Img,
   Subtitle
-  } from '../components/TextElements'
+  } from '../../components/TextElements'
 function BambuPage(){
 
   const[isOpen,setIsOpen]=useState(false)

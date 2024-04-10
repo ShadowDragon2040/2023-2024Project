@@ -1,12 +1,12 @@
 import React,{useState} from 'react'
-import HeroSection from '../components/HeroSection'
-import MainNavbar from "../components/MainNavbar"
-import Sidebar from '../components/Sidebar'
-import InfoSection from '../components/InfoSection'
-import PrinterTools from '../components/PrinterTools'
-import Services from '../components/Services'
-import Footer from '../components/Footer'
-import ModelSection from '../components/ModelSection'
+import HeroSection from '../components/MainPageComponents/HeroComponent'
+import MainNavbar from "../components/MainPageComponents/MainNavbarComponent"
+import Sidebar from '../components/MainPageComponents/SidebarComponent'
+import InfoSection from '../components/MainPageComponents/InfoComponent'
+import PrinterTools from '../components/MainPageComponents/PrinterComponent'
+import Services from '../components/MainPageComponents/ServicesComponent'
+import Footer from '../components/FooterComponent'
+import ModellSection from '../components/MainPageComponents/ModellComponent'
 
 const Home = () => {
 
@@ -24,7 +24,7 @@ const Home = () => {
       <HeroSection/>
       <InfoSection />
       <PrinterTools/>
-      <ModelSection/>
+      <ModellSection/>
       <Services/>
       <Footer/>
     </>

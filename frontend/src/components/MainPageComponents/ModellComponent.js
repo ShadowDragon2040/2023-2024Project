@@ -13,7 +13,7 @@ ImgWrap,
 Img
 } from '../TextElements'
 
-const ModelSection = () => {
+const ModellSection = () => {
   
   return (
       <InfoContainer4  lightBg={false}  >
@@ -42,4 +42,4 @@ const ModelSection = () => {
   )
 }
 
-export default ModelSection
+export default ModellSection

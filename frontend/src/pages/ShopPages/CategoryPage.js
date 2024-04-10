@@ -1,13 +1,13 @@
 import React, { useState,useEffect } from 'react';
-import Navbar from '../components/ShopNavbar';
-import Footer from '../components/Footer';
+import axios from 'axios';
+import Navbar from '../../components/ShopPageComponent/ShopNavbarComponent';
+import ShopSideBar from '../../components/ShopPageComponent/ShopSideBar';
+import TermekCard from '../../components/ShopPageComponent/TermekCard';
+import Footer from '../../components/FooterComponent';
 import {
   ShopPageContainer,
   ItemContainer
-} from '../components/TextElements';
-import ShopSideBar from '../components/ShopSideBar';
-import axios from 'axios';
-import TermekCard from '../components/TermekCard';
+} from '../../components/TextElements';
 
 function CategoryPage() {
   const [singleItem, setSingleItem] = useState(false);

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Navbar from '../components/ShopNavbar';
-import DisplayItem from '../components/DisplayItems';
-import Footer from '../components/Footer';
-import { ShopPageContainer } from '../components/TextElements';
-import ShopSideBar from '../components/ShopSideBar';
+import Navbar from '../../components/ShopPageComponent/ShopNavbarComponent';
+import AllItems from '../../components/ShopPageComponent/AllItemsComponent';
+import Footer from '../../components/FooterComponent';
+import { ShopPageContainer } from '../../components/TextElements';
+import ShopSideBar from '../../components/ShopPageComponent/ShopSideBar';
 
 function ShopPage(props) {
   const [userData, setUserData] = useState(null);
@@ -34,7 +34,7 @@ const handleMouseLeave = () => {
               <ShopSideBar collapsed={collapsed} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave}/>
             </div>
             <div className={`col`}>
-              <DisplayItem collapsed={collapsed}/>
+              <AllItems collapsed={collapsed}/>
             </div>
           </div>
         </div>

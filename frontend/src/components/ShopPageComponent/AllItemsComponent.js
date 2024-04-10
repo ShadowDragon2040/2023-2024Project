@@ -4,7 +4,7 @@ import {
   ItemContainer,
   CarouselContainer,
   CarouselImage
-} from './TextElements'
+} from '../TextElements'
 
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -12,7 +12,7 @@ import { Carousel } from 'react-responsive-carousel';
 import axios from 'axios'
 import TermekCard from './TermekCard'
 
-function NewItemsComponent (props) {
+function AllItems (props) {
   const [newsList, setNewsList] = useState([]);
   const [data, setData] = useState([]);
 
@@ -62,4 +62,4 @@ function NewItemsComponent (props) {
   )
 }
 
-export default NewItemsComponent
+export default AllItems

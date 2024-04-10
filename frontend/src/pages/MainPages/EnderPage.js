@@ -1,11 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
-import NavbarA from '../components/MainNavbar'
-import Footer from '../components/Footer'
-import {NavBtn,NavBtnLink} from '../components/TextElements'
+import NavbarA from '../../components/MainPageComponents/MainNavbarComponent'
+import Footer from '../../components/FooterComponent'
+import {NavBtn,NavBtnLink} from '../../components/TextElements'
+import { NavLink } from 'react-bootstrap';
 import { MdArrowBack } from "react-icons/md";
 import {
-  InfoContainer,
+  InfoContainer5,
   InfoWrapper,
   InfoRow,
   Column1,
@@ -15,21 +16,19 @@ import {
   TopLine,
   Img,
   Subtitle
-  } from '../components/TextElements'
-
-function AnycubicPage(){
+  } from '../../components/TextElements'
+function EnderPage(){
 
   const[isOpen,setIsOpen]=useState(false)
 
   const toggle=()=>{
     setIsOpen(!isOpen)
   }
-  
     return(
       <>
       <NavbarA toggle={toggle}/>
-      <InfoContainer  lightBg={false} id={'tools'} >
-        <Heading lightText={false}>Anycubic Photon Mono</Heading>
+      <InfoContainer5  lightBg={false}>
+        <Heading lightText={false}>Ender 3V2</Heading>
           <NavBtn style={{margin:'20px 0px 20px 200px'}}>
             <NavBtnLink to='/'><MdArrowBack/>Back</NavBtnLink>
           </NavBtn>
@@ -37,13 +36,13 @@ function AnycubicPage(){
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img/>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}fdmboatmodell.jpg`} />
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
             <TopLine>Technology</TopLine>
                 <Subtitle darkText={true}>
-                Anycubic Photon Mono is an SLA 3D printer that prints with resin that cures under UV light.
+                The Ender 3 V2 is an FDM 3D printer that builds the desired object layer by layer using liquid plastic.
                 </Subtitle>
             </Column2>
           </InfoRow>
@@ -51,46 +50,46 @@ function AnycubicPage(){
             <Column1 style={{position: 'relative'}}>
             <TopLine>Size</TopLine>
                 <Subtitle darkText={true}>
-                The maximum printable size inside: 13cm x 8cm x 16.5cm.
+                The maximum printable size inside is: 22cm x 22cm x 25cm.
                 </Subtitle>
             </Column1>
             <Column2 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img/>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}Ender3v2_Volume.jpg`} />
                 </ImgWrap>
             </Column2>
           </InfoRow>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img/>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}PEIsheet.jpg`} />
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
+            <TopLine>PEI Buildplate</TopLine>
+                <Subtitle darkText={true}>
+                An excellent printing surface that provides strong adhesion and gives an unique pattern.
+                </Subtitle>
+            </Column2>
+          </InfoRow>
+          <InfoRow  imgStart={false} >
+            <Column1 style={{position: 'relative'}}>
             <TopLine>Printing resolution</TopLine>
                 <Subtitle darkText={true}>
-                The minimum layer height is 0.01mm and the LCD screen has 4k detail.
-                </Subtitle>
-            </Column2>
-          </InfoRow>
-          <InfoRow  imgStart={false} >
-            <Column1 style={{position: 'relative'}}>
-            <TopLine>Material</TopLine>
-                <Subtitle darkText={true}>
-                The material is abs-like-resin, which is a strong and durable material that cures under UV light.
+                The minimum layer height is 0.1 mm and the maximum layer height is 0.4 mm.
                 </Subtitle>
             </Column1>
             <Column2 style={{position: 'relative'}}>
                 <ImgWrap>
-                    <Img/>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}fdmlayerheightcomparison.jpg`}></Img>
                 </ImgWrap>
             </Column2>
           </InfoRow>
         </InfoWrapper>
-      </InfoContainer>
+      </InfoContainer5>
       <Footer/>
       </>
     )
 }
 
-export default AnycubicPage
+export default EnderPage

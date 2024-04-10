@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import NavigationBar from "../pages/teszt";
+import NavigationBar from "../teszt";
 import { Modal, Button } from 'react-bootstrap'; 
 
 const CartPage = ({ show, handleClose, cart }) => {

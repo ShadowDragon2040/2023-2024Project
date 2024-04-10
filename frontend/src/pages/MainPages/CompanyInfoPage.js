@@ -1,9 +1,8 @@
 import React,{useState} from 'react'
-import Footer from '../components/Footer'
-import NavbarA from '../components/MainNavbar'
-import Sidebar from '../components/Sidebar'
+import NavbarA from '../../components/MainPageComponents/MainNavbarComponent'
+import Footer from '../../components/FooterComponent'
 import { MdArrowBack } from "react-icons/md";
-import {NavBtn, NavBtnLink, TextWrapper} from '../components/TextElements'
+import {NavBtn, NavBtnLink, TextWrapper} from '../../components/TextElements'
 import {
   InfoContainer,
   InfoWrapper,
@@ -15,7 +14,7 @@ import {
   TopLine,
   Img,
   Subtitle
-  } from '../components/TextElements'
+  } from '../../components/TextElements'
 
 const CompanyInfoPage = () => {
   const[isOpen,setIsOpen]=useState(false)
@@ -25,7 +24,6 @@ const CompanyInfoPage = () => {
   }
   return (
     <>
-    <Sidebar isOpen={isOpen} toggle={toggle}/>
       <NavbarA toggle={toggle}/>
       <InfoContainer  lightBg={false} id={'about'} >
         <Heading lightText={false}>About our company</Heading>

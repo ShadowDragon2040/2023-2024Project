@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import {
   NavBtn2,
   ModalButton
-} from './TextElements';
+} from '../TextElements';
 
 const LoginModal = (props) => {
     const [username, setUsername] = useState('');

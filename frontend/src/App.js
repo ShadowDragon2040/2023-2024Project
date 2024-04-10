@@ -1,20 +1,21 @@
 import './App.css';
+import "bootstrap/dist/css/bootstrap.css"
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from './pages';
-import CompanyInfoPage from './pages/CompanyInfoPage';
-import EnderPage from './pages/Ender';
-import BambuPage from './pages/Bambu';
-import AnycubicPage from './pages/Anycubic';
-import ElektroplatingPage from './pages/ElektroplatingPage';
-import PaintPage from './pages/PaintPage';
-import ModelltervezesPage from './pages/ModelltervezesPage';
-import SingleProductDisplay from './pages/SingleProductDisplay';
-import ShopPage from './pages/ShopPage';
-import "bootstrap/dist/css/bootstrap.css"
-import CategoryPage from './pages/CategoryPage';
-import NewsPage from './pages/NewsPage';
+import CompanyInfoPage from './pages/MainPages/CompanyInfoPage';
+import EnderPage from './pages/MainPages/EnderPage';
+import BambuPage from './pages/MainPages/BambuPage';
+import AnycubicPage from './pages/MainPages/AnycubicPage';
+import ElegooSaturnPage from './pages/MainPages/ElegooSaturnPage';
+import ElektroplatingPage from './pages/MainPages/ElektroplatingPage';
+import PaintPage from './pages/MainPages/PaintPage';
+import ModelltervezesPage from './pages/MainPages/ModelltervezesPage';
+import SingleProductDisplay from './pages/ShopPages/SingleProductDisplay';
+import ShopPage from './pages/ShopPages/ShopPage';
+import CategoryPage from './pages/ShopPages/CategoryPage';
+import NewsPage from './pages/MainPages/NewsPage';
 import React, { useState, useEffect } from 'react';
-import CartPage from './pages/CartPage';
+import CartPage from './pages/ShopPages/CartPage';
 
 function App() {
   sessionStorage.setItem("bejelenkezve", "false");
@@ -77,6 +78,7 @@ const addToCart = (product, quantity) => {
         <Route path="/Ender" component={EnderPage} exact />
         <Route path="/Anycubic" component={AnycubicPage} exact />
         <Route path="/Bambu" component={BambuPage} exact />
+        <Route path="/ElegooSaturn" component={ElegooSaturnPage} exact />
         <Route path="/ElektroplatingPage" component={ElektroplatingPage} exact />
         <Route path="/ModelltervezesPage" component={ModelltervezesPage} exact />
         <Route path="/PaintPage" component={PaintPage} exact />

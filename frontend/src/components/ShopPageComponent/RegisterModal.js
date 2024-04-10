@@ -5,7 +5,7 @@ import axios from 'axios';
 import {
   NavBtn2,
   ModalButton
-} from './TextElements';
+} from '../TextElements';
 import { toast } from 'react-toastify';
 
 const RegisterModal = () => {

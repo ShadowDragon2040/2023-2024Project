@@ -5,12 +5,12 @@ import { MdArrowBack } from "react-icons/md";
 import InnerImageZoom from 'react-inner-image-zoom';
 import { CommentSection } from 'react-comments-section';
 import 'react-comments-section/dist/index.css';
-import Navbar from '../components/ShopNavbar';
+import Navbar from '../../components/ShopPageComponent/ShopNavbarComponent';
 import { Rating } from 'react-simple-star-rating';
-import Footer from '../components/Footer';
-import ColorPicker from './ColorPicker';
+import Footer from '../../components/FooterComponent';
+import ColorPicker from '../../components/ShopPageComponent/ColorPickerComponent';
 import Button from 'react-bootstrap/Button';
-import {NavBtn,NavBtnLink} from '../components/TextElements';
+import {NavBtn,NavBtnLink} from '../../components/TextElements';
 
 function SingleProductDisplay(props) {
     const { ProductId } = useParams();

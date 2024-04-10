@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
-import NavbarA from '../components/MainNavbar';
-import Sidebar from '../components/Sidebar'
-import Paint from '../components/Paint'
-import Footer from '../components/Footer'
+import NavbarA from '../../components/MainPageComponents/MainNavbarComponent'
+import Footer from '../../components/FooterComponent'
+import Sidebar from '../../components/MainPageComponents/SidebarComponent'
+import Paint from '../../components/MainPageComponents/PaintComponent'
 
 function PaintPage(){
 

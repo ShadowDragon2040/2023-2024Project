@@ -1,8 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
-import NavbarA from '../components/MainNavbar'
-import Sidebar from '../components/Sidebar'
-import Footer from '../components/Footer'
+import NavbarA from '../../components/MainPageComponents/MainNavbarComponent'
+import Footer from '../../components/FooterComponent'
+import {NavBtn,NavBtnLink} from '../../components/TextElements'
+import { MdArrowBack } from "react-icons/md";
 import {
   InfoContainer,
   InfoWrapper,
@@ -14,70 +15,74 @@ import {
   TopLine,
   Img,
   Subtitle
-  } from '../components/TextElements'
-function ModellTervezesPage(){
+  } from '../../components/TextElements'
+
+function AnycubicPage(){
 
   const[isOpen,setIsOpen]=useState(false)
 
   const toggle=()=>{
     setIsOpen(!isOpen)
   }
+  
     return(
       <>
-      <Sidebar isOpen={isOpen} toggle={toggle}/>
       <NavbarA toggle={toggle}/>
-      <InfoContainer  lightBg={false} id={'Modelltervezes'} >
-        <Heading lightText={false}>Modelltervezés</Heading>
+      <InfoContainer  lightBg={false} id={'tools'} >
+        <Heading lightText={false}>Anycubic Photon Mono</Heading>
+          <NavBtn style={{margin:'20px 0px 20px 200px'}}>
+            <NavBtnLink to='/'><MdArrowBack/>Back</NavBtnLink>
+          </NavBtn>
         <InfoWrapper>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img></Img>
+                  <Img/>
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
-            <TopLine>Szoftver</TopLine>
+            <TopLine>Technology</TopLine>
                 <Subtitle darkText={true}>
-                A modellek tervezésére és elkészítésére a Blender-t használjuk, a programm segítségével bármilyen 3D modellt el lehet készíteni.
+                Anycubic Photon Mono is an SLA 3D printer that prints with resin that cures under UV light.
                 </Subtitle>
             </Column2>
           </InfoRow>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
-            <TopLine>Méretek</TopLine>
+            <TopLine>Size</TopLine>
                 <Subtitle darkText={true}>
-                A belső maximum nyomtatható méret: 22cm x 22cm x 25cm.
+                The maximum printable size inside: 13cm x 8cm x 16.5cm.
                 </Subtitle>
             </Column1>
             <Column2 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img></Img>
+                  <Img/>
                 </ImgWrap>
             </Column2>
           </InfoRow>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img></Img>
+                  <Img/>
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
-            <TopLine>PEI nyomtatólap</TopLine>
+            <TopLine>Printing resolution</TopLine>
                 <Subtitle darkText={true}>
-                Kíváló nyomtatási felület amely erős tapadást biztosít és egyedi mintázatot ad.
+                The minimum layer height is 0.01mm and the LCD screen has 4k detail.
                 </Subtitle>
             </Column2>
           </InfoRow>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
-            <TopLine>Felbontás</TopLine>
+            <TopLine>Material</TopLine>
                 <Subtitle darkText={true}>
-                A minimális rétegmagasság 0,1mm és a maximális rétegmagasság 0,4mm.
+                The material is abs-like-resin, which is a strong and durable material that cures under UV light.
                 </Subtitle>
             </Column1>
             <Column2 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img></Img>
+                    <Img/>
                 </ImgWrap>
             </Column2>
           </InfoRow>
@@ -88,4 +93,4 @@ function ModellTervezesPage(){
     )
 }
 
-export default ModellTervezesPage
+export default AnycubicPage

@@ -123,12 +123,12 @@ const PrinterTools = () => {
               textAlign: 'center',
               textShadow: "4px 2px 2px black",
               zIndex: 1
-            }}>Anycubic photon mono</TopLine>
+            }}>Elegoo Saturn 3</TopLine>
               <ImgWrap>
               <Link onClick={handleClick} to="/Anycubic">
                 <Img
                   src={`${process.env.REACT_APP_KEP_URL}anycubicphotonmono.jpg`}
-                  alt={'cég'}
+                  alt={'Elegoo Saturn 3'}
                   onMouseEnter={() => setBottomRightHovered(true)}
                   onMouseLeave={() => setBottomRightHovered(false)}
                   style={{

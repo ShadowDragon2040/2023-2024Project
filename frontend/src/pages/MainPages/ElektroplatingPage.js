@@ -1,9 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
-import NavbarA from '../components/MainNavbar'
-import Sidebar from '../components/Sidebar'
-import Elektroplating from '../components/Elektroplating'
-import Footer from '../components/Footer'
+import NavbarA from '../../components/MainPageComponents/MainNavbarComponent'
+import Footer from '../../components/FooterComponent'
+import Elektroplating from '../../components/MainPageComponents/ElektroplatingComponent'
 
 function ElektroplatingPage(){
 
@@ -14,7 +13,6 @@ function ElektroplatingPage(){
   }
     return(
       <>
-      <Sidebar isOpen={isOpen} toggle={toggle}/>
       <NavbarA toggle={toggle}/>
       <Elektroplating/>
       <Footer/>
