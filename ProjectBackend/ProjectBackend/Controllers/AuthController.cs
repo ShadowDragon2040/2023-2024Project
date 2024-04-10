@@ -6,7 +6,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using ProjectBackend.DTOs;
 using ProjectBackend.Models;
-using ProjectBackend.DTOs;
 
 namespace ProjectBackend.Controllers
 {
@@ -15,6 +14,7 @@ namespace ProjectBackend.Controllers
     public class AuthController : ControllerBase
     {
         public static Aspnetuser User = new Aspnetuser();
+        private static Random rnd= new Random();    
         private readonly IConfiguration _configuration;
         AuthContext _authContext;
 
@@ -26,19 +26,28 @@ namespace ProjectBackend.Controllers
         [HttpPost("register")]
         public ActionResult<Aspnetuser> Register(RegisterRequestDto request)
         {
-            string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
-
-            User.UserName = request.UserName;
-            User.PasswordHash = passwordHash;
+            
             try
             {
-            }
-            catch (Exception)
-            {
+                string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
-                throw;
+                User.Id = new Guid().ToString();
+                User.UserName = request.UserName;
+                User.PasswordHash = passwordHash;
+                User.Email= request.Email;
+                User.EmailCode = rnd.Next(1000, 10000);
+                User.AktivalasIdopotja=DateTime.Now;
+                User.EmailConfirmed = false;
+                User.ProfilKep = new byte[0];
+                _authContext.Aspnetuser.Add(User);
+                _authContext.SaveChanges();
+                return Ok(User);
+
             }
-            return Ok(User);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
         }
 
