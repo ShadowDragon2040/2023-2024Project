@@ -74,7 +74,7 @@ namespace ProjectBackend.Controllers
 
         }
         [HttpPost("AssignRole")]
-        [Authorize(Roles = "USER")] // Change the role as per your requirement
+        [Authorize(Roles = "ADMIN")] // Change the role as per your requirement
         public async Task<ActionResult> AssignRole([FromBody] AssignRoleDto model)
         {
             if (model == null || string.IsNullOrWhiteSpace(model.Email) || string.IsNullOrWhiteSpace(model.Role))
@@ -137,12 +137,21 @@ namespace ProjectBackend.Controllers
         }
         private string CreateToken(Aspnetuser User)
         {
-            
+
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name,User.UserName),
-                new Claim(ClaimTypes.Role,"USER")
             };
+
+            var userRole = _authContext.Aspnetuserrole.FirstOrDefault(userrole => userrole.UserId == User.Id);
+            if (userRole != null)
+            {
+                var role = _authContext.Aspnetrole.FirstOrDefault(r => r.Id == userRole.RoleId);
+                if (role != null)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, role.Name));
+                }
+            }
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value!));
 
