@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectBackend.Models;
+using System;
 using System.Collections.Generic;
 
 namespace authApi.Models;

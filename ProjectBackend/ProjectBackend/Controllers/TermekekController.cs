@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using authApi.DTOs;
-using authApi.Models;
+using ProjectBackend.DTOs;
+using ProjectBackend.Models;
 
-namespace Webárúház_Nagy_Project.Controllers
+namespace ProjectBackend.Controllers
 {
     [Route("[controller]")]
     [ApiController]

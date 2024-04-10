@@ -1,4 +1,4 @@
-﻿namespace authApi.DTOs
+﻿namespace ProjectBackend.DTOs
 {
     public class VerificationRequestDto
     {

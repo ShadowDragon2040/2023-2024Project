@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace authApi.Models;
+namespace ProjectBackend.Models;
 
 public partial class Aspnetuser
 {
@@ -21,31 +21,9 @@ public partial class Aspnetuser
 
     public string? PasswordHash { get; set; }
 
-    public string? SecurityStamp { get; set; }
-
-    public string? ConcurrencyStamp { get; set; }
-
-    public string? PhoneNumber { get; set; }
-
-    public bool PhoneNumberConfirmed { get; set; }
-
-    public bool TwoFactorEnabled { get; set; }
-
-    public DateTime? LockoutEnd { get; set; }
-
-    public bool LockoutEnabled { get; set; }
-
-    public int AccessFailedCount { get; set; }
-
     public DateTime AktivalasIdopotja { get; set; }
 
     public byte[] ProfilKep { get; set; } = null!;
-
-    public virtual ICollection<Aspnetuserclaim> Aspnetuserclaims { get; set; } = new List<Aspnetuserclaim>();
-
-    public virtual ICollection<Aspnetuserlogin> Aspnetuserlogins { get; set; } = new List<Aspnetuserlogin>();
-
-    public virtual ICollection<Aspnetusertoken> Aspnetusertokens { get; set; } = new List<Aspnetusertoken>();
 
     public virtual ICollection<Helyadatok> Helyadatoks { get; set; } = new List<Helyadatok>();
 

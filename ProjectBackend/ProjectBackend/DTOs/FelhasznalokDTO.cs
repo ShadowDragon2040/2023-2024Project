@@ -1,6 +1,6 @@
-﻿using authApi.Models;
+﻿using ProjectBackend.DTOs;
 
-namespace authApi.DTOs
+namespace ProjectBackend.DTOs
 {
     public record FelhasznalokDto(string Id, string UserName, string PasswordHash, bool EmailConfirmed, string Email, byte[] ProfilKep);
     public record CreatedFelhasznalokDto(string UserName, string PasswordHash, bool EmailConfirmed, string Email, byte[] ProfilKep);

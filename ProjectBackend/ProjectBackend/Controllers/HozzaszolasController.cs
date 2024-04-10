@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using authApi.DTOs;
-using authApi.Models;
+using ProjectBackend.DTOs;
+using ProjectBackend.Models;
 
 namespace Webárúház_Nagy_Project.Controllers
 {

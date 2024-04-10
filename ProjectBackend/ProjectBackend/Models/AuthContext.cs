@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace authApi.Models;
+namespace ProjectBackend.Models;
 
 public partial class AuthContext : DbContext
 {
@@ -17,15 +17,7 @@ public partial class AuthContext : DbContext
 
     public virtual DbSet<Aspnetrole> Aspnetrole { get; set; }
 
-    public virtual DbSet<Aspnetroleclaim> Aspnetroleclaim { get; set; }
-
-    public virtual DbSet<Aspnetuser> Aspnetusers { get; set; }
-
-    public virtual DbSet<Aspnetuserclaim> Aspnetuserclaim { get; set; }
-
-    public virtual DbSet<Aspnetuserlogin> Aspnetuserlogin { get; set; }
-
-    public virtual DbSet<Aspnetusertoken> Aspnetusertoken { get; set; }
+    public virtual DbSet<Aspnetuser> Aspnetuser { get; set; }
 
     public virtual DbSet<Efmigrationshistory> Efmigrationshistorie { get; set; }
 
@@ -37,7 +29,7 @@ public partial class AuthContext : DbContext
 
     public virtual DbSet<Kategoriak> Kategoriak { get; set; }
 
-    public virtual DbSet<Szamlaza> Szamlazas { get; set; }
+    public virtual DbSet<Szamlaza> Szamlaza { get; set; }
 
     public virtual DbSet<Tagek> Tagek { get; set; }
 
@@ -46,7 +38,7 @@ public partial class AuthContext : DbContext
     public virtual DbSet<Termekek> Termekek { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseMySQL("SERVER=localhost;PORT=3306;DATABASE=auth;USER=root;PASSWORD=;SSL MODE=none;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -68,23 +60,6 @@ public partial class AuthContext : DbContext
                 .HasDefaultValueSql("'NULL'");
         });
 
-        modelBuilder.Entity<Aspnetroleclaim>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("aspnetroleclaims");
-
-            entity.HasIndex(e => e.RoleId, "IX_AspNetRoleClaims_RoleId");
-
-            entity.Property(e => e.Id).HasColumnType("int(11)");
-            entity.Property(e => e.ClaimType).HasDefaultValueSql("'NULL'");
-            entity.Property(e => e.ClaimValue).HasDefaultValueSql("'NULL'");
-
-            entity.HasOne(d => d.Role).WithMany(p => p.Aspnetroleclaims)
-                .HasForeignKey(d => d.RoleId)
-                .HasConstraintName("FK_AspNetRoleClaims_AspNetRoles_RoleId");
-        });
-
         modelBuilder.Entity<Aspnetuser>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -95,18 +70,13 @@ public partial class AuthContext : DbContext
 
             entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex").IsUnique();
 
-            entity.Property(e => e.AccessFailedCount).HasColumnType("int(11)");
             entity.Property(e => e.AktivalasIdopotja)
                 .HasDefaultValueSql("'current_timestamp()'")
                 .HasColumnType("datetime");
-            entity.Property(e => e.ConcurrencyStamp).HasDefaultValueSql("'NULL'");
             entity.Property(e => e.Email)
                 .HasMaxLength(256)
                 .HasDefaultValueSql("'NULL'");
             entity.Property(e => e.EmailCode).HasColumnType("int(11)");
-            entity.Property(e => e.LockoutEnd)
-                .HasMaxLength(6)
-                .HasDefaultValueSql("'NULL'");
             entity.Property(e => e.NormalizedEmail)
                 .HasMaxLength(256)
                 .HasDefaultValueSql("'NULL'");
@@ -114,9 +84,7 @@ public partial class AuthContext : DbContext
                 .HasMaxLength(256)
                 .HasDefaultValueSql("'NULL'");
             entity.Property(e => e.PasswordHash).HasDefaultValueSql("'NULL'");
-            entity.Property(e => e.PhoneNumber).HasDefaultValueSql("'NULL'");
             entity.Property(e => e.ProfilKep).HasColumnType("mediumblob");
-            entity.Property(e => e.SecurityStamp).HasDefaultValueSql("'NULL'");
             entity.Property(e => e.UserName)
                 .HasMaxLength(256)
                 .HasDefaultValueSql("'NULL'");
@@ -136,51 +104,6 @@ public partial class AuthContext : DbContext
                         j.ToTable("aspnetuserroles");
                         j.HasIndex(new[] { "RoleId" }, "IX_AspNetUserRoles_RoleId");
                     });
-        });
-
-        modelBuilder.Entity<Aspnetuserclaim>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("aspnetuserclaims");
-
-            entity.HasIndex(e => e.UserId, "IX_AspNetUserClaims_UserId");
-
-            entity.Property(e => e.Id).HasColumnType("int(11)");
-            entity.Property(e => e.ClaimType).HasDefaultValueSql("'NULL'");
-            entity.Property(e => e.ClaimValue).HasDefaultValueSql("'NULL'");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Aspnetuserclaims)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK_AspNetUserClaims_AspNetUsers_UserId");
-        });
-
-        modelBuilder.Entity<Aspnetuserlogin>(entity =>
-        {
-            entity.HasKey(e => new { e.LoginProvider, e.ProviderKey }).HasName("PRIMARY");
-
-            entity.ToTable("aspnetuserlogins");
-
-            entity.HasIndex(e => e.UserId, "IX_AspNetUserLogins_UserId");
-
-            entity.Property(e => e.ProviderDisplayName).HasDefaultValueSql("'NULL'");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Aspnetuserlogins)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK_AspNetUserLogins_AspNetUsers_UserId");
-        });
-
-        modelBuilder.Entity<Aspnetusertoken>(entity =>
-        {
-            entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name }).HasName("PRIMARY");
-
-            entity.ToTable("aspnetusertokens");
-
-            entity.Property(e => e.Value).HasDefaultValueSql("'NULL'");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Aspnetusertokens)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK_AspNetUserTokens_AspNetUsers_UserId");
         });
 
         modelBuilder.Entity<Efmigrationshistory>(entity =>
@@ -282,9 +205,12 @@ public partial class AuthContext : DbContext
             entity.HasIndex(e => e.TermekId, "szamlazas_ibfk_1");
 
             entity.Property(e => e.SzamlazasId).HasColumnType("int(11)");
-            entity.Property(e => e.SzinHex).HasColumnType("int(11)");
+            entity.Property(e => e.Darab)
+                .HasColumnType("int(11)")
+                .HasColumnName("darab");
+            entity.Property(e => e.SzinHex).HasMaxLength(32);
             entity.Property(e => e.TermekId).HasColumnType("int(11)");
-            entity.Property(e => e.VasarlasIdopontja).HasColumnType("date");
+            entity.Property(e => e.VasarlasIdopontja).HasColumnType("datetime");
 
             entity.HasOne(d => d.Termek).WithMany(p => p.Szamlazas)
                 .HasForeignKey(d => d.TermekId)
@@ -311,23 +237,21 @@ public partial class AuthContext : DbContext
 
             entity.ToTable("tagkapcsolo");
 
-            entity.HasIndex(e => e.TagKapcsoloId, "TagKapcsoloId");
+            entity.HasIndex(e => e.TagekId, "TagKapcsoloId");
 
-            entity.HasIndex(e => e.TermekTagKapcsoloId, "TermekTagKapcsoloId");
+            entity.HasIndex(e => e.TermekekId, "TermekekId");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .HasColumnType("int(11)");
-            entity.Property(e => e.TagKapcsoloId).HasColumnType("int(11)");
-            entity.Property(e => e.TermekTagKapcsoloId).HasColumnType("int(11)");
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.TagekId).HasColumnType("int(11)");
+            entity.Property(e => e.TermekekId).HasColumnType("int(11)");
 
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.Tagkapcsolo)
-                .HasForeignKey<Tagkapcsolo>(d => d.Id)
-                .HasConstraintName("tagkapcsolo_ibfk_3");
-
-            entity.HasOne(d => d.TagKapcsolo).WithMany(p => p.Tagkapcsolos)
-                .HasForeignKey(d => d.TagKapcsoloId)
+            entity.HasOne(d => d.Tagek).WithMany(p => p.Tagkapcsolos)
+                .HasForeignKey(d => d.TagekId)
                 .HasConstraintName("tagkapcsolo_ibfk_2");
+
+            entity.HasOne(d => d.Termekek).WithMany(p => p.Tagkapcsolos)
+                .HasForeignKey(d => d.TermekekId)
+                .HasConstraintName("tagkapcsolo_ibfk_3");
         });
 
         modelBuilder.Entity<Termekek>(entity =>

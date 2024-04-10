@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using authApi.DTOs;
-using authApi.Models;
+using ProjectBackend.DTOs;
+using ProjectBackend.Models;
 
 namespace Webárúház_Nagy_Project.Controllers
 {
@@ -23,7 +23,7 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             try
             {
-                var result = await _context.Szamlazas.ToListAsync();
+                var result = await _context.Szamlaza.ToListAsync();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -37,7 +37,7 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             try
             {
-                var result = await _context.Szamlazas.Where(x => x.SzamlazasId == id).ToListAsync();
+                var result = await _context.Szamlaza.Where(x => x.SzamlazasId == id).ToListAsync();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -60,7 +60,7 @@ namespace Webárúház_Nagy_Project.Controllers
                     SikeresSzalitas = false
                 };
 
-                _context.Szamlazas.Add(request);
+                _context.Szamlaza.Add(request);
                 await _context.SaveChangesAsync();
 
                 return Ok(); // Optionally, you can return a response or data
@@ -77,7 +77,7 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             try
             {
-                var existingSzamlazas = _context.Szamlazas.FirstOrDefault(x => x.SzamlazasId == Id);
+                var existingSzamlazas = _context.Szamlaza.FirstOrDefault(x => x.SzamlazasId == Id);
                
                 existingSzamlazas.UserId = updateSzamlazasokDto.UserId;
                 existingSzamlazas.TermekId = updateSzamlazasokDto.TermekId;
@@ -85,7 +85,7 @@ namespace Webárúház_Nagy_Project.Controllers
                 existingSzamlazas.SikeresSzalitas = updateSzamlazasokDto.SikeresSzalitas;
                 existingSzamlazas.SzinHex = updateSzamlazasokDto.SzinHex;
 
-                _context.Szamlazas.Update(existingSzamlazas);
+                _context.Szamlaza.Update(existingSzamlazas);
                await _context.SaveChangesAsync();
                 return Ok();
             }
@@ -101,9 +101,9 @@ namespace Webárúház_Nagy_Project.Controllers
         {
             try
             {
-                var existingSzamlazas = _context.Szamlazas.FirstOrDefault(x => x.SzamlazasId == id);
+                var existingSzamlazas = _context.Szamlaza.FirstOrDefault(x => x.SzamlazasId == id);
 
-                _context.Szamlazas.Remove(existingSzamlazas);
+                _context.Szamlaza.Remove(existingSzamlazas);
                 await _context.SaveChangesAsync();
                 return Ok();
             }

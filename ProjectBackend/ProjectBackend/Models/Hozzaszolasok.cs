@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
-namespace authApi.Models;
+namespace ProjectBackend.Models;
 
 public partial class Hozzaszolasok
 {
@@ -15,8 +14,8 @@ public partial class Hozzaszolasok
     public string Leiras { get; set; } = null!;
 
     public int Ertekeles { get; set; }
-    [JsonIgnore]
-    public virtual Termekek? Termek { get; set; }
-    [JsonIgnore]
-    public virtual Aspnetuser? User { get; set; } 
+
+    public virtual Termekek Termek { get; set; } = null!;
+
+    public virtual Aspnetuser User { get; set; } = null!;
 }

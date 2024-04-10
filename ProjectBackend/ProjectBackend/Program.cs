@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ProjectBackend.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 
@@ -19,6 +20,8 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 
     option.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
+
+
 builder.Services.AddSwaggerGen(options=>
 {
     options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
@@ -47,8 +50,7 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value!))
     };
 });
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>()
-           .AddDefaultTokenProviders();
+//builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 builder.Services.AddAuthorization();
 builder.Services.AddControllers();

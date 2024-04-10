@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using authApi.Models;
-using authApi.DTOs;
+using ProjectBackend.Models;
+using ProjectBackend.DTOs;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace authApi.Controllers
+namespace ProjectBackend.Controllers
 {
     [Route("[controller]")]
     [ApiController]
@@ -25,7 +25,7 @@ namespace authApi.Controllers
         {
             try
             {
-                var result = await _context.Aspnetusers.ToListAsync();
+                var result = await _context.Aspnetuser.ToListAsync();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -39,7 +39,7 @@ namespace authApi.Controllers
         {
             try
             {
-                var result = await _context.Aspnetusers.Where(x => x.Id == id).ToListAsync();
+                var result = await _context.Aspnetuser.Where(x => x.Id == id).ToListAsync();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -62,7 +62,7 @@ namespace authApi.Controllers
                     ProfilKep = createdFelhasznalokDto.ProfilKep
                 };
 
-                _context.Aspnetusers.Add(request);
+                _context.Aspnetuser.Add(request);
                 await _context.SaveChangesAsync();
 
                 return CreatedAtAction(nameof(Get), new { id = request.Id }, request);
@@ -83,7 +83,7 @@ namespace authApi.Controllers
                     return BadRequest("Invalid input");
                 }
 
-                var existingFelhasznalo = await _context.Aspnetusers.FirstOrDefaultAsync(x => x.Id == id);
+                var existingFelhasznalo = await _context.Aspnetuser.FirstOrDefaultAsync(x => x.Id == id);
 
                 if (existingFelhasznalo == null)
                 {
@@ -114,14 +114,14 @@ namespace authApi.Controllers
                     return BadRequest("Invalid id");
                 }
 
-                var existingFelhasznalo = await _context.Aspnetusers.FirstOrDefaultAsync(x => x.Id == id);
+                var existingFelhasznalo = await _context.Aspnetuser.FirstOrDefaultAsync(x => x.Id == id);
 
                 if (existingFelhasznalo == null)
                 {
                     return NotFound();
                 }
 
-                _context.Aspnetusers.Remove(existingFelhasznalo);
+                _context.Aspnetuser.Remove(existingFelhasznalo);
                 await _context.SaveChangesAsync();
 
                 return NoContent();

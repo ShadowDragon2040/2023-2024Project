@@ -1,6 +1,6 @@
-﻿using authApi.Models;
+﻿using ProjectBackend.Models;
 
-namespace authApi.DTOs
+namespace ProjectBackend.DTOs
 {
     public record TermekekDto(int Id, string TermekNev, int Ar, string Leiras, int KategoriaId, int Menyiseg, string Keputvonal);
     public record CreatedTermekekDto(string TermekNev, int Ar, string Leiras, int KategoriaId,  int Menyiseg, string Keputvonal);

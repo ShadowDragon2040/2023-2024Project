@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace authApi.Models;
+namespace ProjectBackend.Models;
 
 public partial class Aspnetuserclaim
 {

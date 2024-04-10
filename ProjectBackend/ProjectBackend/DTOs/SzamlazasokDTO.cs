@@ -1,9 +1,9 @@
 ﻿
-using authApi.Models;
+using ProjectBackend.Models;
 
-namespace authApi.DTOs
+namespace ProjectBackend.DTOs
 {
     public record SzamlazasokDto(int Id, Aspnetuser UserId, Termekek TermekId, DateTime VasarlasIdopontja, bool SikeresSzalitas);
-    public record CreatedSzamlazasokDto(string UserId, int TermekId ,int SzinHex);
-    public record UpdateSzamlazasokDto(string UserId, int TermekId,int SzinHex, bool SikeresSzalitas);
+    public record CreatedSzamlazasokDto(string UserId, int TermekId ,string SzinHex);
+    public record UpdateSzamlazasokDto(string UserId, int TermekId,string SzinHex, bool SikeresSzalitas);
 }

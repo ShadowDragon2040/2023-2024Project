@@ -1,8 +1,8 @@
-﻿using authApi.Models;
+﻿using ProjectBackend.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace authApi.Controllers
+namespace ProjectBackend.Controllers
 {
     [Route("[controller]")]
     [ApiController]

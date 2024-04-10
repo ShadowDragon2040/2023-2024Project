@@ -4,8 +4,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using authApi.DTOs;
-using authApi.Models;
+using ProjectBackend.DTOs;
+using ProjectBackend.Models;
+using ProjectBackend.DTOs;
 
 namespace ProjectBackend.Controllers
 {
@@ -15,10 +16,12 @@ namespace ProjectBackend.Controllers
     {
         public static Aspnetuser User = new Aspnetuser();
         private readonly IConfiguration _configuration;
+        AuthContext _authContext;
 
-        public AuthController(IConfiguration configuration)
+        public AuthController(IConfiguration configuration, AuthContext authContext)
         {
             _configuration = configuration;
+            _authContext = authContext;
         }
         [HttpPost("register")]
         public ActionResult<Aspnetuser> Register(RegisterRequestDto request)
@@ -27,6 +30,14 @@ namespace ProjectBackend.Controllers
 
             User.UserName = request.UserName;
             User.PasswordHash = passwordHash;
+            try
+            {
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             return Ok(User);
 
         }
@@ -54,6 +65,7 @@ namespace ProjectBackend.Controllers
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name,User.UserName),
+                new Claim(ClaimTypes.Role,"USER")
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value!));
