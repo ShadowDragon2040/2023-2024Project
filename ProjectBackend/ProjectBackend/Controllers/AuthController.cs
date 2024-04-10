@@ -49,8 +49,6 @@ namespace ProjectBackend.Controllers
                     ProfilKep = new byte[0]
                 };
 
-               
-
                 var userExists = _authContext.Aspnetuser.FirstOrDefault(user => user.Email == newUser.Email);
                 if (userExists != null)
                 {
@@ -60,10 +58,9 @@ namespace ProjectBackend.Controllers
                 {
                     _authContext.Aspnetuser.Add(newUser);
                     _authContext.SaveChanges();
+                    // Send verification email
                     EmailService.SendVerificationMail(request.Email, newUser.EmailCode, _configuration);
                 }
-
-                // Send verification email
 
                 return Ok("User registered successfully. Verification email sent.");
             }
