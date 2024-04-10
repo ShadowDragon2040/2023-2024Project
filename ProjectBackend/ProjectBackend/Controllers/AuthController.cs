@@ -13,7 +13,6 @@ namespace ProjectBackend.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        public static Aspnetuser User = new Aspnetuser();
         private static Random rnd= new Random();    
         private readonly IConfiguration _configuration;
         AuthContext _authContext;
@@ -26,44 +25,47 @@ namespace ProjectBackend.Controllers
         [HttpPost("register")]
         public ActionResult<Aspnetuser> Register(RegisterRequestDto request)
         {
-            
             try
             {
                 string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
-                User.Id = new Guid().ToString();
-                User.UserName = request.UserName;
-                User.PasswordHash = passwordHash;
-                User.Email= request.Email;
-                User.EmailCode = rnd.Next(1000, 10000);
-                User.AktivalasIdopotja=DateTime.Now;
-                User.EmailConfirmed = false;
-                User.ProfilKep = new byte[0];
-                _authContext.Aspnetuser.Add(User);
-                _authContext.SaveChanges();
-                return Ok(User);
+                var newUser = new Aspnetuser
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = request.UserName,
+                    PasswordHash = passwordHash,
+                    Email = request.Email,
+                    EmailCode = new Random().Next(1000, 10000),
+                    AktivalasIdopotja = DateTime.Now,
+                    EmailConfirmed = false,
+                    ProfilKep = new byte[0]
+                };
 
+                _authContext.Aspnetuser.Add(newUser);
+                _authContext.SaveChanges();
+
+                return Ok(newUser);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-
         }
 
         [HttpPost("login")]
         public ActionResult<Aspnetuser> Login(LoginRequestDto request)
         {
-            if (User.UserName != request.UserName)
+            var user = _authContext.Aspnetuser.FirstOrDefault(u=>u.UserName==request.UserName);
+            if (user.UserName != request.UserName)
             {
                 return BadRequest("User Not Found!");
             }
-            if (!BCrypt.Net.BCrypt.Verify(request.Password, User.PasswordHash))
+            if (!BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
             {
                 return BadRequest("Wrong password!");
             }
 
-            string token = CreateToken(User);
+            string token = CreateToken(user);
 
             return Ok(token);
 

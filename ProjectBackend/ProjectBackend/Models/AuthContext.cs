@@ -66,10 +66,6 @@ public partial class AuthContext : DbContext
 
             entity.ToTable("aspnetusers");
 
-            entity.HasIndex(e => e.NormalizedEmail, "EmailIndex");
-
-            entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex").IsUnique();
-
             entity.Property(e => e.AktivalasIdopotja)
                 .HasDefaultValueSql("'current_timestamp()'")
                 .HasColumnType("datetime");
@@ -77,12 +73,6 @@ public partial class AuthContext : DbContext
                 .HasMaxLength(256)
                 .HasDefaultValueSql("'NULL'");
             entity.Property(e => e.EmailCode).HasColumnType("int(11)");
-            entity.Property(e => e.NormalizedEmail)
-                .HasMaxLength(256)
-                .HasDefaultValueSql("'NULL'");
-            entity.Property(e => e.NormalizedUserName)
-                .HasMaxLength(256)
-                .HasDefaultValueSql("'NULL'");
             entity.Property(e => e.PasswordHash).HasDefaultValueSql("'NULL'");
             entity.Property(e => e.ProfilKep).HasColumnType("mediumblob");
             entity.Property(e => e.UserName)
