@@ -8,8 +8,7 @@ using ProjectBackend.DTOs;
 using ProjectBackend.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using authApi.Models;
-
+using ProjectBackend.Services;
 namespace ProjectBackend.Controllers
 {
     [Route("api/[controller]")]
@@ -26,10 +25,16 @@ namespace ProjectBackend.Controllers
             _authContext = authContext;
         }
         [HttpPost("register")]
-        public ActionResult<Aspnetuser> Register(RegisterRequestDto request)
+        public IActionResult Register(RegisterRequestDto request)
         {
             try
             {
+                // Validate request model
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
                 string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
                 var newUser = new Aspnetuser
@@ -44,16 +49,33 @@ namespace ProjectBackend.Controllers
                     ProfilKep = new byte[0]
                 };
 
-                _authContext.Aspnetuser.Add(newUser);
-                _authContext.SaveChanges();
+               
 
-                return Ok(newUser);
+                var userExists = _authContext.Aspnetuser.FirstOrDefault(user => user.Email == newUser.Email);
+                if (userExists != null)
+                {
+                    return BadRequest("User already exists with this email address!");
+                }
+                else
+                {
+                    _authContext.Aspnetuser.Add(newUser);
+                    _authContext.SaveChanges();
+                    EmailService.SendVerificationMail(request.Email, newUser.EmailCode, _configuration);
+                }
+
+                // Send verification email
+
+                return Ok("User registered successfully. Verification email sent.");
             }
             catch (Exception ex)
             {
+                // Log the exception
+                Console.WriteLine($"Error registering user: {ex.Message}");
+
                 return BadRequest(ex.Message);
             }
         }
+
 
         [HttpPost("login")]
         public ActionResult<Aspnetuser> Login(LoginRequestDto request)
@@ -135,6 +157,45 @@ namespace ProjectBackend.Controllers
                 return BadRequest("User not found.");
             }
         }
+
+        [HttpPost("verify-email")]
+        public IActionResult VerifyEmailCode([FromBody] VerificationRequestDto model)
+        {
+            try
+            {
+                var user = _authContext.Aspnetuser.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
+
+                if (user != null)
+                {
+                    if (user.EmailCode == model.EmailCode)
+                    {
+                        user.EmailConfirmed = true;
+                        _authContext.Aspnetuser.Update(user);
+                        _authContext.SaveChanges();
+
+                        return Ok("Email verified successfully.");
+                    }
+                    else
+                    {
+                        return BadRequest("Incorrect email verification code.");
+                    }
+                }
+                else
+                {
+                    return BadRequest("User not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error verifying email: {ex.Message}");
+
+                return StatusCode(500, "An error occurred while verifying email.");
+            }
+        }
+
+
+
+
         private string CreateToken(Aspnetuser User)
         {
 
@@ -151,6 +212,10 @@ namespace ProjectBackend.Controllers
                 {
                     claims.Add(new Claim(ClaimTypes.Role, role.Name));
                 }
+            }
+            else
+            {
+                claims.Add(new Claim(ClaimTypes.Role, "USER"));
             }
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value!));
