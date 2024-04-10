@@ -7,11 +7,7 @@ public partial class Aspnetrole
 {
     public string Id { get; set; } = null!;
 
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
-    public string? NormalizedName { get; set; }
-
-    public string? ConcurrencyStamp { get; set; }
-
-    public virtual ICollection<Aspnetuser> Users { get; set; } = new List<Aspnetuser>();
+    public virtual ICollection<Aspnetuserrole> Aspnetuserroles { get; set; } = new List<Aspnetuserrole>();
 }

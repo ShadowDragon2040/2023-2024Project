@@ -19,6 +19,8 @@ public partial class AuthContext : DbContext
 
     public virtual DbSet<Aspnetuser> Aspnetuser { get; set; }
 
+    public virtual DbSet<Aspnetuserrole> Aspnetuserrole { get; set; }
+
     public virtual DbSet<Efmigrationshistory> Efmigrationshistorie { get; set; }
 
     public virtual DbSet<Ftpfile> Ftpfile { get; set; }
@@ -47,17 +49,9 @@ public partial class AuthContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("aspnetroles");
+            entity.ToTable("aspnetrole");
 
-            entity.HasIndex(e => e.NormalizedName, "RoleNameIndex").IsUnique();
-
-            entity.Property(e => e.ConcurrencyStamp).HasDefaultValueSql("'NULL'");
-            entity.Property(e => e.Name)
-                .HasMaxLength(256)
-                .HasDefaultValueSql("'NULL'");
-            entity.Property(e => e.NormalizedName)
-                .HasMaxLength(256)
-                .HasDefaultValueSql("'NULL'");
+            entity.HasIndex(e => e.Name, "Name").IsUnique();
         });
 
         modelBuilder.Entity<Aspnetuser>(entity =>
@@ -65,6 +59,10 @@ public partial class AuthContext : DbContext
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
             entity.ToTable("aspnetusers");
+
+            entity.HasIndex(e => e.Email, "Email").IsUnique();
+
+            entity.HasIndex(e => e.UserName, "UserName").IsUnique();
 
             entity.Property(e => e.AktivalasIdopotja)
                 .HasDefaultValueSql("'current_timestamp()'")
@@ -78,22 +76,25 @@ public partial class AuthContext : DbContext
             entity.Property(e => e.UserName)
                 .HasMaxLength(256)
                 .HasDefaultValueSql("'NULL'");
+        });
 
-            entity.HasMany(d => d.Roles).WithMany(p => p.Users)
-                .UsingEntity<Dictionary<string, object>>(
-                    "Aspnetuserrole",
-                    r => r.HasOne<Aspnetrole>().WithMany()
-                        .HasForeignKey("RoleId")
-                        .HasConstraintName("FK_AspNetUserRoles_AspNetRoles_RoleId"),
-                    l => l.HasOne<Aspnetuser>().WithMany()
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("FK_AspNetUserRoles_AspNetUsers_UserId"),
-                    j =>
-                    {
-                        j.HasKey("UserId", "RoleId").HasName("PRIMARY");
-                        j.ToTable("aspnetuserroles");
-                        j.HasIndex(new[] { "RoleId" }, "IX_AspNetUserRoles_RoleId");
-                    });
+        modelBuilder.Entity<Aspnetuserrole>(entity =>
+        {
+            entity.HasKey(e => e.UserId).HasName("PRIMARY");
+
+            entity.ToTable("aspnetuserrole");
+
+            entity.HasIndex(e => e.RoleId, "RoleId");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.Aspnetuserroles)
+                .HasForeignKey(d => d.RoleId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("aspnetuserrole_ibfk_2");
+
+            entity.HasOne(d => d.User).WithOne(p => p.Aspnetuserrole)
+                .HasForeignKey<Aspnetuserrole>(d => d.UserId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("aspnetuserrole_ibfk_1");
         });
 
         modelBuilder.Entity<Efmigrationshistory>(entity =>
