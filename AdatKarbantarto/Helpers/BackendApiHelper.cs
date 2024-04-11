@@ -32,7 +32,7 @@ namespace AdatKarbantarto.Helpers
 
         #region Felhasznalok
 
-        public async Task<AuthenticatedUser> PostAsync(string username, string password)
+        public async Task<string> PostAsync(string username, string password)
         {
             var requestData = new
             {
@@ -44,12 +44,12 @@ namespace AdatKarbantarto.Helpers
 
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            using (HttpResponseMessage response = await _httpClient.PostAsync("/Auth/Login", content))
+            using (HttpResponseMessage response = await _httpClient.PostAsync("/api/Auth/Login", content))
             {
                 if (response.IsSuccessStatusCode)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<AuthenticatedUser>(responseContent);
+                    return JsonConvert.DeserializeObject<string>(responseContent);
                 }
                 else
                 {

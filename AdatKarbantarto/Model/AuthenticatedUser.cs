@@ -11,7 +11,6 @@ namespace AdatKarbantarto.Model
 {
     public class AuthenticatedUser
     {
-        public User User { get; set; }
         public string token { get; set; }
     }
 

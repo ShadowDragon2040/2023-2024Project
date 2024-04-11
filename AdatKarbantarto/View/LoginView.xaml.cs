@@ -1,25 +1,15 @@
 ﻿using AdatKarbantarto.Helpers;
-using AdatKarbantarto.Model;
-using MaterialDesignExtensions.Controls;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using System.Configuration;
+using System.Data;
+using System.DirectoryServices.ActiveDirectory;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Claims;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace AdatKarbantarto.View
 {
@@ -35,7 +25,7 @@ namespace AdatKarbantarto.View
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton==MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
             }
@@ -65,12 +55,26 @@ namespace AdatKarbantarto.View
             }
         }
 
-        private void JwtDecode(SecureString token)
+        private bool JwtDecode(SecureString token)
         {
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-           string tokenString= ConvertSecureStringToString(token);
-           JwtSecurityToken decoded= handler.ReadJwtToken(tokenString);
-           
+            string tokenString = ConvertSecureStringToString(token);
+            JwtSecurityToken decoded = handler.ReadJwtToken(tokenString);
+            Claim roleClaim = decoded.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
+            if (roleClaim != null)
+            {
+                if (roleClaim.Value == "ADMIN")
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+            return false;
+
+
         }
 
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -79,17 +83,24 @@ namespace AdatKarbantarto.View
             {
                 BackendApiHelper apiHelper = new BackendApiHelper();
                 string passString = new NetworkCredential("", txtPassword.Password).Password;
-                AuthenticatedUser user = await apiHelper.PostAsync(txtUsername.Text, passString);
+                string userToken = await apiHelper.PostAsync(txtUsername.Text, passString);
 
-                if (user != null)
+                if (userToken != null)
                 {
-                    SecureString token = ConvertToSecureString(user.token);
-                    JwtDecode(token);
-                    MessageBox.Show($"Logged in as: {user.User.UserName}");
-                    MainWindow window = new MainWindow(token);
-                    window.Show();
+                    SecureString token = ConvertToSecureString(userToken);
+                    bool admin = JwtDecode(token);
+                    if (admin)
+                    {
+                        MainWindow window = new MainWindow(token);
+                        window.Show();
+                        this.Close();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("The user is not admin!");
+                    }
                 }
-                this.Close();
 
             }
             catch (Exception ex)

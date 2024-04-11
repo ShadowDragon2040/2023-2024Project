@@ -18,7 +18,7 @@ namespace AdatKarbantarto.ViewModel
 {
     public class ImageUploadVM : ViewModelBase
     {
-        private string _fileName;
+        
         private List<FtpFile> _uploadedFilesList;
         private ObservableCollection<FtpFile> _uploadedFiles;
         public string Filename { get; set; }
