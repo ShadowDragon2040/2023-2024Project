@@ -21,10 +21,10 @@ namespace AdatKarbantarto
     {
         private readonly NavigationVM _vm;
 
-        public MainWindow(SecureString token)
+        public MainWindow( )
         {
             InitializeComponent();
-            _vm = new NavigationVM(token); 
+            _vm = new NavigationVM(); 
             DataContext = _vm;
         }
     }

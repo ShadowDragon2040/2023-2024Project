@@ -17,13 +17,12 @@ namespace AdatKarbantarto.ViewModel
 {
     public class HozzaszolasokVM : ViewModelBase
     {
+        private BackendApiHelper _backendApiHelper;
         private static readonly Regex _regex = new Regex("[^0-9 ]+");
         private string _searchProductID = "";
         private bool _isSaveEnabled;
         private bool _isAddEnabled;
         private Hozzaszolas _selectedItem;
-        private Felhasznalo _selectedUser;
-        private Termek _selectedTermek;
         private List<Hozzaszolas> _ListData;
         private ObservableCollection<Hozzaszolas> _items;
         private ObservableCollection<Hozzaszolas> _updateItem;
@@ -45,10 +44,7 @@ namespace AdatKarbantarto.ViewModel
             LoadInitialData();
         }
 
-        public HozzaszolasokVM(SecureString jwtToken)
-        {
-            JwtToken = jwtToken;
-        }
+      
         #region Commands
         public RelayCommand RefreshCommand { get; private set; }
         public RelayCommand AddCommand { get; private set; }
@@ -141,8 +137,8 @@ namespace AdatKarbantarto.ViewModel
             // Load data into Items collection 
             try
             {
-                BackendApiHelper apiHelper = new BackendApiHelper();
-                _ListData = await apiHelper.GetHozzaszolasokAsync();
+               
+                _ListData = await _backendApiHelper.GetHozzaszolasokAsync();
                 
                 HozzaszolasItems.Clear();
                 foreach (var Hozzaszolas in _ListData)
@@ -167,8 +163,8 @@ namespace AdatKarbantarto.ViewModel
                     Leiras = SelectedItem.Leiras,
                     Ertekeles = SelectedItem.Ertekeles,
                 };
-                BackendApiHelper postHelper = new BackendApiHelper();
-                var response = await postHelper.PostHozzaszolasAsync(newProduct);
+               
+                var response = await _backendApiHelper.PostHozzaszolasAsync(newProduct);
                 MessageBox.Show(response.ToString());
 
                 IsAddEnabled = true;
@@ -190,9 +186,9 @@ namespace AdatKarbantarto.ViewModel
 
             if (result)
             {
-                BackendApiHelper modhelper = new BackendApiHelper();
                
-                var response = await modhelper.ModifyHozzaszolasAsync(UpdateItem[0].HozzaszolasId, UpdateItem[0]);
+               
+                var response = await _backendApiHelper.ModifyHozzaszolasAsync(UpdateItem[0].HozzaszolasId, UpdateItem[0]);
                 if (response)
                 {
                     MessageBox.Show("Item edited successfully!", "Success!", MessageBoxButton.OK);
@@ -210,8 +206,8 @@ namespace AdatKarbantarto.ViewModel
 
             if (result)
             {
-                BackendApiHelper deleteHelper = new BackendApiHelper();
-                var response = await deleteHelper.DeleteHozzaszolasAsync(itemToDelete.HozzaszolasId);
+            
+                var response = await _backendApiHelper.DeleteHozzaszolasAsync(itemToDelete.HozzaszolasId);
                 if (response)
                 {
                     MessageBox.Show("Item deleted successfully!", "Success!", MessageBoxButton.OK);

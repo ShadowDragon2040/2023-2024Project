@@ -13,6 +13,7 @@ namespace AdatKarbantarto.ViewModel
 {
     public class SzamlazasVM : ViewModelBase
     {
+        private BackendApiHelper _backendApiHelper;
         private static readonly Regex _regex = new Regex("[^0-9 ]+");
         private string _searchProductID = "";
         private bool _isSaveEnabled;
@@ -39,10 +40,7 @@ namespace AdatKarbantarto.ViewModel
             LoadInitialData();
         }
 
-        public SzamlazasVM(SecureString jwtToken)
-        {
-            JwtToken = jwtToken;
-        }
+    
         #region Commands
         public RelayCommand RefreshCommand { get; private set; }
         public RelayCommand AddCommand { get; private set; }
@@ -129,7 +127,7 @@ namespace AdatKarbantarto.ViewModel
             }
         }
 
-        public SecureString JwtToken { get; }
+       
         #endregion
         #region CRUD
         private async void LoadInitialData()
@@ -137,8 +135,8 @@ namespace AdatKarbantarto.ViewModel
             // Load data into Items collection 
             try
             {
-                BackendApiHelper apiHelper = new BackendApiHelper();
-                _ListData = await apiHelper.GetSzamlaAsync();
+                
+                _ListData = await _backendApiHelper.GetSzamlaAsync();
                
                 SzamlaItems.Clear();
               
@@ -165,8 +163,8 @@ namespace AdatKarbantarto.ViewModel
                 VasarlasIdopontja = DateTime.Now,
                 SikeresSzalitas = false,
             };
-            BackendApiHelper postHelper = new BackendApiHelper();
-            var response = await postHelper.PostSzamlaAsync(newOrder);
+          
+            var response = await _backendApiHelper.PostSzamlaAsync(newOrder);
             MessageBox.Show(response.ToString());
 
 
@@ -183,9 +181,9 @@ namespace AdatKarbantarto.ViewModel
 
             if (result)
             {
-                BackendApiHelper modhelper = new BackendApiHelper();
               
-                var response = await modhelper.ModifySzamlaAsync(UpdateItem[0].SzamlazasId, UpdateItem[0]);
+              
+                var response = await _backendApiHelper.ModifySzamlaAsync(UpdateItem[0].SzamlazasId, UpdateItem[0]);
                 if (response)
                 {
                     MessageBox.Show("Item edited successfully!", "Success!", MessageBoxButton.OK);
@@ -203,8 +201,8 @@ namespace AdatKarbantarto.ViewModel
 
             if (result)
             {
-                BackendApiHelper deleteHelper = new BackendApiHelper();
-                var response = await deleteHelper.DeleteSzamlaAsync(itemToDelete.SzamlazasId);
+                
+                var response = await _backendApiHelper.DeleteSzamlaAsync(itemToDelete.SzamlazasId);
                 if (response)
                 {
                     MessageBox.Show("Item deleted successfully!", "Success!", MessageBoxButton.OK);

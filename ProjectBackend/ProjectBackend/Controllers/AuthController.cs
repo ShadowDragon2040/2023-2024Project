@@ -75,22 +75,21 @@ namespace ProjectBackend.Controllers
 
 
         [HttpPost("login")]
-        public ActionResult<Aspnetuser> Login(LoginRequestDto request)
+        public ActionResult Login(LoginRequestDto request)
         {
             var user = _authContext.Aspnetuser.FirstOrDefault(u => u.UserName == request.UserName);
-            if (user.UserName != request.UserName)
+            if (user == null)
             {
-                return BadRequest("User Not Found!");
+                return StatusCode(404,"User Not Found!");
             }
+
             if (!BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
             {
-                return BadRequest("Wrong password!");
+                return StatusCode(404,"Wrong password!");
             }
 
             string token = CreateToken(user);
-
             return Ok(token);
-
         }
         [HttpPost("AssignRole")]
         [Authorize(Roles = "ADMIN")] // Change the role as per your requirement

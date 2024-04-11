@@ -15,13 +15,7 @@ namespace AdatKarbantarto.ViewModel
 {
     class NavigationVM:ViewModelBase
     {
-        private SecureString jwtToken;
-
-        public SecureString JwtToken
-        {
-            get { return jwtToken; }
-            set { jwtToken = value; OnPropertyChanged(); }
-        }
+        
 
         private object _currentView;
         public object CurrentView
@@ -37,24 +31,20 @@ namespace AdatKarbantarto.ViewModel
         public ICommand SzamlazasCommand { get; set; }  
         public ICommand ImageUploadCommand { get; set; }
 
-        private void Home(object obj) => CurrentView = new HomeVM(JwtToken);
-        private void Felhasznalo(object obj) => CurrentView = new FelhasznalokVM(JwtToken);
-        private void Termek(object obj) => CurrentView = new TermekekVM(JwtToken);
-        private void Hozzaszolas(object obj) => CurrentView = new HozzaszolasokVM(JwtToken);
-        private void Szamlazas(object obj)=>CurrentView=new SzamlazasVM(JwtToken);
-        private void ImageUpload(object obj)=>CurrentView = new ImageUploadVM(JwtToken);
+        private void Home(object obj) => CurrentView = new HomeVM();
+        private void Felhasznalo(object obj) => CurrentView = new FelhasznalokVM();
+        private void Termek(object obj) => CurrentView = new TermekekVM();
+        private void Hozzaszolas(object obj) => CurrentView = new HozzaszolasokVM();
+        private void Szamlazas(object obj)=>CurrentView=new SzamlazasVM();
+        private void ImageUpload(object obj)=>CurrentView = new ImageUploadVM();
 
         public NavigationVM()
         {
             InitializeCommands();
+            CurrentView = new HomeVM();
         }
 
-        public NavigationVM(SecureString token)
-        {
-            JwtToken = token;
-            CurrentView = new HomeVM(JwtToken); 
-            InitializeCommands();
-        }
+       
 
 
         private void InitializeCommands()

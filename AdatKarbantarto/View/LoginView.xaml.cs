@@ -88,13 +88,14 @@ namespace AdatKarbantarto.View
                 if (userToken != null)
                 {
                     SecureString token = ConvertToSecureString(userToken);
+                    
+
                     bool admin = JwtDecode(token);
                     if (admin)
                     {
-                        MainWindow window = new MainWindow(token);
+                        MainWindow window = new MainWindow();
                         window.Show();
                         this.Close();
-
                     }
                     else
                     {
@@ -108,6 +109,8 @@ namespace AdatKarbantarto.View
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+
 
         private SecureString ConvertToSecureString(string token)
         {

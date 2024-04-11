@@ -10,17 +10,22 @@ using Newtonsoft.Json;
 using System.Windows;
 using AdatKarbantarto.Exceptions;
 using System.Security;
+using System.Net;
+using Newtonsoft.Json.Linq;
 
 namespace AdatKarbantarto.Helpers
 {
     public class BackendApiHelper
     {
         private readonly HttpClient _httpClient;
+        public string _jwtToken;
+       
 
         public BackendApiHelper()
         {
             _httpClient = new HttpClient();
-            string apiBaseUrl = ConfigurationManager.AppSettings["api"]??"";
+
+            string apiBaseUrl = ConfigurationManager.AppSettings["api"] ?? "";
             if (!string.IsNullOrEmpty(apiBaseUrl))
             {
                 _httpClient.BaseAddress = new Uri(apiBaseUrl);
@@ -29,6 +34,13 @@ namespace AdatKarbantarto.Helpers
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
+
+        public void SetJwtToken(string token)
+        {
+            _jwtToken = token;
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _jwtToken);
+        }
+
 
         #region Felhasznalok
 
@@ -49,11 +61,13 @@ namespace AdatKarbantarto.Helpers
                 if (response.IsSuccessStatusCode)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
+                    SetJwtToken(responseContent);
                     return JsonConvert.DeserializeObject<string>(responseContent);
+                    
                 }
                 else
                 {
-                    throw new Exception($"Failed to post data to API. Status code: {response.StatusCode}");
+                    throw new Exception($"Failed to post data to API. {response.StatusCode} {response.Content}");
                 }
             }
         }
@@ -73,7 +87,7 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
-        public async Task<List<Felhasznalo>> GetFelhasznalokAsync(SecureString secureString)
+        public async Task<List<Felhasznalo>> GetFelhasznalokAsync()
         {
             using (HttpResponseMessage response = await _httpClient.GetAsync("/Felhasznalok"))
             {
@@ -208,6 +222,7 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                
                 HttpResponseMessage response = await _httpClient.GetAsync("/Termekek");
 
                 if (response.IsSuccessStatusCode)

@@ -13,7 +13,7 @@ namespace AdatKarbantarto.ViewModel
 {
     public class FelhasznalokVM : ViewModelBase
     {
-        private SecureString _securerString;
+        private BackendApiHelper _backendApiHelper;
         private static readonly Regex _regex = new Regex("[^0-9 ]+");
         private string _searchProductID = "";
         private bool _isSaveEnabled;
@@ -27,6 +27,7 @@ namespace AdatKarbantarto.ViewModel
         {
             IsSaveEnabled = false;
             IsAddEnabled = true;
+            _backendApiHelper=new BackendApiHelper();
             Items = new ObservableCollection<Felhasznalo>();
             UpdateItem = new ObservableCollection<Felhasznalo>();
             RefreshCommand = new RelayCommand(execute => RefreshItems());
@@ -40,10 +41,7 @@ namespace AdatKarbantarto.ViewModel
             LoadInitialData();
         }
 
-        public FelhasznalokVM(SecureString secureString) : this()
-        {
-            SecurerString = secureString;
-        }
+    
         #region Commands
         public RelayCommand RefreshCommand { get; private set; }
         public RelayCommand AddCommand { get; private set; }
@@ -55,7 +53,7 @@ namespace AdatKarbantarto.ViewModel
         #region Getters/Setters
 
 
-        public SecureString SecurerString { get { return _securerString; } private set { value = _securerString; } }
+       
         public string SearchProductID
         {
             get { return _searchProductID; }
@@ -136,8 +134,8 @@ namespace AdatKarbantarto.ViewModel
             try
             {
                 
-                BackendApiHelper apiHelper = new BackendApiHelper();
-                _ListData = await apiHelper.GetFelhasznalokAsync(SecurerString);
+               
+                _ListData = await _backendApiHelper.GetFelhasznalokAsync();
 
                 Items.Clear();
 
@@ -160,8 +158,8 @@ namespace AdatKarbantarto.ViewModel
                 Password = UpdateItem[0].PasswordHash,
                 Email = UpdateItem[0].Email
             };
-            BackendApiHelper postHelper = new BackendApiHelper();
-            var response = await postHelper.PostFelhasznaloAsync(newUser);
+          
+            var response = await _backendApiHelper.PostFelhasznaloAsync(newUser);
             MessageBox.Show(response.ToString());
 
             IsAddEnabled = true;
@@ -177,9 +175,9 @@ namespace AdatKarbantarto.ViewModel
 
             if (result)
             {
-                BackendApiHelper modhelper = new BackendApiHelper();
+              
 
-                var response = await modhelper.ModifyFelhasznaloAsync(UpdateItem[0].Id, UpdateItem[0]);
+                var response = await _backendApiHelper.ModifyFelhasznaloAsync(UpdateItem[0].Id, UpdateItem[0]);
                 if (response)
                 {
                     MessageBox.Show("Item edited successfully!", "Success!", MessageBoxButton.OK);
@@ -197,8 +195,8 @@ namespace AdatKarbantarto.ViewModel
 
             if (result)
             {
-                BackendApiHelper deleteHelper = new BackendApiHelper();
-                var response = await deleteHelper.DeleteFelhasznaloAsync(itemToDelete.Id);
+               
+                var response = await _backendApiHelper.DeleteFelhasznaloAsync(itemToDelete.Id);
                 if (response)
                 {
                     MessageBox.Show("Item deleted successfully!", "Success!", MessageBoxButton.OK);
