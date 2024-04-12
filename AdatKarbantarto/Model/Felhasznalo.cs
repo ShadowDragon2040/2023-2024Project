@@ -16,7 +16,7 @@ namespace AdatKarbantarto.Model
         public string Email { get; set; }
         public string ProfilKep { get; set; }
         public string PhoneNumber { get; set; }
-        public DateTime ActivateDate { get; set; }
+        public DateTime AktivalasIdopotja { get; set; }
 
        
     }

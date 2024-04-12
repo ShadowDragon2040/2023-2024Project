@@ -13,7 +13,7 @@ namespace AdatKarbantarto.ViewModel
 
         public HomeVM()
         {
-            
+         
         }
         
     }

@@ -40,7 +40,6 @@ namespace AdatKarbantarto.Helpers
         {
             AdatKarbantarto.MainWindow._jwtToken =token.Replace("\"","");
             
-
         }
 
         #region Felhasznalok
@@ -73,70 +72,56 @@ namespace AdatKarbantarto.Helpers
             }
         }
 
-        public async Task<bool> DeleteFelhasznaloAsync(string id)
+        public async Task<HttpResponseMessage> DeleteFelhasznaloAsync(string id)
         {
-            using (HttpResponseMessage response = await _httpClient.DeleteAsync("/Felhasznalok/" + id))
+            try
             {
-                if (response.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-                else
-                {
-                    MessageBox.Show(response.ToString());
-                    throw new Exception($"Failed to delete data from API. Status code: {response.StatusCode}");
-                }
+                HttpResponseMessage response = await _httpClient.DeleteAsync("/Felhasznalok/" + id);
+                return response;
+                
+            }
+            catch(HttpRequestException ex)
+            {
+                throw new HttpRequestException("Failed to delete Item", ex);
             }
         }
-        public async Task<List<Felhasznalo>> GetFelhasznalokAsync()
+        public async Task<HttpResponseMessage> GetFelhasznalokAsync()
         {
-            using (HttpResponseMessage response = await _httpClient.GetAsync("/Felhasznalok"))
+            try
             {
-                if (response.IsSuccessStatusCode)
-                {
+                HttpResponseMessage response = await _httpClient.GetAsync("/Felhasznalok");
+                
                     string content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<Felhasznalo>>(content);
-                }
-                else
-                {
-                    throw new Exception($"Failed to fetch data from API. Status code: {response.StatusCode}");
-                }
+                    return response;
+                    
+            }
+            catch(HttpRequestException ex)
+            {
+                throw new HttpRequestException("Failed to put Item", ex);
             }
         }
-        public async Task<bool> ModifyFelhasznaloAsync(string id, Felhasznalo felhasznalo)
+        public async Task<HttpResponseMessage> ModifyFelhasznaloAsync(string id, Felhasznalo felhasznalo)
         {
             try
             {
                 HttpResponseMessage response = await _httpClient.PutAsJsonAsync("/Felhasznalok/" + id, felhasznalo);
-                string responseBody = await response.Content.ReadAsStringAsync();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-                else
-                {
-                    MessageBox.Show(responseBody);
-                    throw new Exception($"Failed to modify data from API. Status code: {response.StatusCode}. Response: {responseBody}");
-                }
+                return response;
             }
-            catch (Exception ex)
+            catch (HttpRequestException ex)
             {
-                MessageBox.Show(ex.Message);
-                return false;
+                throw new HttpRequestException("Failed to put Item", ex);
             }
         }
-        public async Task<bool> PostFelhasznaloAsync(RegisterUser ujfelhasznalo)
+        public async Task<HttpResponseMessage> PostFelhasznaloAsync(RegisterUser ujfelhasznalo)
         {
             try
             {
                 HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/api/Auth/Register", ujfelhasznalo);
-                response.EnsureSuccessStatusCode();
-                return true;
+                return response;
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception("Failed to post Item", ex);
+                throw new HttpRequestException("Failed to post Item", ex);
             }
         }
         #endregion
@@ -399,7 +384,7 @@ namespace AdatKarbantarto.Helpers
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception("Failed to post Item", ex);
+                throw new HttpRequestException("Failed to post Item", ex);
             }
         }
         public async Task<List<FtpFile>> GetFtpFilesAsync()
@@ -413,7 +398,7 @@ namespace AdatKarbantarto.Helpers
                 }
                 else
                 {
-                    throw new Exception($"Failed to fetch data from API. Status code: {response.StatusCode}");
+                    throw new HttpRequestException($"Failed to fetch data from API. Status code: {response.StatusCode}");
                 }
             }
         }

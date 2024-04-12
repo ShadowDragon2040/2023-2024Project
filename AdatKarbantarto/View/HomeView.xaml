@@ -23,7 +23,7 @@
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" Grid.Column="0" BorderThickness="0,0,0,3" BorderBrush="#FF436437" 
-                HorizontalAlignment="Left" VerticalAlignment="Center" Width="800" Height="72"
+                HorizontalAlignment="Left" VerticalAlignment="Center" Width="1200" Height="72"
                 >
             <Label Content="Welcome back!" Margin="15,0,0,0" Foreground="DarkGray" FontSize="40"
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
@@ -31,7 +31,7 @@
 
         <Image Grid.Row="1" Grid.Column="0" Source="{StaticResource LogoImage}"
                HorizontalAlignment="Left" VerticalAlignment="Top"
-               Margin="20,20,0,0"
+               Margin="70,20,0,0"
                Width="700"
                Height="400"
                Opacity="0.6"

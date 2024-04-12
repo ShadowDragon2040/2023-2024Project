@@ -1,8 +1,10 @@
 ﻿using AdatKarbantarto.Helpers;
 using AdatKarbantarto.Model;
 using AdatKarbantarto.Utilities;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Net.Mail;
 using System.Security;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -15,6 +17,7 @@ namespace AdatKarbantarto.ViewModel
     {
         private BackendApiHelper _backendApiHelper;
         private static readonly Regex _regex = new Regex("[^0-9 ]+");
+
         private string _searchProductID = "";
         private bool _isSaveEnabled;
         private bool _isAddEnabled;
@@ -27,7 +30,7 @@ namespace AdatKarbantarto.ViewModel
         {
             IsSaveEnabled = false;
             IsAddEnabled = true;
-            _backendApiHelper=new BackendApiHelper();
+            _backendApiHelper = new BackendApiHelper();
             Items = new ObservableCollection<Felhasznalo>();
             UpdateItem = new ObservableCollection<Felhasznalo>();
             RefreshCommand = new RelayCommand(execute => RefreshItems());
@@ -41,7 +44,7 @@ namespace AdatKarbantarto.ViewModel
             LoadInitialData();
         }
 
-    
+
         #region Commands
         public RelayCommand RefreshCommand { get; private set; }
         public RelayCommand AddCommand { get; private set; }
@@ -53,7 +56,7 @@ namespace AdatKarbantarto.ViewModel
         #region Getters/Setters
 
 
-       
+
         public string SearchProductID
         {
             get { return _searchProductID; }
@@ -133,9 +136,17 @@ namespace AdatKarbantarto.ViewModel
             // Load data into Items collection 
             try
             {
-                
-               
-                _ListData = await _backendApiHelper.GetFelhasznalokAsync();
+                var resp = await _backendApiHelper.GetFelhasznalokAsync();
+                string content = await resp.Content.ReadAsStringAsync();
+                if (resp != null)
+                {
+                    _ListData = JsonConvert.DeserializeObject<List<Felhasznalo>>(content);
+
+                }
+                else
+                {
+                    MessageBox.Show(resp.ToString());
+                }
 
                 Items.Clear();
 
@@ -158,9 +169,17 @@ namespace AdatKarbantarto.ViewModel
                 Password = UpdateItem[0].PasswordHash,
                 Email = UpdateItem[0].Email
             };
-          
-            var response = await _backendApiHelper.PostFelhasznaloAsync(newUser);
-            MessageBox.Show(response.ToString());
+            if (isEmailAllowed(newUser.Email))
+            {
+                var response = await _backendApiHelper.PostFelhasznaloAsync(newUser);
+                var content = await response.Content.ReadAsStringAsync();
+                MessageBox.Show(content);
+            }
+            else
+            {
+                MessageBox.Show("Invalid email address!");
+            }
+
 
             IsAddEnabled = true;
             IsSaveEnabled = false;
@@ -175,10 +194,8 @@ namespace AdatKarbantarto.ViewModel
 
             if (result)
             {
-              
-
                 var response = await _backendApiHelper.ModifyFelhasznaloAsync(UpdateItem[0].Id, UpdateItem[0]);
-                if (response)
+                if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Item edited successfully!", "Success!", MessageBoxButton.OK);
                 }
@@ -195,13 +212,14 @@ namespace AdatKarbantarto.ViewModel
 
             if (result)
             {
-               
+
                 var response = await _backendApiHelper.DeleteFelhasznaloAsync(itemToDelete.Id);
-                if (response)
+                
+                if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Item deleted successfully!", "Success!", MessageBoxButton.OK);
                 }
-                else MessageBox.Show("Something went wrong!", "Warning!", MessageBoxButton.OKCancel);
+                else MessageBox.Show("Something went wrong! Please refresh the page and try again!", "Warning!", MessageBoxButton.OKCancel);
 
             }
         }
@@ -209,6 +227,19 @@ namespace AdatKarbantarto.ViewModel
         private static bool isTextAllowed(string value)
         {
             return !_regex.IsMatch(value);
+        }
+
+        private static bool isEmailAllowed(string value)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(value);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
         private void RefreshItems()
         {

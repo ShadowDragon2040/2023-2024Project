@@ -49,10 +49,20 @@ namespace ProjectBackend.Controllers
                     ProfilKep = new byte[0]
                 };
 
-                var userExists = _authContext.Aspnetuser.FirstOrDefault(user => user.Email == newUser.Email);
+                var userExists = _authContext.Aspnetuser.FirstOrDefault(user => user.UserName == newUser.UserName);
+                var emailExists = _authContext.Aspnetuser.FirstOrDefault(email => email.Email == newUser.Email);
+                var passExists = _authContext.Aspnetuser.FirstOrDefault(pass => pass.PasswordHash == newUser.PasswordHash);
                 if (userExists != null)
                 {
+                    return BadRequest("User already exists with this username!");
+                }
+                if (emailExists!=null)
+                {
                     return BadRequest("User already exists with this email address!");
+                }
+                if (passExists != null)
+                {
+                    return BadRequest("User already exists with this password!");
                 }
                 else
                 {
