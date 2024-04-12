@@ -38,7 +38,7 @@ namespace AdatKarbantarto.Helpers
         }
         public void SetJwtToken(string token)
         {
-            AdatKarbantarto.MainWindow._jwtToken = token;
+            AdatKarbantarto.MainWindow._jwtToken =token.Replace("\"","");
             Console.WriteLine();
 
         }
@@ -223,6 +223,7 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                
                 _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
                 HttpResponseMessage response = await _httpClient.GetAsync("/Termekek");
 
