@@ -31,6 +31,7 @@ namespace AdatKarbantarto.ViewModel
         {
             _isSaveEnabled = false;
             _isAddEnabled = true;
+            _backendApiHelper=new BackendApiHelper();
             HozzaszolasItems = new ObservableCollection<Hozzaszolas>();
             UpdateItem = new ObservableCollection<Hozzaszolas>();
             RefreshCommand = new RelayCommand(execute => RefreshItems());

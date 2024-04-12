@@ -27,6 +27,7 @@ namespace AdatKarbantarto.ViewModel
         {
             _isSaveEnabled = false;
             _isAddEnabled = true;
+            _backendApiHelper=new BackendApiHelper();
             SzamlaItems = new ObservableCollection<Szamla>();
             UpdateItem = new ObservableCollection<Szamla>();
             RefreshCommand = new RelayCommand(execute => RefreshItems());

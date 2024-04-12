@@ -39,7 +39,7 @@ namespace AdatKarbantarto.Helpers
         public void SetJwtToken(string token)
         {
             AdatKarbantarto.MainWindow._jwtToken =token.Replace("\"","");
-            Console.WriteLine();
+            
 
         }
 
