@@ -20,6 +20,7 @@ namespace AdatKarbantarto
     public partial class MainWindow : Window
     {
         private readonly NavigationVM _vm;
+        public static string _jwtToken;
 
         public MainWindow( )
         {

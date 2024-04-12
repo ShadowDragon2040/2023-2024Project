@@ -17,7 +17,7 @@ namespace ProjectBackend.Controllers
             _context = context;
         }
 
-        [HttpGet, Authorize(Roles ="USER,ADMIN")]
+        [HttpGet, Authorize(Roles ="USER")]
         
         public async Task<ActionResult> Get()
         {

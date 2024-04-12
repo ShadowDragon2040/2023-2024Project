@@ -12,14 +12,16 @@ using AdatKarbantarto.Exceptions;
 using System.Security;
 using System.Net;
 using Newtonsoft.Json.Linq;
+using System.Windows.Automation;
+using System.Reflection.Metadata;
 
 namespace AdatKarbantarto.Helpers
 {
     public class BackendApiHelper
     {
         private readonly HttpClient _httpClient;
-        public string _jwtToken;
-       
+
+
 
         public BackendApiHelper()
         {
@@ -34,13 +36,12 @@ namespace AdatKarbantarto.Helpers
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
-
         public void SetJwtToken(string token)
         {
-            _jwtToken = token;
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _jwtToken);
-        }
+            AdatKarbantarto.MainWindow._jwtToken = token;
+            Console.WriteLine();
 
+        }
 
         #region Felhasznalok
 
@@ -63,7 +64,7 @@ namespace AdatKarbantarto.Helpers
                     string responseContent = await response.Content.ReadAsStringAsync();
                     SetJwtToken(responseContent);
                     return JsonConvert.DeserializeObject<string>(responseContent);
-                    
+
                 }
                 else
                 {
@@ -129,7 +130,7 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
-                HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/Auth/Register", ujfelhasznalo);
+                HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/api/Auth/Register", ujfelhasznalo);
                 response.EnsureSuccessStatusCode();
                 return true;
             }
@@ -222,7 +223,7 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
-                
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
                 HttpResponseMessage response = await _httpClient.GetAsync("/Termekek");
 
                 if (response.IsSuccessStatusCode)
@@ -231,7 +232,7 @@ namespace AdatKarbantarto.Helpers
                     var data = JsonConvert.DeserializeObject<List<Termek>>(content);
                     return new ApiResponse<List<Termek>> { IsSuccess = true, Data = data };
                 }
-                else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                else if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
                     return new ApiResponse<List<Termek>> { IsSuccess = false, ErrorMessage = "Accessing endpoint failed!" };
                 }
@@ -239,6 +240,7 @@ namespace AdatKarbantarto.Helpers
                 {
                     return new ApiResponse<List<Termek>> { IsSuccess = false, ErrorMessage = $"Failed with status code: {response.StatusCode}" };
                 }
+
             }
             catch (HttpRequestException ex)
             {
