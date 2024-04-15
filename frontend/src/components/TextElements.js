@@ -10,10 +10,11 @@ export const baseUrl = "https://localhost:7026/";
 export const InfoContainer=styled.div`
     color: #fff;
     background: ${({lightBg})=>(lightBg?'#f9f9f9':'#010606')};
-    @media screen and (max-width:768px) {
-        padding: 100px 0;
-
-    }
+`
+export const InfoContainer10=styled.div`
+    margin-top:80px;
+    color: #fff;
+    background: ${({lightBg})=>(lightBg?'#f9f9f9':'#010606')};
 `
 export const InfoContainer5=styled.div`
     color: #fff;
@@ -385,13 +386,13 @@ transition: all 0.2s ease-in-out;
 }
 `
 
-export const ModalButton=styled.button`
+export const NiceButton=styled.button`
     border-radius:50px;
-    background:#01bf71;
+    background:#05a866;
     white-space:nowrap;
     padding: 10px 22px;
     color:#010606;
-    justify-self:end;
+    //justify-self:end;
     font-size: 16px;
     outline: none;
     border: none;
@@ -400,7 +401,7 @@ export const ModalButton=styled.button`
     text-decoration:none;
     &:hover{
         transition: all 0.2s ease-in-out;
-        background:black;
+        background:#06c97a;
         color:white;
     }
 `
@@ -411,7 +412,7 @@ export const NavBtnLink=styled(LinkR)`
     white-space:nowrap;
     padding: 10px 22px;
     color:#010606;
-    justify-self:end;
+    //justify-self:end;
     font-size: 16px;
     outline: none;
     border: none;

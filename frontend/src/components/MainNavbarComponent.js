@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { animateScroll as scroll } from 'react-scroll';
 import SearchBar from './ShopPageComponent/SeachBar';
 import { CgProfile } from 'react-icons/cg';
-import { Nav2, NavBtn2, ModalButton } from './TextElements';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import CartPage from '../pages/ShopPages/CartPage';
@@ -20,7 +19,8 @@ import {
   NavMenu,
   NavLinks,
   NavBtn,
-  NavBtnLink
+  NavBtnLink,
+  NavBtn2
 } from './TextElements';
 
 const Navbar = (props) => {
@@ -140,9 +140,7 @@ const Navbar = (props) => {
                     Cart <FaShoppingBasket/> {totalQuantity > 0 && `${totalQuantity}`}
                   </NavBtnLink>
                 </NavBtn2>
-                <NavBtn2>
-                  <ModalButton onClick={handleShow}>Logout</ModalButton>
-                </NavBtn2>
+                <NavBtnLink onClick={handleShow}>Logout</NavBtnLink>
                 <Modal show={show} onHide={handleClose}>
                   <Modal.Header closeButton>
                     <Modal.Title>Are you sure you want to log out?</Modal.Title>

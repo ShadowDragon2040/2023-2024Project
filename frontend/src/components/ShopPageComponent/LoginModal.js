@@ -24,7 +24,7 @@ const LoginModal = (props) => {
           userName: username,
           password: password,
         });
-        localStorage.setItem("LoginToken",JSON.stringify(response.data.token))
+        localStorage.setItem("LoginToken",JSON.stringify(response))
         const decodedToken = jwtDecode(localStorage.getItem("LoginToken"));
         sessionStorage.setItem("decodedTokenRole", decodedToken.role);
         sessionStorage.setItem("bejelenkezve", "true");

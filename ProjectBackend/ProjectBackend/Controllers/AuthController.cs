@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using ProjectBackend.Services;
 namespace ProjectBackend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {

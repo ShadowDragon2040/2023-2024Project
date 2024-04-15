@@ -9,8 +9,12 @@ import Navbar from '../../components/MainNavbarComponent';
 import { Rating } from 'react-simple-star-rating';
 import Footer from '../../components/FooterComponent';
 import ColorPicker from '../../components/ShopPageComponent/ColorPickerComponent';
-import Button from 'react-bootstrap/Button';
-import {NavBtn,NavBtnLink} from '../../components/TextElements';
+import {
+    NavBtn,
+    NavBtnLink,
+    NiceButton,
+    InfoContainer10
+} from '../../components/TextElements';
 
 function SingleProductDisplay(props) {
     const { ProductId } = useParams();
@@ -38,7 +42,6 @@ function SingleProductDisplay(props) {
         setSelectedColor(color);
     };
 
-
     const handleQuantityChange = (e) => {
         setQuantity(parseInt(e.target.value));
     };
@@ -53,7 +56,6 @@ function SingleProductDisplay(props) {
         };
 
         props.addToCart(newItem, quantity) 
-
 
         /*const existingItemIndex = cart.findIndex(item =>
             item.id === ProductId &&
@@ -71,14 +73,12 @@ function SingleProductDisplay(props) {
             console.log('Item added to cart:', newItem);
         }*/
        
-
     };
 
     const handleRemoveFromCart = (itemId) => {
         const updatedCart = cart.filter(item => item.id !== itemId);
         setCart(updatedCart);
     };
-
 
     const [singleProductData, setSingleProductData] = useState({});
     const [transformedComments, setTransformedComments] = useState(null);
@@ -115,19 +115,19 @@ function SingleProductDisplay(props) {
 
     return (
         <>
-            <div className='SingleItemContainer'>
-                <Navbar cart={props.cart} />
+        <InfoContainer10>    
+        <Navbar cart={props.cart} />
+                <NavBtn style={{margin:'20px 0px 20px 200px'}}>
+                    <NavBtnLink to='/ShopPage'><MdArrowBack/>Back</NavBtnLink>
+                </NavBtn>
                 <div className="container mt-3">
-                    <NavBtn style={{margin:'20px 0px 20px 200px'}}>
-                        <NavBtnLink to='/ShopPage'><MdArrowBack/>Back</NavBtnLink>
-                    </NavBtn>
-                    <div className='bg-dark p-1 rounded mx-auto d-flex flex-row mt-2 FirstRow'
-                    style={{color:'white'}}>
+                    <div className='p-1 rounded d-flex flex-row FirstRow'
+                    style={{color:'white',backgroundColor:'#059e60'}}>
                         <InnerImageZoom
                             width={1300}
                             className='ImageZoom rounded'
-                            src={"/" + singleProductData.keputvonal}
-                            zoomSrc={"/" + singleProductData.keputvonal}
+                            src={singleProductData.keputvonal}
+                            zoomSrc={singleProductData.keputvonal}
                             fullscreenOnMobile={true}
                             moveType="drag"
                             zoomScale={3}
@@ -141,20 +141,15 @@ function SingleProductDisplay(props) {
                             <ColorPicker selectedColor={selectedColor} onColorChange={handleColorChange} />
 
                             <input type="number" id="quantity" name="quantity" min="1" max="5" value={quantity} onChange={handleQuantityChange} />
-                            <br></br>
-                            <br></br>
-                            <Button onClick={handleAddToCart}>Kosárba</Button> 
-
+                            <br/>
+                            <NiceButton style={{backgroundColor:'black',color:'white',marginTop:'20px'}} onClick={handleAddToCart}>Kosárba</NiceButton>
                         </div>
                     </div>
 
                     <div className="row align-items-start">
                         <div className='rounded mx-auto d-flex flex-row'>
-                            <div className='wrapper card-body bg-dark rounded mt-3 w-100 p-2'>
-                                <Rating
-                                    className='m-2'
-                                    onClick={handleRating}
-                                />
+                            <div className='wrapper card-body rounded mt-3 w-100' style={{backgroundColor:'#059e60'}}>
+                                <Rating className='m-2' onClick={handleRating}/>
                                 <CommentSection
                                     logIn={{
                                         loginLink: 'http://localhost:3000/Login',
@@ -166,19 +161,17 @@ function SingleProductDisplay(props) {
                                         currentUserImg: 'YourUserImageURL'
                                     }}
                                     overlayStyle={{ backgroundColor: '#fff', color: 'black' }}
-                                    submitBtnStyle={{ border: '1px solid black', backgroundColor: 'black' }}
+                                    submitBtnStyle={{ border:'1px solid #059e60', backgroundColor: '#059e60' }}
                                     commentData={transformedComments}
                                     onSubmitAction={handleSubmitComment}
-                                    titleStyle={{ color: '#378457' }}
+                                    titleStyle={{ color: '#059e60' }}
                                 />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className='footerContainer'>
-                    <Footer />
-                </div>
-            </div>
+        </InfoContainer10>
+        <Footer />
         </>
     );
 }
