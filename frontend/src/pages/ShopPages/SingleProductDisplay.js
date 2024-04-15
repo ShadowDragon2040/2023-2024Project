@@ -5,7 +5,7 @@ import { MdArrowBack } from "react-icons/md";
 import InnerImageZoom from 'react-inner-image-zoom';
 import { CommentSection } from 'react-comments-section';
 import 'react-comments-section/dist/index.css';
-import Navbar from '../../components/ShopPageComponent/ShopNavbarComponent';
+import Navbar from '../../components/MainNavbarComponent';
 import { Rating } from 'react-simple-star-rating';
 import Footer from '../../components/FooterComponent';
 import ColorPicker from '../../components/ShopPageComponent/ColorPickerComponent';

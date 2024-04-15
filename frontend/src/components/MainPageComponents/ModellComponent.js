@@ -31,9 +31,7 @@ const ModellSection = () => {
              <Column2>
               <ImgWrap>
                   <Img
-                    src={`${process.env.REACT_APP_KEP_URL}anycubicphotonmono.jpg`}
-                    alt={'Our Company'}
-                  />
+                    src={`${process.env.REACT_APP_KEP_URL}Blender.jpg`} alt={'Blender Software'}/>
               </ImgWrap>
             </Column2> 
           </InfoRow>

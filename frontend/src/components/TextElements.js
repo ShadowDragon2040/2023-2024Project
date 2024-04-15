@@ -35,6 +35,24 @@ export const InfoContainer6=styled.div`
     }
 `
 
+export const InfoContainer7=styled.div`
+    color: #fff;
+    background: ${({lightBg})=>(lightBg?'#f9f9f9':'#010606')};
+    height:2600px;
+    @media screen and (max-width:768px) {
+        padding: 100px 0;
+
+    }
+`
+export const InfoContainer8=styled.div`
+    color: #fff;
+    background: ${({lightBg})=>(lightBg?'#f9f9f9':'#010606')};
+    height:1100px;
+    @media screen and (max-width:768px) {
+        padding: 100px 0;
+
+    }
+`
 export const InfoContainer4=styled.div`
     color: #fff;
     background: ${({lightBg})=>(lightBg?'#f9f9f9':'#010606')};
@@ -336,9 +354,6 @@ export const NavLinks=styled(LinkS)`
 export const NavBtn=styled.nav`
     display:inline-flex;
     align-items: center;
-    @media screen and (max-width: 768px) {
-        display:none;
-    }
 `
 
 export const NavBtn2=styled.nav`

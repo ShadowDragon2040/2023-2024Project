@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import NavbarA from '../../components/MainPageComponents/MainNavbarComponent'
+import Navbar from '../../components/MainNavbarComponent'
 import Footer from '../../components/FooterComponent'
 import {NavBtn,NavBtnLink} from '../../components/TextElements'
 import { MdArrowBack } from "react-icons/md";
@@ -25,7 +25,7 @@ function BambuPage(){
   }
     return(
       <>
-      <NavbarA toggle={toggle}/>
+      <Navbar toggle={toggle}/>
       <InfoContainer5  lightBg={false}>
         <Heading lightText={false}>Bambu Carbon X1</Heading>
           <NavBtn style={{margin:'20px 0px 20px 200px'}}>
@@ -35,7 +35,7 @@ function BambuPage(){
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img src={`${process.env.REACT_APP_KEP_URL}fdmboatmodell.jpg`} />
+                  <Img src={`${process.env.REACT_APP_KEP_URL}bambucarbonx1.jpg`} />
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
@@ -55,7 +55,7 @@ function BambuPage(){
             </Column1>
             <Column2 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img></Img>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}bambuvolume.jpg`} />
                 </ImgWrap>
             </Column2>
           </InfoRow>
@@ -82,7 +82,7 @@ function BambuPage(){
             </Column1>
             <Column2 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img src={`${process.env.REACT_APP_KEP_URL}PEIsheet.jpg`}></Img>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}fdmboatmodell.jpg`}></Img>
                 </ImgWrap>
             </Column2>
           </InfoRow>

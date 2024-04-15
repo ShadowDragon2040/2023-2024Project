@@ -1,11 +1,11 @@
 import React from 'react'
 import { useState } from 'react';
-import NavbarA from '../../components/MainPageComponents/MainNavbarComponent'
+import Navbar from '../../components/MainNavbarComponent'
 import Footer from '../../components/FooterComponent'
 import {NavBtn,NavBtnLink} from '../../components/TextElements'
 import { MdArrowBack } from "react-icons/md";
 import {
-  InfoContainer,
+  InfoContainer7,
   InfoWrapper,
   InfoRow,
   Column1,
@@ -27,8 +27,8 @@ function AnycubicPage(){
   
     return(
       <>
-      <NavbarA toggle={toggle}/>
-      <InfoContainer  lightBg={false} id={'tools'} >
+      <Navbar toggle={toggle}/>
+      <InfoContainer7  lightBg={false} id={'tools'} >
         <Heading lightText={false}>Anycubic Photon Mono</Heading>
           <NavBtn style={{margin:'20px 0px 20px 200px'}}>
             <NavBtnLink to='/'><MdArrowBack/>Back</NavBtnLink>
@@ -37,13 +37,15 @@ function AnycubicPage(){
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img/>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}anycubicwashcure.jpg`} />
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
             <TopLine>Technology</TopLine>
                 <Subtitle darkText={true}>
                 Anycubic Photon Mono is an SLA 3D printer that prints with resin that cures under UV light.
+                After the print is done it is required for a post process hardening of the material.
+                This can be done with the provided wash and cure station.
                 </Subtitle>
             </Column2>
           </InfoRow>
@@ -56,14 +58,14 @@ function AnycubicPage(){
             </Column1>
             <Column2 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img/>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}Anycubicphotonmono_Volume.jpg`} />
                 </ImgWrap>
             </Column2>
           </InfoRow>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img/>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}layerheightcomparison.jpg`} />
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
@@ -82,12 +84,12 @@ function AnycubicPage(){
             </Column1>
             <Column2 style={{position: 'relative'}}>
                 <ImgWrap>
-                    <Img/>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}abslikeresin.jpg`} />
                 </ImgWrap>
             </Column2>
           </InfoRow>
         </InfoWrapper>
-      </InfoContainer>
+      </InfoContainer7>
       <Footer/>
       </>
     )

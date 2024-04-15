@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NavbarA from '../../components/MainPageComponents/MainNavbarComponent'
+import Navbar from '../../components/MainNavbarComponent'
 import Footer from '../../components/FooterComponent'
 import { ShopPageContainer } from '../../components/TextElements';
 import ShopSideBar from '../../components/ShopPageComponent/ShopSideBar';
@@ -13,7 +13,7 @@ function NewsPage() {
   return (
     <>
       <ShopPageContainer>
-        <NavbarA
+        <Navbar
         isProfileVisible={isProfileVisible}
         setProfileVisible={setProfileVisible}
         setUserData={setUserData}

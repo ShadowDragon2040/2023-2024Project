@@ -3,8 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import {
-  NavBtn2,
-  ModalButton
+  NavBtnLink
 } from '../TextElements';
 import { toast } from 'react-toastify';
 
@@ -62,9 +61,7 @@ const RegisterModal = () => {
 
   return (
     <>
-      <NavBtn2>
-        <ModalButton onClick={handleShowRegisterModal}>Register</ModalButton>
-      </NavBtn2>
+      <NavBtnLink onClick={handleShowRegisterModal}>Register</NavBtnLink>
 
       <Modal show={showRegisterModal} onHide={handleCloseRegisterModal}>
         <Modal.Header style={{ margin: "10px" }} closeButton>

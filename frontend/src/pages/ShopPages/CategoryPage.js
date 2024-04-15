@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import axios from 'axios';
-import Navbar from '../../components/ShopPageComponent/ShopNavbarComponent';
+import Navbar from '../../components/MainNavbarComponent';
 import ShopSideBar from '../../components/ShopPageComponent/ShopSideBar';
 import TermekCard from '../../components/ShopPageComponent/TermekCard';
 import Footer from '../../components/FooterComponent';

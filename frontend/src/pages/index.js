@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import HeroSection from '../components/MainPageComponents/HeroComponent'
-import MainNavbar from "../components/MainPageComponents/MainNavbarComponent"
+import MainNavbar from "../components/MainNavbarComponent"
 import Sidebar from '../components/MainPageComponents/SidebarComponent'
 import InfoSection from '../components/MainPageComponents/InfoComponent'
 import PrinterTools from '../components/MainPageComponents/PrinterComponent'

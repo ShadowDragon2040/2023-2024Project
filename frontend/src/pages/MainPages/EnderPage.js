@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import NavbarA from '../../components/MainPageComponents/MainNavbarComponent'
+import Navbar from '../../components/MainNavbarComponent'
 import Footer from '../../components/FooterComponent'
 import {NavBtn,NavBtnLink} from '../../components/TextElements'
 import { NavLink } from 'react-bootstrap';
@@ -26,7 +26,7 @@ function EnderPage(){
   }
     return(
       <>
-      <NavbarA toggle={toggle}/>
+      <Navbar toggle={toggle}/>
       <InfoContainer5  lightBg={false}>
         <Heading lightText={false}>Ender 3V2</Heading>
           <NavBtn style={{margin:'20px 0px 20px 200px'}}>

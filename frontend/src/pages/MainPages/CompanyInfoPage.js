@@ -1,10 +1,10 @@
 import React,{useState} from 'react'
-import NavbarA from '../../components/MainPageComponents/MainNavbarComponent'
+import Navbar from '../../components/MainNavbarComponent'
 import Footer from '../../components/FooterComponent'
 import { MdArrowBack } from "react-icons/md";
 import {NavBtn, NavBtnLink, TextWrapper} from '../../components/TextElements'
 import {
-  InfoContainer,
+  InfoContainer8,
   InfoWrapper,
   InfoRow,
   Column1,
@@ -24,8 +24,8 @@ const CompanyInfoPage = () => {
   }
   return (
     <>
-      <NavbarA toggle={toggle}/>
-      <InfoContainer  lightBg={false} id={'about'} >
+      <Navbar toggle={toggle}/>
+      <InfoContainer8  lightBg={false} id={'about'} >
         <Heading lightText={false}>About our company</Heading>
           <NavBtn style={{margin:'20px 0px 20px 200px'}}>
             <NavBtnLink to='/'><MdArrowBack/>Back</NavBtnLink>
@@ -35,9 +35,15 @@ const CompanyInfoPage = () => {
             <Column1>
             <TextWrapper> 
              <TopLine></TopLine>
-              <Subtitle darkText={true}>
-              At the company, we believe that imagination is the limit, and this can be solved with 3D printing technology. We can offer something to everyone, and for those who need something unique, we hope to be able to provide it. Look around our site and choose what you like, if you can't find it, send us an e-mail. In addition to 3D printing, we deal with painting and electroplating.
-              </Subtitle>
+                <Subtitle>
+                  At our company, we're pioneers in pushing the boundaries of creativity through the power of 3D printing technology. We firmly believe that imagination knows no bounds, and with the versatility of 3D printing, we can turn even the wildest ideas into tangible realities. Whether you're a tech enthusiast, an artist, or a hobbyist, we have something special just for you.
+                </Subtitle>
+                <Subtitle>
+                  Explore our website and discover a plethora of ready-made designs that cater to a wide range of tastes and interests. But what truly sets us apart is our commitment to personalized innovation. Can't find exactly what you're looking for? Don't worry – simply shoot us an email detailing your vision, and our team of skilled artisans and engineers will work tirelessly to bring it to life.
+                </Subtitle>
+                <Subtitle>
+                  But our expertise doesn't stop at 3D printing. We're also masters of the finishing touches, offering top-notch painting and electroplating services to give your creations that professional polish they deserve. So whether you're dreaming up a one-of-a-kind sculpture, a custom-made gadget, or anything in between, trust us to make your imagination a reality.
+                </Subtitle>
             </TextWrapper>
             </Column1>
              <Column2>
@@ -50,7 +56,7 @@ const CompanyInfoPage = () => {
             </Column2> 
           </InfoRow>
         </InfoWrapper>
-      </InfoContainer>
+      </InfoContainer8>
     <Footer/>
     </>
   )

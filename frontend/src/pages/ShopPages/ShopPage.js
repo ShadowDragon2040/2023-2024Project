@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Navbar from '../../components/ShopPageComponent/ShopNavbarComponent';
+import Navbar from '../../components/MainNavbarComponent';
 import AllItems from '../../components/ShopPageComponent/AllItemsComponent';
 import Footer from '../../components/FooterComponent';
 import { ShopPageContainer } from '../../components/TextElements';

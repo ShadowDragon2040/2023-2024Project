@@ -125,9 +125,9 @@ const PrinterTools = () => {
               zIndex: 1
             }}>Elegoo Saturn 3</TopLine>
               <ImgWrap>
-              <Link onClick={handleClick} to="/Anycubic">
+              <Link onClick={handleClick} to="/ElegooSaturn">
                 <Img
-                  src={`${process.env.REACT_APP_KEP_URL}anycubicphotonmono.jpg`}
+                  src={`${process.env.REACT_APP_KEP_URL}SaturnUltra.jpg`}
                   alt={'Elegoo Saturn 3'}
                   onMouseEnter={() => setBottomRightHovered(true)}
                   onMouseLeave={() => setBottomRightHovered(false)}

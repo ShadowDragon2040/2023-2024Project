@@ -6,8 +6,7 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
 import {
-  NavBtn2,
-  ModalButton
+  NavBtnLink
 } from '../TextElements';
 
 const LoginModal = (props) => {
@@ -48,9 +47,7 @@ const LoginModal = (props) => {
 
     return (
       <>
-        <NavBtn2>
-          <ModalButton onClick={handleShow}>Login</ModalButton>
-        </NavBtn2>
+          <NavBtnLink onClick={handleShow}>Login</NavBtnLink>
 
           <Modal show={show} onHide={handleClose}>
             <Modal.Header style={{margin: "10px"}} closeButton>
