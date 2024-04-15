@@ -164,16 +164,28 @@ namespace AdatKarbantarto.ViewModel
 
             Termek newProduct = new Termek()
             {
-                TermekNev = SelectedItem.TermekNev,
-                Ar = SelectedItem.Ar,
-                Leiras = SelectedItem.Leiras,
-                Menyiseg = SelectedItem.Menyiseg,
-                KategoriaId = SelectedItem.KategoriaId,
-                KepUtvonal = SelectedItem.KepUtvonal,
+                TermekNev = "",
+                Ar = 0,
+                Leiras = "",
+                Menyiseg = 0,
+                KategoriaId = 0,
+                KepUtvonal = "",
             };
             BackendApiHelper postHelper = new BackendApiHelper();
-            var response = await postHelper.PostTermekAsync(newProduct);
-            MessageBox.Show(response.ToString());
+            if (newProduct!=null)
+            {
+
+                var response = await postHelper.PostTermekAsync(newProduct);
+                if (response)
+                {
+                    MessageBox.Show("Item added successfully!");
+                }
+                MessageBox.Show("Somethinh went wrong!");
+            }
+            else
+            {
+                MessageBox.Show("Invalid Product!");
+            }
 
 
             IsAddEnabled = true;
@@ -192,7 +204,7 @@ namespace AdatKarbantarto.ViewModel
                 BackendApiHelper modhelper = new BackendApiHelper();
 
                 var response = await modhelper.ModifyTermekAsync(UpdateItem[0].TermekId, UpdateItem[0]);
-                if (response)
+                if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Item edited successfully!", "Success!", MessageBoxButton.OK);
                 }
@@ -250,7 +262,7 @@ namespace AdatKarbantarto.ViewModel
 
         private bool CanSave()
         {
-            return true;
+            return UpdateItem.Count > 0;
         }
         private void ApplyFilter()
         {

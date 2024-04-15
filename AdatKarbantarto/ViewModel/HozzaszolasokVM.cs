@@ -200,7 +200,7 @@ namespace AdatKarbantarto.ViewModel
                
                
                 var response = await _backendApiHelper.ModifyHozzaszolasAsync(UpdateItem[0].HozzaszolasId, UpdateItem[0]);
-                if (response)
+                if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Item edited successfully!", "Success!", MessageBoxButton.OK);
                 }
@@ -258,7 +258,7 @@ namespace AdatKarbantarto.ViewModel
 
         private bool CanSave()
         {
-            return true;
+            return UpdateItem.Count > 0;
         }
         private void ApplyFilter()
         {

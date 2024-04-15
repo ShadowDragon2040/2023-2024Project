@@ -28,8 +28,8 @@ namespace AdatKarbantarto.ViewModel
         private ICollectionView _filteredView;
         public FelhasznalokVM()
         {
-            IsSaveEnabled = false;
-            IsAddEnabled = true;
+            _isSaveEnabled = false;
+            _isAddEnabled = true;
             _backendApiHelper = new BackendApiHelper();
             Items = new ObservableCollection<Felhasznalo>();
             UpdateItem = new ObservableCollection<Felhasznalo>();
@@ -136,6 +136,7 @@ namespace AdatKarbantarto.ViewModel
             // Load data into Items collection 
             try
             {
+              
                 var resp = await _backendApiHelper.GetFelhasznalokAsync();
                 
                
@@ -170,15 +171,23 @@ namespace AdatKarbantarto.ViewModel
                 Password = UpdateItem[0].PasswordHash,
                 Email = UpdateItem[0].Email
             };
-            if (isEmailAllowed(newUser.Email))
+            if (newUser!=null)
             {
-                var response = await _backendApiHelper.PostFelhasznaloAsync(newUser);
-                var content = await response.Content.ReadAsStringAsync();
-                MessageBox.Show(content);
+
+                if (isEmailAllowed(newUser.Email))
+                {
+                    var response = await _backendApiHelper.PostFelhasznaloAsync(newUser);
+                    var content = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show(content);
+                }
+                else
+                {
+                    MessageBox.Show("Invalid email address!");
+                }
             }
             else
             {
-                MessageBox.Show("Invalid email address!");
+                MessageBox.Show("Invalid User!");
             }
 
 
@@ -234,8 +243,16 @@ namespace AdatKarbantarto.ViewModel
         {
             try
             {
-                MailAddress m = new MailAddress(value);
-                return true;
+                if (value!=null)
+                {
+                    MailAddress m = new MailAddress(value);
+                    return true;
+                }
+                else
+                {
+                    
+                    return false;
+                }
             }
             catch (FormatException)
             {
@@ -254,7 +271,7 @@ namespace AdatKarbantarto.ViewModel
             UpdateItem.Add(new Felhasznalo());
             IsAddEnabled = false;
             IsSaveEnabled = true;
-            AddCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate AddCommand's CanExecute
+            AddCommand.RaiseCanExecuteChanged();
         }
 
         private void ModifyItem(Felhasznalo itemToModify)
@@ -267,7 +284,7 @@ namespace AdatKarbantarto.ViewModel
 
         private bool CanSave()
         {
-            return true;
+            return UpdateItem.Count > 0;
         }
         private void ApplyFilter()
         {

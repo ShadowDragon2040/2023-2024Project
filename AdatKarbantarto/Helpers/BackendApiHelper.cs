@@ -39,7 +39,7 @@ namespace AdatKarbantarto.Helpers
         public void SetJwtToken(string token)
         {
             AdatKarbantarto.MainWindow._jwtToken =token.Replace("\"","");
-            
+            _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
         }
 
         #region Felhasznalok
@@ -56,18 +56,17 @@ namespace AdatKarbantarto.Helpers
 
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            using (HttpResponseMessage response = await _httpClient.PostAsync("/api/Auth/Login", content))
+            using (HttpResponseMessage response = await _httpClient.PostAsync("Auth/Login", content))
             {
                 if (response.IsSuccessStatusCode)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
                     SetJwtToken(responseContent);
                     return JsonConvert.DeserializeObject<string>(responseContent);
-
                 }
                 else
                 {
-                    throw new Exception($"Failed to post data to API. {response.StatusCode} {response.Content}");
+                    return $"Failed to post data to API. {response.StatusCode} {response.Content}";
                 }
             }
         }
@@ -90,7 +89,6 @@ namespace AdatKarbantarto.Helpers
             try
             {
 
-                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
                 HttpResponseMessage response = await _httpClient.GetAsync("/Felhasznalok");
 
                 if (response.IsSuccessStatusCode)
@@ -137,7 +135,9 @@ namespace AdatKarbantarto.Helpers
             }
             catch (HttpRequestException ex)
             {
-                throw new HttpRequestException("Failed to post Item", ex);
+                HttpResponseMessage errorResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                errorResponse.Content = new StringContent("Failed to modify Felhasznalo."+ex.Message);
+                return errorResponse;
             }
         }
         #endregion
@@ -147,7 +147,6 @@ namespace AdatKarbantarto.Helpers
             try
             {
 
-                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
                 HttpResponseMessage response = await _httpClient.GetAsync("/Hozzaszolas");
 
                 if (response.IsSuccessStatusCode)
@@ -182,7 +181,7 @@ namespace AdatKarbantarto.Helpers
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception("Failed to post Item", ex);
+                return false;
             }
         }
         public async Task<bool> DeleteHozzaszolasAsync(int id)
@@ -198,8 +197,7 @@ namespace AdatKarbantarto.Helpers
                 }
                 else
                 {
-                    MessageBox.Show(responseBody);
-                    throw new Exception($"Failed to delete data from API. Status code: {response.StatusCode}. Response: {responseBody}");
+                    return false;
                 }
             }
             catch (Exception ex)
@@ -230,7 +228,7 @@ namespace AdatKarbantarto.Helpers
             try
             {
                 
-                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+                
                 HttpResponseMessage response = await _httpClient.GetAsync("/Termekek");
 
                 if (response.IsSuccessStatusCode)
@@ -280,7 +278,7 @@ namespace AdatKarbantarto.Helpers
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception("Failed to post Item", ex);
+                return false;
             }
         }
         public async Task<bool> DeleteTermekAsync(int id)
@@ -293,8 +291,7 @@ namespace AdatKarbantarto.Helpers
                 }
                 else
                 {
-                    MessageBox.Show(response.ToString());
-                    throw new Exception($"Failed to delete data from API. Status code: {response.StatusCode}");
+                    return false;
                 }
             }
         }
@@ -306,7 +303,6 @@ namespace AdatKarbantarto.Helpers
             try
             {
 
-                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
                 HttpResponseMessage response = await _httpClient.GetAsync("/Szamlazas");
 
                 if (response.IsSuccessStatusCode)
@@ -333,17 +329,27 @@ namespace AdatKarbantarto.Helpers
 
         public async Task<List<Kategoria>> GetKategoriaAsync()
         {
-            using (HttpResponseMessage response = await _httpClient.GetAsync("/Termekek/Kategoriak"))
+            try
             {
-                if (response.IsSuccessStatusCode)
+                using (HttpResponseMessage response = await _httpClient.GetAsync("/Termekek/Kategoriak"))
                 {
-                    string content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<Kategoria>>(content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string content = await response.Content.ReadAsStringAsync();
+                        return JsonConvert.DeserializeObject<List<Kategoria>>(content);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Failed to fetch data from API. Status code: {response.StatusCode}");
+                        return new List<Kategoria>(); 
+                    }
                 }
-                else
-                {
-                    throw new Exception($"Failed to fetch data from API. Status code: {response.StatusCode}");
-                }
+            }
+            catch (Exception ex)
+            {
+               
+                Console.WriteLine($"An error occurred while fetching data from API: {ex.Message}");
+                return new List<Kategoria>(); 
             }
         }
         public async Task<HttpResponseMessage> ModifySzamlaAsync(int id, Szamla szamla)
@@ -371,7 +377,7 @@ namespace AdatKarbantarto.Helpers
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception("Failed to post Item", ex);
+               return false;
             }
         }
         public async Task<bool> DeleteSzamlaAsync(int id)
@@ -384,8 +390,7 @@ namespace AdatKarbantarto.Helpers
                 }
                 else
                 {
-                    MessageBox.Show(response.ToString());
-                    throw new Exception($"Failed to delete data from API. Status code: {response.StatusCode}");
+                   return false;
                 }
             }
         }
@@ -401,7 +406,7 @@ namespace AdatKarbantarto.Helpers
             }
             catch (HttpRequestException ex)
             {
-                throw new HttpRequestException("Failed to post Item", ex);
+                return false;
             }
         }
         public async Task<List<FtpFile>> GetFtpFilesAsync()
@@ -415,7 +420,8 @@ namespace AdatKarbantarto.Helpers
                 }
                 else
                 {
-                    throw new HttpRequestException($"Failed to fetch data from API. Status code: {response.StatusCode}");
+                    Console.WriteLine($"Failed to fetch data from API. Status code: {response.StatusCode}");
+                    return new List<FtpFile>();
                 }
             }
         }
