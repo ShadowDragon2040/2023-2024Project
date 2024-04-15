@@ -85,19 +85,33 @@ namespace AdatKarbantarto.Helpers
                 throw new HttpRequestException("Failed to delete Item", ex);
             }
         }
-        public async Task<HttpResponseMessage> GetFelhasznalokAsync()
+        public async Task<ApiResponse<List<Felhasznalo>>> GetFelhasznalokAsync()
         {
             try
             {
+
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
                 HttpResponseMessage response = await _httpClient.GetAsync("/Felhasznalok");
-                
+
+                if (response.IsSuccessStatusCode)
+                {
                     string content = await response.Content.ReadAsStringAsync();
-                    return response;
-                    
+                    var data = JsonConvert.DeserializeObject<List<Felhasznalo>>(content);
+                    return new ApiResponse<List<Felhasznalo>> { IsSuccess = true, Data = data };
+                }
+                else if (response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    return new ApiResponse<List<Felhasznalo>> { IsSuccess = false, ErrorMessage = "Accessing endpoint failed!" };
+                }
+                else
+                {
+                    return new ApiResponse<List<Felhasznalo>> { IsSuccess = false, ErrorMessage = $"Failed with status code: {response.StatusCode}" };
+                }
+
             }
-            catch(HttpRequestException ex)
+            catch (HttpRequestException ex)
             {
-                throw new HttpRequestException("Failed to put Item", ex);
+                return new ApiResponse<List<Felhasznalo>> { IsSuccess = false, ErrorMessage = "Connection to the server failed.", Exception = ex };
             }
         }
         public async Task<HttpResponseMessage> ModifyFelhasznaloAsync(string id, Felhasznalo felhasznalo)
@@ -109,7 +123,9 @@ namespace AdatKarbantarto.Helpers
             }
             catch (HttpRequestException ex)
             {
-                throw new HttpRequestException("Failed to put Item", ex);
+                HttpResponseMessage errorResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                errorResponse.Content = new StringContent("Failed to modify Felhasznalo."+ex.Message);
+                return errorResponse;
             }
         }
         public async Task<HttpResponseMessage> PostFelhasznaloAsync(RegisterUser ujfelhasznalo)
@@ -126,19 +142,33 @@ namespace AdatKarbantarto.Helpers
         }
         #endregion
         #region Hozzaszolasok
-        public async Task<List<Hozzaszolas>> GetHozzaszolasokAsync()
+        public async Task<ApiResponse<List<Hozzaszolas>>> GetHozzaszolasAsync()
         {
-            using (HttpResponseMessage response = await _httpClient.GetAsync("/Hozzaszolas"))
+            try
             {
+
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+                HttpResponseMessage response = await _httpClient.GetAsync("/Hozzaszolas");
+
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<Hozzaszolas>>(content);
+                    var data = JsonConvert.DeserializeObject<List<Hozzaszolas>>(content);
+                    return new ApiResponse<List<Hozzaszolas>> { IsSuccess = true, Data = data };
+                }
+                else if (response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    return new ApiResponse<List<Hozzaszolas>> { IsSuccess = false, ErrorMessage = "Accessing endpoint failed!" };
                 }
                 else
                 {
-                    throw new Exception($"Failed to fetch data from API. Status code: {response.StatusCode}");
+                    return new ApiResponse<List<Hozzaszolas>> { IsSuccess = false, ErrorMessage = $"Failed with status code: {response.StatusCode}" };
                 }
+
+            }
+            catch (HttpRequestException ex)
+            {
+                return new ApiResponse<List<Hozzaszolas>> { IsSuccess = false, ErrorMessage = "Connection to the server failed.", Exception = ex };
             }
         }
 
@@ -179,27 +209,18 @@ namespace AdatKarbantarto.Helpers
             }
         }
 
-        public async Task<bool> ModifyHozzaszolasAsync(int id, Hozzaszolas hozzaszolas)
+        public async Task<HttpResponseMessage> ModifyHozzaszolasAsync(int id, Hozzaszolas hozzaszolas)
         {
             try
             {
                 HttpResponseMessage response = await _httpClient.PutAsJsonAsync("/Hozzaszolas/" + id, hozzaszolas);
-                string responseBody = await response.Content.ReadAsStringAsync();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-                else
-                {
-                    MessageBox.Show(responseBody);
-                    throw new Exception($"Failed to modify data from API. Status code: {response.StatusCode}. Response: {responseBody}");
-                }
+                return response;
             }
-            catch (Exception ex)
+            catch (HttpRequestException ex)
             {
-                MessageBox.Show(ex.Message);
-                return false;
+                HttpResponseMessage errorResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                errorResponse.Content = new StringContent("Failed to modify Comment." + ex.Message);
+                return errorResponse;
             }
         }
         #endregion
@@ -234,27 +255,18 @@ namespace AdatKarbantarto.Helpers
             }
         }
 
-        public async Task<bool> ModifyTermekAsync(int id, Termek termek)
+        public async Task<HttpResponseMessage> ModifyTermekAsync(int id, Termek termek)
         {
             try
             {
                 HttpResponseMessage response = await _httpClient.PutAsJsonAsync("/Termekek/" + id, termek);
-                string responseBody = await response.Content.ReadAsStringAsync();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-                else
-                {
-                    MessageBox.Show(responseBody);
-                    throw new Exception($"Failed to modify data from API. Status code: {response.StatusCode}. Response: {responseBody}");
-                }
+                return response;
             }
-            catch (Exception ex)
+            catch (HttpRequestException ex)
             {
-                MessageBox.Show(ex.Message);
-                return false;
+                HttpResponseMessage errorResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                errorResponse.Content = new StringContent("Failed to modify Product." + ex.Message);
+                return errorResponse;
             }
         }
 
@@ -289,19 +301,33 @@ namespace AdatKarbantarto.Helpers
         #endregion
         #region Szamlazas
 
-        public async Task<List<Szamla>> GetSzamlaAsync()
+        public async Task<ApiResponse<List<Szamla>>> GetSzamlazasAsync()
         {
-            using (HttpResponseMessage response = await _httpClient.GetAsync("/Szamlazas"))
+            try
             {
+
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+                HttpResponseMessage response = await _httpClient.GetAsync("/Szamlazas");
+
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<Szamla>>(content);
+                    var data = JsonConvert.DeserializeObject<List<Szamla>>(content);
+                    return new ApiResponse<List<Szamla>> { IsSuccess = true, Data = data };
+                }
+                else if (response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    return new ApiResponse<List<Szamla>> { IsSuccess = false, ErrorMessage = "Accessing endpoint failed!" };
                 }
                 else
                 {
-                    throw new Exception($"Failed to fetch data from API. Status code: {response.StatusCode}");
+                    return new ApiResponse<List<Szamla>> { IsSuccess = false, ErrorMessage = $"Failed with status code: {response.StatusCode}" };
                 }
+
+            }
+            catch (HttpRequestException ex)
+            {
+                return new ApiResponse<List<Szamla>> { IsSuccess = false, ErrorMessage = "Connection to the server failed.", Exception = ex };
             }
         }
 
@@ -320,27 +346,18 @@ namespace AdatKarbantarto.Helpers
                 }
             }
         }
-        public async Task<bool> ModifySzamlaAsync(int id, Szamla szamla)
+        public async Task<HttpResponseMessage> ModifySzamlaAsync(int id, Szamla szamla)
         {
             try
             {
                 HttpResponseMessage response = await _httpClient.PutAsJsonAsync("/Szamlazas/" + id, szamla);
-                string responseBody = await response.Content.ReadAsStringAsync();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-                else
-                {
-                    MessageBox.Show(responseBody);
-                    throw new Exception($"Failed to modify data from API. Status code: {response.StatusCode}. Response: {responseBody}");
-                }
+                return response;
             }
-            catch (Exception ex)
+            catch (HttpRequestException ex)
             {
-                MessageBox.Show(ex.Message);
-                return false;
+                HttpResponseMessage errorResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                errorResponse.Content = new StringContent("Failed to modify Order." + ex.Message);
+                return errorResponse;
             }
         }
 

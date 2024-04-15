@@ -137,15 +137,16 @@ namespace AdatKarbantarto.ViewModel
             try
             {
                 var resp = await _backendApiHelper.GetFelhasznalokAsync();
-                string content = await resp.Content.ReadAsStringAsync();
-                if (resp != null)
+                
+               
+                if (resp.Data != null)
                 {
-                    _ListData = JsonConvert.DeserializeObject<List<Felhasznalo>>(content);
+                    _ListData = resp.Data;
 
                 }
                 else
                 {
-                    MessageBox.Show(resp.ToString());
+                    MessageBox.Show(resp.ErrorMessage);
                 }
 
                 Items.Clear();
