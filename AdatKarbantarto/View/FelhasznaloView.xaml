@@ -67,12 +67,12 @@
                 <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True"/>
                 <materialDesign:DataGridTextColumn Header="UserName" Binding="{Binding UserName}"/>
                 <materialDesign:DataGridTextColumn Header="PasswordHash" Binding="{Binding PasswordHash}"/>
+                <materialDesign:DataGridTextColumn Header="Email" Binding="{Binding Email}" />
                 <materialDesign:DataGridTextColumn Header="EmailConfirmed" Binding="{Binding EmailConfirmed}"/>
                 <materialDesign:DataGridTextColumn Header="EmailCode" Binding="{Binding EmailCode}" />
-                <materialDesign:DataGridTextColumn Header="Email" Binding="{Binding Email}" />
                 <materialDesign:DataGridTextColumn Header="ProfilKep" Binding="{Binding ProfilKep}" />
                 <materialDesign:DataGridTextColumn Header="PhoneNumber" Binding="{Binding PhoneNumber}" />
-                <materialDesign:DataGridTextColumn Header="ActivateDate" Binding="{Binding ActivateDate}" />
+                <materialDesign:DataGridTextColumn Header="ActivateDate" Binding="{Binding AktivalasIdopotja}" />
 
             </DataGrid.Columns>
         </DataGrid>

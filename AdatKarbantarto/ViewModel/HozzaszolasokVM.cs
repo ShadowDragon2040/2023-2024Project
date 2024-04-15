@@ -31,6 +31,7 @@ namespace AdatKarbantarto.ViewModel
         {
             _isSaveEnabled = false;
             _isAddEnabled = true;
+            _backendApiHelper=new BackendApiHelper();
             HozzaszolasItems = new ObservableCollection<Hozzaszolas>();
             UpdateItem = new ObservableCollection<Hozzaszolas>();
             RefreshCommand = new RelayCommand(execute => RefreshItems());
@@ -137,9 +138,19 @@ namespace AdatKarbantarto.ViewModel
             // Load data into Items collection 
             try
             {
-               
-                _ListData = await _backendApiHelper.GetHozzaszolasokAsync();
-                
+                var resp = await _backendApiHelper.GetHozzaszolasAsync();
+
+
+                if (resp.Data != null)
+                {
+                    _ListData = resp.Data;
+
+                }
+                else
+                {
+                    MessageBox.Show(resp.ErrorMessage);
+                }
+
                 HozzaszolasItems.Clear();
                 foreach (var Hozzaszolas in _ListData)
                 {

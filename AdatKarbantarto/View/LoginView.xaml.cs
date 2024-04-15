@@ -81,6 +81,7 @@ namespace AdatKarbantarto.View
         {
             try
             {
+                btnLogin.IsEnabled = false;
                 BackendApiHelper apiHelper = new BackendApiHelper();
                 string passString = new NetworkCredential("", txtPassword.Password).Password;
                 string userToken = await apiHelper.PostAsync(txtUsername.Text, passString);
@@ -107,6 +108,10 @@ namespace AdatKarbantarto.View
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                btnLogin.IsEnabled = true;
             }
         }
 

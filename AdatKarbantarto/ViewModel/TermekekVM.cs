@@ -13,6 +13,7 @@ namespace AdatKarbantarto.ViewModel
 {
     public class TermekekVM : ViewModelBase
     {
+        private BackendApiHelper _backendApiHelper;
         private static readonly Regex _regex = new Regex("[^0-9 ]+");
         private string _searchProductID = "";
         private bool _isSaveEnabled;
@@ -26,6 +27,7 @@ namespace AdatKarbantarto.ViewModel
         {
             _isSaveEnabled = false;
             _isAddEnabled = true;
+            _backendApiHelper= new BackendApiHelper();
             Items = new ObservableCollection<Termek>();
             UpdateItem = new ObservableCollection<Termek>();
             RefreshCommand = new RelayCommand(execute => RefreshItems());
@@ -134,23 +136,27 @@ namespace AdatKarbantarto.ViewModel
         #region CRUD
         private async void LoadInitialData()
         {
-            BackendApiHelper apiHelper = new BackendApiHelper();
-            ApiResponse<List<Termek>> response = await apiHelper.GetTermekekAsync();
 
-            if (response.IsSuccess)
+
+            var resp = await _backendApiHelper.GetTermekekAsync();
+
+
+            if (resp.Data != null)
             {
-                _ListData = response.Data;
-                Items.Clear();
-                foreach (var szamla in _ListData)
-                {
-                    Items.Add(szamla);
-                }
+                _ListData = resp.Data;
+
             }
             else
             {
-               
-                MessageBox.Show($"Failed to load data: {response.ErrorMessage}");
+                MessageBox.Show(resp.ErrorMessage);
             }
+
+            Items.Clear();
+            foreach (var Termek in _ListData)
+            {
+                Items.Add(Termek);
+            }
+
         }
 
         private async void SaveItem()

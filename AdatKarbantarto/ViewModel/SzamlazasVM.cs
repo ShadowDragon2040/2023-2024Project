@@ -27,6 +27,7 @@ namespace AdatKarbantarto.ViewModel
         {
             _isSaveEnabled = false;
             _isAddEnabled = true;
+            _backendApiHelper=new BackendApiHelper();
             SzamlaItems = new ObservableCollection<Szamla>();
             UpdateItem = new ObservableCollection<Szamla>();
             RefreshCommand = new RelayCommand(execute => RefreshItems());
@@ -135,9 +136,19 @@ namespace AdatKarbantarto.ViewModel
             // Load data into Items collection 
             try
             {
-                
-                _ListData = await _backendApiHelper.GetSzamlaAsync();
-               
+
+                var resp = await _backendApiHelper.GetSzamlazasAsync();
+
+
+                if (resp.Data != null)
+                {
+                    _ListData = resp.Data;
+
+                }
+                else
+                {
+                    MessageBox.Show(resp.ErrorMessage);
+                }
                 SzamlaItems.Clear();
               
 

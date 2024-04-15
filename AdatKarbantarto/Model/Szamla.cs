@@ -14,7 +14,7 @@ namespace AdatKarbantarto.Model
 
         public int TermekId { get; set; }
 
-        public int SzinHex { get; set; }
+        public string SzinHex { get; set; }
 
         public DateTime VasarlasIdopontja { get; set; }
         public bool SikeresSzalitas { get; set; }

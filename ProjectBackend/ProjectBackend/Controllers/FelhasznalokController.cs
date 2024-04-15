@@ -48,30 +48,6 @@ namespace ProjectBackend.Controllers
             }
         }
 
-        [HttpPost/*, Authorize(Roles = "ADMIN")*/]
-        public async Task<IActionResult> Post(CreatedFelhasznalokDto createdFelhasznalokDto)
-        {
-            try
-            {
-                var request = new Aspnetuser
-                {
-                    UserName = createdFelhasznalokDto.UserName,
-                    PasswordHash = createdFelhasznalokDto.PasswordHash,
-                    Email = createdFelhasznalokDto.Email,
-                    EmailConfirmed = createdFelhasznalokDto.EmailConfirmed,
-                    ProfilKep = createdFelhasznalokDto.ProfilKep
-                };
-
-                _context.Aspnetuser.Add(request);
-                await _context.SaveChangesAsync();
-
-                return CreatedAtAction(nameof(Get), new { id = request.Id }, request);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
 
         [HttpPut("{id}")/*, Authorize(Roles = "ADMIN")*/]
         public async Task<IActionResult> Put(string id, UpdateFelhasznalokDto updateFelhasznalokDto)
