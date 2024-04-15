@@ -25,7 +25,7 @@ namespace AdatKarbantarto.ViewModel
         private ICollectionView _filteredView;
         public SzamlazasVM()
         {
-            _isSaveEnabled = false;
+ 
             _isAddEnabled = true;
             _backendApiHelper=new BackendApiHelper();
             SzamlaItems = new ObservableCollection<Szamla>();
@@ -167,16 +167,24 @@ namespace AdatKarbantarto.ViewModel
 
             Szamla newOrder = new Szamla()
             {
-                SzamlazasId = SelectedItem.SzamlazasId,
-                UserId = SelectedItem.UserId,
-                TermekId = SelectedItem.TermekId,
-                SzinHex = SelectedItem.SzinHex,
+              
+                UserId = "",
+                TermekId = 0,
+                SzinHex = "",
                 VasarlasIdopontja = DateTime.Now,
                 SikeresSzalitas = false,
             };
-          
-            var response = await _backendApiHelper.PostSzamlaAsync(newOrder);
-            MessageBox.Show(response.ToString());
+            if (newOrder!=null)
+            {
+                var response = await _backendApiHelper.PostSzamlaAsync(newOrder);
+                if (response)
+                {
+                    Console.WriteLine("Order added successfully!");
+                }
+                Console.WriteLine("Something went wrong!");
+
+
+            }
 
 
             IsAddEnabled = true;
@@ -195,7 +203,7 @@ namespace AdatKarbantarto.ViewModel
               
               
                 var response = await _backendApiHelper.ModifySzamlaAsync(UpdateItem[0].SzamlazasId, UpdateItem[0]);
-                if (response)
+                if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Item edited successfully!", "Success!", MessageBoxButton.OK);
                 }
@@ -253,7 +261,7 @@ namespace AdatKarbantarto.ViewModel
 
         private bool CanSave()
         {
-            return true;
+            return UpdateItem.Count > 0;
         }
         private void ApplyFilter()
         {
