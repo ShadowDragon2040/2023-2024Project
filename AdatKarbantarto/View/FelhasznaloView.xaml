@@ -24,7 +24,9 @@
         <Button Grid.Row="0" Command="{Binding SaveCommand}" Content="Save Changes" x:Name="btn_save" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="336,26,0,0"/>
         <Button Grid.Row="0" Command="{Binding RefreshCommand}" Content="Refresh" Name="btn_refresh" Margin="471,26,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></Button>
         <Button Grid.Row="0" Command="{Binding AddCommand}" Content="Add Row" x:Name="btn_add"   Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="242,26,0,0"/>
-        <DataGrid Grid.Row="1" x:Name="dtg_Adatok" CanUserAddRows="False" CanUserReorderColumns="False" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding Items}" Margin="20,42,-309,10" Height="600" AutoGenerateColumns="True">
+        <DataGrid Grid.Row="1" x:Name="dtg_Adatok" CanUserAddRows="False" CanUserReorderColumns="False"
+                  SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding Items}"
+                  Margin="20,42,-309,10" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <!-- Delete button column -->
                 <DataGridTemplateColumn Header="Delete">
@@ -57,7 +59,16 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                </DataGrid.Columns>
+                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True"/>
+                <materialDesign:DataGridTextColumn Header="UserName" Binding="{Binding UserName}"/>
+                <materialDesign:DataGridTextColumn Header="PasswordHash" Binding="{Binding PasswordHash}"/>
+                <materialDesign:DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                <materialDesign:DataGridTextColumn Header="EmailConfirmed" Binding="{Binding EmailConfirmed}"/>
+                <materialDesign:DataGridTextColumn Header="EmailCode" Binding="{Binding EmailCode}" />
+                <materialDesign:DataGridTextColumn Header="ProfilKep" Binding="{Binding ProfilKep}" />
+                <materialDesign:DataGridTextColumn Header="PhoneNumber" Binding="{Binding PhoneNumber}" />
+                <materialDesign:DataGridTextColumn Header="ActivateDate" Binding="{Binding AktivalasIdopotja}" />
+            </DataGrid.Columns>
         </DataGrid>
         <DataGrid Grid.Row="2" x:Name="dtg_add" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False"
                   AutoGenerateColumns="False" Height="100" ItemsSource="{Binding UpdateItem}" Margin="20,10,-140,20"

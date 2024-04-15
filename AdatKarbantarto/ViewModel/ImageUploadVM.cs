@@ -13,6 +13,7 @@ using AdatKarbantarto.Helpers;
 using AdatKarbantarto.Model;
 using System.Windows;
 using System.Security;
+using System.Linq;
 
 namespace AdatKarbantarto.ViewModel
 {
@@ -81,7 +82,7 @@ namespace AdatKarbantarto.ViewModel
                 EditorText = "Uploading...";
                 await Task.Delay(100); // A small delay to update the UI
                 Filename = openFileDialog.FileName;
-                EditorText=Filename;
+                EditorText = Path.GetFileName(Filename);
             }
         }
 
@@ -100,7 +101,7 @@ namespace AdatKarbantarto.ViewModel
                         BackendApiHelper apihelper = new BackendApiHelper();
                         FtpFile newFtpFile = new FtpFile()
                         {
-                            file = Filename,
+                            file = Path.GetFileName(Filename),
                             timestamp = DateTime.Now
                         };
                         await apihelper.PostFtpFileAsync(newFtpFile);

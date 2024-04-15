@@ -43,7 +43,7 @@ namespace AdatKarbantarto.View
         private  void ListBoxItem_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
            
-            string file = e.Source.ToString().Split("\\").Last();
+            string file = e.Source.ToString().Split(": ")[1];
            
            
             string url = ConfigurationManager.AppSettings["ftp"]+file;

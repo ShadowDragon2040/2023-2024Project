@@ -58,6 +58,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                
                 <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding HozzaszolasId}" IsReadOnly="True"/>
                 <materialDesign:DataGridTextColumn Header="User ID" Binding="{Binding UserId}" />
                 <materialDesign:DataGridTextColumn Header="Product ID" Binding="{Binding TermekId}" />

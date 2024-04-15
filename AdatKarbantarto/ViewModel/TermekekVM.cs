@@ -136,21 +136,13 @@ namespace AdatKarbantarto.ViewModel
         #region CRUD
         private async void LoadInitialData()
         {
-
-
             var resp = await _backendApiHelper.GetTermekekAsync();
 
-
             if (resp.Data != null)
-            {
                 _ListData = resp.Data;
-
-            }
             else
-            {
                 MessageBox.Show(resp.ErrorMessage);
-            }
-
+            
             Items.Clear();
             foreach (var Termek in _ListData)
             {
@@ -164,23 +156,24 @@ namespace AdatKarbantarto.ViewModel
 
             Termek newProduct = new Termek()
             {
-                TermekNev = "",
-                Ar = 0,
-                Leiras = "",
-                Menyiseg = 0,
-                KategoriaId = 0,
-                KepUtvonal = "",
+                TermekNev = SelectedItem.TermekNev,
+                Ar = SelectedItem.Ar,
+                Leiras = SelectedItem.Leiras,
+                Menyiseg = SelectedItem.Menyiseg,
+                KategoriaId = SelectedItem.KategoriaId,
+                KepUtvonal =SelectedItem.KepUtvonal,
             };
             BackendApiHelper postHelper = new BackendApiHelper();
             if (newProduct!=null)
             {
 
                 var response = await postHelper.PostTermekAsync(newProduct);
+
                 if (response)
-                {
                     MessageBox.Show("Item added successfully!");
-                }
-                MessageBox.Show("Somethinh went wrong!");
+                
+                else
+                    MessageBox.Show("Something went wrong! Refresh the page and try again!");
             }
             else
             {

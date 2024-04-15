@@ -168,9 +168,9 @@ namespace AdatKarbantarto.ViewModel
             Szamla newOrder = new Szamla()
             {
               
-                UserId = "",
-                TermekId = 0,
-                SzinHex = "",
+                UserId = SelectedItem.UserId,
+                TermekId = SelectedItem.TermekId,
+                SzinHex = SelectedItem.SzinHex,
                 VasarlasIdopontja = DateTime.Now,
                 SikeresSzalitas = false,
             };
@@ -179,11 +179,10 @@ namespace AdatKarbantarto.ViewModel
                 var response = await _backendApiHelper.PostSzamlaAsync(newOrder);
                 if (response)
                 {
-                    Console.WriteLine("Order added successfully!");
+                   MessageBox.Show("Order added successfully!");
                 }
-                Console.WriteLine("Something went wrong!");
-
-
+                else
+                    MessageBox.Show("Something went wrong! Refresh the page and try again!");
             }
 
 
