@@ -101,6 +101,39 @@ namespace ProjectBackend.Controllers
             string token = CreateToken(user);
             return Ok(token);
         }
+
+        [HttpPost("updatepassword")]
+        public IActionResult UpdatePassword(UpdatePasswordRequestDto request)
+        {
+            try
+            {
+                var user = _authContext.Aspnetuser.FirstOrDefault(u => u.Email == request.Email && u.EmailCode == request.EmailCode);
+                if (user == null)
+                {
+                    return BadRequest("Invalid email or email code!");
+                }
+
+                if (string.IsNullOrEmpty(request.NewPassword))
+                {
+                    return BadRequest("New password is required!");
+                }
+
+                user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.NewPassword);
+                _authContext.SaveChanges();
+
+                // Optionally, you can send a confirmation email here
+                EmailService.SendConfirmationMail(request.Email,$"Your new password is {request.NewPassword}",$"Your password was changed on the PrintFusion site, if this was not done by you contact us immediately!", _configuration);
+
+                return Ok("Password updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating password: {ex.Message}");
+
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost("AssignRole")]
         [Authorize(Roles = "ADMIN")] // Change the role as per your requirement
         public async Task<ActionResult> AssignRole([FromBody] AssignRoleDto model)
