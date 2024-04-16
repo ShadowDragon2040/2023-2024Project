@@ -25,7 +25,7 @@
 
         <Border Grid.Column="0" BorderThickness="0,0,0,3" BorderBrush="#FF436437" VerticalAlignment="Center"
                 Padding="30,15,15,5" Height="84" Grid.ColumnSpan="2">
-            <Label Content="Welcome back!" Foreground="DarkGray" FontSize="40"
+            <Label Content="Admin Dashboard" Foreground="DarkGray" FontSize="40"
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
         </Border>
 

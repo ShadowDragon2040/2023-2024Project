@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="1200"
              Style="{StaticResource Page_Style}">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -13,7 +12,6 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="1" Margin="50,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Center">
-            <TextBox Name="txtEditor" Text="{Binding EditorText}" Background="White" Width="320" Height="30" IsReadOnly="True" />
             <Label Content="Recently Uploaded Files" FontSize="22" HorizontalAlignment="Center"  VerticalAlignment="Stretch"/>
             <ListBox Name="lsb_uploadedFiles" Height="350" Margin="0,20,0,0"  ItemsSource="{Binding UploadedFiles}">
                 <ListBox.ItemContainerStyle>
@@ -37,6 +35,13 @@
                    HorizontalAlignment="Center"
                    Foreground="Black"
                 />
+            <Label
+                Content="{Binding EditorText}"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Center"
+                Foreground="Black">
+                
+            </Label>
 
             <Button x:Name="btnOpenFile" Height="50"
                     Content="Open file" Width="150"

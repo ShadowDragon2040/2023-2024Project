@@ -19,7 +19,9 @@ namespace AdatKarbantarto.ViewModel
 {
     public class ImageUploadVM : ViewModelBase
     {
-        
+        private string _labelText;
+        private string _editorText;
+
         private List<FtpFile> _uploadedFilesList;
         private ObservableCollection<FtpFile> _uploadedFiles;
         public string Filename { get; set; }
@@ -34,7 +36,19 @@ namespace AdatKarbantarto.ViewModel
         public RelayCommand openfile { get; private set; }
         public RelayCommand uploadfile { get; private set; }
 
-        private string _editorText;
+
+        public string LabelText
+        {
+            get { return _labelText; }
+            set
+            {
+                if (_labelText != value)
+                {
+                    _labelText = value;
+                    OnPropertyChanged(nameof(LabelText));
+                }
+            }
+        }
         public string EditorText
         {
             get { return _editorText; }
@@ -76,13 +90,15 @@ namespace AdatKarbantarto.ViewModel
         private async Task OpenFile()
         {
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-
+            openFileDialog.Multiselect = true;
             if (openFileDialog.ShowDialog() == true)
             {
+                LabelText = "Uploading File...";
                 EditorText = "Uploading...";
                 await Task.Delay(100); // A small delay to update the UI
                 Filename = openFileDialog.FileName;
                 EditorText = Path.GetFileName(Filename);
+                LabelText = "File detected: " + Path.GetFileName(Filename);
             }
         }
 
@@ -97,6 +113,7 @@ namespace AdatKarbantarto.ViewModel
                         client.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["ftpUser"], ConfigurationManager.AppSettings["ftpPass"]);
                         await client.UploadFileTaskAsync(new Uri(ConfigurationManager.AppSettings["ftpServer"] + Path.GetFileName(Filename)), "STOR", Filename);
                         EditorText = "Upload successful.";
+                        LabelText = "Upload successful.";
 
                         BackendApiHelper apihelper = new BackendApiHelper();
                         FtpFile newFtpFile = new FtpFile()
@@ -111,17 +128,16 @@ namespace AdatKarbantarto.ViewModel
                     }
                     catch (Exception ex)
                     {
-                        // Handle and log exceptions appropriately
                         Console.WriteLine($"Error uploading file: {ex.Message}");
                         EditorText = "Upload failed.";
+                        LabelText = "Upload failed!";
                     }
                 }
 
             }
             catch (Exception ex)
             {
-                // Handle exception
-                EditorText = "Upload failed: " + ex.Message;
+                LabelText = "Upload failed!" +ex.Message;
             }
         }
 
