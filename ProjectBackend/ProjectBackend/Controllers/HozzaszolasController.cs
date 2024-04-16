@@ -100,6 +100,7 @@ namespace Webárúház_Nagy_Project.Controllers
 
                 existingHozzaszolas.Leiras = updateHozzaszolasokDto.Leiras;
                 existingHozzaszolas.Ertekeles = updateHozzaszolasokDto.Ertekeles;
+                existingHozzaszolas.TermekId = updateHozzaszolasokDto.TermekId;
 
                 await _context.SaveChangesAsync();
                 return Ok();
