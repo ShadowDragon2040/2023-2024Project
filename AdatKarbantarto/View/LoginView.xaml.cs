@@ -22,7 +22,6 @@ namespace AdatKarbantarto.View
         {
             InitializeComponent();
         }
-
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -30,7 +29,6 @@ namespace AdatKarbantarto.View
                 DragMove();
             }
         }
-
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
@@ -54,7 +52,6 @@ namespace AdatKarbantarto.View
                     Marshal.ZeroFreeBSTR(ptr);
             }
         }
-
         private bool JwtDecode(SecureString token)
         {
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
@@ -73,10 +70,7 @@ namespace AdatKarbantarto.View
                 return false;
             }
             return false;
-
-
         }
-
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -89,8 +83,6 @@ namespace AdatKarbantarto.View
                 if (userToken != null)
                 {
                     SecureString token = ConvertToSecureString(userToken);
-                    
-
                     bool admin = JwtDecode(token);
                     if (admin)
                     {
@@ -103,20 +95,16 @@ namespace AdatKarbantarto.View
                         MessageBox.Show("The user is not admin!");
                     }
                 }
-
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("User not found!");
             }
             finally
             {
                 btnLogin.IsEnabled = true;
             }
         }
-
-
-
         private SecureString ConvertToSecureString(string token)
         {
             SecureString secureString = new SecureString();

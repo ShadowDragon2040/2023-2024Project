@@ -16,6 +16,7 @@ import CategoryPage from './pages/ShopPages/CategoryPage';
 import NewsPage from './pages/MainPages/NewsPage';
 import React, { useState, useEffect } from 'react';
 import CartPage from './pages/ShopPages/CartPage';
+import ProfilePage from './pages/ShopPages/ProfilePage';
 
 function App() {
   sessionStorage.setItem("bejelenkezve", "false");
@@ -82,7 +83,8 @@ const addToCart = (product, quantity) => {
         <Route path="/ElektroplatingPage" component={ElektroplatingPage} exact />
         <Route path="/ModelltervezesPage" component={ModelltervezesPage} exact />
         <Route path="/PaintPage" component={PaintPage} exact />
-
+        <Route path="/ProfilePage" component={ProfilePage} exact />
+        
         <Route path="/ShopPage" exact component={() => <ShopPage incrementCounter={incrementCounter} />}/>
         <Route path="/ShopPage/:ProductId" component={() => <SingleProductDisplay addToCart={addToCart} cart={cartItems} />}/>
         <Route path="/ShopPage/Categories/:CategoryId" component={CategoryPage} exact />

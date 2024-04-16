@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AdatKarbantarto.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="450" Width="1200"
              Style="{StaticResource Page_Style}">
     <UserControl.DataContext>
         <local:HomeVM/>
@@ -16,27 +16,20 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Grid.Column="0" BorderThickness="0,0,0,3" BorderBrush="#FF436437" 
-                HorizontalAlignment="Left" VerticalAlignment="Center" Width="1200" Height="72"
-                >
-            <Label Content="Welcome back!" Margin="15,0,0,0" Foreground="DarkGray" FontSize="40"
+        <Border Grid.Column="0" BorderThickness="0,0,0,3" BorderBrush="#FF436437" VerticalAlignment="Center"
+                Padding="30,15,15,5" Height="84" Grid.ColumnSpan="2">
+            <Label Content="Admin Dashboard" Foreground="DarkGray" FontSize="40"
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
         </Border>
 
         <Image Grid.Row="1" Grid.Column="0" Source="{StaticResource LogoImage}"
-               HorizontalAlignment="Left" VerticalAlignment="Top"
-               Margin="70,20,0,0"
-               Width="700"
-               Height="400"
-               Opacity="0.6"
-               />
-
+               Opacity="0.8" Margin="10" Width="Auto"/>
     </Grid>
 </UserControl>

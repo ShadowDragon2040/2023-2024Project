@@ -30,8 +30,14 @@ const Navbar = (props) => {
   const handleShow = () => setShow(true);
 
   const [scrollNav, setScrollNav]= useState(false);
-  const location = useLocation();
-  
+  //const location = useLocation();
+  const {pathname} = useLocation()
+
+
+  useEffect(() => {
+    console.log(pathname)
+  }, [pathname])
+
   const changeNav=()=>{
     if(window.scrollY >= 80){
       setScrollNav(true);
@@ -71,7 +77,7 @@ const Navbar = (props) => {
       <Nav scrollNav={scrollNav}>
         <NavbarContainer>
           <NavLogo to='/' onClick={toggleHome}>PrintFusion</NavLogo>
-          {location.pathname === '/' ? (
+          {pathname === '/' ? (
             <NavMenu>
               <NavItem>
                 <NavLinks
@@ -122,12 +128,12 @@ const Navbar = (props) => {
                 </NavLinks>
               </NavItem>
             </NavMenu>
-          ) : location.pathname.startsWith('/ShopPage') ? (
+          ) : pathname.startsWith('/ShopPage') ? (
             <NavBtn2>
               <SearchBar />
             </NavBtn2>
-          ) : null}
-          {location.pathname === '/ShopPage' ? (
+          ) : <></>}
+          {pathname.startsWith('/ShopPage') ? (
             sessionStorage.getItem("bejelenkezve") === 'true' ? (
               <div>
                 <NavBtn2>
@@ -163,9 +169,9 @@ const Navbar = (props) => {
                 <div style={{width: '200px'}}></div>
               </NavBtn>
             )
-          ) : null}
-          {location.pathname === '/ShopPage'  ? (
-            null
+          ) : <></>}
+          {pathname === '/ShopPage'  ? (
+            <></>
           ):
             <NavBtn>
               <NavBtnLink onClick={toggleHome} to='/ShopPage'>Shop</NavBtnLink>
