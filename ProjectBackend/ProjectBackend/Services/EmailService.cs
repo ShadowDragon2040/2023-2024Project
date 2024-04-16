@@ -25,7 +25,7 @@ namespace ProjectBackend.Services
             smtpServer.EnableSsl = true;
             smtpServer.Send(mail);
         }
-        
+
         public static void SendConfirmationMail(string mailAddressTo, string subject, string body, IConfiguration configuration)
         {
             MailMessage mail = new MailMessage();

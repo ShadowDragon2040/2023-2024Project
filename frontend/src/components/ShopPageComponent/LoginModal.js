@@ -6,7 +6,8 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
 import {
-  NavBtnLink
+  NavBtnLink,
+  NiceButton
 } from '../TextElements';
 
 const LoginModal = (props) => {
@@ -14,8 +15,15 @@ const LoginModal = (props) => {
     const [password, setPassword] = useState('');
     const [show, setShow] = useState(false);
 
+    const [showResetModal, setShowResetModal] = useState(false);
+    const [resetEmail, setResetEmail] = useState('');
+    const [resetEmailCode, setResetEmailCode] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handleResetModalClose = () => setShowResetModal(false);
+    const handleResetModalShow = () => setShowResetModal(true);
     
     const handleLogin = async (e) => {
       e.preventDefault();
@@ -44,6 +52,22 @@ const LoginModal = (props) => {
         handleClose();
       }
     };
+
+    const handlePasswordReset = async () => {
+      try {
+          const response = await axios.post(`${process.env.REACT_APP_BASE_URL}Auth/updatepassword`, {
+              email: resetEmail,
+              emailCode: resetEmailCode,
+              newPassword: newPassword
+          });
+          console.log("Password reset successful.");
+          toast("Password reset successful.");
+          handleClose();
+      } catch (error) {
+          console.log("Password reset failed.", error);
+          toast("Password reset failed.");
+      }
+  };
 
     return (
       <>
@@ -74,11 +98,39 @@ const LoginModal = (props) => {
                     />
                   </Form.Group>
 
-                <Button style={{margin: "10px",backgroundColor: "#01BF71", border: "none"}} variant="primary" type="submit">
+                <NiceButton style={{marginTop: "10px", backgroundColor: "#01BF71", border: "none"}} variant="primary" type="submit">
                     Login
-                </Button>
+                </NiceButton>
+                <NiceButton style={{marginLeft: "200px",backgroundColor: "#01BF71", border: "none"}} variant="primary" onClick={handleResetModalShow}>
+                  Forgot Password?
+                </NiceButton>
             </Form>
           </Modal>
+
+          <Modal show={showResetModal} onHide={handleResetModalClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Reset Password:</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group controlId="formResetEmail">
+                            <Form.Label>Email address:</Form.Label>
+                            <Form.Control type="email" placeholder="Enter email" value={resetEmail} onChange={(e) => setResetEmail(e.target.value)} />
+                        </Form.Group>
+                        <Form.Group controlId="formResetEmailCode">
+                            <Form.Label>Email code:</Form.Label>
+                            <Form.Control type="text" placeholder="Enter email code" value={resetEmailCode} onChange={(e) => setResetEmailCode(e.target.value)} />
+                        </Form.Group>
+                        <Form.Group controlId="formNewPassword">
+                            <Form.Label>New Password:</Form.Label>
+                            <Form.Control type="password" placeholder="New Password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                        </Form.Group>
+                        <NiceButton style={{marginTop: "10px"}} variant="primary" onClick={handlePasswordReset}>
+                            Reset Password
+                        </NiceButton>
+                    </Form>
+                </Modal.Body>
+            </Modal>
       </>
     );
 };
