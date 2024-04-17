@@ -1,6 +1,6 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.css"
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages';
 import CompanyInfoPage from './pages/MainPages/CompanyInfoPage';
 import EnderPage from './pages/MainPages/EnderPage';
@@ -73,7 +73,7 @@ const addToCart = (product, quantity) => {
 }; 
   return (
     <Router>
-      <Switch>
+      <Routes>
         <Route path="/" component={Home} exact />
         <Route path="/CompanyInfoPage" component={CompanyInfoPage} exact />
         <Route path="/Ender" component={EnderPage} exact />
@@ -91,7 +91,7 @@ const addToCart = (product, quantity) => {
         <Route path="/News" component={NewsPage} exact />
         <Route path="/CartPage"component={CartPage} exact cartItemCount={cartItemCount} cartItems={cartItems} />
         
-      </Switch>
+      </Routes>
     </Router>
   );
 }

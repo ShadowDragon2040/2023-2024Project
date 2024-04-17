@@ -1,7 +1,7 @@
   import React, { useRef, useState, useEffect } from 'react';
   import { FaSearch, FaMicrophone } from 'react-icons/fa';
   import axios from 'axios';
-  import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+  import { NavLink } from 'react-router-dom';
 
   function SearchBar() {
     const inputRef = useRef(null);
