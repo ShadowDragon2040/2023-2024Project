@@ -74,22 +74,22 @@ const addToCart = (product, quantity) => {
   return (
     <Router>
       <Routes>
-        <Route path="/" component={Home} exact />
-        <Route path="/CompanyInfoPage" component={CompanyInfoPage} exact />
-        <Route path="/Ender" component={EnderPage} exact />
-        <Route path="/Anycubic" component={AnycubicPage} exact />
-        <Route path="/Bambu" component={BambuPage} exact />
-        <Route path="/ElegooSaturn" component={ElegooSaturnPage} exact />
-        <Route path="/ElektroplatingPage" component={ElektroplatingPage} exact />
-        <Route path="/ModelltervezesPage" component={ModelltervezesPage} exact />
-        <Route path="/PaintPage" component={PaintPage} exact />
-        <Route path="/ProfilePage" component={ProfilePage} exact />
+        <Route path="/" element={<Home/>} exact />
+        <Route path="/CompanyInfoPage" element={<CompanyInfoPage/>} exact />
+        <Route path="/Ender" element={<EnderPage/>} exact />
+        <Route path="/Anycubic" element={<AnycubicPage/>} exact />
+        <Route path="/Bambu" element={<BambuPage/>} exact />
+        <Route path="/ElegooSaturn" element={<ElegooSaturnPage/>} exact />
+        <Route path="/ElektroplatingPage" element={<ElektroplatingPage/>} exact />
+        <Route path="/ModelltervezesPage" element={<ModelltervezesPage/>} exact />
+        <Route path="/PaintPage" element={<PaintPage/>} exact />
+        <Route path="/ProfilePage" element={<ProfilePage/>} exact />
         
-        <Route path="/ShopPage" exact component={() => <ShopPage incrementCounter={incrementCounter} />}/>
-        <Route path="/ShopPage/:ProductId" component={() => <SingleProductDisplay addToCart={addToCart} cart={cartItems} />}/>
-        <Route path="/ShopPage/Categories/:CategoryId" component={CategoryPage} exact />
-        <Route path="/News" component={NewsPage} exact />
-        <Route path="/CartPage"component={CartPage} exact cartItemCount={cartItemCount} cartItems={cartItems} />
+        <Route path="/ShopPage"element={<ShopPage incrementCounter={incrementCounter} />}exact/>
+        <Route path="/ShopPage/:ProductId" element={() => <SingleProductDisplay addToCart={addToCart} cart={cartItems} />}/>
+        <Route path="/ShopPage/Categories/:CategoryId" element={<CategoryPage/>} exact />
+        <Route path="/News" element={<NewsPage/>} exact />
+        <Route path="/CartPage"element={<CartPage/>} exact cartItemCount={cartItemCount} cartItems={cartItems} />
         
       </Routes>
     </Router>
