@@ -29,6 +29,7 @@ const Navbar = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
   const [scrollNav, setScrollNav]= useState(false);
   //const location = useLocation();
   const {pathname} = useLocation()
@@ -165,7 +166,7 @@ const Navbar = (props) => {
               <NavBtn>
                 <RegisterModal />
                 <div style={{width: '20px'}}></div>
-                <LoginModal/>
+                <LoginModal incrementCounter={props.incrementCounter} setShow={setShow}/>
                 <div style={{width: '200px'}}></div>
               </NavBtn>
             )

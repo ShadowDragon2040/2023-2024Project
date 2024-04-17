@@ -17,11 +17,13 @@ import NewsPage from './pages/MainPages/NewsPage';
 import React, { useState, useEffect } from 'react';
 import CartPage from './pages/ShopPages/CartPage';
 import ProfilePage from './pages/ShopPages/ProfilePage';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   sessionStorage.setItem("bejelenkezve", "false");
   sessionStorage.setItem("role", "PUBLIC");
-  const[counter,setCounter]=useState(0)
+ 
 
   const [cartItems, setCartItems] = useState([]);
   const [addedToCart, setAddedToCart] = useState([]);
@@ -31,10 +33,7 @@ function App() {
     //console.log(cartItems)
   }, [cartItems]);
 
-  const incrementCounter=()=>{
-    setCounter(counter+1)
-    console.log(counter)
-  }
+
   /*const handleRemoveFromCart = (itemId) => {
     const updatedCart = cart.filter(item => item.id !== itemId);
     setCart(updatedCart);
@@ -62,9 +61,9 @@ const addToCart = (product, quantity) => {
   setCartItemCount(prevCount => cartItems.length);
   console.log("Added to cart: " + product.name);
 
-  if(cartItems.length != 0){
+  if(cartItems.length !== 0){
     let kosarString = "";
-    cartItems.map(item =>{
+    cartItems.map(item =>()=>{
       kosarString+= item.id +" "+ item.quantity+" "+item.color+";";
 
     })
@@ -72,7 +71,20 @@ const addToCart = (product, quantity) => {
   }
 }; 
   return (
+  <>
+    <ToastContainer
+   position="bottom-right"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    theme="dakr"
+    />
+
+<ToastContainer />
     <Router>
+  
       <Routes>
         <Route path="/" element={<Home/>} exact />
         <Route path="/CompanyInfoPage" element={<CompanyInfoPage/>} exact />
@@ -85,14 +97,15 @@ const addToCart = (product, quantity) => {
         <Route path="/PaintPage" element={<PaintPage/>} exact />
         <Route path="/ProfilePage" element={<ProfilePage/>} exact />
         
-        <Route path="/ShopPage"element={<ShopPage incrementCounter={incrementCounter} />}exact/>
-        <Route path="/ShopPage/:ProductId" element={() => <SingleProductDisplay addToCart={addToCart} cart={cartItems} />}/>
-        <Route path="/ShopPage/Categories/:CategoryId" element={<CategoryPage/>} exact />
+        <Route path="/ShopPage"element={<ShopPage/>}exact/>
+        <Route path="/ShopPage/:ProductId" element={<SingleProductDisplay addToCart={addToCart} cart={cartItems} />}/>
+        <Route path="/ShopPage/Categories/:CategoryId" element={<CategoryPage />} exact />
         <Route path="/News" element={<NewsPage/>} exact />
         <Route path="/CartPage"element={<CartPage/>} exact cartItemCount={cartItemCount} cartItems={cartItems} />
         
       </Routes>
     </Router>
+    </>
   );
 }
 export default App;

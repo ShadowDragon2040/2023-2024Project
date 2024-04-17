@@ -23,24 +23,31 @@ const LoginModal = (props) => {
     const [newPassword, setNewPassword] = useState('');
 
     const handleClose = () => setShow(false);
+
     const handleShow = () => setShow(true);
     const handleResetModalClose = () => setShowResetModal(false);
     const handleResetModalShow = () => setShowResetModal(true);
     
     const handleLogin = async (e) => {
+
       e.preventDefault();
+     
       try {
         const response = await axios.post(`${process.env.REACT_APP_BASE_URL}Auth/login`, {
           userName: username,
           password: password,
         });
-        localStorage.setItem("LoginToken",JSON.stringify(response))
-        const decodedToken = jwtDecode(localStorage.getItem("LoginToken"));
-        sessionStorage.setItem("decodedTokenRole", decodedToken.role);
+        
+        const token = response; 
+        localStorage.setItem("LoginToken", token.data);
+        
+        const decodedToken = jwtDecode(token.data);
+        
+        const role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+        sessionStorage.setItem("role", role);
+        console.log(role);
         sessionStorage.setItem("bejelenkezve", "true");
-        console.log(decodedToken);
-        console.log("Login successful.");
-        toast("Login successful.");
+        toast.success("Login successful.");
       } catch (error) {
         sessionStorage.setItem("bejelenkezve", "false");
         console.log("Login failed.", error);
@@ -50,8 +57,9 @@ const LoginModal = (props) => {
         a megjelenés rossz lesz mert a session storage kitisztul ha
         nincs ez a kódrészlet benne akkor meg történnie kell egy refresh
         eseménynek hogy az oldal kinézete frissüljön a megfelelő állapotba.
-        props.incrementCounter();*/
-        handleClose();
+        */
+       props.incrementCounter();
+       handleClose();
       }
     };
 
@@ -63,7 +71,7 @@ const LoginModal = (props) => {
               newPassword: newPassword
           });
           console.log("Password reset successful.");
-          toast("Password reset successful.");
+          toast.success("Password reset successful.");
           handleClose();
       } catch (error) {
           console.log("Password reset failed.", error);

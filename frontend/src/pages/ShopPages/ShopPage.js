@@ -5,13 +5,18 @@ import Footer from '../../components/FooterComponent';
 import { ShopPageContainer } from '../../components/TextElements';
 import ShopSideBar from '../../components/ShopPageComponent/ShopSideBar';
 
-function ShopPage(props) {
+function ShopPage() {
   const [userData, setUserData] = useState(null);
   const [collapsed, setCollapsed] = useState(true);
 
   const handleMouseEnter = () => {
     setCollapsed(false);
 };
+const[counter,setCounter]=useState(0)
+const incrementCounter=()=>{
+  setCounter(counter+1)
+  console.log(counter)
+}
 
 const handleMouseLeave = () => {
     setCollapsed(true);
@@ -21,12 +26,14 @@ const handleMouseLeave = () => {
     <>
       <ShopPageContainer>
         <Navbar
-        incrementCounter={props.incrementCounter}
+        incrementCounter={incrementCounter}
+        
+        /*
         setUserData={setUserData}
-        bejelenkezve={props.bejelenkezve}
-        role={props.role}
-        setBejelenkezve={props.setBejelenkezve}
-        setRole={props.setRole}
+        bejelenkezve={bejelenkezve}
+        role={role}
+        setBejelenkezve={setBejelenkezve}
+        setRole={setRole}*/
         />
         <div className="container">
           <div className="row">
