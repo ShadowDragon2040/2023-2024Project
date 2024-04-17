@@ -358,7 +358,6 @@ export const NavBtn=styled.nav`
 `
 
 export const NavBtn2=styled.nav`
-    margin-left: 10px;
     margin-right: 10px;
     display:inline-flex;
     align-items: center;

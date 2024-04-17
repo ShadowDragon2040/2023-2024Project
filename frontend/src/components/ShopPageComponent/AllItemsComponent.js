@@ -31,7 +31,7 @@ function AllItems (props) {
 
           <Carousel style={{width: props.collapsed ? '80%' : '100%',borderRadius: '20px'}} autoPlay={true} infiniteLoop={true} showThumbs={false} showStatus={false}>
             <NavLink to={"/ShopPage/"+25}>
-              <CarouselImage src={`${process.env.REACT_APP_KEP_URL}image1.png`} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s', borderRadius: '20px'}}/>
+              <CarouselImage src={`${process.env.REACT_APP_KEP_URL}image1.png`} style={{ width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s', borderRadius: '20px'}}/>
             </NavLink>
             <NavLink to={"/ShopPage/"+26}>
               <CarouselImage src={`${process.env.REACT_APP_KEP_URL}image2.jpg`} style={{width: props.collapsed ? '80%' : '100%',transition: 'width 0.3s',borderRadius: '20px'}}/>

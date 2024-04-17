@@ -37,7 +37,7 @@ function ShopSideBar(props) {
             <MenuItem icon={<FaHome /> }> Home</MenuItem>
           </NavLink>
 
-          <NavLink to={'/ShopPage/news'} className='nav-link'>
+          <NavLink to={'/ShopPage/News'} className='nav-link'>
             <MenuItem icon={<FaNewspaper />}> News</MenuItem>
           </NavLink>
 

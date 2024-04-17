@@ -46,12 +46,16 @@ const LoginModal = (props) => {
         const role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
         sessionStorage.setItem("role", role);
         console.log(role);
-        sessionStorage.setItem("bejelenkezve", "true");
-        toast.success("Login successful.");
+        sessionStorage.setItem("bejelenkezve", "true"); 
+        toast.success("Login successful.",{
+          position: "bottom-right"
+        });
       } catch (error) {
         sessionStorage.setItem("bejelenkezve", "false");
         console.log("Login failed.", error);
-        toast("Login failed.");
+        toast.error("Login failed.",{
+          position: "bottom-right"
+        });
       }finally{
         /*ha benne van az inkrement akkor refresselődik az oldalde
         a megjelenés rossz lesz mert a session storage kitisztul ha

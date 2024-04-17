@@ -61,3 +61,24 @@ const CartPage = ({handleClose, cart }) => {
 };
 
 export default CartPage;
+
+/* <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Cart Items</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {props.cart.map(item => (
+            <div key={item.id}>
+              <h5>{item.name}</h5>
+              <p>Price: {item.price}</p>
+              <p>Quantity: {item.quantity}</p>
+              <p>Color: {item.color}</p>
+            </div>
+          ))}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>Close</Button>
+          
+          <Button variant="primary" onClick={() => console.log('Fizetés')}>Fizetés</Button>
+        </Modal.Footer>
+      </Modal>*/

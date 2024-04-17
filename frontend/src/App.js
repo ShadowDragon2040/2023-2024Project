@@ -73,7 +73,7 @@ const addToCart = (product, quantity) => {
   return (
   <>
     <ToastContainer
-   position="bottom-right"
+    position="bottom-right"
     autoClose={5000}
     hideProgressBar={false}
     newestOnTop={false}
@@ -97,7 +97,7 @@ const addToCart = (product, quantity) => {
         <Route path="/PaintPage" element={<PaintPage/>} exact />
         <Route path="/ProfilePage" element={<ProfilePage/>} exact />
 
-        <Route path="/ShopPage" exact element={ <ShopPage/>}/>
+        <Route path="/ShopPage" exact element={<ShopPage/>}/>
         <Route path="/ShopPage/:ProductId" element={ <SingleProductDisplay addToCart={addToCart} cart={cartItems} />}/>
         <Route path="/ShopPage/Categories/:CategoryId" element={<CategoryPage/>} exact />
 

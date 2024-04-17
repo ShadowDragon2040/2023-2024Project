@@ -22,20 +22,15 @@ import {
   NavBtnLink,
   NavBtn2
 } from './TextElements';
-import { ModalButton } from 'react-st-modal';
 
 const Navbar = (props) => {
   const [show, setShow] = useState(false);
-  const [show2, setShow2] = useState(false);
   const [totalQuantity, setTotalQuantity] = useState(0);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const handleClose2 = () => setShow2(false);
-  const handleShow2 = () => setShow2(true);
 
 
   const [scrollNav, setScrollNav]= useState(false);
-  //const location = useLocation();
   const {pathname} = useLocation()
 
 
@@ -133,58 +128,46 @@ const Navbar = (props) => {
                 </NavLinks>
               </NavItem>
             </NavMenu>
-          ) : pathname.startsWith('/ShopPage') ? (
+          ) : pathname === '/ShopPage'  ? (
             <NavBtn2>
               <SearchBar />
             </NavBtn2>
           ) : <></>}
           {pathname.startsWith('/ShopPage') ? (
             sessionStorage.getItem("bejelenkezve") === 'true' ? (
-              <div>
+              <div style={{marginTop:"15px"}}>
                 <NavBtn2>
                   <NavBtnLink to='/ProfilePage'>
                     <CgProfile /> Profile
                   </NavBtnLink>
                 </NavBtn2>
+
                 <NavBtn2>
-                  <NavBtnLink onClick={handleShow}>
+                  <NavBtnLink to='/CartPage'>
                     Cart <FaShoppingBasket/> {totalQuantity > 0 && `${totalQuantity}`}
                   </NavBtnLink>
                 </NavBtn2>
+
+                <NavBtn2>
+                  <NavBtnLink onClick={handleShow}>
+                    Logout
+                  </NavBtnLink>
+                </NavBtn2>
+
                 <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Cart Items</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {props.cart.map(item => (
-            <div key={item.id}>
-              <h5>{item.name}</h5>
-              <p>Price: {item.price}</p>
-              <p>Quantity: {item.quantity}</p>
-              <p>Color: {item.color}</p>
-            </div>
-          ))}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>Close</Button>
-          
-          <Button variant="primary" onClick={() => console.log('Fizetés')}>Fizetés</Button>
-        </Modal.Footer>
-      </Modal>
-                <NavBtnLink onClick={handleShow2}>Logout</NavBtnLink>
-                <Modal show2={show2} onHide={handleClose2}>
                   <Modal.Header closeButton>
                     <Modal.Title>Are you sure you want to log out?</Modal.Title>
                   </Modal.Header>
                   <Modal.Footer>
-                    <Button style={{backgroundColor: 'green', border: 'none'}} variant="primary" onClick={handleClose2}>
+                    <Button style={{backgroundColor: 'green', border: 'none'}} variant="primary" onClick={handleClose}>
                       No
                     </Button>
-                    <Button variant="secondary" onClick={ handleLogout}>
+                    <Button variant="secondary" onClick={handleLogout}>
                       Yes
                     </Button>
                   </Modal.Footer>
                 </Modal>
+
               </div>
             ) : (
               <NavBtn>
