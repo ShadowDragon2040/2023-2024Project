@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import NavigationBar from "../teszt";
 import { Modal, Button } from 'react-bootstrap'; 
 
-const CartPage = ({ show, handleClose, cart }) => {
+const CartPage = ({handleClose, cart }) => {
+  console.log(cart)
   /*
   <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -35,7 +36,7 @@ const CartPage = ({ show, handleClose, cart }) => {
   return (
     <div>
       
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={true} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Cart Items</Modal.Title>
         </Modal.Header>
@@ -51,8 +52,8 @@ const CartPage = ({ show, handleClose, cart }) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>Close</Button>
-          {/* A NavBtnLink helyett itt egy egyszerű gomb található */}
-          <Button variant="primary" onClick={() => console.log('Go to Cart Page')}>Go to Cart Page</Button>
+          
+          <Button variant="primary" onClick={() => console.log('Fizetés')}>Fizetés</Button>
         </Modal.Footer>
       </Modal>
     </div>

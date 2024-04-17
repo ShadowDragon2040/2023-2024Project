@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import {useParams } from 'react-router-dom';
 import { MdArrowBack } from "react-icons/md";
 import InnerImageZoom from 'react-inner-image-zoom';
-import { CommentSection } from 'react-comments-section';
-import 'react-comments-section/dist/index.css';
+
+
 import Navbar from '../../components/MainNavbarComponent';
 import { Rating } from 'react-simple-star-rating';
 import Footer from '../../components/FooterComponent';
@@ -150,7 +150,7 @@ function SingleProductDisplay(props) {
                         <div className='rounded mx-auto d-flex flex-row'>
                             <div className='wrapper card-body rounded mt-3 w-100' style={{backgroundColor:'#059e60'}}>
                                 <Rating className='m-2' onClick={handleRating}/>
-                                <CommentSection
+                                {/*<CommentSection
                                     logIn={{
                                         loginLink: 'http://localhost:3000/Login',
                                         signupLink: 'http://localhost:3000/SignUp',
@@ -165,7 +165,7 @@ function SingleProductDisplay(props) {
                                     commentData={transformedComments}
                                     onSubmitAction={handleSubmitComment}
                                     titleStyle={{ color: '#059e60' }}
-                                />
+                                />*/}
                             </div>
                         </div>
                     </div>
