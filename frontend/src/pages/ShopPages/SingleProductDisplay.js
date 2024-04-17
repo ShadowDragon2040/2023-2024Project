@@ -4,9 +4,7 @@ import {useParams } from 'react-router-dom';
 import { MdArrowBack } from "react-icons/md";
 import InnerImageZoom from 'react-inner-image-zoom';
 
-
 import Navbar from '../../components/MainNavbarComponent';
-import { Rating } from 'react-simple-star-rating';
 import Footer from '../../components/FooterComponent';
 import ColorPicker from '../../components/ShopPageComponent/ColorPickerComponent';
 import {
@@ -18,25 +16,10 @@ import {
 
 function SingleProductDisplay(props) {
     const { ProductId } = useParams();
-    const [rating, setRating] = useState(0);
-    const [commentString, setCommentString] = useState("");
     const [selectedColor, setSelectedColor] = useState("");
     const [quantity, setQuantity] = useState(1);
-    const [cart, setCart] = useState([]);
+   
 
-    const handleRating = (rate) => {
-        setRating(rate);
-    }
-
-    const handleCommentSubmit = async () => {
-        try {
-            console.log(commentString);
-            console.log(rating);
-            setCommentString("");
-        } catch (error) {
-            console.log(error);
-        }
-    };
 
     const handleColorChange = (color) => {
         setSelectedColor(color);
@@ -75,13 +58,8 @@ function SingleProductDisplay(props) {
        
     };
 
-    const handleRemoveFromCart = (itemId) => {
-        const updatedCart = cart.filter(item => item.id !== itemId);
-        setCart(updatedCart);
-    };
-
     const [singleProductData, setSingleProductData] = useState({});
-    const [transformedComments, setTransformedComments] = useState(null);
+   
     const url = `${process.env.REACT_APP_BASE_URL}Termekek/EgyTermek/`;
 
     useEffect(() => {
@@ -97,21 +75,13 @@ function SingleProductDisplay(props) {
                     userProfile: '',
                     replies: []
                 }));
-                setTransformedComments(transformedComments);
+                
             })
             .catch(error => console.error('Error fetching product data:', error));
     }, [singleProductData]);
 
-    const handleSubmitComment = (data) => {
-        console.log("Submitted comment data:", data);
-        axios.post(`${process.env.REACT_APP_BASE_URL}Hozzaszolas`, {
-            "hozzaszolasId": 0,
-            "felhasznaloId": 1,
-            "termekId": ProductId,
-            "leiras": data.text,
-            "ertekeles": rating
-        })
-    }
+   
+    
 
     return (
         <>
@@ -149,8 +119,8 @@ function SingleProductDisplay(props) {
                     <div className="row align-items-start">
                         <div className='rounded mx-auto d-flex flex-row'>
                             <div className='wrapper card-body rounded mt-3 w-100' style={{backgroundColor:'#059e60'}}>
-                                <Rating className='m-2' onClick={handleRating}/>
-                                {/*<CommentSection
+                                {/*<Rating className='m-2' onClick={handleRating}/>
+                                <CommentSection
                                     logIn={{
                                         loginLink: 'http://localhost:3000/Login',
                                         signupLink: 'http://localhost:3000/SignUp',
