@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import {useParams } from 'react-router-dom';
 import { MdArrowBack } from "react-icons/md";
 import InnerImageZoom from 'react-inner-image-zoom';
+
 import Navbar from '../../components/MainNavbarComponent';
 import Footer from '../../components/FooterComponent';
 import ColorPicker from '../../components/ShopPageComponent/ColorPickerComponent';
@@ -112,6 +113,30 @@ function SingleProductDisplay(props) {
                             <input type="number" id="quantity" name="quantity" min="1" max="5" value={quantity} onChange={handleQuantityChange} />
                             <br/>
                             <NiceButton style={{backgroundColor:'black',color:'white',marginTop:'20px'}} onClick={handleAddToCart}>Kosárba</NiceButton>
+                        </div>
+                    </div>
+
+                    <div className="row align-items-start">
+                        <div className='rounded mx-auto d-flex flex-row'>
+                            <div className='wrapper card-body rounded mt-3 w-100' style={{backgroundColor:'#059e60'}}>
+                                {/*<Rating className='m-2' onClick={handleRating}/>
+                                <CommentSection
+                                    logIn={{
+                                        loginLink: 'http://localhost:3000/Login',
+                                        signupLink: 'http://localhost:3000/SignUp',
+                                    }}
+                                    currentUser={{
+                                        currentUserId: 'YourUserId',
+                                        currentUserFullName: 'YourUserName',
+                                        currentUserImg: 'YourUserImageURL'
+                                    }}
+                                    overlayStyle={{ backgroundColor: '#fff', color: 'black' }}
+                                    submitBtnStyle={{ border:'1px solid #059e60', backgroundColor: '#059e60' }}
+                                    commentData={transformedComments}
+                                    onSubmitAction={handleSubmitComment}
+                                    titleStyle={{ color: '#059e60' }}
+                                />*/}
+                            </div>
                         </div>
                     </div>
                 </div>

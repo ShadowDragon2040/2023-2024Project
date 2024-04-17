@@ -96,13 +96,13 @@ const addToCart = (product, quantity) => {
         <Route path="/ModelltervezesPage" element={<ModelltervezesPage/>} exact />
         <Route path="/PaintPage" element={<PaintPage/>} exact />
         <Route path="/ProfilePage" element={<ProfilePage/>} exact />
-        
-        <Route path="/ShopPage"element={<ShopPage/>}exact/>
-        <Route path="/ShopPage/:ProductId" element={<SingleProductDisplay addToCart={addToCart} cart={cartItems} />}/>
-        <Route path="/ShopPage/Categories/:CategoryId" element={<CategoryPage />} exact />
+
+        <Route path="/ShopPage" exact element={ <ShopPage/>}/>
+        <Route path="/ShopPage/:ProductId" element={ <SingleProductDisplay addToCart={addToCart} cart={cartItems} />}/>
+        <Route path="/ShopPage/Categories/:CategoryId" element={<CategoryPage/>} exact />
+
         <Route path="/News" element={<NewsPage/>} exact />
-        <Route path="/CartPage"element={<CartPage/>} exact cartItemCount={cartItemCount} cartItems={cartItems} />
-        
+        <Route path="/CartPage"element={<CartPage cart={cartItems} cartItemCount={cartItemCount}/>} exact  />
       </Routes>
     </Router>
     </>
