@@ -62,7 +62,7 @@ const LoginModal = (props) => {
         nincs ez a kódrészlet benne akkor meg történnie kell egy refresh
         eseménynek hogy az oldal kinézete frissüljön a megfelelő állapotba.
         */
-       props.incrementCounter();
+       //props.incrementCounter();
        handleClose();
       }
     };

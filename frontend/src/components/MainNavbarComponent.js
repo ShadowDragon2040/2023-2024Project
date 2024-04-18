@@ -25,7 +25,7 @@ import {
 
 const Navbar = (props) => {
   const [show, setShow] = useState(false);
-  const [totalQuantity, setTotalQuantity] = useState(0);
+  //const [totalQuantity, setTotalQuantity] = useState(0);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -38,6 +38,10 @@ const Navbar = (props) => {
     console.log(pathname)
   }, [pathname])
 
+  useEffect(() => {
+    console.log(props)
+
+  },[props.totalQuantity])
   const changeNav=()=>{
     if(window.scrollY >= 80){
       setScrollNav(true);
@@ -62,15 +66,7 @@ const Navbar = (props) => {
     handleClose();
   };
 
-  useEffect(() => {
-    let total = 0;
-    if (props.cart) {
-      props.cart.forEach(item => {
-        total += item.quantity;
-      });
-    }
-    setTotalQuantity(total);
-  }, [props.cart]);
+ 
 
   return (
     <IconContext.Provider value={{color:'#fff'}}>
@@ -144,7 +140,7 @@ const Navbar = (props) => {
 
                 <NavBtn2>
                   <NavBtnLink to='/CartPage'>
-                    Cart <FaShoppingBasket/> {totalQuantity > 0 && `${totalQuantity}`}
+                    Cart <FaShoppingBasket/> {props.totalQuantity > 0 && `${props.totalQuantity}`}
                   </NavBtnLink>
                 </NavBtn2>
 

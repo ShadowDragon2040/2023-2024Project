@@ -26,12 +26,21 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   const [addedToCart, setAddedToCart] = useState([]);
   const [cartItemCount, setCartItemCount] = useState(0);
- 
+  const [totalQuantity, setTotalQuantity] = useState(0);
+
   useEffect(() => {
     //console.log(cartItems)
   }, [cartItems]);
 
- 
+  useEffect(() => {
+    let total = 0;
+    if (cartItems) {
+      cartItems.forEach(item => {
+        total += item.quantity;
+      });
+    }
+    setTotalQuantity(total);
+  }, [cartItems]);
 
 
   /*const handleRemoveFromCart = (itemId) => {
@@ -69,6 +78,7 @@ const addToCart = (product, quantity) => {
     })
     localStorage.setItem("kosar", kosarString);
   }
+
 }; 
   return (
   <>
@@ -87,7 +97,7 @@ const addToCart = (product, quantity) => {
         <Route path="/ModelltervezesPage" element={<ModelltervezesPage/>} exact/>
         <Route path="/PaintPage" element={<PaintPage/>} exact />
         <Route path="/ProfilePage" element={<ProfilePage/>} exact />
-        <Route path="/ShopPage" exact element={<ShopPage/>}/>
+        <Route path="/ShopPage" exact element={<ShopPage cartItemCount={totalQuantity}/>}/>
         <Route path="/ShopPage/:ProductId" element={ <SingleProductDisplay addToCart={addToCart} cart={cartItems} />}/>
         <Route path="/ShopPage/Categories/:CategoryId" element={<CategoryPage/>} exact />
         <Route path="/News" element={<NewsPage/>} exact/>

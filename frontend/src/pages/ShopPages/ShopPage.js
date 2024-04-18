@@ -5,7 +5,8 @@ import Footer from '../../components/FooterComponent';
 import { ShopPageContainer } from '../../components/TextElements';
 import ShopSideBar from '../../components/ShopPageComponent/ShopSideBar';
 
-function ShopPage() {
+function ShopPage(props) {
+
   const [userData, setUserData] = useState(null);
   const [collapsed, setCollapsed] = useState(true);
 
@@ -22,10 +23,11 @@ const handleMouseLeave = () => {
     setCollapsed(true);
 };
 
+
   return (
     <>
       <ShopPageContainer>
-        <Navbar incrementCounter={incrementCounter}/>
+        <Navbar incrementCounter={incrementCounter} totalQuantity={props.cartItemCount}/>
         <div className="container">
           <div className="row">
             <div style={{transition: 'width 0.3s'}} className={`${collapsed ? 'col-1' : 'col-3'}`}>
