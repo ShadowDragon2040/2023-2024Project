@@ -60,10 +60,8 @@ function SingleProductDisplay(props) {
 
     const [singleProductData, setSingleProductData] = useState({});
    
-    const url = `${process.env.REACT_APP_BASE_URL}Termekek/EgyTermek/`;
-
     useEffect(() => {
-        axios.get(url + ProductId)
+        axios.get(`${process.env.REACT_APP_BASE_URL}Termekek/EgyTermek/` + ProductId)
             .then(response => {
                 setSingleProductData(response.data);
                 const transformedComments = response.data.hozzaszolasok.map(productData => ({
