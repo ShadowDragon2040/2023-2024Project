@@ -23,8 +23,6 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   sessionStorage.setItem("bejelenkezve", "false");
   sessionStorage.setItem("role", "PUBLIC");
- 
-
   const [cartItems, setCartItems] = useState([]);
   const [addedToCart, setAddedToCart] = useState([]);
   const [cartItemCount, setCartItemCount] = useState(0);
@@ -32,6 +30,8 @@ function App() {
   useEffect(() => {
     //console.log(cartItems)
   }, [cartItems]);
+
+ 
 
 
   /*const handleRemoveFromCart = (itemId) => {
@@ -72,37 +72,24 @@ const addToCart = (product, quantity) => {
 }; 
   return (
   <>
-    <ToastContainer
-    position="bottom-right"
-    autoClose={5000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick
-    rtl={false}
-    theme="dakr"
-    />
-
-<ToastContainer />
+  <ToastContainer />
     <Router>
-  
       <Routes>
         <Route path="/" element={<Home/>} exact />
-        <Route path="/CompanyInfoPage" element={<CompanyInfoPage/>} exact />
-        <Route path="/Ender" element={<EnderPage/>} exact />
-        <Route path="/Anycubic" element={<AnycubicPage/>} exact />
-        <Route path="/Bambu" element={<BambuPage/>} exact />
-        <Route path="/ElegooSaturn" element={<ElegooSaturnPage/>} exact />
-        <Route path="/ElektroplatingPage" element={<ElektroplatingPage/>} exact />
-        <Route path="/ModelltervezesPage" element={<ModelltervezesPage/>} exact />
+        <Route path="/CompanyInfoPage" element={<CompanyInfoPage/>} exact/>
+        <Route path="/Ender" element={<EnderPage/>} exact/>
+        <Route path="/Anycubic" element={<AnycubicPage/>} exact/>
+        <Route path="/Bambu" element={<BambuPage/>} exact/>
+        <Route path="/ElegooSaturn" element={<ElegooSaturnPage/>} exact/>
+        <Route path="/ElektroplatingPage" element={<ElektroplatingPage/>} exact/>
+        <Route path="/ModelltervezesPage" element={<ModelltervezesPage/>} exact/>
         <Route path="/PaintPage" element={<PaintPage/>} exact />
         <Route path="/ProfilePage" element={<ProfilePage/>} exact />
-
         <Route path="/ShopPage" exact element={<ShopPage/>}/>
         <Route path="/ShopPage/:ProductId" element={ <SingleProductDisplay addToCart={addToCart} cart={cartItems} />}/>
         <Route path="/ShopPage/Categories/:CategoryId" element={<CategoryPage/>} exact />
-
-        <Route path="/News" element={<NewsPage/>} exact />
-        <Route path="/CartPage"element={<CartPage cart={cartItems} cartItemCount={cartItemCount}/>} exact  />
+        <Route path="/News" element={<NewsPage/>} exact/>
+        <Route path="/CartPage"element={<CartPage cart={cartItems} cartItemCount={cartItemCount}/>} exact/>
       </Routes>
     </Router>
     </>

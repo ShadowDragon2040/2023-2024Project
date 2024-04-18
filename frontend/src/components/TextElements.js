@@ -279,10 +279,35 @@ export const TermekButtonCard=styled.button`
         cursor: pointer;
     }
 `
+export const TermekListButtonCard=styled.button`
+    background-color:#059e60;
+    display: flex;
+    text-align: left;
+    align-items: center;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom:10px;
+    max-height: 180px;
+    max-width:950px;
+    min-width:950px;
+    &:hover{
+        transform: scale(1.02);
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+    }
+`
+export const TermekListImage=styled.img`
+    box-shadow: 10px 10px 10px black;
+    max-height: 120px;
+    max-width: 200px;
+    margin-bottom: 10px;
+`
+
 
 export const TermekImage=styled.img`
     max-height: 200px;
     margin-bottom: 10px;
+    box-shadow:5px 5px 5px black;
 `
 
 export const ServicesIcon=styled.img`
