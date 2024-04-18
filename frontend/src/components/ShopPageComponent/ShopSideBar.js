@@ -45,7 +45,7 @@ function ShopSideBar(props) {
             <ul>
               {categoryList.map((category) => (
                 <div key={category.kategoriaId} className='form-check form-switch menupont'>
-                  <NavLink to={'/ShopPage/Categories/'+category.kategoriaNev} className='nav-link' style={{margin:"0px"}}>
+                  <NavLink to={'/ShopPage/Categories/'+category.kategoriaId} className='nav-link' style={{margin:"0px"}}>
                     <MenuItem>
                           {category.kategoriaNev}
                     </MenuItem>

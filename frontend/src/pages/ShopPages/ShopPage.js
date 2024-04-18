@@ -25,20 +25,11 @@ const handleMouseLeave = () => {
   return (
     <>
       <ShopPageContainer>
-        <Navbar
-        incrementCounter={incrementCounter}
-        
-        /*
-        setUserData={setUserData}
-        bejelenkezve={bejelenkezve}
-        role={role}
-        setBejelenkezve={setBejelenkezve}
-        setRole={setRole}*/
-        />
+        <Navbar incrementCounter={incrementCounter}/>
         <div className="container">
           <div className="row">
             <div style={{transition: 'width 0.3s'}} className={`${collapsed ? 'col-1' : 'col-3'}`}>
-              <ShopSideBar collapsed={collapsed} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave}/>
+              <ShopSideBar incrementCounter={incrementCounter} collapsed={collapsed} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave}/>
             </div>
             <div className={`col`}>
               <AllItems collapsed={collapsed}/>

@@ -2,50 +2,57 @@ import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../../components/MainNavbarComponent';
 import ShopSideBar from '../../components/ShopPageComponent/ShopSideBar';
-import TermekCard from '../../components/ShopPageComponent/TermekCard';
+import TermekListCard from '../../components/ShopPageComponent/TermekListCard';
 import Footer from '../../components/FooterComponent';
 import {
   ShopPageContainer,
   ItemContainer
 } from '../../components/TextElements';
+import { useParams } from 'react-router-dom';
 
-function CategoryPage() {
+function CategoryPage(props) {
+  const { CategoryId } = useParams(); 
   const [singleItem, setSingleItem] = useState(false);
   const [ItemData,setItemData]=useState(null)
   const [userData, setUserData] = useState(null);
   const [categoryDataList, setCategoryDataList] = useState([]);
+  const [collapsed, setCollapsed] = useState(true);
+
+  const handleMouseEnter = () => {
+    setCollapsed(false);};
+
+  const handleMouseLeave = () => {
+    setCollapsed(true);};
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_BASE_URL}Termekek/Termek/`+1)
-      .then(response => setCategoryDataList(response.data))
+    axios.get(`${process.env.REACT_APP_BASE_URL}Termekek/Termek/`+CategoryId)
+      .then(response => {setCategoryDataList(response.data);
+        //console.log(response.data);
+      })
       .catch(error => console.error('Hiba a lekérdezés során:', error));
-  }, []);
+  }, [CategoryId]);
 
   return (
     <>
       <ShopPageContainer>
         <Navbar setUserData={setUserData} setItemData={setItemData}  setSingleItem={setSingleItem}/>
         <div className="container">
-          <div className="row align-items-start">
-            <div className="col-sm-4 col-md-4 col-xl-3">
-              <ShopSideBar/>
+          <div className="row">
+            <div style={{transition: 'width 0.3s'}} className={`${collapsed ? 'col-1' : 'col-3'}`}>
+              <ShopSideBar handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} collapsed={collapsed}/>
             </div>
-            <ItemContainer className="col-sm-8 col-md-8 col-xl-9">
+            <ItemContainer className="col-sm-8 col-md-8 col-xl-8">
                 <ItemContainer>
-                    <div>
-                    <div className="row">
-                        <div className="col-md-6">
-                        <h5>kategórianév</h5>
-                        </div>
-                    </div>
-                    <div className="row w-100">
-                        {
-                            categoryDataList.map(item => (
-                            <TermekCard item={item} key={item.id}/>
-                            ))
-                        }
-                    </div>
-                    </div>
+                <div className="row">
+                    {categoryDataList.map(item => 
+                    (
+                      <div className="col-md-12 col-xl-12 col-sm-12" key={item.id}>
+                          <h5 style={{color:"white"}}>{item.kategoriaNev}</h5>
+                          <TermekListCard item={item}/>
+                      </div>
+                    )
+                    )}
+                  </div>
                 </ItemContainer>
             </ItemContainer>
           </div>
