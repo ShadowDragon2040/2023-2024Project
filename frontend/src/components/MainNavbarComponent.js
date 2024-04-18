@@ -32,12 +32,11 @@ const Navbar = (props) => {
 
   const [scrollNav, setScrollNav]= useState(false);
   const {pathname} = useLocation()
-
-
+/*
   useEffect(() => {
     console.log(pathname)
   }, [pathname])
-
+*/
   const changeNav=()=>{
     if(window.scrollY >= 80){
       setScrollNav(true);
