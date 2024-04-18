@@ -1,84 +1,38 @@
 import React, { useState, useEffect } from "react";
 import NavigationBar from "../teszt";
-import { Modal, Button } from 'react-bootstrap'; 
-
-const CartPage = ({handleClose, cart }) => {
-  console.log(cart)
-  /*
-  <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Cart Items</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {
-                !props.cart ? (
-                  <div>Nincs semmi</div>
-                ) : (
-                  <div>
-                    {props.cart.map(item => (
-                      <div key={item.id}>
-                        <h5>{item.name}</h5>
-                        <p>Price: {item.price}</p>
-                        <p>Quantity: {item.quantity}</p>
-                        <p>Color: {item.color}</p>
-                      </div>
-                    ))}
-                  </div>
-                )
-              }
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>Close</Button>
-              <NavBtnLink to='/CartPage'>Go to Cart Page</NavBtnLink>
-            </Modal.Footer>
-          </Modal>
-          */
-  return (
-    <div>
+import { Button } from 'react-bootstrap'; // Modal eltávolítva
       
-      <Modal show={true} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Cart Items</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {cart.map(item => (
-            <div key={item.id}>
-              <h5>{item.name}</h5>
-              <p>Price: {item.price}</p>
-              <p>Quantity: {item.quantity}</p>
-              <p>Color: {item.color}</p>
+      const CartPage = ({ handleClose, cart }) => {
+        // Modal state és handler eltávolítva
+      
+        // handleClose funkció változatlanul használható
+      
+        console.log(cart);
+      
+        return (
+          <div>
+            <div className="card">
+              <div className="card-header">
+                <h5 className="card-title">Cart Items</h5>
+              </div>
+              <div className="card-body">
+                {cart.map(item => (
+                  <div key={item.id}>
+                    <h5>{item.name}</h5>
+                    <p>Price: {item.price}</p>
+                    <p>Quantity: {item.quantity}</p>
+                    <p>Color: {item.color}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="card-footer">
+                <Button variant="secondary" onClick={handleClose}>Close</Button>
+                <Button variant="primary" onClick={() => console.log('Fizetés')}>Fizetés</Button>
+              </div>
             </div>
-          ))}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>Close</Button>
-          
-          <Button variant="primary" onClick={() => console.log('Fizetés')}>Fizetés</Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
-  );
-};
-
-export default CartPage;
-
-/* <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Cart Items</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {props.cart.map(item => (
-            <div key={item.id}>
-              <h5>{item.name}</h5>
-              <p>Price: {item.price}</p>
-              <p>Quantity: {item.quantity}</p>
-              <p>Color: {item.color}</p>
-            </div>
-          ))}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>Close</Button>
-          
-          <Button variant="primary" onClick={() => console.log('Fizetés')}>Fizetés</Button>
-        </Modal.Footer>
-      </Modal>*/
+          </div>
+        );
+      };
+      
+      export default CartPage;
+      
