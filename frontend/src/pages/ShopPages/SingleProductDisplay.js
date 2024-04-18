@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import {useParams } from 'react-router-dom';
 import { MdArrowBack } from "react-icons/md";
 import InnerImageZoom from 'react-inner-image-zoom';
-
+import { jwtDecode } from 'jwt-decode';
 import Navbar from '../../components/MainNavbarComponent';
 import Footer from '../../components/FooterComponent';
 import ColorPicker from '../../components/ShopPageComponent/ColorPickerComponent';
@@ -18,8 +18,10 @@ function SingleProductDisplay(props) {
     const { ProductId } = useParams();
     const [selectedColor, setSelectedColor] = useState("");
     const [quantity, setQuantity] = useState(1);
-   
-
+    const [singleProductData, setSingleProductData] = useState({});
+    const [transformedComments, setTransformedComments] = useState([]);
+    const [commentText, setCommentText] = useState('');
+    const [userId, setUserId] = useState('');
 
     const handleColorChange = (color) => {
         setSelectedColor(color);
@@ -39,26 +41,7 @@ function SingleProductDisplay(props) {
         };
 
         props.addToCart(newItem, quantity) 
-
-        /*const existingItemIndex = cart.findIndex(item =>
-            item.id === ProductId &&
-            item.color === selectedColor
-        );
-
-        if (existingItemIndex !== -1) {
-            const updatedCart = [...cart];
-            updatedCart[existingItemIndex].quantity += quantity;
-            updatedCart[existingItemIndex].price += singleProductData.ar * quantity;
-            setCart(updatedCart);
-            console.log('Item already exists in cart. Updated cart:', updatedCart);
-        } else {
-            setCart(prevCart => [...prevCart, newItem]);
-            console.log('Item added to cart:', newItem);
-        }*/
-       
     };
-
-    const [singleProductData, setSingleProductData] = useState({});
    
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_BASE_URL}Termekek/EgyTermek/` + ProductId)
@@ -70,6 +53,7 @@ function SingleProductDisplay(props) {
                     fullName: productData.loginNev,
                     avatarUrl: `${process.env.REACT_APP_KEP_URL}ppp.png`,
                     text: productData.leiras,
+                    rating: productData.ertekeles,
                     userProfile: '',
                     replies: []
                 }));
@@ -78,13 +62,58 @@ function SingleProductDisplay(props) {
             .catch(error => console.error('Error fetching product data:', error));
     }, [singleProductData]);
 
-   
-    
+    useEffect(() => {
+        const token = localStorage.getItem("LoginToken");
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            setUserId(decodedToken.userId);
+        }
+    }, []);
 
+    const handleSubmitComment = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}Hozzaszolas`, {
+                userId: userId,
+                termekId: ProductId,
+                leiras: commentText,
+                ertekeles: 0
+            });
+            console.log("Comment posted successfully:", response.data);
+            // Refresh comments
+            setCommentText('');
+            // You might want to refresh comments here
+        } catch (error) {
+            console.error('Error posting comment:', error);
+        }
+    };
+
+    const handleRatingChange = async (e, comId) => {
+        const rating = parseInt(e.target.value);
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}Hozzaszolas/Rating`, {
+                comId: comId,
+                rating: rating
+            });
+            console.log("Rating updated successfully:", response.data);
+            // Refresh comments
+            const updatedComments = transformedComments.map(comment => {
+                if (comment.comId === comId) {
+                    return { ...comment, rating: rating };
+                } else {
+                    return comment;
+                }
+            });
+            setTransformedComments(updatedComments);
+        } catch (error) {
+            console.error('Error updating rating:', error);
+        }
+    };
+    
     return (
         <>
         <InfoContainer10>    
-        <Navbar cart={props.cart} />
+        <Navbar cart={props.cart} totalQuantity={props.cartItemCount} />
                 <NavBtn style={{margin:'20px 0px 20px 200px'}}>
                     <NavBtnLink to='/ShopPage'><MdArrowBack/>Back</NavBtnLink>
                 </NavBtn>
@@ -116,24 +145,38 @@ function SingleProductDisplay(props) {
 
                     <div className="row align-items-start">
                         <div className='rounded mx-auto d-flex flex-row'>
-                            <div className='wrapper card-body rounded mt-3 w-100' style={{backgroundColor:'#059e60'}}>
-                                {/*<Rating className='m-2' onClick={handleRating}/>
-                                <CommentSection
-                                    logIn={{
-                                        loginLink: 'http://localhost:3000/Login',
-                                        signupLink: 'http://localhost:3000/SignUp',
-                                    }}
-                                    currentUser={{
-                                        currentUserId: 'YourUserId',
-                                        currentUserFullName: 'YourUserName',
-                                        currentUserImg: 'YourUserImageURL'
-                                    }}
-                                    overlayStyle={{ backgroundColor: '#fff', color: 'black' }}
-                                    submitBtnStyle={{ border:'1px solid #059e60', backgroundColor: '#059e60' }}
-                                    commentData={transformedComments}
-                                    onSubmitAction={handleSubmitComment}
-                                    titleStyle={{ color: '#059e60' }}
-                                />*/}
+                            <div className='wrapper card-body rounded mt-3 w-100' style={{ backgroundColor: '#059e60' }}>
+                                <h3>Comments</h3>
+                                {transformedComments.length === 0 && <p>Be the first one to rate our item</p>}
+                                {transformedComments.map(comment => (
+                                    <div key={comment.comId}>
+                                        <div>
+                                            <img src={comment.avatarUrl} alt="avatar" />
+                                            <strong>{comment.fullName}</strong>
+                                            {/* Rating system */}
+                                            <select value={comment.rating} onChange={(e) => handleRatingChange(e, comment.comId)}>
+                                                <option value="0">No rating</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                        <p>{comment.text}</p>
+                                    </div>
+                                ))}
+                                <form onSubmit={handleSubmitComment}>
+                                    <textarea
+                                        value={commentText}
+                                        onChange={(e) => setCommentText(e.target.value)}
+                                        placeholder="Write your comment..."
+                                        rows="4"
+                                        cols="50"
+                                    ></textarea>
+                                    <br />
+                                    <button type="submit">Post Comment</button>
+                                </form>
                             </div>
                         </div>
                     </div>
