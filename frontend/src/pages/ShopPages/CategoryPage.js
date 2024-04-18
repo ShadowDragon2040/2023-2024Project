@@ -9,8 +9,9 @@ import {
   ItemContainer
 } from '../../components/TextElements';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-function CategoryPage(props) {
+function CategoryPage() {
   const { CategoryId } = useParams(); 
   const [singleItem, setSingleItem] = useState(false);
   const [ItemData,setItemData]=useState(null)
@@ -26,10 +27,13 @@ function CategoryPage(props) {
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BASE_URL}Termekek/Termek/`+CategoryId)
-      .then(response => {setCategoryDataList(response.data);
-        //console.log(response.data);
-      })
-      .catch(error => console.error('Hiba a lekérdezés során:', error));
+      .then(response => {setCategoryDataList(response.data);})
+      .catch(error =>{
+        if(error.response&&error.response.status===404){
+          toast.error('Product not found!');
+        }
+        console.error('Hiba a lekérdezés során:', error)
+      } );
   }, [CategoryId]);
 
   return (
@@ -44,15 +48,19 @@ function CategoryPage(props) {
             <ItemContainer className="col-sm-8 col-md-8 col-xl-8">
                 <ItemContainer>
                 <div className="row">
-                    {categoryDataList.map(item => 
-                    (
-                      <div className="col-md-12 col-xl-12 col-sm-12" key={item.id}>
-                          <h5 style={{color:"white"}}>{item.kategoriaNev}</h5>
-                          <TermekListCard item={item}/>
+                    {categoryDataList.length === 0 ? (
+                      <div className="col-md-12 col-xl-12 col-sm-12">
+                        <h5 style={{color:"white",height:"420px",textAlign:"left"}}>No products found with this category ID</h5>
                       </div>
-                    )
+                    ) : (
+                      categoryDataList.map(item => (
+                        <div className="col-md-12 col-xl-12 col-sm-12" key={item.id}>
+                          <h5 style={{ color: "white" }}>{item.kategoriaNev}</h5>
+                          <TermekListCard item={item}/>
+                        </div>
+                      ))
                     )}
-                  </div>
+                </div>
                 </ItemContainer>
             </ItemContainer>
           </div>

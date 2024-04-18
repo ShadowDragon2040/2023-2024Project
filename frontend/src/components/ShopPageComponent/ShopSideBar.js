@@ -17,7 +17,7 @@ function ShopSideBar(props) {
       axios.get(`${process.env.REACT_APP_BASE_URL}Termekek/Kategoriak`)
         .then(response => setCategoryList(response.data))
         .catch(error => console.error('Hiba a lekérdezés során:', error));
-    }, []);
+    }, [categoryList]);
 
   return (
       <ShopSidebarContainer>

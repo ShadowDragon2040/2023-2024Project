@@ -72,7 +72,9 @@ const addToCart = (product, quantity) => {
 }; 
   return (
   <>
-  <ToastContainer />
+  <ToastContainer 
+  position='bottom-right'
+  />
     <Router>
       <Routes>
         <Route path="/" element={<Home/>} exact />

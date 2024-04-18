@@ -601,6 +601,7 @@ export const CarouselContainer = styled.div`
     }
 `
 export const ItemContainer=styled.div`
+        min-height:750px;
         position:relative;
         display:inline-block;
         margin:auto;
