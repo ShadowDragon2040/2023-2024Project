@@ -36,16 +36,18 @@ const CartPage = ({ handleClose, cart, setCart }) => {
         </div>
      
         <div className="card-footer">
+          <br></br>
         <NavBtnLink to='/ShopPage'><MdArrowBack/>Vissza a weboldalra</NavBtnLink>
           <br></br>
           <br></br>
           <Button variant="primary" onClick={() => console.log('Fizetés')}>Fizetés</Button>
         </div>
       </div>
+      <Footer />
     </div>
    
   );
  
 };
-<Footer />
+
 export default CartPage;

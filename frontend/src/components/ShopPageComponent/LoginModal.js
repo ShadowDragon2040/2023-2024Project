@@ -27,7 +27,15 @@ const LoginModal = (props) => {
     const handleShow = () => setShow(true);
     const handleResetModalClose = () => setShowResetModal(false);
     const handleResetModalShow = () => setShowResetModal(true);
-    
+    // ---- ez csak tipp ide, csökkenti a redundáns kódot:
+    /*
+    const toggleModal = (modal, state) => {
+      if (modal === "login") {
+        setShow(state);
+      } else if (modal === "reset") {
+        setShowResetModal(state);
+      }
+    };*/
     const handleLogin = async (e) => {
 
       e.preventDefault();
