@@ -190,7 +190,7 @@ namespace AdatKarbantarto.ViewModel
                 };
                
                 var response = await _backendApiHelper.PostHozzaszolasAsync(newProduct);
-                if (response)
+                if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Comment added successfully!"); 
                 }
@@ -241,7 +241,7 @@ namespace AdatKarbantarto.ViewModel
             {
             
                 var response = await _backendApiHelper.DeleteHozzaszolasAsync(itemToDelete.HozzaszolasId);
-                if (response)
+                if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Item deleted successfully!", "Success!", MessageBoxButton.OK);
                 }

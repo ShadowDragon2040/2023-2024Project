@@ -86,6 +86,7 @@ namespace AdatKarbantarto.View
                     bool admin = JwtDecode(token);
                     if (admin)
                     {
+                        apiHelper.SetJwtToken(userToken);
                         MainWindow window = new MainWindow();
                         window.Show();
                         this.Close();

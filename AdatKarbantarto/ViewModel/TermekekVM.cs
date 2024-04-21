@@ -179,7 +179,7 @@ namespace AdatKarbantarto.ViewModel
 
                 var response = await postHelper.PostTermekAsync(newProduct);
 
-                if (response)
+                if (response.IsSuccessStatusCode)
                     MessageBox.Show("Item added successfully!");
                 
                 else
@@ -228,7 +228,7 @@ namespace AdatKarbantarto.ViewModel
             {
                 BackendApiHelper deleteHelper = new BackendApiHelper();
                 var response = await deleteHelper.DeleteTermekAsync(itemToDelete.TermekId);
-                if (response)
+                if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Item deleted successfully!", "Success!", MessageBoxButton.OK);
                 }

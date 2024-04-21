@@ -190,7 +190,7 @@ namespace AdatKarbantarto.ViewModel
             if (newOrder!=null)
             {
                 var response = await _backendApiHelper.PostSzamlaAsync(newOrder);
-                if (response)
+                if (response.IsSuccessStatusCode)
                 {
                    MessageBox.Show("Order added successfully!");
                 }
@@ -236,7 +236,7 @@ namespace AdatKarbantarto.ViewModel
             {
                 
                 var response = await _backendApiHelper.DeleteSzamlaAsync(itemToDelete.SzamlazasId);
-                if (response)
+                if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Item deleted successfully!", "Success!", MessageBoxButton.OK);
                 }
