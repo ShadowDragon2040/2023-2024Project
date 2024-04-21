@@ -17,6 +17,7 @@ namespace AdatKarbantarto.ViewModel
         private static readonly Regex _regex = new Regex("[^0-9 ]+");
         private string _searchProductID = "";
         private bool _isSaveEnabled;
+        private bool _isPutEnabled;
         private bool _isAddEnabled;
         private Szamla _selectedItem;
         private List<Szamla> _ListData;
@@ -25,7 +26,7 @@ namespace AdatKarbantarto.ViewModel
         private ICollectionView _filteredView;
         public SzamlazasVM()
         {
- 
+            _isPutEnabled = false;
             _isAddEnabled = true;
             _backendApiHelper=new BackendApiHelper();
             SzamlaItems = new ObservableCollection<Szamla>();
@@ -115,6 +116,18 @@ namespace AdatKarbantarto.ViewModel
                 }
             }
         }
+        public bool IsPutEnabled
+        {
+            get { return _isPutEnabled; }
+            set
+            {
+                if (_isPutEnabled != value)
+                {
+                    _isPutEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public bool IsAddEnabled
         {
             get { return _isAddEnabled; }
@@ -188,6 +201,8 @@ namespace AdatKarbantarto.ViewModel
 
             IsAddEnabled = true;
             IsSaveEnabled = false;
+            IsPutEnabled = false;
+
             SaveCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate SaveCommand's CanExecute
         }
         private async void PutItem()
@@ -246,6 +261,7 @@ namespace AdatKarbantarto.ViewModel
             UpdateItem.Add(new Szamla());
             IsAddEnabled = false;
             IsSaveEnabled = true;
+            IsPutEnabled = false;
             AddCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate AddCommand's CanExecute
         }
 
@@ -255,6 +271,8 @@ namespace AdatKarbantarto.ViewModel
 
             UpdateItem.Add(szamlaToModify);
             IsAddEnabled = true;
+            IsPutEnabled = true;
+
         }
 
 

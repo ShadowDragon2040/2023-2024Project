@@ -17,6 +17,7 @@ namespace AdatKarbantarto.ViewModel
         private static readonly Regex _regex = new Regex("[^0-9 ]+");
         private string _searchProductID = "";
         private bool _isSaveEnabled;
+        private bool _isPutEnabled;
         private bool _isAddEnabled;
         private Termek _selectedItem;
         private List<Termek> _ListData;
@@ -25,6 +26,7 @@ namespace AdatKarbantarto.ViewModel
         private ICollectionView _filteredView;
         public TermekekVM()
         {
+            _isPutEnabled = false;
             _isSaveEnabled = false;
             _isAddEnabled = true;
             _backendApiHelper= new BackendApiHelper();
@@ -41,10 +43,7 @@ namespace AdatKarbantarto.ViewModel
             LoadInitialData();
         }
 
-        public TermekekVM(SecureString jwtToken)
-        {
-            JwtToken = jwtToken;
-        }
+    
         #region Commands
         public RelayCommand RefreshCommand { get; private set; }
         public RelayCommand AddCommand { get; private set; }
@@ -118,6 +117,18 @@ namespace AdatKarbantarto.ViewModel
                 }
             }
         }
+        public bool IsPutEnabled
+        {
+            get { return _isPutEnabled; }
+            set
+            {
+                if (_isPutEnabled != value)
+                {
+                    _isPutEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public bool IsAddEnabled
         {
             get { return _isAddEnabled; }
@@ -148,7 +159,6 @@ namespace AdatKarbantarto.ViewModel
             {
                 Items.Add(Termek);
             }
-
         }
 
         private async void SaveItem()
@@ -182,6 +192,8 @@ namespace AdatKarbantarto.ViewModel
 
 
             IsAddEnabled = true;
+            IsPutEnabled = false;
+
             IsSaveEnabled = false;
             SaveCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate SaveCommand's CanExecute
         }
@@ -241,6 +253,7 @@ namespace AdatKarbantarto.ViewModel
             UpdateItem.Add(new Termek());
             IsAddEnabled = false;
             IsSaveEnabled = true;
+            IsPutEnabled = false;
             AddCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate AddCommand's CanExecute
         }
 
@@ -250,6 +263,8 @@ namespace AdatKarbantarto.ViewModel
 
             UpdateItem.Add(itemToModify);
             IsAddEnabled = true;
+            IsPutEnabled = true;
+
         }
 
 

@@ -130,7 +130,7 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
-                HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/api/Auth/Register", ujfelhasznalo);
+                HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/Auth/Register", ujfelhasznalo);
                 return response;
             }
             catch (HttpRequestException ex)
