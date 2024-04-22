@@ -18,7 +18,6 @@ namespace ProjectBackend.Controllers
         }
 
         [HttpGet]
-        
         public async Task<ActionResult> Get()
         {
             try

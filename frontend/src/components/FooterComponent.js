@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FaFacebook } from 'react-icons/fa'
 import { animateScroll as scroll } from 'react-scroll'
 import {
@@ -16,12 +16,24 @@ import {
     SocialLogo,
     WebsiteRights
 } from './TextElements'
-const Footer = () => {
+import { useState } from 'react'
+const Footer = (props) => {
     const toggleHome=()=>{
         scroll.scrollToTop();
     };
+
+    const [isButtom, setIsButtom] = useState(false);
+
+    useEffect(() => {
+        if(props.isButtom){
+         setIsButtom(props.isButtom);
+        }
+    }, [props.isButtom])
+    
+
+
   return (
-    <FooterContainer style={{zIndex:"10"}}>
+    <FooterContainer style={{zIndex:"10", position:isButtom ? "fixed" : "relative", bottom: isButtom ? "0" : "auto", width:"100%"}}>
         <FooterWrap>
             <FooterLinksContainer>
                 <FooterLinksWrapper>

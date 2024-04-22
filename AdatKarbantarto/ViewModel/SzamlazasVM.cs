@@ -270,6 +270,7 @@ namespace AdatKarbantarto.ViewModel
             UpdateItem.Clear();
 
             UpdateItem.Add(szamlaToModify);
+            IsSaveEnabled = false;
             IsAddEnabled = true;
             IsPutEnabled = true;
 

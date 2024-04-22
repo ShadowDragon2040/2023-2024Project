@@ -275,6 +275,7 @@ namespace AdatKarbantarto.ViewModel
             UpdateItem.Clear();
 
             UpdateItem.Add(HozzaszolasToModify);
+            IsSaveEnabled = false;
             IsAddEnabled = true;
             IsPutEnabled = true;
         }

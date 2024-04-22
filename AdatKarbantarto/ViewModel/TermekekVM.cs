@@ -262,6 +262,7 @@ namespace AdatKarbantarto.ViewModel
             UpdateItem.Clear();
 
             UpdateItem.Add(itemToModify);
+            IsSaveEnabled = false;
             IsAddEnabled = true;
             IsPutEnabled = true;
 

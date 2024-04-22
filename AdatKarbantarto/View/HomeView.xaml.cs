@@ -28,7 +28,6 @@ namespace AdatKarbantarto.View
         {
             InitializeComponent();
             DataContext = new HomeVM();
-
         }
 
     }

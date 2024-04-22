@@ -47,10 +47,16 @@ function App() {
   }, [cartItems]);
 
 
-  /*const handleRemoveFromCart = (itemId) => {
-    const updatedCart = cart.filter(item => item.id !== itemId);
-    setCart(updatedCart);
-};*/
+  const handleRemoveFromCart = (index) => {
+
+    setCartItems(prevList => {
+      let newList = [...prevList]; 
+      newList.splice(index, 1); 
+      
+      return newList; 
+      
+    });
+};
 const addToCart = (product, quantity) => {
   let existingItemIndex = -1;
 
@@ -104,7 +110,7 @@ const addToCart = (product, quantity) => {
         <Route path="/ShopPage/:ProductId" element={ <SingleProductDisplay addToCart={addToCart} cart={cartItems} cartItemCount={totalQuantity} />}/>
         <Route path="/ShopPage/Categories/:CategoryId" element={<CategoryPage/>} exact />
         <Route path="/News" element={<NewsPage/>} exact/>
-        <Route path="/CartPage"element={<CartPage cart={cartItems} cartItemCount={cartItemCount}/>} exact/>
+        <Route path="/CartPage"element={<CartPage cart={cartItems} cartItemCount={cartItemCount} setCart={handleRemoveFromCart} />} exact/>
       </Routes>
     </Router>
     </>
