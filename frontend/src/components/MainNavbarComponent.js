@@ -129,7 +129,7 @@ const Navbar = (props) => {
             <NavBtn2>
               <SearchBar />
             </NavBtn2>
-          ) : <></>}
+          ) : <div style={{width: '1000px'}}></div>}
           {pathname.startsWith('/ShopPage') ? (
             sessionStorage.getItem("bejelenkezve") === 'true' ? (
               <div style={{marginTop:"15px"}}>

@@ -9,8 +9,6 @@ const NavigationBar = ({ onCategoryClick, setSearchTerm, cartItemCount, cartItem
   const [searchOpen, setSearchOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
-  
-
   const handleOpen = () => {
     setModalOpen(true);
   };

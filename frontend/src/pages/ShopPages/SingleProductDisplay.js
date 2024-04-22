@@ -1,17 +1,19 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import {useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { MdArrowBack } from "react-icons/md";
 import InnerImageZoom from 'react-inner-image-zoom';
 import { jwtDecode } from 'jwt-decode';
 import Navbar from '../../components/MainNavbarComponent';
 import Footer from '../../components/FooterComponent';
 import ColorPicker from '../../components/ShopPageComponent/ColorPickerComponent';
+import { Rating } from 'react-simple-star-rating';
 import {
     NavBtn,
     NavBtnLink,
     NiceButton,
-    InfoContainer10
+    InfoContainer10,
+    CommentButton
 } from '../../components/TextElements';
 
 function SingleProductDisplay(props) {
@@ -21,7 +23,13 @@ function SingleProductDisplay(props) {
     const [singleProductData, setSingleProductData] = useState({});
     const [transformedComments, setTransformedComments] = useState([]);
     const [commentText, setCommentText] = useState('');
+    const [rating, setRating] = useState(1);
     const [userId, setUserId] = useState('');
+    const [ratingStar, setRatingStar] = useState(0)
+
+    const handleRating = (rate) => {
+      setRatingStar(rate)
+    }
 
     const handleColorChange = (color) => {
         setSelectedColor(color);
@@ -40,27 +48,26 @@ function SingleProductDisplay(props) {
             color: selectedColor
         };
 
-        props.addToCart(newItem, quantity) 
+        props.addToCart(newItem, quantity)
     };
-   
+
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_BASE_URL}Termekek/EgyTermek/` + ProductId)
             .then(response => {
                 setSingleProductData(response.data);
-                const transformedComments = response.data.hozzaszolasok.map(productData => ({
-                    //userId: productData.felhasznaloId.toString(),
-                    comId: productData.hozzaszolasId.toString(),
-                    fullName: productData.loginNev,
-                    avatarUrl: `${process.env.REACT_APP_KEP_URL}ppp.png`,
-                    text: productData.leiras,
-                    rating: productData.ertekeles,
+                const transformedComments = response.data.hozzaszolasok.map(commentData => ({
+                    comId: commentData.hozzaszolasId.toString(),
+                    fullName: commentData.userName,
+                    avatarUrl: commentData.profilKep || `${process.env.REACT_APP_KEP_URL}ppp.jpg`,
+                    text: commentData.leiras,
+                    rating: commentData.ertekeles,
                     userProfile: '',
                     replies: []
                 }));
-                
+                setTransformedComments(transformedComments);
             })
             .catch(error => console.error('Error fetching product data:', error));
-    }, [singleProductData]);
+    }, [ProductId]);
 
     useEffect(() => {
         const token = localStorage.getItem("LoginToken");
@@ -77,49 +84,28 @@ function SingleProductDisplay(props) {
                 userId: userId,
                 termekId: ProductId,
                 leiras: commentText,
-                ertekeles: 0
+                ertekeles: rating
             });
             console.log("Comment posted successfully:", response.data);
             // Refresh comments
             setCommentText('');
+            setRating(1); // Reset rating to default
             // You might want to refresh comments here
         } catch (error) {
             console.error('Error posting comment:', error);
         }
     };
 
-    const handleRatingChange = async (e, comId) => {
-        const rating = parseInt(e.target.value);
-        try {
-            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}Hozzaszolas/Rating`, {
-                comId: comId,
-                rating: rating
-            });
-            console.log("Rating updated successfully:", response.data);
-            // Refresh comments
-            const updatedComments = transformedComments.map(comment => {
-                if (comment.comId === comId) {
-                    return { ...comment, rating: rating };
-                } else {
-                    return comment;
-                }
-            });
-            setTransformedComments(updatedComments);
-        } catch (error) {
-            console.error('Error updating rating:', error);
-        }
-    };
-    
     return (
         <>
-        <InfoContainer10>    
-        <Navbar cart={props.cart} totalQuantity={props.cartItemCount} />
-                <NavBtn style={{margin:'20px 0px 20px 200px'}}>
-                    <NavBtnLink to='/ShopPage'><MdArrowBack/>Back</NavBtnLink>
+            <InfoContainer10>
+                <Navbar cart={props.cart} totalQuantity={props.cartItemCount} />
+                <NavBtn style={{ margin: '20px 0px 20px 200px' }}>
+                    <NavBtnLink to='/ShopPage'><MdArrowBack />Back</NavBtnLink>
                 </NavBtn>
                 <div className="container mt-3">
                     <div className='p-1 rounded d-flex flex-row FirstRow'
-                    style={{color:'white',backgroundColor:'#059e60'}}>
+                        style={{ color: 'white', backgroundColor: '#059e60' }}>
                         <InnerImageZoom
                             width={1300}
                             className='ImageZoom rounded'
@@ -138,51 +124,50 @@ function SingleProductDisplay(props) {
                             <ColorPicker selectedColor={selectedColor} onColorChange={handleColorChange} />
 
                             <input type="number" id="quantity" name="quantity" min="1" max="5" value={quantity} onChange={handleQuantityChange} />
-                            <br/>
-                            <NiceButton style={{backgroundColor:'black',color:'white',marginTop:'20px'}} onClick={handleAddToCart}>Kosárba</NiceButton>
+                            <br />
+                            <CommentButton onClick={handleAddToCart}>Kosárba</CommentButton>
                         </div>
                     </div>
 
                     <div className="row align-items-start">
                         <div className='rounded mx-auto d-flex flex-row'>
-                            <div className='wrapper card-body rounded mt-3 w-100' style={{ backgroundColor: '#059e60' }}>
-                                <h3>Comments</h3>
-                                {transformedComments.length === 0 && <p>Be the first one to rate our item</p>}
-                                {transformedComments.map(comment => (
-                                    <div key={comment.comId}>
-                                        <div>
-                                            <img src={comment.avatarUrl} alt="avatar" />
-                                            <strong>{comment.fullName}</strong>
-                                            {/* Rating system */}
-                                            <select value={comment.rating} onChange={(e) => handleRatingChange(e, comment.comId)}>
-                                                <option value="0">No rating</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                            </select>
-                                        </div>
-                                        <p>{comment.text}</p>
-                                    </div>
-                                ))}
+                            <div className='wrapper card-body rounded mt-3 w-100' style={{ backgroundColor: '#059e60', padding: '20px' }}>
+                                <h3>Write a comment</h3>
                                 <form onSubmit={handleSubmitComment}>
-                                    <textarea
+                                    <textarea style={{ width: '100%' }}
                                         value={commentText}
                                         onChange={(e) => setCommentText(e.target.value)}
                                         placeholder="Write your comment..."
                                         rows="4"
-                                        cols="50"
                                     ></textarea>
                                     <br />
-                                    <button type="submit">Post Comment</button>
+                                    <p>Rate our item:</p>
+                                    <Rating onClick={handleRating} onChange={(e) => setRating(parseInt(e.target.value))} initialValue={ratingStar} required />
+                                    <br />
+                                    <CommentButton type="submit" >Post Comment</CommentButton>
                                 </form>
+                                <hr style={{border: '3px solid white'}}></hr>
+                                <h3 style={{ marginTop: '20px' }}>Comments</h3>
+                                {transformedComments.length === 0 && <p>Be the first one to rate our item</p>}
+                                {transformedComments.map(comment => (
+                                    <div key={comment.comId} style={{ marginBottom: '20px',color:"black", backgroundColor: 'white', padding: '10px', borderRadius: '5px' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                                            <img style={{ width: '50px', height: '50px', borderRadius: '50%', margin: '10px' }} src={comment.avatarUrl} alt="avatar" />
+                                            <p>
+                                                <strong>{comment.fullName}</strong>
+                                                <br/>
+                                                Rating: {comment.rating}
+                                            </p>
+                                        </div>
+                                        <p>{comment.text}</p>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
                 </div>
-        </InfoContainer10>
-        <Footer />
+            </InfoContainer10>
+            <Footer />
         </>
     );
 }

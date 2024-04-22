@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Ápr 05. 10:12
+-- Létrehozás ideje: 2024. Ápr 22. 09:24
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -26,81 +26,39 @@ USE `auth`;
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `aspnetroleclaims`
+-- Tábla szerkezet ehhez a táblához `aspnetrole`
 --
 
-CREATE TABLE `aspnetroleclaims` (
-  `Id` int(11) NOT NULL,
-  `RoleId` varchar(255) NOT NULL,
-  `ClaimType` longtext DEFAULT NULL,
-  `ClaimValue` longtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Tábla szerkezet ehhez a táblához `aspnetroles`
---
-
-CREATE TABLE `aspnetroles` (
+CREATE TABLE `aspnetrole` (
   `Id` varchar(255) NOT NULL,
-  `Name` varchar(256) DEFAULT NULL,
-  `NormalizedName` varchar(256) DEFAULT NULL,
-  `ConcurrencyStamp` longtext DEFAULT NULL
+  `Name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `aspnetroles`
+-- A tábla adatainak kiíratása `aspnetrole`
 --
 
-INSERT INTO `aspnetroles` (`Id`, `Name`, `NormalizedName`, `ConcurrencyStamp`) VALUES
-('dd8fa84e-d702-4d1b-bc81-7948a2a1083f', 'USER', 'USER', NULL);
+INSERT INTO `aspnetrole` (`Id`, `Name`) VALUES
+('81f1660f-8329-4f49-9b16-7a1592d43d7e', 'ADMIN'),
+('49d1592d-dc96-4868-834e-fa4e837e3d97', 'USER');
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `aspnetuserclaims`
+-- Tábla szerkezet ehhez a táblához `aspnetuserrole`
 --
 
-CREATE TABLE `aspnetuserclaims` (
-  `Id` int(11) NOT NULL,
-  `UserId` varchar(255) NOT NULL,
-  `ClaimType` longtext DEFAULT NULL,
-  `ClaimValue` longtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Tábla szerkezet ehhez a táblához `aspnetuserlogins`
---
-
-CREATE TABLE `aspnetuserlogins` (
-  `LoginProvider` varchar(255) NOT NULL,
-  `ProviderKey` varchar(255) NOT NULL,
-  `ProviderDisplayName` longtext DEFAULT NULL,
-  `UserId` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Tábla szerkezet ehhez a táblához `aspnetuserroles`
---
-
-CREATE TABLE `aspnetuserroles` (
+CREATE TABLE `aspnetuserrole` (
   `UserId` varchar(255) NOT NULL,
   `RoleId` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `aspnetuserroles`
+-- A tábla adatainak kiíratása `aspnetuserrole`
 --
 
-INSERT INTO `aspnetuserroles` (`UserId`, `RoleId`) VALUES
-('03c66e48-f575-4ffb-9252-f307d1b473e0', 'dd8fa84e-d702-4d1b-bc81-7948a2a1083f'),
-('0bb5579f-84d4-4120-beda-8012fe6a9816', 'dd8fa84e-d702-4d1b-bc81-7948a2a1083f'),
-('26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 'dd8fa84e-d702-4d1b-bc81-7948a2a1083f');
+INSERT INTO `aspnetuserrole` (`UserId`, `RoleId`) VALUES
+('1310d8a6-1174-4480-b815-41379c654d11', '81f1660f-8329-4f49-9b16-7a1592d43d7e');
 
 -- --------------------------------------------------------
 
@@ -112,19 +70,9 @@ CREATE TABLE `aspnetusers` (
   `Id` varchar(255) NOT NULL,
   `EmailCode` int(11) NOT NULL,
   `UserName` varchar(256) DEFAULT NULL,
-  `NormalizedUserName` varchar(256) DEFAULT NULL,
   `Email` varchar(256) DEFAULT NULL,
-  `NormalizedEmail` varchar(256) DEFAULT NULL,
   `EmailConfirmed` tinyint(1) NOT NULL,
   `PasswordHash` longtext DEFAULT NULL,
-  `SecurityStamp` longtext DEFAULT NULL,
-  `ConcurrencyStamp` longtext DEFAULT NULL,
-  `PhoneNumber` longtext DEFAULT NULL,
-  `PhoneNumberConfirmed` tinyint(1) NOT NULL,
-  `TwoFactorEnabled` tinyint(1) NOT NULL,
-  `LockoutEnd` datetime(6) DEFAULT NULL,
-  `LockoutEnabled` tinyint(1) NOT NULL,
-  `AccessFailedCount` int(11) NOT NULL,
   `AktivalasIdopotja` datetime NOT NULL DEFAULT current_timestamp(),
   `ProfilKep` mediumblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -133,23 +81,11 @@ CREATE TABLE `aspnetusers` (
 -- A tábla adatainak kiíratása `aspnetusers`
 --
 
-INSERT INTO `aspnetusers` (`Id`, `EmailCode`, `UserName`, `NormalizedUserName`, `Email`, `NormalizedEmail`, `EmailConfirmed`, `PasswordHash`, `SecurityStamp`, `ConcurrencyStamp`, `PhoneNumber`, `PhoneNumberConfirmed`, `TwoFactorEnabled`, `LockoutEnd`, `LockoutEnabled`, `AccessFailedCount`, `AktivalasIdopotja`, `ProfilKep`) VALUES
-('03c66e48-f575-4ffb-9252-f307d1b473e0', 1547, 'Balazs', 'BALAZS', 'vardai.balazs22@gmail.com', 'VARDAI.BALAZS22@GMAIL.COM', 1, 'AQAAAAIAAYagAAAAEIJgdW+Z4wG/Z7BKteT5hJbgMe6GkiWMJcpWF8fpFd/gUgZaTTb4hqLKPmQ3+dNpRQ==', '5ZHHI5SV3UKLE2OXVWS3FFAZYZFNF7X3', '7fc461ac-e756-476b-967e-f3c9ec6a7603', NULL, 0, 0, NULL, 1, 0, '2024-04-05 08:54:02', ''),
-('0bb5579f-84d4-4120-beda-8012fe6a9816', 2003, 'Balint', 'BALINT', 'pejkob@kkszki.hu', 'PEJKOB@KKSZKI.HU', 1, 'AQAAAAIAAYagAAAAEKhnQ5rzrUs87l66JuSTG1pQCl2M4X/EaH4T17rqj3pW7w/14eHoG/UEMqpzexwEiA==', '4DXEAYHC6SNQEELSXNLM6DKVGJJEXQHE', '2e10709c-dcfe-4661-ab9b-680f611b23bb', NULL, 0, 0, NULL, 1, 0, '2024-04-05 08:55:12', ''),
-('26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 8220, 'Judit', 'JUDIT', 'szaboj@kkszki.hu', 'SZABOJ@KKSZKI.HU', 1, 'AQAAAAIAAYagAAAAEE8YKq86JvUY3LJxA3mr9yljZH6LHLeBlO+h3t2ii1JbWFNZQ1Z0tPQggQSuRTizyw==', '4UDYEDEEE4S4EQICF4NHLTYB6CGQTWNO', '6e4b75cb-ca6a-49d7-95e6-4d13db91a7fa', NULL, 0, 0, NULL, 1, 0, '2024-04-05 08:56:47', '');
-
--- --------------------------------------------------------
-
---
--- Tábla szerkezet ehhez a táblához `aspnetusertokens`
---
-
-CREATE TABLE `aspnetusertokens` (
-  `UserId` varchar(255) NOT NULL,
-  `LoginProvider` varchar(255) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Value` longtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `aspnetusers` (`Id`, `EmailCode`, `UserName`, `Email`, `EmailConfirmed`, `PasswordHash`, `AktivalasIdopotja`, `ProfilKep`) VALUES
+('1310d8a6-1174-4480-b815-41379c654d11', 9827, 'string', 'string', 1, '$2a$11$Edek6dtSHiOGR.Do3625POM8qUthmpRydiN4WG5EUTengKwaIXQ/S', '2024-04-10 09:34:21', ''),
+('14bd25b6-bf98-423b-b060-471bfaf81452', 8663, 'Balazs', 'vardai.balazs22@gmail.com', 1, '$2a$11$qa/gdLq5gvoCVxalW2pjReDjr2UZ9.BF8d1GNnWgu6qJyp.08YjPO', '2024-04-16 12:55:24', ''),
+('2b9b3815-ea87-490f-8d27-238bf18b8ca7', 5748, 'Judit', 'szaboj@kkszki.hu', 1, '$2a$11$6Gcpk9SdR3OwXNEJ6gFujOeCYyAkV7qrb0H2hMiiGC4TxZ4NZO5AC', '2024-04-22 09:11:50', ''),
+('7a27d9fc-7483-4098-b7f4-dfa679aefc81', 7897, 'Balint', 'pejkob@kkszki.hu', 1, '$2a$11$nD2y7AjVWZ4b2v4TTciuKugeMyoZUlXc9e1LvEe9HU.bJop4S5SUW', '2024-04-22 09:10:53', '');
 
 -- --------------------------------------------------------
 
@@ -209,9 +145,10 @@ CREATE TABLE `helyadatok` (
 --
 
 INSERT INTO `helyadatok` (`Id`, `UserId`, `OrszagNev`, `VarosNev`, `UtcaNev`, `Iranyitoszam`, `Hazszam`, `Egyeb`) VALUES
-(1, '0bb5579f-84d4-4120-beda-8012fe6a9816', 'Magyarország', 'Miskolc', 'Sarok utca', '6284', '65', ''),
-(2, '03c66e48-f575-4ffb-9252-f307d1b473e0', 'Kína', 'Söul', 'CHinchin utca', '8495', '69', 'Első lépcső'),
-(3, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 'Anglia', 'Londoff', 'Temze utca', '6958', '5', 'A folyóba ne ugorj bele');
+(1, '14bd25b6-bf98-423b-b060-471bfaf81452', 'Magyarország', 'Miskolc', 'Sarok utca', '6284', '65', ''),
+(2, '2b9b3815-ea87-490f-8d27-238bf18b8ca7', 'Kína', 'Söul', 'CHinchin utca', '8495', '69', 'Első lépcső'),
+(3, '7a27d9fc-7483-4098-b7f4-dfa679aefc81', 'Anglia', 'Londoff', 'Temze utca', '6958', '5', 'A folyóba ne ugorj bele'),
+(4, '1310d8a6-1174-4480-b815-41379c654d11', 'Magyarország', 'IzéHozé', 'Jani utca', '6268', '15', 'ADMIN VAGYOK');
 
 -- --------------------------------------------------------
 
@@ -448,53 +385,26 @@ INSERT INTO `__efmigrationshistory` (`MigrationId`, `ProductVersion`) VALUES
 --
 
 --
--- A tábla indexei `aspnetroleclaims`
+-- A tábla indexei `aspnetrole`
 --
-ALTER TABLE `aspnetroleclaims`
+ALTER TABLE `aspnetrole`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `IX_AspNetRoleClaims_RoleId` (`RoleId`);
+  ADD UNIQUE KEY `Name` (`Name`);
 
 --
--- A tábla indexei `aspnetroles`
+-- A tábla indexei `aspnetuserrole`
 --
-ALTER TABLE `aspnetroles`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `RoleNameIndex` (`NormalizedName`);
-
---
--- A tábla indexei `aspnetuserclaims`
---
-ALTER TABLE `aspnetuserclaims`
-  ADD PRIMARY KEY (`Id`),
-  ADD KEY `IX_AspNetUserClaims_UserId` (`UserId`);
-
---
--- A tábla indexei `aspnetuserlogins`
---
-ALTER TABLE `aspnetuserlogins`
-  ADD PRIMARY KEY (`LoginProvider`,`ProviderKey`),
-  ADD KEY `IX_AspNetUserLogins_UserId` (`UserId`);
-
---
--- A tábla indexei `aspnetuserroles`
---
-ALTER TABLE `aspnetuserroles`
-  ADD PRIMARY KEY (`UserId`,`RoleId`),
-  ADD KEY `IX_AspNetUserRoles_RoleId` (`RoleId`);
+ALTER TABLE `aspnetuserrole`
+  ADD PRIMARY KEY (`UserId`),
+  ADD KEY `RoleId` (`RoleId`);
 
 --
 -- A tábla indexei `aspnetusers`
 --
 ALTER TABLE `aspnetusers`
   ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `UserNameIndex` (`NormalizedUserName`),
-  ADD KEY `EmailIndex` (`NormalizedEmail`);
-
---
--- A tábla indexei `aspnetusertokens`
---
-ALTER TABLE `aspnetusertokens`
-  ADD PRIMARY KEY (`UserId`,`LoginProvider`,`Name`);
+  ADD UNIQUE KEY `UserName` (`UserName`),
+  ADD UNIQUE KEY `Email` (`Email`);
 
 --
 -- A tábla indexei `ftpfiles`
@@ -565,18 +475,6 @@ ALTER TABLE `__efmigrationshistory`
 --
 
 --
--- AUTO_INCREMENT a táblához `aspnetroleclaims`
---
-ALTER TABLE `aspnetroleclaims`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT a táblához `aspnetuserclaims`
---
-ALTER TABLE `aspnetuserclaims`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT a táblához `ftpfiles`
 --
 ALTER TABLE `ftpfiles`
@@ -586,7 +484,7 @@ ALTER TABLE `ftpfiles`
 -- AUTO_INCREMENT a táblához `helyadatok`
 --
 ALTER TABLE `helyadatok`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT a táblához `hozzaszolasok`
@@ -629,35 +527,11 @@ ALTER TABLE `termekek`
 --
 
 --
--- Megkötések a táblához `aspnetroleclaims`
+-- Megkötések a táblához `aspnetuserrole`
 --
-ALTER TABLE `aspnetroleclaims`
-  ADD CONSTRAINT `FK_AspNetRoleClaims_AspNetRoles_RoleId` FOREIGN KEY (`RoleId`) REFERENCES `aspnetroles` (`Id`) ON DELETE CASCADE;
-
---
--- Megkötések a táblához `aspnetuserclaims`
---
-ALTER TABLE `aspnetuserclaims`
-  ADD CONSTRAINT `FK_AspNetUserClaims_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE;
-
---
--- Megkötések a táblához `aspnetuserlogins`
---
-ALTER TABLE `aspnetuserlogins`
-  ADD CONSTRAINT `FK_AspNetUserLogins_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE;
-
---
--- Megkötések a táblához `aspnetuserroles`
---
-ALTER TABLE `aspnetuserroles`
-  ADD CONSTRAINT `FK_AspNetUserRoles_AspNetRoles_RoleId` FOREIGN KEY (`RoleId`) REFERENCES `aspnetroles` (`Id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_AspNetUserRoles_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE;
-
---
--- Megkötések a táblához `aspnetusertokens`
---
-ALTER TABLE `aspnetusertokens`
-  ADD CONSTRAINT `FK_AspNetUserTokens_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE;
+ALTER TABLE `aspnetuserrole`
+  ADD CONSTRAINT `aspnetuserrole_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`),
+  ADD CONSTRAINT `aspnetuserrole_ibfk_2` FOREIGN KEY (`RoleId`) REFERENCES `aspnetrole` (`Id`);
 
 --
 -- Megkötések a táblához `helyadatok`
