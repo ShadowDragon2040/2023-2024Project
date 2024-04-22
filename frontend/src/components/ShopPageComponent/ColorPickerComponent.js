@@ -28,10 +28,10 @@ const ColorPicker = ({selectedColor, onColorChange}) => {
                     ></div>
                 ))}
             </div>
-           
+            Selected Color:
                 {selectedColor && (
                 <p style={{ textAlign: 'left', marginTop: '10px' }}>
-                    Selected Color: {selectedColor}
+                     {selectedColor}
                 </p>
             )}
         </div>
