@@ -4,7 +4,7 @@ import SearchBar from './ShopPageComponent/SeachBar';
 import { CgProfile } from 'react-icons/cg';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import CartPage from '../pages/ShopPages/CartPage';
+//import CartPage from '../pages/ShopPages/CartPage';
 import { FaShoppingBasket } from 'react-icons/fa';
 import RegisterModal from './ShopPageComponent/RegisterModal';
 import LoginModal from './ShopPageComponent/LoginModal';

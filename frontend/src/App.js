@@ -21,13 +21,17 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  sessionStorage.setItem("bejelenkezve", "false");
-  sessionStorage.setItem("role", "PUBLIC");
+  /*sessionStorage.setItem("bejelenkezve", "false");
+  sessionStorage.setItem("role", "PUBLIC");*/
   const [cartItems, setCartItems] = useState([]);
   const [addedToCart, setAddedToCart] = useState([]);
   const [cartItemCount, setCartItemCount] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
 
+  useEffect(() => {
+    sessionStorage.setItem("bejelenkezve", "false");
+    sessionStorage.setItem("role", "PUBLIC");
+  }, []);
   useEffect(() => {
     //console.log(cartItems)
   }, [cartItems]);
@@ -67,15 +71,14 @@ const addToCart = (product, quantity) => {
 
   setAddedToCart([...addedToCart, product.id]);
 
-  setCartItemCount(prevCount => cartItems.length);
+
+  setCartItemCount(cartItems.length + 1); 
   console.log("Added to cart: " + product.name);
 
   if(cartItems.length !== 0){
-    let kosarString = "";
-    cartItems.map(item =>()=>{
-      kosarString+= item.id +" "+ item.quantity+" "+item.color+";";
-
-    })
+    let kosarString = cartItems.reduce((acc, item) => {
+      return acc + `${item.id} ${item.quantity} ${item.color};`;
+    }, "");
     localStorage.setItem("kosar", kosarString);
   }
 

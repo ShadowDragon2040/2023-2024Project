@@ -22,6 +22,7 @@ namespace AdatKarbantarto.ViewModel
         private string _searchProductID = "";
         private bool _isSaveEnabled;
         private bool _isAddEnabled;
+        private bool _isPutEnabled;
         private Hozzaszolas _selectedItem;
         private List<Hozzaszolas> _ListData;
         private ObservableCollection<Hozzaszolas> _items;
@@ -29,6 +30,7 @@ namespace AdatKarbantarto.ViewModel
         private ICollectionView _filteredView;
         public HozzaszolasokVM()
         {
+            _isPutEnabled = false;
             _isSaveEnabled = false;
             _isAddEnabled = true;
             _backendApiHelper=new BackendApiHelper();
@@ -117,6 +119,18 @@ namespace AdatKarbantarto.ViewModel
                 }
             }
         }
+        public bool IsPutEnabled
+        {
+            get { return _isPutEnabled; }
+            set
+            {
+                if (_isPutEnabled != value)
+                {
+                    _isPutEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public bool IsAddEnabled
         {
             get { return _isAddEnabled; }
@@ -176,10 +190,18 @@ namespace AdatKarbantarto.ViewModel
                 };
                
                 var response = await _backendApiHelper.PostHozzaszolasAsync(newProduct);
-                MessageBox.Show(response.ToString());
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Comment added successfully!"); 
+                }
+                else
+                {
+                    MessageBox.Show("Something went wrong! Refresh the page and try again!");
+                }
 
                 IsAddEnabled = true;
                 IsSaveEnabled = false;
+                IsPutEnabled = false;
                 SaveCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate SaveCommand's CanExecute
             }
             else
@@ -219,7 +241,7 @@ namespace AdatKarbantarto.ViewModel
             {
             
                 var response = await _backendApiHelper.DeleteHozzaszolasAsync(itemToDelete.HozzaszolasId);
-                if (response)
+                if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Item deleted successfully!", "Success!", MessageBoxButton.OK);
                 }
@@ -244,6 +266,7 @@ namespace AdatKarbantarto.ViewModel
             UpdateItem.Add(new Hozzaszolas());
             IsAddEnabled = false;
             IsSaveEnabled = true;
+            IsPutEnabled = false;
             AddCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate AddCommand's CanExecute
         }
 
@@ -253,6 +276,7 @@ namespace AdatKarbantarto.ViewModel
 
             UpdateItem.Add(HozzaszolasToModify);
             IsAddEnabled = true;
+            IsPutEnabled = true;
         }
 
 

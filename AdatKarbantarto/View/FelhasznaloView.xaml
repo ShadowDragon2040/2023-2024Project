@@ -87,6 +87,6 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="2" Content="Put" x:Name="btn_put" Command="{Binding PutCommand}"  Background="YellowGreen"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,16,-213,0"/>
+        <Button Grid.Row="2" Content="Put" x:Name="btn_put" Command="{Binding PutCommand}"  IsEnabled="{Binding IsPutEnabled}"  Background="YellowGreen"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,16,-213,0"/>
     </Grid>
 </UserControl>

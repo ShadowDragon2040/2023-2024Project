@@ -20,6 +20,7 @@ namespace AdatKarbantarto.ViewModel
 
         private string _searchProductID = "";
         private bool _isSaveEnabled;
+        private bool _isPutEnabled;
         private bool _isAddEnabled;
         private Felhasznalo _selectedItem;
         private List<Felhasznalo> _ListData;
@@ -28,6 +29,7 @@ namespace AdatKarbantarto.ViewModel
         private ICollectionView _filteredView;
         public FelhasznalokVM()
         {
+            _isPutEnabled = false;
             _isSaveEnabled = false;
             _isAddEnabled = true;
             _backendApiHelper = new BackendApiHelper();
@@ -117,6 +119,18 @@ namespace AdatKarbantarto.ViewModel
                 }
             }
         }
+        public bool IsPutEnabled
+        {
+            get { return _isPutEnabled; }
+            set
+            {
+                if (_isPutEnabled != value)
+                {
+                    _isPutEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public bool IsAddEnabled
         {
             get { return _isAddEnabled; }
@@ -167,14 +181,14 @@ namespace AdatKarbantarto.ViewModel
 
             RegisterUser newUser = new RegisterUser()
             {
-                UserName = UpdateItem[0].UserName,
-                Password = UpdateItem[0].PasswordHash,
-                Email = UpdateItem[0].Email
+                userName = UpdateItem[0].UserName,
+                password = UpdateItem[0].PasswordHash,
+                email = UpdateItem[0].Email
             };
             if (newUser!=null)
             {
 
-                if (isEmailAllowed(newUser.Email))
+                if (isEmailAllowed(newUser.email))
                 {
                     var response = await _backendApiHelper.PostFelhasznaloAsync(newUser);
                     var content = await response.Content.ReadAsStringAsync();
@@ -193,6 +207,8 @@ namespace AdatKarbantarto.ViewModel
 
             IsAddEnabled = true;
             IsSaveEnabled = false;
+            IsPutEnabled = false;
+
             SaveCommand.RaiseCanExecuteChanged(); // Notify the UI to re-evaluate SaveCommand's CanExecute
         }
         private async void PutItem()
@@ -271,6 +287,7 @@ namespace AdatKarbantarto.ViewModel
             UpdateItem.Add(new Felhasznalo());
             IsAddEnabled = false;
             IsSaveEnabled = true;
+            IsPutEnabled = false;
             AddCommand.RaiseCanExecuteChanged();
         }
 
@@ -279,6 +296,8 @@ namespace AdatKarbantarto.ViewModel
             UpdateItem.Clear();
             UpdateItem.Add(itemToModify);
             IsAddEnabled = true;
+            IsPutEnabled = true;
+
         }
 
 
