@@ -15,13 +15,13 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_2EB69EF1A3C74D5092F3E2E816DBEEAD"
+        "MsmKey" = "8:_66CC08DCB96841EBB5DF95DFD3DE9D85"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E35E4870043E48F488C78718B4530D93"
+        "MsmKey" = "8:_92A12FA4940D463B85D1BFDE9CD97AF5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -43,6 +43,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -59,6 +75,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -76,14 +108,24 @@
         {
             "LaunchCondition"
             {
+                "{A06ECF26-33A3-4562-8140-9B0E340D4F24}:_00CA3BE87E7840E99797B61A1F526070"
+                {
+                "Name" = "8:.NET Core"
+                "Message" = "8:[VSDNETCOREMSG]"
+                "AllowLaterVersions" = "11:FALSE"
+                "InstallUrl" = "8:https://dotnet.microsoft.com/download/dotnet-core/[NetCoreVerMajorDotMinor]"
+                "IsNETCore" = "11:TRUE"
+                "Architecture" = "2:0"
+                "Runtime" = "2:0"
+                }
             }
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E35E4870043E48F488C78718B4530D93"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_66CC08DCB96841EBB5DF95DFD3DE9D85"
             {
-            "SourcePath" = "8:..\\AdatKarbantarto\\Images\\1.ico"
-            "TargetName" = "8:1.ico"
+            "SourcePath" = "8:..\\..\\..\\..\\Downloads\\logo2.ico"
+            "TargetName" = "8:logo2.ico"
             "Tag" = "8:"
             "Folder" = "8:_B07B44CD8B2F47BFA6ECFC22782F4839"
             "Condition" = "8:"
@@ -157,7 +199,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AdatkarbantartoSetup"
         "ProductCode" = "8:{AF59937E-6FE6-419B-8354-B255ADC7E9BA}"
-        "PackageCode" = "8:{C3CB6A47-CABB-4F11-A9D2-E3F1ABF4EBAB}"
+        "PackageCode" = "8:{3D0E8D69-B2BC-4E44-B52E-09C6DB24B316}"
         "UpgradeCode" = "8:{189E8952-1A8F-48E1-86C3-064538768DB1}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
@@ -277,7 +319,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_111617EDC0474F6389610A6CC48D131D"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A8202F5AF8A54B469B1DBE43EDC8A317"
             {
             "Name" = "8:Admin Dashboard"
             "Arguments" = "8:"
@@ -285,13 +327,13 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_2EB69EF1A3C74D5092F3E2E816DBEEAD"
+            "Target" = "8:_92A12FA4940D463B85D1BFDE9CD97AF5"
             "Folder" = "8:_13F37E2370FE4742BE37D4671E7D88D0"
             "WorkingFolder" = "8:_B07B44CD8B2F47BFA6ECFC22782F4839"
-            "Icon" = "8:_E35E4870043E48F488C78718B4530D93"
+            "Icon" = "8:_66CC08DCB96841EBB5DF95DFD3DE9D85"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_7ABA3A38744A40F789683CCDBEA40A91"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_BA26BD1C959C4059BF14476D51BC6688"
             {
             "Name" = "8:Admin Dashboard"
             "Arguments" = "8:"
@@ -299,10 +341,10 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_2EB69EF1A3C74D5092F3E2E816DBEEAD"
+            "Target" = "8:_92A12FA4940D463B85D1BFDE9CD97AF5"
             "Folder" = "8:_C658AC51831848F1ACCFDD5CE9E2BF3A"
             "WorkingFolder" = "8:_B07B44CD8B2F47BFA6ECFC22782F4839"
-            "Icon" = "8:_E35E4870043E48F488C78718B4530D93"
+            "Icon" = "8:_66CC08DCB96841EBB5DF95DFD3DE9D85"
             "Feature" = "8:"
             }
         }
@@ -704,9 +746,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_2EB69EF1A3C74D5092F3E2E816DBEEAD"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_92A12FA4940D463B85D1BFDE9CD97AF5"
             {
-            "SourcePath" = "8:..\\AdatKarbantarto\\obj\\Debug\\net7.0-windows\\apphost.exe"
+            "SourcePath" = "8:..\\AdatKarbantarto\\obj\\x86\\Debug\\net7.0-windows\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B07B44CD8B2F47BFA6ECFC22782F4839"
@@ -724,7 +766,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
+            "OutputConfiguration" = "8:Debug|x86"
             "OutputGroupCanonicalName" = "8:PublishItems"
             "OutputProjectGuid" = "8:{0C2A6454-44DE-4E23-862D-6861939C8A99}"
             "ShowKeyOutput" = "11:TRUE"
