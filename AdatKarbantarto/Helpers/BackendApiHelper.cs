@@ -19,11 +19,11 @@ namespace AdatKarbantarto.Helpers
 {
     public class BackendApiHelper
     {
-
+       
         //A BackendApiHelper osztály segitségével tudunk kapcsolatot teremteni az alkalmazás és a backend közt.
-        //Egy Http kliens segitségével érhető el a backend által biztositott adatok végpontokon keresztül való elérése.
+        //Egy Http kliens segitségével érhető el a backend által biztositott adatok.
         private readonly HttpClient _httpClient;
-
+       
         public BackendApiHelper()
         {
             _httpClient = new HttpClient();
@@ -45,53 +45,7 @@ namespace AdatKarbantarto.Helpers
         }
 
         //Eljárások melyek kérést intéznek a backend felé végpontokon keresztül hogy elérjük a Felhasználókkal kapcsolatos adatokat.
-        #region Felhasznalok
-
-        //Eljárás mely a felhasználók bejelentkezését kezeli. Paraméterként kap egy felhasználónevet és egy jelszót.
-        //Sikeres bejelentkezés esetén visszatér egy jwt tokennel, hiba esetén pedig egy üzenettel.
-        public async Task<string> PostAsync(string username, string password)
-        {
-            var requestData = new
-            {
-                Username = username,
-                Password = password
-            };
-
-            string json = JsonConvert.SerializeObject(requestData);
-
-            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            using (HttpResponseMessage response = await _httpClient.PostAsync("Auth/Login", content))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<string>(responseContent);
-                }
-                else
-                {
-                    return $"Failed to post data to API. {response.StatusCode} {response.Content}";
-                }
-            }
-        }
-
-        //Eljárás mely a felhasználók törlését kezeli. Paraméterként kap egy létező felhasználó azonositót.
-        //Sikeres törlés esetén visszatér a backend által küldött válasszal, hiba esetén egy egyéni hibaüzenet tér vissza, mely tartalmazza a hiba okát.
-        public async Task<HttpResponseMessage> DeleteFelhasznaloAsync(string id)
-        {
-            try
-            {
-                HttpResponseMessage response = await _httpClient.DeleteAsync("/Felhasznalok/" + id);
-                return response;
-
-            }
-            catch (HttpRequestException ex)
-            {
-                HttpResponseMessage errorResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-                errorResponse.Content = new StringContent("Failed to delete Felhasznalo." + ex.Message);
-                return errorResponse;
-            }
-        }
+    #region Felhasznalok
 
         //Eljárás mely a felhasználók listájának lekérdezését kezeli. Sikeres kérés esetén visszatér egy listával mely az összes felhasználó összes adatát tartalmazza,
         //hiba esetén egy egyéni hibaleiró osztály segitségével visszatér a hibaüzenettel. 
@@ -123,20 +77,31 @@ namespace AdatKarbantarto.Helpers
             }
         }
 
-        //Eljárás mely a felhasználók adatainak módositását kezeli. Paraméterként a módositandó felhasználó id-ját és a módositott felhasználó adatokat kapja.
-        //Sikeres kérés esetén visszatér a backend által előállitott sikert jelző üzenettel, hiba esetén egy egyéni hibaüzenet tér vissza, mely tartalmazza a hiba okát.
-        public async Task<HttpResponseMessage> ModifyFelhasznaloAsync(string id, Felhasznalo felhasznalo)
+        //Eljárás mely a felhasználók bejelentkezését kezeli. Paraméterként kap egy felhasználónevet és egy jelszót.
+        //Sikeres bejelentkezés esetén visszatér egy jwt tokennel, hiba esetén pedig egy üzenettel.
+        public async Task<string> PostAsync(string username, string password)
         {
-            try
+            var requestData = new
             {
-                HttpResponseMessage response = await _httpClient.PutAsJsonAsync("/Felhasznalok/" + id, felhasznalo);
-                return response;
-            }
-            catch (HttpRequestException ex)
+                Username = username,
+                Password = password
+            };
+
+            string json = JsonConvert.SerializeObject(requestData);
+
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using (HttpResponseMessage response = await _httpClient.PostAsync("Auth/Login", content))
             {
-                HttpResponseMessage errorResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-                errorResponse.Content = new StringContent("Failed to modify Felhasznalo." + ex.Message);
-                return errorResponse;
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<string>(responseContent);
+                }
+                else
+                {
+                    return $"Failed to post data to API. {response.StatusCode} {response.Content}";
+                }
             }
         }
 
@@ -156,10 +121,47 @@ namespace AdatKarbantarto.Helpers
                 return errorResponse;
             }
         }
-        #endregion
+
+        //Eljárás mely a felhasználók adatainak módositását kezeli. Paraméterként a módositandó felhasználó id-ját és a módositott felhasználó adatokat kapja.
+        //Sikeres kérés esetén visszatér a backend által előállitott sikert jelző üzenettel, hiba esetén egy egyéni hibaüzenet tér vissza, mely tartalmazza a hiba okát.
+        public async Task<HttpResponseMessage> ModifyFelhasznaloAsync(string id, Felhasznalo felhasznalo)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.PutAsJsonAsync("/Felhasznalok/" + id, felhasznalo);
+                return response;
+            }
+            catch (HttpRequestException ex)
+            {
+                HttpResponseMessage errorResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                errorResponse.Content = new StringContent("Failed to modify Felhasznalo." + ex.Message);
+                return errorResponse;
+            }
+        }
+
+        //Eljárás mely a felhasználók törlését kezeli. Paraméterként kap egy létező felhasználó azonositót.
+        //Sikeres törlés esetén visszatér a backend által küldött válasszal, hiba esetén egy egyéni hibaüzenet tér vissza, mely tartalmazza a hiba okát.
+        public async Task<HttpResponseMessage> DeleteFelhasznaloAsync(string id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.DeleteAsync("/Felhasznalok/" + id);
+                return response;
+
+            }
+            catch (HttpRequestException ex)
+            {
+                HttpResponseMessage errorResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                errorResponse.Content = new StringContent("Failed to delete Felhasznalo." + ex.Message);
+                return errorResponse;
+            }
+        }
+
+    #endregion
+
 
         //Eljárások melyek kérést intéznek a backend felé végpontokon keresztül hogy elérjük a Hozzászolásokkal kapcsolatos adatokat.
-        #region Hozzaszolasok
+    #region Hozzaszolasok
 
         //Eljárás mely a hozzászólások listájának lekérdezését kezeli. Sikeres kérés esetén visszatér egy listával mely az összes hozzászólás összes adatát tartalmazza,
         //hiba esetén egy egyéni hibaleiró osztály segitségével visszatér a hibaüzenettel. 
@@ -241,10 +243,11 @@ namespace AdatKarbantarto.Helpers
                 return errorResponse;
             }
         }
-        #endregion
+    #endregion
+
 
         //Eljárások melyek kérést intéznek a backend felé végpontokon keresztül hogy elérjük a Termékekkel kapcsolatos adatokat.
-        #region Termekek
+    #region Termekek
         //Eljárás mely a termékek listájának lekérdezését kezeli. Sikeres kérés esetén visszatér egy listával mely az összes termék összes adatát tartalmazza,
         //hiba esetén egy egyéni hibaleiró osztály segitségével visszatér a hibaüzenettel. 
         public async Task<ApiResponse<List<Termek>>> GetTermekekAsync()
@@ -326,6 +329,7 @@ namespace AdatKarbantarto.Helpers
         }
         #endregion
 
+      
         //Eljárások melyek kérést intéznek a backend felé végpontokon keresztül hogy elérjük a Számlázással kapcsolatos adatokat.
         #region Szamlazas
 
