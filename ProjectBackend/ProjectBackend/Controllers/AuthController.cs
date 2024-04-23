@@ -66,6 +66,14 @@ namespace ProjectBackend.Controllers
                 }
                 else
                 {
+                    var defaultRoleId= _authContext.Aspnetrole.FirstOrDefault(r=>r.Name=="USER");
+                    Aspnetuserrole newuserrole = new Aspnetuserrole()
+                    {
+                        UserId=newUser.Id,
+                        RoleId=defaultRoleId.Id
+
+                    };
+                    _authContext.Aspnetuserrole.Add(newuserrole);
                     _authContext.Aspnetuser.Add(newUser);
                     _authContext.SaveChanges();
                     // Send verification email
@@ -240,6 +248,7 @@ namespace ProjectBackend.Controllers
 
             List<Claim> claims = new List<Claim>
             {
+                new Claim(ClaimTypes.UserData,User.Id),
                 new Claim(ClaimTypes.Name,User.UserName),
             };
 
