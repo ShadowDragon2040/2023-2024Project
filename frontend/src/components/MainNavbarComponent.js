@@ -140,7 +140,7 @@ const Navbar = (props) => {
                 </NavBtn2>
 
                 <NavBtn2>
-                  <NavBtnLink to='/CartPage'>
+                  <NavBtnLink to='/ShopPage/CartPage'>
                     Cart <FaShoppingBasket/> {props.totalQuantity > 0 && `${props.totalQuantity}`}
                   </NavBtnLink>
                 </NavBtn2>

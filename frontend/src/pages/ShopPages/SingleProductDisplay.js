@@ -44,6 +44,7 @@ function SingleProductDisplay(props) {
             id: ProductId,
             name: singleProductData.termekNev,
             price: singleProductData.ar * quantity,
+            image:singleProductData.keputvonal,
             quantity: quantity,
             color: selectedColor
         };

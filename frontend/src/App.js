@@ -110,7 +110,7 @@ const addToCart = (product, quantity) => {
         <Route path="/ShopPage/:ProductId" element={ <SingleProductDisplay addToCart={addToCart} cart={cartItems} cartItemCount={totalQuantity} />}/>
         <Route path="/ShopPage/Categories/:CategoryId" element={<CategoryPage/>} exact />
         <Route path="/News" element={<NewsPage/>} exact/>
-        <Route path="/CartPage"element={<CartPage cart={cartItems} cartItemCount={cartItemCount} setCart={handleRemoveFromCart} />} exact/>
+        <Route path="/ShopPage/CartPage"element={<CartPage cart={cartItems} cartItemCount={cartItemCount} setCart={handleRemoveFromCart} />} exact/>
       </Routes>
     </Router>
     </>
