@@ -63,7 +63,7 @@ const Navbar = (props) => {
   }
 
   const handleLogout = () => {
-    sessionStorage.setItem("bejelenkezve", "false");
+    localStorage.setItem("bejelenkezve", "false");
     handleClose();
   };
 
@@ -131,7 +131,7 @@ const Navbar = (props) => {
             </NavBtn2>
           ) : <div style={{width: '1000px'}}></div>}
           {pathname.startsWith('/ShopPage') ? (
-            sessionStorage.getItem("bejelenkezve") === 'true' ? (
+            localStorage.getItem("bejelenkezve") === 'true' ? (
               <div style={{marginTop:"15px"}}>
                 <NavBtn2>
                   <NavBtnLink to='/ProfilePage'>

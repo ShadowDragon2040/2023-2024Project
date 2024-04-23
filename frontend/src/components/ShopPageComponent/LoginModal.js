@@ -52,14 +52,14 @@ const LoginModal = (props) => {
         const decodedToken = jwtDecode(token.data);
         
         const role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-        sessionStorage.setItem("role", role);
+        localStorage.setItem("role", role);
         console.log(role);
-        sessionStorage.setItem("bejelenkezve", "true"); 
+        localStorage.setItem("bejelenkezve", "true"); 
         toast.success("Login successful.",{
           position: "bottom-right"
         });
       } catch (error) {
-        sessionStorage.setItem("bejelenkezve", "false");
+        localStorage.setItem("bejelenkezve", "false");
         console.log("Login failed.", error);
         toast.error("Login failed.",{
           position: "bottom-right"
@@ -70,7 +70,7 @@ const LoginModal = (props) => {
         nincs ez a kódrészlet benne akkor meg történnie kell egy refresh
         eseménynek hogy az oldal kinézete frissüljön a megfelelő állapotba.
         */
-       //props.incrementCounter();
+       props.incrementCounter();
        handleClose();
       }
     };
