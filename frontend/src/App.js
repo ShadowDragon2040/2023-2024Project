@@ -29,8 +29,8 @@ function App() {
   const [totalQuantity, setTotalQuantity] = useState(0);
 
   useEffect(() => {
-    sessionStorage.setItem("bejelenkezve", "false");
-    sessionStorage.setItem("role", "PUBLIC");
+    localStorage.setItem("bejelenkezve", "false");
+    localStorage.setItem("role", "PUBLIC");
   }, []);
   useEffect(() => {
     //console.log(cartItems)

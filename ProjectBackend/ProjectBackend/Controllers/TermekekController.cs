@@ -84,7 +84,7 @@ namespace ProjectBackend.Controllers
         }
         */
 
-        [HttpGet("EgyTermek/{id}")/*, Authorize*/]
+        [HttpGet("EgyTermek/{id}")]
         public async Task<ActionResult<TermekEgyoldalAdatokWithHozzaszolasok>> Get(int id)
         {
             try
@@ -103,8 +103,10 @@ namespace ProjectBackend.Controllers
                         h.HozzaszolasId,
                         h.Leiras,
                         h.Ertekeles,
-                        h.UserId
-                        
+                        h.UserId,
+                        h.User.UserName,
+                        h.User.AktivalasIdopotja,
+                        h.User.ProfilKep
                     ))
                     .ToListAsync();
 
@@ -127,6 +129,7 @@ namespace ProjectBackend.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
 
 
 

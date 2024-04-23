@@ -430,6 +430,27 @@ export const NiceButton=styled.button`
     }
 `
 
+export const CommentButton=styled.button`
+    margin-top: 20px;
+    border-radius:50px;
+    background:black;
+    white-space:nowrap;
+    padding: 10px 22px;
+    color:white;
+    //justify-self:end;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration:none;
+    &:hover{
+        transition: all 0.2s ease-in-out;
+        background:white;
+        color:black;
+    }
+`
+
 export const NavBtnLink=styled(LinkR)`
     border-radius:50px;
     background:#05a866;

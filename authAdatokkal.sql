@@ -232,26 +232,26 @@ CREATE TABLE `hozzaszolasok` (
 --
 
 INSERT INTO `hozzaszolasok` (`HozzaszolasId`, `UserId`, `TermekId`, `Leiras`, `Ertekeles`) VALUES
-(52, '0bb5579f-84d4-4120-beda-8012fe6a9816', 1, 'Great product, highly recommended!', 5),
-(53, '03c66e48-f575-4ffb-9252-f307d1b473e0', 21, 'Looks amazing on my desk, very sturdy.', 5),
-(54, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 26, 'Not what I expected, but still good.', 3),
-(55, '03c66e48-f575-4ffb-9252-f307d1b473e0', 4, 'Quality is okay, expected more.', 4),
-(56, '03c66e48-f575-4ffb-9252-f307d1b473e0', 4, 'Perfect for the holiday season!', 5),
-(57, '0bb5579f-84d4-4120-beda-8012fe6a9816', 12, 'Beautiful and functional, worth the price.', 5),
-(58, '03c66e48-f575-4ffb-9252-f307d1b473e0', 8, 'Unique design, I get lots of compliments.', 4),
-(59, '0bb5579f-84d4-4120-beda-8012fe6a9816', 6, 'Comfortable and stylish, love it!', 2),
-(60, '0bb5579f-84d4-4120-beda-8012fe6a9816', 22, 'Could be better, but it serves its purpose.', 2),
-(61, '03c66e48-f575-4ffb-9252-f307d1b473e0', 26, 'Good quality, but a bit overpriced.', 4),
-(62, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 12, 'Exactly what I needed, great buy.', 5),
-(63, '03c66e48-f575-4ffb-9252-f307d1b473e0', 6, 'Well-made and durable, would buy again.', 4),
-(64, '0bb5579f-84d4-4120-beda-8012fe6a9816', 27, 'Not what I expected, disappointed.', 1),
-(65, '03c66e48-f575-4ffb-9252-f307d1b473e0', 24, 'Not the best quality, expected more.', 3),
-(66, '03c66e48-f575-4ffb-9252-f307d1b473e0', 7, 'Could be improved, but overall satisfied.', 4),
-(67, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 15, 'Good value for money, happy with the purchase.', 4),
-(68, '03c66e48-f575-4ffb-9252-f307d1b473e0', 26, 'Quality is okay, expected more.', 4),
-(69, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 21, 'Unique and stylish, stands out.', 5),
-(70, '0bb5579f-84d4-4120-beda-8012fe6a9816', 4, 'Unique and stylish, stands out.', 3),
-(71, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 3, 'Good quality, but a bit overpriced.', 3);
+(52, '1310d8a6-1174-4480-b815-41379c654d11', 1, 'Great product, highly recommended!', 5),
+(53, '14bd25b6-bf98-423b-b060-471bfaf81452', 21, 'Looks amazing on my desk, very sturdy.', 5),
+(54, '1310d8a6-1174-4480-b815-41379c654d11', 26, 'Not what I expected, but still good.', 3),
+(55, '14bd25b6-bf98-423b-b060-471bfaf81452', 4, 'Quality is okay, expected more.', 4),
+(56, '1310d8a6-1174-4480-b815-41379c654d11', 4, 'Perfect for the holiday season!', 5),
+(57, '14bd25b6-bf98-423b-b060-471bfaf81452', 12, 'Beautiful and functional, worth the price.', 5),
+(58, '14bd25b6-bf98-423b-b060-471bfaf81452', 8, 'Unique design, I get lots of compliments.', 4),
+(59, '14bd25b6-bf98-423b-b060-471bfaf81452', 6, 'Comfortable and stylish, love it!', 2),
+(60, '1310d8a6-1174-4480-b815-41379c654d11', 22, 'Could be better, but it serves its purpose.', 2),
+(61, '2b9b3815-ea87-490f-8d27-238bf18b8ca7', 26, 'Good quality, but a bit overpriced.', 4),
+(62, '7a27d9fc-7483-4098-b7f4-dfa679aefc81', 12, 'Exactly what I needed, great buy.', 5),
+(63, '2b9b3815-ea87-490f-8d27-238bf18b8ca7', 6, 'Well-made and durable, would buy again.', 4),
+(64, '1310d8a6-1174-4480-b815-41379c654d11', 27, 'Not what I expected, disappointed.', 1),
+(65, '2b9b3815-ea87-490f-8d27-238bf18b8ca7', 24, 'Not the best quality, expected more.', 3),
+(66, '2b9b3815-ea87-490f-8d27-238bf18b8ca7', 7, 'Could be improved, but overall satisfied.', 4),
+(67, '7a27d9fc-7483-4098-b7f4-dfa679aefc81', 15, 'Good value for money, happy with the purchase.', 4),
+(68, '2b9b3815-ea87-490f-8d27-238bf18b8ca7', 26, 'Quality is okay, expected more.', 4),
+(69, '7a27d9fc-7483-4098-b7f4-dfa679aefc81', 21, 'Unique and stylish, stands out.', 5),
+(70, '14bd25b6-bf98-423b-b060-471bfaf81452', 4, 'Unique and stylish, stands out.', 3),
+(71, '7a27d9fc-7483-4098-b7f4-dfa679aefc81', 3, 'Good quality, but a bit overpriced.', 3);
 
 -- --------------------------------------------------------
 
@@ -301,15 +301,15 @@ CREATE TABLE `szamlazas` (
 --
 
 INSERT INTO `szamlazas` (`SzamlazasId`, `UserId`, `TermekId`, `SzinHex`, `darab`, `VasarlasIdopontja`, `SikeresSzalitas`) VALUES
-(39, '03c66e48-f575-4ffb-9252-f307d1b473e0', 3, '32a852', 6, '2024-04-05 09:19:44', 0),
-(40, '03c66e48-f575-4ffb-9252-f307d1b473e0', 22, '000000', 30, '2024-04-05 09:23:10', 1),
-(41, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 12, 'ab9fcc', 1, '2024-04-05 09:23:10', 0),
-(42, '03c66e48-f575-4ffb-9252-f307d1b473e0', 27, 'ffffff', 9, '2024-04-05 09:23:10', 1),
-(43, '0bb5579f-84d4-4120-beda-8012fe6a9816', 24, 'ffffff', 3, '2024-04-05 09:23:10', 0),
-(44, '03c66e48-f575-4ffb-9252-f307d1b473e0', 6, '5431b5', 4, '2024-04-05 09:23:10', 1),
-(45, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 23, 'de2393', 20, '2024-04-05 09:23:10', 1),
-(46, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 21, '820774', 5, '2024-04-05 09:23:10', 1),
-(47, '03c66e48-f575-4ffb-9252-f307d1b473e0', 6, 'f7eb81', 8, '2024-04-05 09:23:10', 0);
+(39, '1310d8a6-1174-4480-b815-41379c654d11', 3, '32a852', 6, '2024-04-05 09:19:44', 0),
+(40, '1310d8a6-1174-4480-b815-41379c654d11', 22, '000000', 30, '2024-04-05 09:23:10', 1),
+(41, '14bd25b6-bf98-423b-b060-471bfaf81452', 12, 'ab9fcc', 1, '2024-04-05 09:23:10', 0),
+(42, '14bd25b6-bf98-423b-b060-471bfaf81452', 27, 'ffffff', 9, '2024-04-05 09:23:10', 1),
+(43, '14bd25b6-bf98-423b-b060-471bfaf81452', 24, 'ffffff', 3, '2024-04-05 09:23:10', 0),
+(44, '2b9b3815-ea87-490f-8d27-238bf18b8ca7', 6, '5431b5', 4, '2024-04-05 09:23:10', 1),
+(45, '2b9b3815-ea87-490f-8d27-238bf18b8ca7', 23, 'de2393', 20, '2024-04-05 09:23:10', 1),
+(46, '7a27d9fc-7483-4098-b7f4-dfa679aefc81', 21, '820774', 5, '2024-04-05 09:23:10', 1),
+(47, '7a27d9fc-7483-4098-b7f4-dfa679aefc81', 6, 'f7eb81', 8, '2024-04-05 09:23:10', 0);
 
 -- --------------------------------------------------------
 
