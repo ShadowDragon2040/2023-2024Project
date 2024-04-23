@@ -1,17 +1,18 @@
-import React  from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { TermekButtonCard,TermekImage } from '../TextElements'
+import { TermekButtonCard, TermekImage } from '../TextElements';
 
 function TermekCard(props) {
-  
+  const { id, item } = props; // Destructure props
+
   return (
-    <NavLink style={{textDecoration: 'none'}} key={props.item.termekId} className="col-4" to={"/ShopPage/"+props.item.termekId}>
+    <NavLink style={{ textDecoration: 'none' }} key={id} className="col-4" to={"/ShopPage/" + item.termekId}>
       <TermekButtonCard>
         <div>
-            <TermekImage className="card-img-top" src={props.item.keputvonal} alt="Image not found!" />
-            <h5 className="card-title">{props.item.termekNev} </h5>
-            <p>{props.item.leiras}</p>
-            <p className='font-weight-bold'>Price: {props.item.ar}. -HUF</p>
+          <TermekImage className="card-img-top" src={item.keputvonal} alt={item.termekNev} /> {/* Provide a meaningful alt attribute */}
+          <h5 className="card-title">{item.termekNev}</h5>
+          <p>{item.leiras}</p>
+          <p className='font-weight-bold'>Price: {item.ar}. -HUF</p>
         </div>
       </TermekButtonCard>
     </NavLink>

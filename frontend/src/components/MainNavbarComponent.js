@@ -36,12 +36,12 @@ const Navbar = (props) => {
   useEffect(() => {
     console.log(pathname)
   }, [pathname])
-*/
+
   useEffect(() => {
     console.log(props)
 
   },[props.totalQuantity])
-
+*/
 
   const changeNav=()=>{
     if(window.scrollY >= 80){

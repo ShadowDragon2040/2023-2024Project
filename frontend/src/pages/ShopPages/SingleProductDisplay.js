@@ -11,7 +11,6 @@ import { Rating } from 'react-simple-star-rating';
 import {
     NavBtn,
     NavBtnLink,
-    NiceButton,
     InfoContainer10,
     CommentButton
 } from '../../components/TextElements';

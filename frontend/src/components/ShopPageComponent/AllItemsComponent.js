@@ -13,7 +13,6 @@ import axios from 'axios'
 import TermekCard from './TermekCard'
 
 function AllItems (props) {
-  const [newsList, setNewsList] = useState([]);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -52,9 +51,11 @@ function AllItems (props) {
           </div>
           <div className="row w-100">
               {
-                data.map(item => (
-                  <TermekCard  item={item} key={item.id}/>
-                ))
+                 <div className="row">
+                 {data.map((item, index) => ( 
+                   <TermekCard key={index} item={item} />
+                 ))}
+               </div>
               }
           </div>
       </ItemContainer>

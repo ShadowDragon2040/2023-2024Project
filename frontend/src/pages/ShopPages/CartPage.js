@@ -1,7 +1,6 @@
 //import React, { useState, useEffect } from "react";
 import { Button } from 'react-bootstrap';
 import {
-  ItemContainer2,
   NavBtnLink, ShopPageContainer,
 } from '../../components/TextElements';
 import { MdArrowBack } from "react-icons/md";
@@ -10,7 +9,7 @@ import Navbar from '../../components/MainNavbarComponent';
 import TermekCartCard from '../../components/ShopPageComponent/TermekCartCard';
 
 
-const CartPage = ({ handleClose, cart, setCart }) => {
+const CartPage = ({ cart, setCart }) => {
 
   console.log(setCart);
   console.log(cart);
@@ -50,7 +49,7 @@ const CartPage = ({ handleClose, cart, setCart }) => {
                 <h5 className="card-title">User Information</h5>
               </div>
               <div className='card-body'>
-                <img src="Profilkép" ></img>
+                <img src="Profilkép" alt='profilkep' ></img>
                 <p>Username:</p>
                 <p>Address: </p>
                 <p>PhoneNumber: </p>

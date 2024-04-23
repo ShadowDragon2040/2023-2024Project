@@ -1,7 +1,7 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState } from 'react';
-import { Form, Button, Modal } from 'react-bootstrap';
+import { Form, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
@@ -77,7 +77,7 @@ const LoginModal = (props) => {
 
     const handlePasswordReset = async () => {
       try {
-          const response = await axios.post(`${process.env.REACT_APP_BASE_URL}Auth/updatepassword`, {
+            await axios.post(`${process.env.REACT_APP_BASE_URL}Auth/updatepassword`, {
               email: resetEmail,
               emailCode: resetEmailCode,
               newPassword: newPassword
