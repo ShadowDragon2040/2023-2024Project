@@ -13,11 +13,11 @@ import ModelltervezesPage from './pages/MainPages/ModelltervezesPage';
 import SingleProductDisplay from './pages/ShopPages/SingleProductDisplay';
 import ShopPage from './pages/ShopPages/ShopPage';
 import CategoryPage from './pages/ShopPages/CategoryPage';
-import NewsPage from './pages/MainPages/NewsPage';
+import NewsPage from './pages/ShopPages/NewsPage';
 import React, { useState, useEffect } from 'react';
 import CartPage from './pages/ShopPages/CartPage';
 import ProfilePage from './pages/ShopPages/ProfilePage';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, collapseToast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
@@ -28,6 +28,14 @@ function App() {
   const [cartItemCount, setCartItemCount] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
 
+  const [collapsed, setCollapsed] = useState(true);
+
+  const handleMouseEnter = () => {
+    setCollapsed(false);
+};
+const handleMouseLeave = () => {
+  setCollapsed(true);
+};
   useEffect(() => {
     localStorage.setItem("bejelenkezve", "false");
     localStorage.setItem("role", "PUBLIC");
@@ -88,6 +96,8 @@ const addToCart = (product, quantity) => {
     localStorage.setItem("kosar", kosarString);
   }
 
+
+
 }; 
   return (
   <>
@@ -106,10 +116,10 @@ const addToCart = (product, quantity) => {
         <Route path="/ModelltervezesPage" element={<ModelltervezesPage/>} exact/>
         <Route path="/PaintPage" element={<PaintPage/>} exact />
         <Route path="/ProfilePage" element={<ProfilePage/>} exact />
-        <Route path="/ShopPage" exact element={<ShopPage cartItemCount={totalQuantity}/>}/>
+        <Route path="/ShopPage" exact element={<ShopPage collapsed={collapsed} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} cartItemCount={totalQuantity}/>}/>
         <Route path="/ShopPage/:ProductId" element={ <SingleProductDisplay addToCart={addToCart} cart={cartItems} cartItemCount={totalQuantity} />}/>
         <Route path="/ShopPage/Categories/:CategoryId" element={<CategoryPage/>} exact />
-        <Route path="/News" element={<NewsPage/>} exact/>
+        <Route path="/ShopPage/News" element={<NewsPage collapsed={collapsed} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave}/>} exact/>
         <Route path="/ShopPage/CartPage"element={<CartPage cart={cartItems} cartItemCount={cartItemCount} setCart={handleRemoveFromCart} />} exact/>
       </Routes>
     </Router>

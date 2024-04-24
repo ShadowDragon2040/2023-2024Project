@@ -7,6 +7,7 @@ function TermekCartCard(props) {
   
   return (
     <>
+    <CloseButton onClick={()=>props.setCart(props.index)} style={{ float: 'right'}}/>
     <NavLink style={{textDecoration: 'none'}}  key={props.item.id} className="col" to={"/ShopPage/"+props.item.id}>
       <TermekCartButtonCard>
         <TermekListImage className="card-img-top" src={props.item.image} alt="Image not found!" />
@@ -17,7 +18,6 @@ function TermekCartCard(props) {
             <p className='font-weight-bold'>Quantity: {props.item.quantity}</p>
             <p className='font-weight-bold'>Color: {props.item.color}</p>
         </div>
-        <CloseButton onClick={()=>props.setCart(props.index)} style={{ float: 'right'}}/>
       </TermekCartButtonCard>
     </NavLink>
    

@@ -1,76 +1,63 @@
-import React, { useState, useEffect } from 'react';
-import { FaHome, FaNewspaper, FaPaintBrush, FaGitlab } from 'react-icons/fa';
+import React,{useState,useEffect} from 'react';
+import { FaHome, FaNewspaper,FaPaintBrush,FaGitlab } from 'react-icons/fa';
 import { IoGiftSharp } from "react-icons/io5";
-import { ShopSidebarContainer } from '../TextElements';
-import { NavLink } from 'react-router-dom';
+import {
+  ShopSidebarContainer
+} from '../TextElements';
+import { Link, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { BiCategory } from "react-icons/bi";
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+//https://www.npmjs.com/package/react-pro-sidebar?activeTab=readme
 
 function ShopSideBar(props) {
   const [categoryList, setCategoryList] = useState([]);
 
-  useEffect(() => {
-    axios.get(`${process.env.REACT_APP_BASE_URL}Termekek/Kategoriak`)
-      .then(response => setCategoryList(response.data))
-      .catch(error => console.error('Error during the request:', error));
-  }, []);
+    useEffect(() => {
+      axios.get(`${process.env.REACT_APP_BASE_URL}Termekek/Kategoriak`)
+        .then(response => setCategoryList(response.data))
+        .catch(error => console.error('Hiba a lekérdezés során:', error));
+    }, []);
 
   return (
-    <ShopSidebarContainer>
-      <Sidebar
-        collapsed={props.collapsed}
-        onMouseEnter={props.handleMouseEnter}
-        onMouseLeave={props.handleMouseLeave}
-        rootStyles={{
-          width: '300px',
-          height: '100%',
-          backgroundColor: 'white'
-        }}
-      >
-        <Menu menuItemStyles={{
-          button: {
-            color: '#01bf71',
-            marginTop: '20px'
-          }
-        }}>
-          <NavLink to={'/'} className='nav-link'>
-            <MenuItem icon={<FaHome />} prefix={"Home"}/>
-          </NavLink>
+      <ShopSidebarContainer>
+        <Sidebar collapsed={props.collapsed} onMouseEnter={props.handleMouseEnter} onMouseLeave={props.handleMouseLeave}
+          rootStyles={{
+              width : '300px',
+              height : '90%',
+              backgroundColor: 'white'
+          }}>
+          <Menu menuItemStyles={{
+              button: {
+                color: '#01bf71',
+                marginTop: '20px'
+              }
+          }}>
+            <MenuItem icon={<FaHome /> } component={<NavLink className={'nav-link'} to={'/'}></NavLink>}>Home</MenuItem>
 
-          <NavLink to={'/ShopPage/News'} className='nav-link'>
-            <MenuItem icon={<FaNewspaper />} prefix={"News"}/>
-          </NavLink>
+            <MenuItem icon={<FaNewspaper />} component={<NavLink className={'nav-link'} to={'/ShopPage/News'}></NavLink>}> News</MenuItem>
 
-          <SubMenu  icon={<BiCategory />} label="Categories">
+          <SubMenu icon={<BiCategory />} label="Categories">
             <ul>
               {categoryList.map((category) => (
-                <li key={category.kategoriaId}>
-                  <NavLink to={'/ShopPage/Categories/' + category.kategoriaId} className='nav-link' style={{ margin: "0px" }}>
-                    <MenuItem>
-                      {category.kategoriaNev}
+                <div key={category.kategoriaId} className='form-check form-switch menupont'>
+                    <MenuItem component={<NavLink className={'nav-link'} to={'/ShopPage/Categories/'+category.kategoriaId}></NavLink>}>
+                          {category.kategoriaNev}
                     </MenuItem>
-                  </NavLink>
-                </li>
+                </div>
               ))}
             </ul>
           </SubMenu>
+          
+            <MenuItem icon={<FaPaintBrush />} component={<NavLink className={'nav-link'} to={'/ShopPage/paints'}></NavLink>}>Paints</MenuItem>
 
-          <NavLink to={'/ShopPage/paints'} className='nav-link'>
-            <MenuItem icon={<FaPaintBrush />} prefix={"Paints"}/>
-          </NavLink>
+            <MenuItem icon={<IoGiftSharp />}component={<NavLink className={'nav-link'} to={'/ShopPage/gift'}></NavLink>}>Gift</MenuItem>
 
-          <NavLink to={"/ShopPage/gift"} className='nav-link'>
-            <MenuItem icon={<IoGiftSharp />} prefix={"Gift"}/>
-          </NavLink>
+            <MenuItem icon={<FaGitlab /> }component={<NavLink className={'nav-link'} to={'/ShopPage/lab'}></NavLink>}>Lab</MenuItem>
 
-          <NavLink to={'/ShopPage/lab'} className={'disabled nav-link'}>
-            <MenuItem icon={<FaGitlab />} prefix={"Lab"} suffix={"coming soon"}/>
-          </NavLink>
-
-        </Menu>
-      </Sidebar>
-    </ShopSidebarContainer>
+          </Menu>
+        </Sidebar>
+      </ShopSidebarContainer>
   );
 }
 
