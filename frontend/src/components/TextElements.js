@@ -313,6 +313,22 @@ export const TermekCartButtonCard=styled.button`
         cursor: pointer;
     }
 `
+export const NewsCard=styled.button`
+    background-color:#059e60;
+    margin-top:20px;
+    display: flex;
+    text-align: left;
+    align-items: center;
+    border-radius: 10px;
+    padding: 20px;
+    max-width:100%;
+    min-width:100%;
+    &:hover{
+        transform: scale(1.02);
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+    }
+`
 export const TermekListImage=styled.img`
     box-shadow: 10px 10px 10px black;
     max-height: 120px;
@@ -590,7 +606,7 @@ export const HeroContainer=styled.div`
 `
 export const ShopPageContainer=styled.div`
     background: black;
-    min-height:1500px;
+
 `
 
 export const HeroContent=styled.div`
@@ -644,6 +660,7 @@ export const ItemContainer=styled.div`
         position:relative;
         display:inline-block;
         margin:auto;
+        margin-top:50px;
         float:right;
     @media screen and (max-width:700px) {
         margin-top:80px;
@@ -797,8 +814,7 @@ export const ShopSidebarContainer=styled.aside`
     margin-top:80px;
     height:100%;
     left:0px;
-    position:fixed;
-    
+    position:fixed;    
 `
 
 export const ProfileDisplayPageContainer=styled.aside`

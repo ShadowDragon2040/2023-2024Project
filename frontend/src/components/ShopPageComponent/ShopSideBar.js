@@ -4,7 +4,7 @@ import { IoGiftSharp } from "react-icons/io5";
 import {
   ShopSidebarContainer
 } from '../TextElements';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { BiCategory } from "react-icons/bi";
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
@@ -24,7 +24,7 @@ function ShopSideBar(props) {
         <Sidebar collapsed={props.collapsed} onMouseEnter={props.handleMouseEnter} onMouseLeave={props.handleMouseLeave}
           rootStyles={{
               width : '300px',
-              height : '100%',
+              height : '90%',
               backgroundColor: 'white'
           }}>
           <Menu menuItemStyles={{
@@ -33,39 +33,27 @@ function ShopSideBar(props) {
                 marginTop: '20px'
               }
           }}>
-          <NavLink to={'/'} className='nav-link'>
-            <MenuItem icon={<FaHome /> }> Home</MenuItem>
-          </NavLink>
+            <MenuItem icon={<FaHome /> } component={<NavLink className={'nav-link'} to={'/'}></NavLink>}>Home</MenuItem>
 
-          <NavLink to={'/ShopPage/News'} className='nav-link'>
-            <MenuItem icon={<FaNewspaper />}> News</MenuItem>
-          </NavLink>
+            <MenuItem icon={<FaNewspaper />} component={<NavLink className={'nav-link'} to={'/ShopPage/News'}></NavLink>}> News</MenuItem>
 
           <SubMenu icon={<BiCategory />} label="Categories">
             <ul>
               {categoryList.map((category) => (
                 <div key={category.kategoriaId} className='form-check form-switch menupont'>
-                  <NavLink to={'/ShopPage/Categories/'+category.kategoriaId} className='nav-link' style={{margin:"0px"}}>
-                    <MenuItem>
+                    <MenuItem component={<NavLink className={'nav-link'} to={'/ShopPage/Categories/'+category.kategoriaId}></NavLink>}>
                           {category.kategoriaNev}
                     </MenuItem>
-                  </NavLink>
                 </div>
               ))}
             </ul>
           </SubMenu>
           
-          <NavLink to={'/ShopPage/paints'} className='nav-link'>
-            <MenuItem icon={<FaPaintBrush />}> Paints</MenuItem>
-          </NavLink>
+            <MenuItem icon={<FaPaintBrush />} component={<NavLink className={'nav-link'} to={'/ShopPage/paints'}></NavLink>}>Paints</MenuItem>
 
-          <NavLink to={"/ShopPage/gift"} className='nav-link'>
-            <MenuItem icon={<IoGiftSharp />}> Gift</MenuItem>
-          </NavLink>
+            <MenuItem icon={<IoGiftSharp />}component={<NavLink className={'nav-link'} to={'/ShopPage/gift'}></NavLink>}>Gift</MenuItem>
 
-          <NavLink to={'/ShopPage/lab'} className='nav-link'>
-            <MenuItem icon={<FaGitlab /> }> Lab</MenuItem>
-          </NavLink>
+            <MenuItem icon={<FaGitlab /> }component={<NavLink className={'nav-link'} to={'/ShopPage/lab'}></NavLink>}>Lab</MenuItem>
 
           </Menu>
         </Sidebar>
