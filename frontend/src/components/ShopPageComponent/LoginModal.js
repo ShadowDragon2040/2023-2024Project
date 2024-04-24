@@ -48,12 +48,11 @@ const LoginModal = (props) => {
         
         const token = response; 
         localStorage.setItem("LoginToken", token.data);
-        
         const decodedToken = jwtDecode(token.data);
-        
+        const id = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata"];
+        localStorage.setItem("userId", id);
         const role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
         localStorage.setItem("role", role);
-        console.log(role);
         localStorage.setItem("bejelenkezve", "true"); 
         toast.success("Login successful.",{
           position: "bottom-right"

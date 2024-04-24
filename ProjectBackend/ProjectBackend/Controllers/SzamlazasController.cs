@@ -32,12 +32,13 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
+        //userId alapján
         [HttpGet("{id}")/*, Authorize(Roles = "ADMIN")*/]
-        public async Task<ActionResult> Get(int id)
+        public async Task<ActionResult> Get(string id)
         {
             try
             {
-                var result = await _context.Szamlaza.Where(x => x.SzamlazasId == id).ToListAsync();
+                var result = await _context.Szamlaza.Where(x => x.UserId == id).ToListAsync();
                 return Ok(result);
             }
             catch (Exception ex)

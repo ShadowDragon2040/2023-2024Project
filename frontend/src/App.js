@@ -105,7 +105,7 @@ const addToCart = (product, quantity) => {
         <Route path="/ElektroplatingPage" element={<ElektroplatingPage/>} exact/>
         <Route path="/ModelltervezesPage" element={<ModelltervezesPage/>} exact/>
         <Route path="/PaintPage" element={<PaintPage/>} exact />
-        <Route path="/ProfilePage" element={<ProfilePage/>} exact />
+        <Route path="/ShopPage/ProfilePage" element={<ProfilePage/>} exact />
         <Route path="/ShopPage" exact element={<ShopPage cartItemCount={totalQuantity}/>}/>
         <Route path="/ShopPage/:ProductId" element={ <SingleProductDisplay addToCart={addToCart} cart={cartItems} cartItemCount={totalQuantity} />}/>
         <Route path="/ShopPage/Categories/:CategoryId" element={<CategoryPage/>} exact />

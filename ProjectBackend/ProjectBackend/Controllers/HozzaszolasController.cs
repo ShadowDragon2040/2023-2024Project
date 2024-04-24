@@ -48,12 +48,13 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
+        //userId alapján
         [HttpGet("{id}")]
-        public async Task<ActionResult> Get(int id)
+        public async Task<ActionResult> Get(string id)
         {
             try
             {
-                var result = await _context.Hozzaszolasok.Where(x => x.HozzaszolasId == id).ToListAsync();
+                var result = await _context.Hozzaszolasok.Where(x => x.UserId == id).ToListAsync();
                 return Ok(result);
             }
             catch (Exception ex)

@@ -134,7 +134,7 @@ const Navbar = (props) => {
             localStorage.getItem("bejelenkezve") === 'true' ? (
               <div style={{marginTop:"15px"}}>
                 <NavBtn2>
-                  <NavBtnLink to='/ProfilePage'>
+                  <NavBtnLink to='/ShopPage/ProfilePage'>
                     <CgProfile /> Profile
                   </NavBtnLink>
                 </NavBtn2>

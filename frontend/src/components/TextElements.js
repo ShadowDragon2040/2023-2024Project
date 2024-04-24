@@ -16,6 +16,7 @@ export const InfoContainer10=styled.div`
     color: #fff;
     background: ${({lightBg})=>(lightBg?'#f9f9f9':'#010606')};
 `
+
 export const InfoContainer5=styled.div`
     color: #fff;
     background: ${({lightBg})=>(lightBg?'#f9f9f9':'#010606')};
