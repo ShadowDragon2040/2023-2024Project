@@ -1,6 +1,7 @@
 ﻿using ProjectBackend.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProjectBackend.Controllers
 {
@@ -15,7 +16,7 @@ namespace ProjectBackend.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize(Roles ="ADMIN")]
         public IActionResult Get()
         {
             try
@@ -28,7 +29,7 @@ namespace ProjectBackend.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost,Authorize(Roles ="ADMIN")]
         public IActionResult Post(Ftpfile postFile)
         {
             try

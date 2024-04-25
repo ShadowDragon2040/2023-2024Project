@@ -158,18 +158,18 @@ namespace AdatKarbantarto.ViewModel
                 if (resp.Data != null)
                 {
                     _ListData = resp.Data;
-
+                    HozzaszolasItems.Clear();
+                    foreach (var Hozzaszolas in _ListData)
+                    {
+                        HozzaszolasItems.Add(Hozzaszolas);
+                    }
                 }
                 else
                 {
                     MessageBox.Show(resp.ErrorMessage);
                 }
 
-                HozzaszolasItems.Clear();
-                foreach (var Hozzaszolas in _ListData)
-                {
-                    HozzaszolasItems.Add(Hozzaszolas);
-                }
+            
             }
             catch (Exception ex)
             {

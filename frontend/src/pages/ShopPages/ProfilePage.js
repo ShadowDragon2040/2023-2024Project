@@ -33,7 +33,10 @@ function ProfilePage() {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}Felhasznalok/${userId}`);
+        const token=localStorage.getItem("LoginToken")
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}Felhasznalok/${userId}`,{
+          headers:{'Authorization': 'Bearer ' + token}
+        });
         setUserProfile(response.data[0]);
       } catch (error) {
         console.error('Error fetching user profile:', error);

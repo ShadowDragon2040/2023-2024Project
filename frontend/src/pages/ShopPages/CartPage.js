@@ -11,6 +11,21 @@ import TermekCartCard from '../../components/ShopPageComponent/TermekCartCard';
 
 const CartPage = ({ cart, setCart }) => {
 
+
+/*
+   const fetchUserProfile = async () => {
+      try {
+        const token=localStorage.getItem("LoginToken")
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}Felhasznalok/${userId}`,{
+          headers:{'Authorization': 'Bearer ' + token}
+        });
+        setUserProfile(response.data[0]);
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+      }
+    };
+*/
+
   console.log(setCart);
   console.log(cart);
   const totalPayment = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);

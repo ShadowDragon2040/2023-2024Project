@@ -26,7 +26,12 @@ function CategoryPage() {
     setCollapsed(true);};
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_BASE_URL}Termekek/Termek/`+CategoryId)
+    const token=localStorage.getItem('LoginToken');
+    axios.get(`${process.env.REACT_APP_BASE_URL}Termekek/Termek/`+CategoryId,{
+      headers:{
+        'Authorization':'Bearer'+token
+      }
+    })
       .then(response => {setCategoryDataList(response.data);})
       .catch(error =>{
         if(error.response&&error.response.status===404){

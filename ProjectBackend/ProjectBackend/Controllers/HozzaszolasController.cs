@@ -20,7 +20,7 @@ namespace Webárúház_Nagy_Project.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "ADMIN")]
         public async Task<ActionResult> Get()
         {
             try
@@ -34,7 +34,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpGet("termek/{termekId}")] 
+        [HttpGet("termek/{termekId}"),Authorize(Roles ="USER,ADMIN")] 
         public async Task<ActionResult> GetByTermekId(int termekId)
         {
             try
@@ -49,7 +49,7 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
         //userId alapján
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize(Roles = "USER,ADMIN")]
         public async Task<ActionResult> Get(string id)
         {
             try
@@ -63,7 +63,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost,Authorize(Roles ="ADMIN")]
         public async Task<ActionResult> Post(CreatedHozzaszolasokDto createdHozzaszolasokDto)
         {
             try
@@ -87,7 +87,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}"),Authorize(Roles ="ADMIN")]
         public async Task<ActionResult> Put(int id, UpdateHozzaszolasokDto updateHozzaszolasokDto)
         {
             try
@@ -113,7 +113,7 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"),Authorize(Roles ="ADMIN")]
         public async Task<ActionResult> Delete(int id)
         {
             try

@@ -44,7 +44,7 @@ namespace ProjectBackend.Controllers
             }
         }
 
-        [HttpGet("Termek/{kategoriaId}")/*, Authorize*/]
+        [HttpGet("Termek/{kategoriaId}")]
         public async Task<ActionResult<IEnumerable<Termekek>>> GetTermekByKategoriaId(int kategoriaId)
         {
             try
@@ -133,7 +133,7 @@ namespace ProjectBackend.Controllers
 
 
 
-        [HttpPost/*, Authorize(Roles = "Admin")*/]
+        [HttpPost, Authorize(Roles = "ADMIN")]
         public async Task<ActionResult<TermekekDto>> Post(CreatedTermekekDto createdTermekekDto)
         {
             try
@@ -159,7 +159,7 @@ namespace ProjectBackend.Controllers
             }
         }
 
-        [HttpPut("{id}")/*, Authorize(Roles = "Admin")*/]
+        [HttpPut("{id}"), Authorize(Roles = "ADMIN")]
         public async Task<ActionResult> Put(int id, UpdateTermekekDto updateTermekedDto)
         {
             try
@@ -184,8 +184,7 @@ namespace ProjectBackend.Controllers
         }
 
 
-        [HttpDelete("{id}")]
-        //[Authorize(Roles = "Admin")]
+        [HttpDelete("{id}"), Authorize(Roles = "ADMIN")]
         public async Task<ActionResult> Delete(int id)
         {
             try

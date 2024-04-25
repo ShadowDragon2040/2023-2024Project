@@ -21,7 +21,7 @@ namespace Webárúház_Nagy_Project.Controllers
             _context = context;
         }
 
-        [HttpGet/*, Authorize(Roles = "ADMIN")*/]
+        [HttpGet, Authorize(Roles = "ADMIN")]
         public async Task<ActionResult> Get()
         {
             try
@@ -36,7 +36,7 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
         //userId alapján
-        [HttpGet("{id}")/*, Authorize(Roles = "ADMIN")*/]
+        [HttpGet("{id}"), Authorize(Roles = "USER,ADMIN")]
         public async Task<ActionResult> Get(string id)
         {
             try
@@ -50,7 +50,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles ="ADMIN")]
         public async Task<IActionResult> Post(CreatedHelyadatokDto createdHelyadatokDto)
         {
             try
@@ -78,7 +78,7 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
 
-        [HttpPut("{id}")/*, Authorize(Roles = "Admin")*/]
+        [HttpPut("{id}"), Authorize(Roles = "ADMIN")]
         public async Task<ActionResult> Put(int id, UpdateHelyadatokDto updateHelyadatokDto)
         {
             try
@@ -106,7 +106,7 @@ namespace Webárúház_Nagy_Project.Controllers
         }
 
 
-        [HttpDelete("{id}")/*, Authorize(Roles = "Admin")*/]
+        [HttpDelete("{id}"), Authorize(Roles = "ADMIN")]
         public async Task<ActionResult> Delete(int id)
         {
             try

@@ -38,9 +38,6 @@ const handleMouseLeave = () => {
   setCollapsed(true);
 };
   useEffect(() => {
-    localStorage.setItem("role", "PUBLIC");
-  }, []);
-  useEffect(() => {
     //console.log(cartItems)
   }, [cartItems]);
 

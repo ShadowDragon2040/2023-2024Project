@@ -41,7 +41,6 @@ namespace AdatKarbantarto.Helpers
         public void SetJwtToken(string token)
         {
             AdatKarbantarto.MainWindow._jwtToken = token.Replace("\"", "");
-            _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
         }
 
         //Eljárások melyek kérést intéznek a backend felé végpontokon keresztül hogy elérjük a Felhasználókkal kapcsolatos adatokat.
@@ -53,6 +52,11 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                _httpClient.DefaultRequestHeaders.Clear();
+
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
                 HttpResponseMessage response = await _httpClient.GetAsync("/Felhasznalok");
 
                 if (response.IsSuccessStatusCode)
@@ -81,6 +85,8 @@ namespace AdatKarbantarto.Helpers
         //Sikeres bejelentkezés esetén visszatér egy jwt tokennel, hiba esetén pedig egy üzenettel.
         public async Task<string> PostAsync(string username, string password)
         {
+          
+
             var requestData = new
             {
                 Username = username,
@@ -109,6 +115,10 @@ namespace AdatKarbantarto.Helpers
         //Sikeres regisztráció esetén visszatér a backend által előállitott sikert jelző üzenettel, hiba esetén egy egyéni hibaüzenet tér vissza, mely tartalmazza a hiba okát.
         public async Task<HttpResponseMessage> PostFelhasznaloAsync(RegisterUser ujfelhasznalo)
         {
+            _httpClient.DefaultRequestHeaders.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
             try
             {
                 HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/Auth/Register", ujfelhasznalo);
@@ -126,6 +136,10 @@ namespace AdatKarbantarto.Helpers
         //Sikeres kérés esetén visszatér a backend által előállitott sikert jelző üzenettel, hiba esetén egy egyéni hibaüzenet tér vissza, mely tartalmazza a hiba okát.
         public async Task<HttpResponseMessage> ModifyFelhasznaloAsync(string id, Felhasznalo felhasznalo)
         {
+            _httpClient.DefaultRequestHeaders.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
             try
             {
                 HttpResponseMessage response = await _httpClient.PutAsJsonAsync("/Felhasznalok/" + id, felhasznalo);
@@ -143,8 +157,13 @@ namespace AdatKarbantarto.Helpers
         //Sikeres törlés esetén visszatér a backend által küldött válasszal, hiba esetén egy egyéni hibaüzenet tér vissza, mely tartalmazza a hiba okát.
         public async Task<HttpResponseMessage> DeleteFelhasznaloAsync(string id)
         {
+           
             try
             {
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
                 HttpResponseMessage response = await _httpClient.DeleteAsync("/Felhasznalok/" + id);
                 return response;
 
@@ -169,6 +188,11 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+
                 HttpResponseMessage response = await _httpClient.GetAsync("/Hozzaszolas");
 
                 if (response.IsSuccessStatusCode)
@@ -199,6 +223,11 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+
                 HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/Hozzaszolas", hozzaszolas);
                 return response;
             }
@@ -216,6 +245,11 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+
                 HttpResponseMessage response = await _httpClient.DeleteAsync("/Hozzaszolas/" + id);
                 return response;
             }
@@ -233,6 +267,11 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+
                 HttpResponseMessage response = await _httpClient.PutAsJsonAsync("/Hozzaszolas/" + id, hozzaszolas);
                 return response;
             }
@@ -254,6 +293,11 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+
                 HttpResponseMessage response = await _httpClient.GetAsync("/Termekek");
 
                 if (response.IsSuccessStatusCode)
@@ -284,6 +328,11 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+
                 HttpResponseMessage response = await _httpClient.PutAsJsonAsync("/Termekek/" + id, termek);
                 return response;
             }
@@ -301,6 +350,11 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+
                 HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/Termekek", ujtermek);
                 return response;
             }
@@ -317,6 +371,11 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+
                 HttpResponseMessage response = await _httpClient.DeleteAsync("/Termekek/" + id);
                 return response;
             }
@@ -339,6 +398,11 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+
                 HttpResponseMessage response = await _httpClient.GetAsync("/Szamlazas");
 
                 if (response.IsSuccessStatusCode)
@@ -396,6 +460,11 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+
                 HttpResponseMessage response = await _httpClient.PutAsJsonAsync("/Szamlazas/" + id, szamla);
                 return response;
             }
@@ -413,6 +482,11 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+
                 HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/Szamlazas", ujszamla);
                 return response;
 
@@ -430,6 +504,11 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+
                 HttpResponseMessage response = await _httpClient.DeleteAsync("/Szamlazas/" + id);
                 return response;
             }
@@ -451,6 +530,11 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+
                 HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/FTPFile", file);
                 return response;
             }
@@ -467,6 +551,11 @@ namespace AdatKarbantarto.Helpers
         {
             try
             {
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {MainWindow._jwtToken}");
+
                 HttpResponseMessage response = await _httpClient.GetAsync("/FTPFile");
 
                 if (response.IsSuccessStatusCode)

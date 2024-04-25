@@ -20,7 +20,7 @@ namespace ProjectBackend.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet ,Authorize(Roles ="ADMIN")]
         public async Task<IActionResult> Get()
         {
             try
@@ -34,7 +34,7 @@ namespace ProjectBackend.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize(Roles = "USER,ADMIN")]
         public async Task<IActionResult> Get(string id)
         {
             try
@@ -49,7 +49,7 @@ namespace ProjectBackend.Controllers
         }
 
 
-        [HttpPut("{id}")/*, Authorize(Roles = "ADMIN")*/]
+        [HttpPut("{id}"), Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> Put(string id, UpdateFelhasznalokDto updateFelhasznalokDto)
         {
             try
@@ -80,7 +80,7 @@ namespace ProjectBackend.Controllers
             }
         }
 
-        [HttpDelete("{id}")/*, Authorize(Roles = "ADMIN")*/]
+        [HttpDelete("{id}"), Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> Delete(string id)
         {
             try

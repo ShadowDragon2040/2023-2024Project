@@ -157,19 +157,19 @@ namespace AdatKarbantarto.ViewModel
                 if (resp.Data != null)
                 {
                     _ListData = resp.Data;
+                    Items.Clear();
 
+                    foreach (var szamla in _ListData)
+                    {
+                        Items.Add(szamla);
+                    }
                 }
                 else
                 {
                     MessageBox.Show(resp.ErrorMessage);
                 }
 
-                Items.Clear();
-
-                foreach (var szamla in _ListData)
-                {
-                    Items.Add(szamla);
-                }
+              
             }
             catch (Exception ex)
             {
