@@ -53,7 +53,7 @@ function ShopSideBar(props) {
 
             <MenuItem icon={<IoGiftSharp />}component={<NavLink className={'nav-link'} to={'/ShopPage/gift'}></NavLink>}>Gift</MenuItem>
 
-            <MenuItem icon={<FaGitlab /> }component={<NavLink className={'nav-link'} to={'/ShopPage/lab'}></NavLink>}>Lab</MenuItem>
+            <MenuItem icon={<FaGitlab /> }component={<NavLink className={'nav-link'} to={'/ShopPage/Lab'}></NavLink>}>Lab</MenuItem>
 
           </Menu>
         </Sidebar>

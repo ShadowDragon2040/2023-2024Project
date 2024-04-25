@@ -14,6 +14,7 @@ import {
     InfoContainer10,
     CommentButton
 } from '../../components/TextElements';
+import { toast } from 'react-toastify';
 
 function SingleProductDisplay(props) {
     const { ProductId } = useParams();
@@ -22,10 +23,12 @@ function SingleProductDisplay(props) {
     const [singleProductData, setSingleProductData] = useState({});
     const [transformedComments, setTransformedComments] = useState([]);
     const [commentText, setCommentText] = useState('');
-    const [rating, setRating] = useState(1);
     const [userId, setUserId] = useState('');
-    const [ratingStar, setRatingStar] = useState(0)
-
+    const [ratingStar, setRatingStar] = useState(5);
+    const [increment,setIncrement]=useState(0);
+    const incrementCounter=()=>{
+        setIncrement(increment+1)
+      }
     const handleRating = (rate) => {
       setRatingStar(rate)
     }
@@ -67,39 +70,47 @@ function SingleProductDisplay(props) {
                 setTransformedComments(transformedComments);
             })
             .catch(error => console.error('Error fetching product data:', error));
-    }, [ProductId]);
+    }, [increment]);
 
-    useEffect(() => {
-        const token = localStorage.getItem("LoginToken");
-        if (token) {
-            const decodedToken = jwtDecode(token);
-            setUserId(decodedToken.userId);
+        const getToken=()=>{
+            const token = localStorage.getItem("LoginToken");
+            if (token) {
+                const decodedToken = jwtDecode(token);
+                setUserId(decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata"]);
+            }
         }
-    }, []);
 
-    const handleSubmitComment = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}Hozzaszolas`, {
-                userId: userId,
-                termekId: ProductId,
-                leiras: commentText,
-                ertekeles: rating
-            });
-            console.log("Comment posted successfully:", response.data);
-            // Refresh comments
-            setCommentText('');
-            setRating(1); // Reset rating to default
-            // You might want to refresh comments here
-        } catch (error) {
-            console.error('Error posting comment:', error);
-        }
-    };
+        const handleSubmitComment = async (e) => {
+            e.preventDefault();
+            try {
+                // Wait for getToken to finish and then proceed
+                await getToken();
+                if(localStorage.getItem('bejelenkezve')== 'false'){
+                    toast.error("Please log in before writing a comment!")
+                }
+               
+                if (commentText !== "") {
+                    await axios.post(`${process.env.REACT_APP_BASE_URL}Hozzaszolas`, {
+                        userId: userId,
+                        termekId: ProductId,
+                        leiras: commentText,
+                        ertekeles: ratingStar
+                    }).then(toast.success("Successfully posted comment!"));
+                }
+                // Refresh comments
+                setCommentText('');
+                setRatingStar(1); // Reset rating to default
+                incrementCounter();
+            } catch (error) {
+                console.error('Error posting comment:', error); 
+            }
+        };
+        
 
     return (
         <>
             <InfoContainer10>
-                <Navbar cart={props.cart} totalQuantity={props.cartItemCount} />
+                <Navbar cart={props.cart} totalQuantity={props.cartItemCount} incrementCounter={incrementCounter} />
                 <NavBtn style={{ margin: '20px 0px 20px 200px' }}>
                     <NavBtnLink to='/ShopPage'><MdArrowBack />Back</NavBtnLink>
                 </NavBtn>
@@ -142,7 +153,7 @@ function SingleProductDisplay(props) {
                                     ></textarea>
                                     <br />
                                     <p>Rate our item:</p>
-                                    <Rating onClick={handleRating} onChange={(e) => setRating(parseInt(e.target.value))} initialValue={ratingStar} required />
+                                    <Rating onClick={handleRating} onChange={(e) => setRatingStar(parseInt(e.target.value))} initialValue={ratingStar} required />
                                     <br />
                                     <CommentButton type="submit" >Post Comment</CommentButton>
                                 </form>

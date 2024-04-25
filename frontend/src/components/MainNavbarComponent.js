@@ -64,6 +64,8 @@ const Navbar = (props) => {
 
   const handleLogout = () => {
     localStorage.setItem("bejelenkezve", "false");
+    localStorage.setItem("userId", "");
+    localStorage.setItem("LoginToken", "");
     handleClose();
   };
 
