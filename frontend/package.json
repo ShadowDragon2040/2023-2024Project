@@ -30,6 +30,7 @@
     "react-slick": "^0.29.0",
     "react-slideshow-image": "^4.3.0",
     "react-st-modal": "^1.1.3",
+    "react-stl-viewer": "^2.5.0",
     "react-toastify": "^10.0.4",
     "styled-components": "^5.3.5"
   },

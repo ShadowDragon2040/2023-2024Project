@@ -17,6 +17,7 @@ import NewsPage from './pages/ShopPages/NewsPage';
 import React, { useState, useEffect } from 'react';
 import CartPage from './pages/ShopPages/CartPage';
 import ProfilePage from './pages/ShopPages/ProfilePage';
+import LabPage from './pages/ShopPages/LabPage';
 import { ToastContainer, collapseToast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -115,6 +116,7 @@ const addToCart = (product, quantity) => {
         <Route path="/ModelltervezesPage" element={<ModelltervezesPage/>} exact/>
         <Route path="/PaintPage" element={<PaintPage/>} exact />
         <Route path="/ShopPage/ProfilePage" element={<ProfilePage/>} exact />
+        <Route path="/ShopPage/Lab" element={<LabPage/>} exact />
         <Route path="/ShopPage" exact element={<ShopPage collapsed={collapsed} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} cartItemCount={totalQuantity}/>}/>
         <Route path="/ShopPage/:ProductId" element={ <SingleProductDisplay addToCart={addToCart} cart={cartItems} cartItemCount={totalQuantity} />}/>
         <Route path="/ShopPage/Categories/:CategoryId" element={<CategoryPage/>} exact />
