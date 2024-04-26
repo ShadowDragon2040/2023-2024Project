@@ -1,6 +1,7 @@
 //import React, { useState, useEffect } from "react";
 import { Button } from 'react-bootstrap';
 import {
+  ItemContainer,
   NavBtnLink, NiceButton, ShopPageContainer,
 } from '../../components/TextElements';
 import { MdArrowBack } from "react-icons/md";
@@ -25,15 +26,13 @@ const CartPage = ({ cart, setCart }) => {
       }
     };
 */
-
-  console.log(setCart);
-  console.log(cart);
   const totalPayment = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   return (
 <>
-      <Navbar/>
     <ShopPageContainer>
+      <Navbar/>
       <div className='container'>
+
         <div className='row'>
           <div className='col-xl-6'>
             <div className="card border border-success rounded border-5" style={{ marginTop: "100px", height: '150vh',width:'85vh', float: 'left'}}>
@@ -45,6 +44,7 @@ const CartPage = ({ cart, setCart }) => {
                   <TermekCartCard index={index} setCart={setCart} item={item} />
                 </div>
               ))}
+              
             </div>
           </div>
           <div className='col-xl-6' style={{minHeight:'1500px'}}>
@@ -73,9 +73,10 @@ const CartPage = ({ cart, setCart }) => {
               </div>
             </div>
           </div>
+
         </div>
       </div>
-      <Footer className="fixed-bottom" isButtom={true}/>
+      <Footer isButtom={true}/>
     </ShopPageContainer>
 </>
 

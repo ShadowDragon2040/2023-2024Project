@@ -63,7 +63,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpPost,Authorize(Roles ="ADMIN")]
+        [HttpPost,Authorize(Roles ="USER,ADMIN")]
         public async Task<ActionResult> Post(CreatedHozzaszolasokDto createdHozzaszolasokDto)
         {
             try

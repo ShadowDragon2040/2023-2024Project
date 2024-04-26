@@ -3,13 +3,14 @@ import React from 'react';
 const ColorPicker = ({selectedColor, onColorChange}) => {
     
     const colors = ['red', 'green', 'blue', 'yellow', 'white', 'black'];
-
+   
     const handleColorSelection = (color) => {
         onColorChange(color);
     };
 
     return (
         <div >
+              Select Color:
             <div style={{ display: 'flex', justifyContent: 'left', marginTop: '10px' }}>
                 {colors.map((color, index) => (
                     <div
@@ -28,12 +29,7 @@ const ColorPicker = ({selectedColor, onColorChange}) => {
                     ></div>
                 ))}
             </div>
-            Selected Color:
-                {selectedColor && (
-                <p style={{ textAlign: 'left', marginTop: '10px' }}>
-                     {selectedColor}
-                </p>
-            )}
+          
         </div>
     );
 };

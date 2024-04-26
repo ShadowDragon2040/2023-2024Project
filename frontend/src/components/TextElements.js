@@ -606,7 +606,6 @@ export const HeroContainer=styled.div`
 `
 export const ShopPageContainer=styled.div`
     background: black;
-
 `
 
 export const HeroContent=styled.div`

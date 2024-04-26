@@ -24,7 +24,7 @@ function SingleProductDisplay(props) {
     const [transformedComments, setTransformedComments] = useState([]);
     const [commentText, setCommentText] = useState('');
     const [userId, setUserId] = useState('');
-    const [ratingStar, setRatingStar] = useState(5);
+    const [ratingStar, setRatingStar] = useState(1);
     const [increment,setIncrement]=useState(0);
     const incrementCounter=()=>{
         setIncrement(increment+1)
@@ -83,24 +83,33 @@ function SingleProductDisplay(props) {
         const handleSubmitComment = async (e) => {
             e.preventDefault();
             try {
-                // Wait for getToken to finish and then proceed
                 await getToken();
                 if(localStorage.getItem('bejelenkezve')== 'false'){
                     toast.error("Please log in before writing a comment!")
                 }
-               
+               console.log(ratingStar);
                 if (commentText !== "") {
-                    await axios.post(`${process.env.REACT_APP_BASE_URL}Hozzaszolas`, {
-                        userId: userId,
-                        termekId: ProductId,
-                        leiras: commentText,
-                        ertekeles: ratingStar
-                    }).then(toast.success("Successfully posted comment!"));
+                    const jwtToken = localStorage.getItem("LoginToken");
+
+                        axios.post(`${process.env.REACT_APP_BASE_URL}Hozzaszolas`, {
+                            userId: userId,
+                            termekId: ProductId,
+                            leiras: commentText,
+                            ertekeles: ratingStar
+                        }, {
+                            headers: {
+                                'Authorization': `Bearer ${jwtToken}`
+                            }
+                        }).then(() => {
+                            toast.success("Successfully posted comment!");
+                        }).catch(error => {
+                            console.error('Error posting comment:', error);
+                        });
                 }
                 // Refresh comments
                 setCommentText('');
                 setRatingStar(1); // Reset rating to default
-                incrementCounter();
+                setIncrement(increment+1);
             } catch (error) {
                 console.error('Error posting comment:', error); 
             }
@@ -133,8 +142,8 @@ function SingleProductDisplay(props) {
                             {singleProductData.menyiseg && <p>Available: {singleProductData.menyiseg} pieces</p>}
                             {singleProductData.ar && <h3>{singleProductData.ar} -Ft</h3>}
                             <ColorPicker selectedColor={selectedColor} onColorChange={handleColorChange} />
-
-                            <input type="number" id="quantity" name="quantity" min="1" max="5" value={quantity} onChange={handleQuantityChange} />
+                            <br/>
+                            <input type="number" className='form-control w-25 border border-dark' id="quantity" name="quantity" min="1" max="5" value={quantity} onChange={handleQuantityChange} />
                             <br />
                             <CommentButton onClick={handleAddToCart}>Kosárba</CommentButton>
                         </div>
