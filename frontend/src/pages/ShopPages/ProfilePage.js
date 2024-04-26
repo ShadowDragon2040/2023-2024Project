@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { MdArrowBack } from "react-icons/md";
 import {
-  InfoContainer8,
+  InfoContainer,
   NiceButton,
   NavBtnLink,
   NavBtn
@@ -20,6 +20,8 @@ function ProfilePage() {
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
 
   const [userHelyadat, setUserHelyadat] = useState(null);
+  const [userComments, setUserComments] = useState(null);
+  const [userSzamlak, setUserSzamlak] = useState(null);
 
   const [userCountry, setUserCountry] = useState('');
   const [userCity, setUserCity] = useState('');
@@ -29,11 +31,11 @@ function ProfilePage() {
   const [userOther, setUserOther] = useState('');
 
   const userId = localStorage.getItem("userId");
+  const token=localStorage.getItem("LoginToken")
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const token=localStorage.getItem("LoginToken")
         const response = await axios.get(`${process.env.REACT_APP_BASE_URL}Felhasznalok/${userId}`,{
           headers:{'Authorization': 'Bearer ' + token}
         });
@@ -49,9 +51,10 @@ function ProfilePage() {
   useEffect(() => {
     const fetchUserHelyadat = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}Helyadatok/${userId}`);
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}Helyadatok/${userId}`,{
+          headers:{'Authorization': 'Bearer ' + token}
+        });
         setUserHelyadat(response.data[0]);
-        console.log(response.data[0]);
       } catch (error) {
         console.error('Error fetching user helyadat:', error);
       }
@@ -101,7 +104,9 @@ function ProfilePage() {
         },
         {
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer ' + token
+
           }
         }
       );
@@ -128,7 +133,8 @@ function ProfilePage() {
         },
         {
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer ' + token
           }
         }
       );
@@ -145,7 +151,8 @@ function ProfilePage() {
 
   const confirmDeleteLocation = async () => {
     try {
-      await axios.delete(`${process.env.REACT_APP_BASE_URL}Helyadatok/${userHelyadat.id}`);
+      await axios.delete(`${process.env.REACT_APP_BASE_URL}Helyadatok/${userHelyadat.id}`,
+      {headers:{'Authorization': 'Bearer ' + token}});
       setUserHelyadat(null);
     } catch (error) {
       console.error('Error deleting location:', error);
@@ -153,10 +160,41 @@ function ProfilePage() {
     closeModal();
   }
 
+  useEffect(() => {
+    const fetchUserComments = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}Hozzaszolas/${userId}`,{
+          headers:{'Authorization': 'Bearer ' + token}
+        });
+        setUserComments(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching user Comments:', error);
+      }
+    };
+
+    fetchUserComments();
+  }, []);
+
+  useEffect(() => {
+    const fetchUserSzamlak = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}Szamlazas/${userId}`,{
+          headers:{'Authorization': 'Bearer ' + token}
+        });
+        setUserSzamlak(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching user szamlak:', error);
+      }
+    };
+
+    fetchUserSzamlak();
+  }, []);
+
   return (
-    <>
+      <InfoContainer>
       <Navbar />
-      <InfoContainer8>
         <div style={{padding: '80px', textAlign: 'left'}}>
         <NavBtn style={{margin: '20px 0px 20px 0px'}}>
           <NavBtnLink to='/ShopPage'><MdArrowBack />Back</NavBtnLink>
@@ -185,6 +223,53 @@ function ProfilePage() {
           )}
           {!userProfile && <p>Loading...</p>}
         </div>
+        
+        {/*classname collapse és collapsed között kell váltogatni onclickre*/}
+        <div className="accordion w-50 m-auto" id="accordionExample">
+        <div className="accordion-item" style={{border:"none"}}>
+          <h2 className="accordion-header" id="headingOne">
+            <button className="accordion-button collapsed" style={{backgroundColor: '#05a866'}} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+              Your Comments
+            </button>
+          </h2>
+          <div id="collapseOne" className="accordion-collapse collapsed" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div className="accordion-body">
+              {userComments && userComments.map(comment => (
+                <div className="comment-card" key={comment.hozzaszolasId}>
+                  <p><strong>Comment ID:</strong> {comment.hozzaszolasId}</p>
+                  <p><strong>Product name:</strong></p>
+                  <p><strong>Description:</strong> {comment.leiras}</p>
+                  <p><strong>Rating:</strong> {comment.ertekeles}</p>
+                  <hr style={{border: '2px solid #05a866'}}></hr>
+                </div>
+              ))}      
+            </div>
+          </div>
+        </div>
+        <div className="accordion-item" style={{border:"none"}}>
+          <h2 className="accordion-header"  id="headingTwo">
+            <button className="accordion-button collapsed" style={{backgroundColor: '#05a866'}} type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Your Invoices
+            </button>
+          </h2>
+          <div id="collapseTwo" className="accordion-collapse collapsed"  aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div className="accordion-body">
+              {userSzamlak && userSzamlak.map(invoice => (
+                <div className="invoice-card" key={invoice.szamlazasId}>
+                  <h3>Invoice</h3>
+                  <p><strong>User ID:</strong> {invoice.userId}</p>
+                  <p><strong>Product ID:</strong> {invoice.termekId}</p>
+                  <p><strong>Color:</strong> {invoice.szinHex}</p>
+                  <p><strong>Quantity:</strong> {invoice.darab}</p>
+                  <p><strong>Purchase Time:</strong> {new Date(invoice.vasarlasIdopontja).toLocaleString()}</p>
+                  <p><strong>Successful Delivery:</strong> {invoice.sikeresSzalitas ? 'Yes' : 'No'}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
 
         <Modal show={modalIsOpen} onHide={closeModal}>
           <Modal.Header closeButton>
@@ -239,9 +324,8 @@ function ProfilePage() {
           </Modal.Footer>
         </Modal>
 
-      </InfoContainer8>
       <Footer />
-    </>
+      </InfoContainer>
   );
 }
 
