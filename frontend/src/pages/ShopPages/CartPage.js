@@ -114,8 +114,8 @@ const CartPage = ({ cart, setCart }) => {
 
         </div>
       </div>
-      <Footer isButtom={true}/>
     </ShopPageContainer>
+      <Footer isButtom={true}/>
 </>
 
   );

@@ -13,7 +13,7 @@ namespace ProjectBackend.DTOs
         string UserId,
         string UserName,
         DateTime AktivalasIdopontja,
-        byte[] ProfilKep
+        string ProfilKep
     );
 
     public record TermekEgyoldalAdatokWithHozzaszolasok(

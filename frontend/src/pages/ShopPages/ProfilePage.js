@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../../components/MainNavbarComponent';
 import Footer from '../../components/FooterComponent';
-import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { MdArrowBack } from "react-icons/md";
 import {
@@ -11,7 +10,7 @@ import {
   NavBtnLink,
   NavBtn
 } from '../../components/TextElements';
-import Accordion from 'react-bootstrap/Accordion';
+import {Accordion, Modal, Button, Row, Col, Image} from 'react-bootstrap';
 
 
 
@@ -20,6 +19,9 @@ function ProfilePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [editedLocation, setEditedLocation] = useState(null);
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
+  const [avatarChangeModal,setAvatarChangeModal]=useState(false);
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
+  const[avatarChoices,setAvatarChoices]=useState(null);
 
   const [userHelyadat, setUserHelyadat] = useState(null);
   const [userComments, setUserComments] = useState(null);
@@ -36,35 +38,95 @@ function ProfilePage() {
   const userId = localStorage.getItem("userId");
   const token=localStorage.getItem("LoginToken")
 
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}Felhasznalok/${userId}`,{
-          headers:{'Authorization': 'Bearer ' + token}
-        });
-        setUserProfile(response.data[0]);
-      } catch (error) {
-        console.error('Error fetching user profile:', error);
+  const handleClose = () =>{ 
+
+    setAvatarChangeModal(false);
+    setSelectedAvatar(null);
+  } 
+
+  const handleShow = () => setAvatarChangeModal(true);
+
+
+  const handleAvatarSelection = (index) => {
+    setSelectedAvatar(avatarChoices[index].url);
+  };
+  
+  const handleSaveAvatar = async () => {
+    try {
+      console.log("Selected avatar:", selectedAvatar);
+      const response = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}Felhasznalok/${userId}`,
+        {
+          userName: userProfile.userName,
+          passwordHash: userProfile.passwordHash,
+          emailConfirmed: userProfile.emailConfirmed,
+          email: userProfile.email,
+          profilKep: selectedAvatar
+        },
+        {
+          headers: {
+            Authorization: 'Bearer ' + token
+          }
+        }
+      );
+      console.log(response);
+      handleClose();
+    } catch (error) {
+      console.error('Error saving avatar:', error);
+    }
+  };
+
+    useEffect(() => {
+      const fetchUserProfile = async () => {
+        try {
+          const response = await axios.get(`${process.env.REACT_APP_BASE_URL}Felhasznalok/${userId}`,{
+            headers:{'Authorization': 'Bearer ' + token}
+          });
+          setUserProfile(response.data[0]);
+        } catch (error) {
+          console.error('Error fetching user profile:', error);
+        }
+      };
+    
+      fetchUserProfile();
+    }, [selectedAvatar]);
+    
+    useEffect(() => {
+      const fetchUserHelyadat = async () => {
+        try {
+          const response = await axios.get(`${process.env.REACT_APP_BASE_URL}Helyadatok/${userId}`,{
+            headers:{'Authorization': 'Bearer ' + token}
+          });
+          setUserHelyadat(response.data[0]);
+        } catch (error) {
+          console.error('Error fetching user helyadat:', error);
+        }
+      };
+    
+      if (userId) { // Add this condition to avoid unnecessary requests when userId is null
+        fetchUserHelyadat();
       }
-    };
-
-    fetchUserProfile();
-  }, []);
-
-  useEffect(() => {
-    const fetchUserHelyadat = async () => {
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}Helyadatok/${userId}`,{
-          headers:{'Authorization': 'Bearer ' + token}
-        });
-        setUserHelyadat(response.data[0]);
-      } catch (error) {
-        console.error('Error fetching user helyadat:', error);
-      }
-    };
-
-    fetchUserHelyadat();
-  }, []);
+    },[userId, token]);
+    
+    useEffect(() => {
+      const fetchAvatars = async () => {
+        try {
+          const avatarCount = 9;
+          const avatarURLs = Array.from({ length: avatarCount }, (_, index) => {
+            const avatarNumber = index + 1;
+            return {
+              url: `${process.env.REACT_APP_AVATAR_URL}/avatar${avatarNumber}.png`,
+              selected: false
+            };
+          });
+          setAvatarChoices(avatarURLs);
+        } catch (error) {
+          console.error('Error fetching avatars:', error);
+        }
+      };
+  
+      fetchAvatars();
+    }, []);
 
   const openModal = (location) => {
     if (location) {
@@ -195,14 +257,13 @@ function ProfilePage() {
           headers:{'Authorization': 'Bearer ' + token}
         });
         setUserSzamlak(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error('Error fetching user szamlak:', error);
       }
     };
 
     fetchUserSzamlak();
-  }, []);
+  },[userId]);
 
   return (
       <InfoContainer>
@@ -212,10 +273,63 @@ function ProfilePage() {
           <NavBtnLink to='/ShopPage'><MdArrowBack />Back</NavBtnLink>
         </NavBtn>
 
-        <div className='container'>
+
+        
+        <Modal show={avatarChangeModal} onHide={handleClose} dialogClassName='avatar-modal'>
+          <Modal.Header closeButton>
+            <Modal.Title>Set Avatar</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Row>
+              {/* Display current avatar on the left side */}
+              <Col md={4} className='border mx-auto rounded'>
+                <h5>Current Avatar</h5>
+                {userProfile && (
+                  <Image src={userProfile.profilKep} roundedCircle style={{ width: '200px', marginBottom: '10px' }} />
+                )}
+              </Col>
+              {/* Display avatar choices on the right side */}
+              <Col md={8}>
+                <h5>Choose Avatar</h5>
+                <Row>
+                  {/* Map through avatar choices and display each */}
+                  {avatarChoices&&avatarChoices.map((avatar, index) => (
+                      <Col key={index} xs={4} style={{ marginBottom: '10px' }}>
+                        <Image
+                          src={avatar.url}
+                          roundedCircle
+                          style={{
+                            width: '100px',
+                            cursor: 'pointer',
+                            width: avatar.selected ? '110px' : '100px', 
+                          }}
+                          onClick={() => handleAvatarSelection(index)}
+                        />
+                      </Col>
+                    ))}
+                </Row>
+              </Col>
+            </Row>
+          </Modal.Body>
+          <Modal.Footer>
+            {/* Button to save the selected avatar */}
+            <Button variant="primary" onClick={handleSaveAvatar}>
+              Save Avatar
+            </Button>
+            {/* Button to close the modal */}
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+         
+        <div className='container' style={{minHeight:'600px'}}>
+          
           <div className='row'>
-            <div className='col rounded' style={{backgroundColor: '#05a866'}}>
-              <img src={userProfile.profilKep} alt='Profile Image'></img>
+            <div className='col rounded' style={{backgroundColor: '#05a866',maxHeight:'400px'}}>
+            {userProfile && (
+              <Image src={userProfile.profilKep} onClick={handleShow} className='mx-auto' style={{maxWidth:"350px"}} alt='Profile Image' fluid roundedCircle/>
+            )}
             </div>
             <div className='col'>
                 {userProfile && (
@@ -242,11 +356,11 @@ function ProfilePage() {
               )}
             </div>
             <div className='col rounded' style={{backgroundColor: '#05a866'}}>
-            <Accordion className='w-75 mx-auto rounded mt-4'>
+            <Accordion className='w-100 mx-auto rounded mt-4 p-3'>
               <Accordion.Item eventKey="0" style={{border:'none'}}>
               <Accordion.Header>Your Comments</Accordion.Header>
               <Accordion.Body>
-              {userComments && userComments.map(comment => (
+              {userComments&&userCommentProduct && userComments.map(comment => (
                       <div className="comment-card" key={comment.hozzaszolasId}>
                         <p><strong>Comment ID:</strong> {comment.hozzaszolasId}</p>
                         <p><strong>Product name:</strong> {userCommentProduct.termekNev}</p>

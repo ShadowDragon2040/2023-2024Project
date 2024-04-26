@@ -19,7 +19,7 @@ public partial class Aspnetuser
 
     public DateTime AktivalasIdopotja { get; set; }
 
-    public byte[] ProfilKep { get; set; } = null!;
+    public string ProfilKep { get; set; } = null!;
 
     public virtual Aspnetuserrole? Aspnetuserrole { get; set; }
 

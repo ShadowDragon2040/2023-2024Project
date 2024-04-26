@@ -16,7 +16,9 @@
   color: #4a8b64;
 
 }
-
+.avatar-modal{
+  min-width: 800px;
+}
 .selectpicker {
   appearance: none;
   -webkit-appearance: none;

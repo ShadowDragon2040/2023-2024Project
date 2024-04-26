@@ -72,7 +72,7 @@ public partial class AuthContext : DbContext
                 .HasDefaultValueSql("'NULL'");
             entity.Property(e => e.EmailCode).HasColumnType("int(11)");
             entity.Property(e => e.PasswordHash).HasDefaultValueSql("'NULL'");
-            entity.Property(e => e.ProfilKep).HasColumnType("mediumblob");
+            entity.Property(e => e.ProfilKep).HasMaxLength(256);
             entity.Property(e => e.UserName)
                 .HasMaxLength(256)
                 .HasDefaultValueSql("'NULL'");
@@ -93,7 +93,6 @@ public partial class AuthContext : DbContext
 
             entity.HasOne(d => d.User).WithOne(p => p.Aspnetuserrole)
                 .HasForeignKey<Aspnetuserrole>(d => d.UserId)
-                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("aspnetuserrole_ibfk_1");
         });
 

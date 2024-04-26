@@ -9,8 +9,7 @@ import { FaShoppingBasket } from 'react-icons/fa';
 import RegisterModal from './ShopPageComponent/RegisterModal';
 import LoginModal from './ShopPageComponent/LoginModal';
 import { IconContext } from 'react-icons';
-import { useLocation } from 'react-router-dom';
-
+import { useLocation, useNavigate } from 'react-router-dom';
 import { 
   Nav,
   NavbarContainer,
@@ -28,7 +27,7 @@ const Navbar = (props) => {
   //const [totalQuantity, setTotalQuantity] = useState(0);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  const navigate=useNavigate();
 
   const [scrollNav, setScrollNav]= useState(false);
   const {pathname} = useLocation()
@@ -67,6 +66,8 @@ const Navbar = (props) => {
     localStorage.setItem("userId", "");
     localStorage.setItem("LoginToken", "");
     handleClose();
+    navigate("/ShopPage")
+    
   };
 
  
