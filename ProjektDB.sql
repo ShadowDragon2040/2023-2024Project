@@ -3,10 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Ápr 12. 07:48
+-- Létrehozás ideje: 2024. Ápr 26. 07:33
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
-
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -23,6 +22,7 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `auth` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `auth`;
+
 -- --------------------------------------------------------
 
 --
@@ -58,6 +58,7 @@ CREATE TABLE `aspnetuserrole` (
 --
 
 INSERT INTO `aspnetuserrole` (`UserId`, `RoleId`) VALUES
+('af3f31fb-8693-42bb-86a2-076e5df37026', '49d1592d-dc96-4868-834e-fa4e837e3d97'),
 ('1310d8a6-1174-4480-b815-41379c654d11', '81f1660f-8329-4f49-9b16-7a1592d43d7e');
 
 -- --------------------------------------------------------
@@ -82,13 +83,9 @@ CREATE TABLE `aspnetusers` (
 --
 
 INSERT INTO `aspnetusers` (`Id`, `EmailCode`, `UserName`, `Email`, `EmailConfirmed`, `PasswordHash`, `AktivalasIdopotja`, `ProfilKep`) VALUES
-('03c66e48-f575-4ffb-9252-f307d1b473e0', 1547, 'Balazs', 'vardai.balazs22@gmail.com', 1, 'AQAAAAIAAYagAAAAEIJgdW+Z4wG/Z7BKteT5hJbgMe6GkiWMJcpWF8fpFd/gUgZaTTb4hqLKPmQ3+dNpRQ==', '2024-04-05 08:54:02', ''),
 ('1310d8a6-1174-4480-b815-41379c654d11', 9827, 'string', 'string', 1, '$2a$11$Edek6dtSHiOGR.Do3625POM8qUthmpRydiN4WG5EUTengKwaIXQ/S', '2024-04-10 09:34:21', ''),
-('1d90a3d3-ada0-458f-a242-25c26616dc68', 4975, 'test', 'test', 1, '$2a$11$4uwIzlRrHg1nCsWPE5ugT.KN2DLRt1dw/oWP6nv1ovYOHmW964oqu', '2024-04-10 12:00:40', ''),
-('5b09a8c4-620d-4a41-8518-8027cc718fa3', 5666, 'testuser', 'balintpejko@gmail.com', 1, '$2a$11$ZsCWipTqN.PuxfVgpkcDo.nEeZUqvAdnMSsRiyeFsuxal2EMOv90i', '2024-04-10 12:38:12', ''),
-('bcb02b97-6eae-41b6-be73-b6059d7d4dd8', 1008, 'testaesdsad', 'asdoisadjoadoisad', 0, '$2a$11$Z3gJp8vn0QUJPjrCxzHliedazIeA.Rs3seQrltAK.cAkbh6a9Iktm', '2024-04-10 09:36:33', ''),
-('ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 4712, 'Balint', 'pejkob@kkszki.hu', 0, '$2a$11$87hOBvGa7BmXPd2liJdLKOIbJOsX969.yzYZBCCESbACZkGogZ9jO', '2024-04-10 10:29:25', ''),
-('f1065d80-06e0-45a7-8959-fdd409a26da1', 5736, 'string1', 'string1', 0, '$2a$11$LM3FBsGcd58SrKcZsDtOM.msilipGdOE1fvEKqPXKLYiobwp2QZo.', '2024-04-10 09:34:39', '');
+('af3f31fb-8693-42bb-86a2-076e5df37026', 6441, 'test', 'string@gmail.com', 1, '$2a$11$f5B2971fciXmkIoICyRLKeQWlnwNdyN7i1bdlD5M/HXE1n2PoRRSu', '2024-04-23 09:58:37', ''),
+('ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 4712, 'Balint', 'pejkob@kkszki.hu', 0, '$2a$11$87hOBvGa7BmXPd2liJdLKOIbJOsX969.yzYZBCCESbACZkGogZ9jO', '2024-04-10 10:29:25', '');
 
 -- --------------------------------------------------------
 
@@ -107,24 +104,15 @@ CREATE TABLE `ftpfiles` (
 --
 
 INSERT INTO `ftpfiles` (`id`, `file`, `timestamp`) VALUES
-(1, 'asd', '2024-03-24 14:53:45'),
-(4, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 135937.png', '2024-03-24 15:57:35'),
-(5, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 114236.png', '2024-03-24 15:58:03'),
-(6, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 114236.png', '2024-03-24 15:59:13'),
-(7, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 114236.png', '2024-03-24 16:00:42'),
-(8, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 114236.png', '2024-03-24 16:01:14'),
-(9, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 114236.png', '2024-03-24 16:02:35'),
-(10, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 135937.png', '2024-03-24 17:27:36'),
-(11, 'C:\\Users\\pbálint\\Pictures\\Screenshots\\Képernyőkép 2024-02-06 100052.png', '2024-03-25 09:34:39'),
-(12, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\3dBencyBlender.jpg', '2024-03-25 10:34:02'),
-(13, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\abslikeresin.jpg', '2024-03-25 10:34:09'),
-(14, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\fdmboatmodell.jpg', '2024-03-25 10:34:19'),
-(15, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\Pencil_Holder.jpg', '2024-03-25 10:35:11'),
-(16, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\layerheightcomparison.jpg', '2024-03-25 10:35:29'),
-(17, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\3D_Printed_House.jpg', '2024-03-25 10:35:38'),
-(18, 'C:\\Users\\pbálint\\Pictures\\Screenshots\\Képernyőkép 2024-01-24 095750.png', '2024-03-26 08:19:47'),
-(19, 'C:\\Users\\pbálint\\Pictures\\Screenshots\\Képernyőkép 2024-02-21 101309.png', '2024-03-26 12:56:19'),
-(20, 'C:\\Users\\pbálint\\Pictures\\Screenshots\\Képernyőkép 2024-01-24 095702.png', '2024-03-26 13:52:11');
+(21, 'Képernyőkép 2024-02-06 100052.png', '2024-04-16 09:03:20'),
+(22, 'Képernyőkép 2024-03-19 132115.png', '2024-04-16 09:05:14'),
+(23, 'Képernyőkép 2024-03-26 132411.png', '2024-04-16 09:05:33'),
+(24, 'Képernyőkép 2024-02-06 100052 másolata.png', '2024-04-16 09:19:27'),
+(25, 'Képernyőkép 2024-02-06 100052 másolata.png', '2024-04-16 09:54:53'),
+(26, 'Képernyőkép 2024-03-12 095008.png', '2024-04-16 11:26:06'),
+(27, 'Képernyőkép 2024-04-16 111413.png', '2024-04-16 13:34:29'),
+(28, 'Képernyőkép 2024-04-16 111413.png', '2024-04-22 10:29:07'),
+(29, 'skull_art.stl', '2024-04-25 09:03:05');
 
 -- --------------------------------------------------------
 
@@ -148,7 +136,7 @@ CREATE TABLE `helyadatok` (
 --
 
 INSERT INTO `helyadatok` (`Id`, `UserId`, `OrszagNev`, `VarosNev`, `UtcaNev`, `Iranyitoszam`, `Hazszam`, `Egyeb`) VALUES
-(2, '03c66e48-f575-4ffb-9252-f307d1b473e0', 'Kína', 'Söul', 'CHinchin utca', '8495', '69', 'Első lépcső');
+(4, '1310d8a6-1174-4480-b815-41379c654d11', 'Magyarország', 'Fügöd', 'Nagy', '45678', '3', '');
 
 -- --------------------------------------------------------
 
@@ -169,15 +157,11 @@ CREATE TABLE `hozzaszolasok` (
 --
 
 INSERT INTO `hozzaszolasok` (`HozzaszolasId`, `UserId`, `TermekId`, `Leiras`, `Ertekeles`) VALUES
-(53, '03c66e48-f575-4ffb-9252-f307d1b473e0', 21, 'Looks amazing on my desk, very sturdy.', 5),
-(55, '03c66e48-f575-4ffb-9252-f307d1b473e0', 4, 'Quality is okay, expected more.', 4),
-(56, '03c66e48-f575-4ffb-9252-f307d1b473e0', 4, 'Perfect for the holiday season!', 5),
-(58, '03c66e48-f575-4ffb-9252-f307d1b473e0', 8, 'Unique design, I get lots of compliments.', 4),
-(61, '03c66e48-f575-4ffb-9252-f307d1b473e0', 26, 'Good quality, but a bit overpriced.', 4),
-(63, '03c66e48-f575-4ffb-9252-f307d1b473e0', 6, 'Well-made and durable, would buy again.', 4),
-(65, '03c66e48-f575-4ffb-9252-f307d1b473e0', 24, 'Not the best quality, expected more.', 3),
-(66, '03c66e48-f575-4ffb-9252-f307d1b473e0', 7, 'Could be improved, but overall satisfied.', 4),
-(68, '03c66e48-f575-4ffb-9252-f307d1b473e0', 26, 'Quality is okay, expected more.', 4);
+(73, '1310d8a6-1174-4480-b815-41379c654d11', 15, 'test', 2),
+(76, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(106, '1310d8a6-1174-4480-b815-41379c654d11', 3, 'Nice', 4),
+(116, '1310d8a6-1174-4480-b815-41379c654d11', 3, 'Very Nice!', 5),
+(117, '1310d8a6-1174-4480-b815-41379c654d11', 3, 'asdsad', 3);
 
 -- --------------------------------------------------------
 
@@ -227,11 +211,7 @@ CREATE TABLE `szamlazas` (
 --
 
 INSERT INTO `szamlazas` (`SzamlazasId`, `UserId`, `TermekId`, `SzinHex`, `darab`, `VasarlasIdopontja`, `SikeresSzalitas`) VALUES
-(39, '03c66e48-f575-4ffb-9252-f307d1b473e0', 3, '32a852', 6, '2024-04-05 09:19:44', 0),
-(40, '03c66e48-f575-4ffb-9252-f307d1b473e0', 22, '000000', 30, '2024-04-05 09:23:10', 1),
-(42, '03c66e48-f575-4ffb-9252-f307d1b473e0', 27, 'ffffff', 9, '2024-04-05 09:23:10', 1),
-(44, '03c66e48-f575-4ffb-9252-f307d1b473e0', 6, '5431b5', 4, '2024-04-05 09:23:10', 1),
-(47, '03c66e48-f575-4ffb-9252-f307d1b473e0', 6, 'f7eb81', 8, '2024-04-05 09:23:10', 0);
+(55, '1310d8a6-1174-4480-b815-41379c654d11', 5, 'test', 0, '2024-04-16 13:15:32', 0);
 
 -- --------------------------------------------------------
 
@@ -463,19 +443,19 @@ ALTER TABLE `__efmigrationshistory`
 -- AUTO_INCREMENT a táblához `ftpfiles`
 --
 ALTER TABLE `ftpfiles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT a táblához `helyadatok`
 --
 ALTER TABLE `helyadatok`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT a táblához `hozzaszolasok`
 --
 ALTER TABLE `hozzaszolasok`
-  MODIFY `HozzaszolasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `HozzaszolasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT a táblához `kategoriak`
@@ -487,7 +467,7 @@ ALTER TABLE `kategoriak`
 -- AUTO_INCREMENT a táblához `szamlazas`
 --
 ALTER TABLE `szamlazas`
-  MODIFY `SzamlazasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `SzamlazasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT a táblához `tagek`
@@ -505,7 +485,7 @@ ALTER TABLE `tagkapcsolo`
 -- AUTO_INCREMENT a táblához `termekek`
 --
 ALTER TABLE `termekek`
-  MODIFY `TermekId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `TermekId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -515,7 +495,7 @@ ALTER TABLE `termekek`
 -- Megkötések a táblához `aspnetuserrole`
 --
 ALTER TABLE `aspnetuserrole`
-  ADD CONSTRAINT `aspnetuserrole_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`),
+  ADD CONSTRAINT `aspnetuserrole_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `aspnetuserrole_ibfk_2` FOREIGN KEY (`RoleId`) REFERENCES `aspnetrole` (`Id`);
 
 --
@@ -555,11 +535,12 @@ DELIMITER $$
 --
 -- Események
 --
-CREATE DEFINER=`root`@`localhost` EVENT `delete_old_records` ON SCHEDULE EVERY 1 DAY STARTS '2024-03-24 15:03:43' ON COMPLETION NOT PRESERVE ENABLE DO begin
-    delete from ftpfiles
-    where 
-    Timestamp < timestamp(current_date() - interval 1 day);
-end$$
+CREATE DEFINER=`root`@`localhost` EVENT `delete_old_records` ON SCHEDULE EVERY 1 DAY STARTS '2024-03-24 15:03:43' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM ftpfiles
+WHERE Timestamp < DATE_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `delete_unconfirmed_users` ON SCHEDULE EVERY 1 DAY STARTS '2024-04-23 10:17:06' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+    DELETE FROM aspnetusers WHERE EmailConfirmed = 0 AND AktivalasIdopontja <= DATE_SUB(NOW(), INTERVAL 1 DAY);
+END$$
 
 DELIMITER ;
 COMMIT;
