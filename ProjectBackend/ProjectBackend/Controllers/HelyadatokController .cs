@@ -50,7 +50,7 @@ namespace Webárúház_Nagy_Project.Controllers
             }
         }
 
-        [HttpPost, Authorize(Roles ="ADMIN")]
+        [HttpPost, Authorize(Roles ="USER,ADMIN")]
         public async Task<IActionResult> Post(CreatedHelyadatokDto createdHelyadatokDto)
         {
             try

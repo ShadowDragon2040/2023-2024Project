@@ -306,7 +306,7 @@ export const TermekCartButtonCard=styled.button`
     padding: 30px;
     max-height: 180px;
     max-width:600px;
-    min-width:600px;
+    min-width:100px;
     &:hover{
         transform: scale(1.02);
         transition: all 0.2s ease-in-out;
