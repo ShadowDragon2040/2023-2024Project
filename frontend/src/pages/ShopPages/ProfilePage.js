@@ -11,6 +11,8 @@ import {
   NavBtnLink,
   NavBtn
 } from '../../components/TextElements';
+import Accordion from 'react-bootstrap/Accordion';
+
 
 
 function ProfilePage() {
@@ -21,6 +23,7 @@ function ProfilePage() {
 
   const [userHelyadat, setUserHelyadat] = useState(null);
   const [userComments, setUserComments] = useState(null);
+  const [userCommentProduct, setUserCommentProduct] = useState(null);
   const [userSzamlak, setUserSzamlak] = useState(null);
 
   const [userCountry, setUserCountry] = useState('');
@@ -166,15 +169,24 @@ function ProfilePage() {
         const response = await axios.get(`${process.env.REACT_APP_BASE_URL}Hozzaszolas/${userId}`,{
           headers:{'Authorization': 'Bearer ' + token}
         });
+        
         setUserComments(response.data);
         console.log(response.data);
+        
+        const termekResponse = await axios.get(`${process.env.REACT_APP_BASE_URL}Termekek/EgyTermek/${response.data[0].termekId}`,{
+          headers:{'Authorization': 'Bearer ' + token}
+        });
+        
+        setUserCommentProduct(termekResponse.data);
+        console.log(termekResponse.data);
       } catch (error) {
         console.error('Error fetching user Comments:', error);
       }
     };
 
     fetchUserComments();
-  }, []);
+  }, [userId, token]); 
+
 
   useEffect(() => {
     const fetchUserSzamlak = async () => {
@@ -199,77 +211,80 @@ function ProfilePage() {
         <NavBtn style={{margin: '20px 0px 20px 0px'}}>
           <NavBtnLink to='/ShopPage'><MdArrowBack />Back</NavBtnLink>
         </NavBtn>
-          {userProfile && (
-            <>
-              <h2><strong>Profile of  {userProfile.userName}</strong></h2>
-              <p><strong>Email:</strong> {userProfile.email}</p>
-              <p><strong>Email Confirmed:</strong> {userProfile.emailConfirmed ? 'Yes' : 'No'}</p>
-              {userHelyadat ? (
-                <div key={userHelyadat.id}>
-                  <p><strong>Country:</strong> {userHelyadat.orszagNev}</p>
-                  <p><strong>City:</strong> {userHelyadat.varosNev}</p>
-                  <p><strong>Postal Code:</strong> {userHelyadat.iranyitoszam}</p>
-                  <p><strong>Street and House Number:</strong> {userHelyadat.utcaNev} {userHelyadat.hazszam}</p>
-                  {userHelyadat.egyeb !== '' && (
-                    <p><strong>Other:</strong> {userHelyadat.egyeb}</p>
+
+        <div className='container'>
+          <div className='row'>
+            <div className='col rounded' style={{backgroundColor: '#05a866'}}>
+              <img src={userProfile.profilKep} alt='Profile Image'></img>
+            </div>
+            <div className='col'>
+                {userProfile && (
+                <>
+                  <h2><strong>Profile of  {userProfile.userName}</strong></h2>
+                  <p><strong>Email:</strong> {userProfile.email}</p>
+                  <p><strong>Email Confirmed:</strong> {userProfile.emailConfirmed ? 'Yes' : 'No'}</p>
+                  {userHelyadat ? (
+                    <div key={userHelyadat.id}>
+                      <p><strong>Country:</strong> {userHelyadat.orszagNev}</p>
+                      <p><strong>City:</strong> {userHelyadat.varosNev}</p>
+                      <p><strong>Postal Code:</strong> {userHelyadat.iranyitoszam}</p>
+                      <p><strong>Street and House Number:</strong> {userHelyadat.utcaNev} {userHelyadat.hazszam}</p>
+                      {userHelyadat.egyeb !== '' && (
+                        <p><strong>Other:</strong> {userHelyadat.egyeb}</p>
+                      )}
+                      <NiceButton onClick={() => openModal(userHelyadat)}>Change Location</NiceButton>
+                      <NiceButton style={{margin: '20px'}} onClick={handleDeleteLocation}>Delete Location</NiceButton>
+                    </div>
+                  ) : (
+                    <NiceButton onClick={() => openModal()}>Add Location</NiceButton>
                   )}
-                  <NiceButton onClick={() => openModal(userHelyadat)}>Change Location</NiceButton>
-                  <NiceButton style={{margin: '20px'}} onClick={handleDeleteLocation}>Delete Location</NiceButton>
-                </div>
-              ) : (
-                <NiceButton onClick={() => openModal()}>Add Location</NiceButton>
+                </>
               )}
-            </>
-          )}
+            </div>
+            <div className='col rounded' style={{backgroundColor: '#05a866'}}>
+            <Accordion className='w-75 mx-auto rounded mt-4'>
+              <Accordion.Item eventKey="0" style={{border:'none'}}>
+              <Accordion.Header>Your Comments</Accordion.Header>
+              <Accordion.Body>
+              {userComments && userComments.map(comment => (
+                      <div className="comment-card" key={comment.hozzaszolasId}>
+                        <p><strong>Comment ID:</strong> {comment.hozzaszolasId}</p>
+                        <p><strong>Product name:</strong> {userCommentProduct.termekNev}</p>
+                        <p><strong>Description:</strong> {comment.leiras}</p>
+                        <p><strong>Rating:</strong> {comment.ertekeles}</p>
+                        <hr style={{border: '2px solid #05a866'}}></hr>
+                      </div>
+                    ))}      
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="1">
+              <Accordion.Header >Your Invoices</Accordion.Header>
+              <Accordion.Body>
+              {userSzamlak && userSzamlak.map(invoice => (
+                      <div className="invoice-card" key={invoice.szamlazasId}>
+                        <h3>Invoice</h3>
+                        <p><strong>User ID:</strong> {invoice.userId}</p>
+                        <p><strong>Product ID:</strong> {invoice.termekId}</p>
+                        <p><strong>Color:</strong> {invoice.szinHex}</p>
+                        <p><strong>Quantity:</strong> {invoice.darab}</p>
+                        <p><strong>Purchase Time:</strong> {new Date(invoice.vasarlasIdopontja).toLocaleString()}</p>
+                        <p><strong>Successful Delivery:</strong> {invoice.sikeresSzalitas ? 'Yes' : 'No'}</p>
+                      </div>
+                    ))}
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+            
+            </div>
+          </div>
+        </div>
+          
           {!userProfile && <p>Loading...</p>}
         </div>
         
         {/*classname collapse és collapsed között kell váltogatni onclickre*/}
-        <div className="accordion w-50 m-auto" id="accordionExample">
-        <div className="accordion-item" style={{border:"none"}}>
-          <h2 className="accordion-header" id="headingOne">
-            <button className="accordion-button collapsed" style={{backgroundColor: '#05a866'}} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-              Your Comments
-            </button>
-          </h2>
-          <div id="collapseOne" className="accordion-collapse collapsed" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div className="accordion-body">
-              {userComments && userComments.map(comment => (
-                <div className="comment-card" key={comment.hozzaszolasId}>
-                  <p><strong>Comment ID:</strong> {comment.hozzaszolasId}</p>
-                  <p><strong>Product name:</strong></p>
-                  <p><strong>Description:</strong> {comment.leiras}</p>
-                  <p><strong>Rating:</strong> {comment.ertekeles}</p>
-                  <hr style={{border: '2px solid #05a866'}}></hr>
-                </div>
-              ))}      
-            </div>
-          </div>
-        </div>
-        <div className="accordion-item" style={{border:"none"}}>
-          <h2 className="accordion-header"  id="headingTwo">
-            <button className="accordion-button collapsed" style={{backgroundColor: '#05a866'}} type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              Your Invoices
-            </button>
-          </h2>
-          <div id="collapseTwo" className="accordion-collapse collapsed"  aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-            <div className="accordion-body">
-              {userSzamlak && userSzamlak.map(invoice => (
-                <div className="invoice-card" key={invoice.szamlazasId}>
-                  <h3>Invoice</h3>
-                  <p><strong>User ID:</strong> {invoice.userId}</p>
-                  <p><strong>Product ID:</strong> {invoice.termekId}</p>
-                  <p><strong>Color:</strong> {invoice.szinHex}</p>
-                  <p><strong>Quantity:</strong> {invoice.darab}</p>
-                  <p><strong>Purchase Time:</strong> {new Date(invoice.vasarlasIdopontja).toLocaleString()}</p>
-                  <p><strong>Successful Delivery:</strong> {invoice.sikeresSzalitas ? 'Yes' : 'No'}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
 
+     
 
         <Modal show={modalIsOpen} onHide={closeModal}>
           <Modal.Header closeButton>
