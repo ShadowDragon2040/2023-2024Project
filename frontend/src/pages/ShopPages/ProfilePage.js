@@ -10,7 +10,8 @@ import {
   NavBtnLink,
   NavBtn
 } from '../../components/TextElements';
-import {Accordion, Modal, Button, Row, Col, Image} from 'react-bootstrap';
+import {Accordion, Modal, Button, Row, Col, Image, ButtonToolbar} from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
 
 
@@ -19,9 +20,15 @@ function ProfilePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [editedLocation, setEditedLocation] = useState(null);
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
+
   const [avatarChangeModal,setAvatarChangeModal]=useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const[avatarChoices,setAvatarChoices]=useState(null);
+
+  const[emailCode,setEmailCode]=useState(null);
+  const[changedPassword,setChangedPassword]=useState("");
+  const[changedPasswordAgain,setChangedPasswordAgain]=useState("");
+  const [error, setError] = useState('');
 
   const [userHelyadat, setUserHelyadat] = useState(null);
   const [userComments, setUserComments] = useState(null);
@@ -37,6 +44,57 @@ function ProfilePage() {
 
   const userId = localStorage.getItem("userId");
   const token=localStorage.getItem("LoginToken")
+
+
+
+  const validateForm = () => {
+
+    if (parseInt(emailCode)!==parseInt(userProfile.emailCode)) {
+      setError('Email code not match.');
+      console.log(userProfile.emailCode);
+      return false;
+    }
+
+    if (changedPassword===""||changedPasswordAgain==="") {
+      setError('Password cannot be null.');
+      return false;
+    }
+  
+    if (changedPassword !== changedPasswordAgain) {
+      setError('Passwords do not match.');
+      return false;
+    }
+    setError('');
+    return true;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    if (validateForm()) {
+      axios.post(`${process.env.REACT_APP_BASE_URL}Auth/updatepassword/`, {
+        email: userProfile.email,
+        emailCode:parseInt( emailCode),
+        newPassword: changedPassword
+      }, {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      })
+      .then(response => {
+        if (response.status === 200) {
+          toast.success("Successfully changed password!");
+        } else {
+          toast.error("Failed to change password. Please try again.");
+        }
+      })
+      .catch(error => {
+        console.error("Error changing password:", error);
+        toast.error("An error occurred. Please try again later.");
+      });
+    }
+  };
+  
 
   const handleClose = () =>{ 
 
@@ -328,7 +386,7 @@ function ProfilePage() {
           <div className='row'>
             <div className='col rounded' style={{backgroundColor: '#05a866',maxHeight:'400px'}}>
             {userProfile && (
-              <Image src={userProfile.profilKep} onClick={handleShow} className='mx-auto' style={{maxWidth:"350px"}} alt='Profile Image' fluid roundedCircle/>
+              <Image src={userProfile.profilKep} onClick={handleShow} style={{maxWidth:"350px"}} alt='Profile Image' fluid roundedCircle/>
             )}
             </div>
             <div className='col'>
@@ -357,7 +415,7 @@ function ProfilePage() {
             </div>
             <div className='col rounded' style={{backgroundColor: '#05a866'}}>
             <Accordion className='w-100 mx-auto rounded mt-4 p-3'>
-              <Accordion.Item eventKey="0" style={{border:'none'}}>
+              <Accordion.Item eventKey="0" style={{border:'2px solid black'}}>
               <Accordion.Header>Your Comments</Accordion.Header>
               <Accordion.Body>
               {userComments&&userCommentProduct && userComments.map(comment => (
@@ -371,7 +429,7 @@ function ProfilePage() {
                     ))}      
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="1">
+            <Accordion.Item eventKey="1" style={{border:'2px solid black'}}>
               <Accordion.Header >Your Invoices</Accordion.Header>
               <Accordion.Body>
               {userSzamlak && userSzamlak.map(invoice => (
@@ -385,6 +443,40 @@ function ProfilePage() {
                         <p><strong>Successful Delivery:</strong> {invoice.sikeresSzalitas ? 'Yes' : 'No'}</p>
                       </div>
                     ))}
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="2" style={{border:'2px solid black'}}>
+              <Accordion.Header  >Change Password</Accordion.Header>
+              <Accordion.Body>
+                  <Form className='p-1' onSubmit={handleSubmit}>
+                  <Form.Group controlId="changedPassword">
+                  <Form.Label>Email Code:</Form.Label>
+                    <Form.Control
+                      style={{ border: "2px solid black" }}
+                      type="number"
+                      min={1000}
+                      max={9999}
+                      value={emailCode}
+                      onChange={(e) => setEmailCode(e.target.value)}
+                    />
+                    <Form.Label>New Password:</Form.Label>
+                    <Form.Control
+                      style={{ border: "2px solid black" }}
+                      type="password"
+                      value={changedPassword}
+                      onChange={(e) => setChangedPassword(e.target.value)}
+                    />
+                    <Form.Label>Confirm New Password:</Form.Label>
+                    <Form.Control
+                      style={{ border: "2px solid black" }}
+                      type="password"
+                      value={changedPasswordAgain}
+                      onChange={(e) => setChangedPasswordAgain(e.target.value)}
+                    />
+                  </Form.Group>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
+                <Button className='btn btn-success' type="submit">Submit</Button>
+              </Form>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>

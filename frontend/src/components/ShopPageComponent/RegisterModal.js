@@ -29,18 +29,19 @@ const RegisterModal = () => {
     }
     try {
       const response = await axios.post(`${process.env.REACT_APP_BASE_URL}Auth/register`, {
-        userName: userName,
-        password: password,
-        email: email
+        userName,
+        password,
+        email
       });
-      console.log("Registration successful:", response.data);
+      toast.success("Registration successful: " + JSON.stringify(response.data));
       handleShowVerificationModal();
     } catch (error) {
-      console.error("Registration failed:", error);
+      toast.error("Registration failed: " + error.message);
     } finally {
       handleCloseRegisterModal();
     }
   };
+  
 
   const handleVerificationSubmit = async (e) => {
     e.preventDefault();
@@ -49,14 +50,14 @@ const RegisterModal = () => {
         email: email,
         emailCode: verificationCode
       });
-      console.log("Registration successful:", response.data);
+      toast.success("Registration successful:", response.data);
       handleShowVerificationModal();
     } catch (error) {
-      console.error("Registration failed:", error);
+      toast.error("Registration failed:", error);
     } finally {
       handleCloseVerificationModal();
     }
-    console.log("Verification code submitted:", verificationCode);
+    toast("Verification code submitted:", verificationCode);
   };
 
   return (
