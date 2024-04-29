@@ -49,7 +49,7 @@ namespace ProjectBackend.Controllers
         }
 
 
-        [HttpPut("{id}"), Authorize(Roles = "ADMIN")]
+        [HttpPut("{id}"), Authorize(Roles = "USER,ADMIN")]
         public async Task<IActionResult> Put(string id, UpdateFelhasznalokDto updateFelhasznalokDto)
         {
             try

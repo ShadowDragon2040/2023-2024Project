@@ -9,6 +9,7 @@ using ProjectBackend.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using ProjectBackend.Services;
+using static System.Net.WebRequestMethods;
 namespace ProjectBackend.Controllers
 {
     [Route("[controller]")]
@@ -46,7 +47,7 @@ namespace ProjectBackend.Controllers
                     EmailCode = rnd.Next(1000, 10000),
                     AktivalasIdopotja = DateTime.Now,
                     EmailConfirmed = false,
-                    ProfilKep = new byte[0]
+                    ProfilKep = "http://printfusion.nhely.hu/test/ppp.jpg"
                 };
 
                 var userExists = _authContext.Aspnetuser.FirstOrDefault(user => user.UserName == newUser.UserName);

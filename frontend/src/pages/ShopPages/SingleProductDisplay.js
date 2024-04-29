@@ -90,12 +90,11 @@ function SingleProductDisplay(props) {
                console.log(ratingStar);
                 if (commentText !== "") {
                     const jwtToken = localStorage.getItem("LoginToken");
-
                         axios.post(`${process.env.REACT_APP_BASE_URL}Hozzaszolas`, {
-                            userId: userId,
-                            termekId: ProductId,
                             leiras: commentText,
-                            ertekeles: ratingStar
+                            ertekeles: ratingStar,
+                            termekId: parseInt(ProductId),
+                            userId: userId
                         }, {
                             headers: {
                                 'Authorization': `Bearer ${jwtToken}`
