@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Ápr 05. 10:12
+-- Létrehozás ideje: 2024. Ápr 29. 12:09
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -26,81 +26,40 @@ USE `auth`;
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `aspnetroleclaims`
+-- Tábla szerkezet ehhez a táblához `aspnetrole`
 --
 
-CREATE TABLE `aspnetroleclaims` (
-  `Id` int(11) NOT NULL,
-  `RoleId` varchar(255) NOT NULL,
-  `ClaimType` longtext DEFAULT NULL,
-  `ClaimValue` longtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Tábla szerkezet ehhez a táblához `aspnetroles`
---
-
-CREATE TABLE `aspnetroles` (
+CREATE TABLE `aspnetrole` (
   `Id` varchar(255) NOT NULL,
-  `Name` varchar(256) DEFAULT NULL,
-  `NormalizedName` varchar(256) DEFAULT NULL,
-  `ConcurrencyStamp` longtext DEFAULT NULL
+  `Name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `aspnetroles`
+-- A tábla adatainak kiíratása `aspnetrole`
 --
 
-INSERT INTO `aspnetroles` (`Id`, `Name`, `NormalizedName`, `ConcurrencyStamp`) VALUES
-('dd8fa84e-d702-4d1b-bc81-7948a2a1083f', 'USER', 'USER', NULL);
+INSERT INTO `aspnetrole` (`Id`, `Name`) VALUES
+('81f1660f-8329-4f49-9b16-7a1592d43d7e', 'ADMIN'),
+('49d1592d-dc96-4868-834e-fa4e837e3d97', 'USER');
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `aspnetuserclaims`
+-- Tábla szerkezet ehhez a táblához `aspnetuserrole`
 --
 
-CREATE TABLE `aspnetuserclaims` (
-  `Id` int(11) NOT NULL,
-  `UserId` varchar(255) NOT NULL,
-  `ClaimType` longtext DEFAULT NULL,
-  `ClaimValue` longtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Tábla szerkezet ehhez a táblához `aspnetuserlogins`
---
-
-CREATE TABLE `aspnetuserlogins` (
-  `LoginProvider` varchar(255) NOT NULL,
-  `ProviderKey` varchar(255) NOT NULL,
-  `ProviderDisplayName` longtext DEFAULT NULL,
-  `UserId` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Tábla szerkezet ehhez a táblához `aspnetuserroles`
---
-
-CREATE TABLE `aspnetuserroles` (
+CREATE TABLE `aspnetuserrole` (
   `UserId` varchar(255) NOT NULL,
   `RoleId` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `aspnetuserroles`
+-- A tábla adatainak kiíratása `aspnetuserrole`
 --
 
-INSERT INTO `aspnetuserroles` (`UserId`, `RoleId`) VALUES
-('03c66e48-f575-4ffb-9252-f307d1b473e0', 'dd8fa84e-d702-4d1b-bc81-7948a2a1083f'),
-('0bb5579f-84d4-4120-beda-8012fe6a9816', 'dd8fa84e-d702-4d1b-bc81-7948a2a1083f'),
-('26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 'dd8fa84e-d702-4d1b-bc81-7948a2a1083f');
+INSERT INTO `aspnetuserrole` (`UserId`, `RoleId`) VALUES
+('af3f31fb-8693-42bb-86a2-076e5df37026', '49d1592d-dc96-4868-834e-fa4e837e3d97'),
+('1310d8a6-1174-4480-b815-41379c654d11', '81f1660f-8329-4f49-9b16-7a1592d43d7e');
 
 -- --------------------------------------------------------
 
@@ -112,44 +71,21 @@ CREATE TABLE `aspnetusers` (
   `Id` varchar(255) NOT NULL,
   `EmailCode` int(11) NOT NULL,
   `UserName` varchar(256) DEFAULT NULL,
-  `NormalizedUserName` varchar(256) DEFAULT NULL,
   `Email` varchar(256) DEFAULT NULL,
-  `NormalizedEmail` varchar(256) DEFAULT NULL,
   `EmailConfirmed` tinyint(1) NOT NULL,
   `PasswordHash` longtext DEFAULT NULL,
-  `SecurityStamp` longtext DEFAULT NULL,
-  `ConcurrencyStamp` longtext DEFAULT NULL,
-  `PhoneNumber` longtext DEFAULT NULL,
-  `PhoneNumberConfirmed` tinyint(1) NOT NULL,
-  `TwoFactorEnabled` tinyint(1) NOT NULL,
-  `LockoutEnd` datetime(6) DEFAULT NULL,
-  `LockoutEnabled` tinyint(1) NOT NULL,
-  `AccessFailedCount` int(11) NOT NULL,
   `AktivalasIdopotja` datetime NOT NULL DEFAULT current_timestamp(),
-  `ProfilKep` mediumblob NOT NULL
+  `ProfilKep` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `aspnetusers`
 --
 
-INSERT INTO `aspnetusers` (`Id`, `EmailCode`, `UserName`, `NormalizedUserName`, `Email`, `NormalizedEmail`, `EmailConfirmed`, `PasswordHash`, `SecurityStamp`, `ConcurrencyStamp`, `PhoneNumber`, `PhoneNumberConfirmed`, `TwoFactorEnabled`, `LockoutEnd`, `LockoutEnabled`, `AccessFailedCount`, `AktivalasIdopotja`, `ProfilKep`) VALUES
-('03c66e48-f575-4ffb-9252-f307d1b473e0', 1547, 'Balazs', 'BALAZS', 'vardai.balazs22@gmail.com', 'VARDAI.BALAZS22@GMAIL.COM', 1, 'AQAAAAIAAYagAAAAEIJgdW+Z4wG/Z7BKteT5hJbgMe6GkiWMJcpWF8fpFd/gUgZaTTb4hqLKPmQ3+dNpRQ==', '5ZHHI5SV3UKLE2OXVWS3FFAZYZFNF7X3', '7fc461ac-e756-476b-967e-f3c9ec6a7603', NULL, 0, 0, NULL, 1, 0, '2024-04-05 08:54:02', ''),
-('0bb5579f-84d4-4120-beda-8012fe6a9816', 2003, 'Balint', 'BALINT', 'pejkob@kkszki.hu', 'PEJKOB@KKSZKI.HU', 1, 'AQAAAAIAAYagAAAAEKhnQ5rzrUs87l66JuSTG1pQCl2M4X/EaH4T17rqj3pW7w/14eHoG/UEMqpzexwEiA==', '4DXEAYHC6SNQEELSXNLM6DKVGJJEXQHE', '2e10709c-dcfe-4661-ab9b-680f611b23bb', NULL, 0, 0, NULL, 1, 0, '2024-04-05 08:55:12', ''),
-('26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 8220, 'Judit', 'JUDIT', 'szaboj@kkszki.hu', 'SZABOJ@KKSZKI.HU', 1, 'AQAAAAIAAYagAAAAEE8YKq86JvUY3LJxA3mr9yljZH6LHLeBlO+h3t2ii1JbWFNZQ1Z0tPQggQSuRTizyw==', '4UDYEDEEE4S4EQICF4NHLTYB6CGQTWNO', '6e4b75cb-ca6a-49d7-95e6-4d13db91a7fa', NULL, 0, 0, NULL, 1, 0, '2024-04-05 08:56:47', '');
-
--- --------------------------------------------------------
-
---
--- Tábla szerkezet ehhez a táblához `aspnetusertokens`
---
-
-CREATE TABLE `aspnetusertokens` (
-  `UserId` varchar(255) NOT NULL,
-  `LoginProvider` varchar(255) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Value` longtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `aspnetusers` (`Id`, `EmailCode`, `UserName`, `Email`, `EmailConfirmed`, `PasswordHash`, `AktivalasIdopotja`, `ProfilKep`) VALUES
+('1310d8a6-1174-4480-b815-41379c654d11', 9827, 'string', 'string', 1, '$2a$11$Edek6dtSHiOGR.Do3625POM8qUthmpRydiN4WG5EUTengKwaIXQ/S', '2024-04-10 09:34:21', 'http://printfusion.nhely.hu/avatars//avatar8.png'),
+('af3f31fb-8693-42bb-86a2-076e5df37026', 6441, 'test', 'string@gmail.com', 1, '$2a$11$f5B2971fciXmkIoICyRLKeQWlnwNdyN7i1bdlD5M/HXE1n2PoRRSu', '2024-04-23 09:58:37', ''),
+('ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 4712, 'Balint', 'pejkob@kkszki.hu', 0, '$2a$11$87hOBvGa7BmXPd2liJdLKOIbJOsX969.yzYZBCCESbACZkGogZ9jO', '2024-04-10 10:29:25', '');
 
 -- --------------------------------------------------------
 
@@ -168,24 +104,16 @@ CREATE TABLE `ftpfiles` (
 --
 
 INSERT INTO `ftpfiles` (`id`, `file`, `timestamp`) VALUES
-(1, 'asd', '2024-03-24 14:53:45'),
-(4, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 135937.png', '2024-03-24 15:57:35'),
-(5, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 114236.png', '2024-03-24 15:58:03'),
-(6, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 114236.png', '2024-03-24 15:59:13'),
-(7, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 114236.png', '2024-03-24 16:00:42'),
-(8, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 114236.png', '2024-03-24 16:01:14'),
-(9, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 114236.png', '2024-03-24 16:02:35'),
-(10, 'C:\\Users\\User\\Pictures\\Képernyőkép 2024-03-24 135937.png', '2024-03-24 17:27:36'),
-(11, 'C:\\Users\\pbálint\\Pictures\\Screenshots\\Képernyőkép 2024-02-06 100052.png', '2024-03-25 09:34:39'),
-(12, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\3dBencyBlender.jpg', '2024-03-25 10:34:02'),
-(13, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\abslikeresin.jpg', '2024-03-25 10:34:09'),
-(14, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\fdmboatmodell.jpg', '2024-03-25 10:34:19'),
-(15, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\Pencil_Holder.jpg', '2024-03-25 10:35:11'),
-(16, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\layerheightcomparison.jpg', '2024-03-25 10:35:29'),
-(17, 'C:\\Users\\pbálint\\Documents\\GitHub\\2023-2024Project\\Kepek\\3D_Printed_House.jpg', '2024-03-25 10:35:38'),
-(18, 'C:\\Users\\pbálint\\Pictures\\Screenshots\\Képernyőkép 2024-01-24 095750.png', '2024-03-26 08:19:47'),
-(19, 'C:\\Users\\pbálint\\Pictures\\Screenshots\\Képernyőkép 2024-02-21 101309.png', '2024-03-26 12:56:19'),
-(20, 'C:\\Users\\pbálint\\Pictures\\Screenshots\\Képernyőkép 2024-01-24 095702.png', '2024-03-26 13:52:11');
+(21, 'Képernyőkép 2024-02-06 100052.png', '2024-04-16 09:03:20'),
+(22, 'Képernyőkép 2024-03-19 132115.png', '2024-04-16 09:05:14'),
+(23, 'Képernyőkép 2024-03-26 132411.png', '2024-04-16 09:05:33'),
+(24, 'Képernyőkép 2024-02-06 100052 másolata.png', '2024-04-16 09:19:27'),
+(25, 'Képernyőkép 2024-02-06 100052 másolata.png', '2024-04-16 09:54:53'),
+(26, 'Képernyőkép 2024-03-12 095008.png', '2024-04-16 11:26:06'),
+(27, 'Képernyőkép 2024-04-16 111413.png', '2024-04-16 13:34:29'),
+(28, 'Képernyőkép 2024-04-16 111413.png', '2024-04-22 10:29:07'),
+(29, 'skull_art.stl', '2024-04-25 09:03:05'),
+(30, 'Képernyőkép 2024-04-16 111413.png', '2024-04-29 10:34:02');
 
 -- --------------------------------------------------------
 
@@ -209,9 +137,7 @@ CREATE TABLE `helyadatok` (
 --
 
 INSERT INTO `helyadatok` (`Id`, `UserId`, `OrszagNev`, `VarosNev`, `UtcaNev`, `Iranyitoszam`, `Hazszam`, `Egyeb`) VALUES
-(1, '0bb5579f-84d4-4120-beda-8012fe6a9816', 'Magyarország', 'Miskolc', 'Sarok utca', '6284', '65', ''),
-(2, '03c66e48-f575-4ffb-9252-f307d1b473e0', 'Kína', 'Söul', 'CHinchin utca', '8495', '69', 'Első lépcső'),
-(3, '26d1e535-4d3c-4c2d-a4cf-c4c3e48d310f', 'Anglia', 'Londoff', 'Temze utca', '6958', '5', 'A folyóba ne ugorj bele');
+(4, '1310d8a6-1174-4480-b815-41379c654d11', 'Magyarország', 'Fügöd', 'Nagy', '45678', '3', '');
 
 -- --------------------------------------------------------
 
@@ -232,26 +158,35 @@ CREATE TABLE `hozzaszolasok` (
 --
 
 INSERT INTO `hozzaszolasok` (`HozzaszolasId`, `UserId`, `TermekId`, `Leiras`, `Ertekeles`) VALUES
-(52, '1310d8a6-1174-4480-b815-41379c654d11', 1, 'Great product, highly recommended!', 5),
-(53, '14bd25b6-bf98-423b-b060-471bfaf81452', 21, 'Looks amazing on my desk, very sturdy.', 5),
-(54, '1310d8a6-1174-4480-b815-41379c654d11', 26, 'Not what I expected, but still good.', 3),
-(55, '14bd25b6-bf98-423b-b060-471bfaf81452', 4, 'Quality is okay, expected more.', 4),
-(56, '1310d8a6-1174-4480-b815-41379c654d11', 4, 'Perfect for the holiday season!', 5),
-(57, '14bd25b6-bf98-423b-b060-471bfaf81452', 12, 'Beautiful and functional, worth the price.', 5),
-(58, '14bd25b6-bf98-423b-b060-471bfaf81452', 8, 'Unique design, I get lots of compliments.', 4),
-(59, '14bd25b6-bf98-423b-b060-471bfaf81452', 6, 'Comfortable and stylish, love it!', 2),
-(60, '1310d8a6-1174-4480-b815-41379c654d11', 22, 'Could be better, but it serves its purpose.', 2),
-(61, '2b9b3815-ea87-490f-8d27-238bf18b8ca7', 26, 'Good quality, but a bit overpriced.', 4),
-(62, '7a27d9fc-7483-4098-b7f4-dfa679aefc81', 12, 'Exactly what I needed, great buy.', 5),
-(63, '2b9b3815-ea87-490f-8d27-238bf18b8ca7', 6, 'Well-made and durable, would buy again.', 4),
-(64, '1310d8a6-1174-4480-b815-41379c654d11', 27, 'Not what I expected, disappointed.', 1),
-(65, '2b9b3815-ea87-490f-8d27-238bf18b8ca7', 24, 'Not the best quality, expected more.', 3),
-(66, '2b9b3815-ea87-490f-8d27-238bf18b8ca7', 7, 'Could be improved, but overall satisfied.', 4),
-(67, '7a27d9fc-7483-4098-b7f4-dfa679aefc81', 15, 'Good value for money, happy with the purchase.', 4),
-(68, '2b9b3815-ea87-490f-8d27-238bf18b8ca7', 26, 'Quality is okay, expected more.', 4),
-(69, '7a27d9fc-7483-4098-b7f4-dfa679aefc81', 21, 'Unique and stylish, stands out.', 5),
-(70, '14bd25b6-bf98-423b-b060-471bfaf81452', 4, 'Unique and stylish, stands out.', 3),
-(71, '7a27d9fc-7483-4098-b7f4-dfa679aefc81', 3, 'Good quality, but a bit overpriced.', 3);
+(73, '1310d8a6-1174-4480-b815-41379c654d11', 15, 'test', 2),
+(76, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(106, '1310d8a6-1174-4480-b815-41379c654d11', 3, 'Nice', 4),
+(116, '1310d8a6-1174-4480-b815-41379c654d11', 3, 'Very Nice!', 5),
+(135, '1310d8a6-1174-4480-b815-41379c654d11', 3, 'tretetewt', 5),
+(136, '1310d8a6-1174-4480-b815-41379c654d11', 3, 'sdad', 3),
+(140, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(141, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(142, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(143, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(144, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(145, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(146, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'Test#1', 3),
+(147, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(148, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(150, '1310d8a6-1174-4480-b815-41379c654d11', 8, 'string', 2),
+(151, '1310d8a6-1174-4480-b815-41379c654d11', 8, 'string', 0),
+(152, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(153, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(154, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(155, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(156, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(157, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(158, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(159, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(160, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(161, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(162, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
+(163, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3);
 
 -- --------------------------------------------------------
 
@@ -301,15 +236,7 @@ CREATE TABLE `szamlazas` (
 --
 
 INSERT INTO `szamlazas` (`SzamlazasId`, `UserId`, `TermekId`, `SzinHex`, `darab`, `VasarlasIdopontja`, `SikeresSzalitas`) VALUES
-(39, '1310d8a6-1174-4480-b815-41379c654d11', 3, '32a852', 6, '2024-04-05 09:19:44', 0),
-(40, '1310d8a6-1174-4480-b815-41379c654d11', 22, '000000', 30, '2024-04-05 09:23:10', 1),
-(41, '14bd25b6-bf98-423b-b060-471bfaf81452', 12, 'ab9fcc', 1, '2024-04-05 09:23:10', 0),
-(42, '14bd25b6-bf98-423b-b060-471bfaf81452', 27, 'ffffff', 9, '2024-04-05 09:23:10', 1),
-(43, '14bd25b6-bf98-423b-b060-471bfaf81452', 24, 'ffffff', 3, '2024-04-05 09:23:10', 0),
-(44, '2b9b3815-ea87-490f-8d27-238bf18b8ca7', 6, '5431b5', 4, '2024-04-05 09:23:10', 1),
-(45, '2b9b3815-ea87-490f-8d27-238bf18b8ca7', 23, 'de2393', 20, '2024-04-05 09:23:10', 1),
-(46, '7a27d9fc-7483-4098-b7f4-dfa679aefc81', 21, '820774', 5, '2024-04-05 09:23:10', 1),
-(47, '7a27d9fc-7483-4098-b7f4-dfa679aefc81', 6, 'f7eb81', 8, '2024-04-05 09:23:10', 0);
+(55, '1310d8a6-1174-4480-b815-41379c654d11', 5, 'test', 0, '2024-04-16 13:15:32', 0);
 
 -- --------------------------------------------------------
 
@@ -448,53 +375,26 @@ INSERT INTO `__efmigrationshistory` (`MigrationId`, `ProductVersion`) VALUES
 --
 
 --
--- A tábla indexei `aspnetroleclaims`
+-- A tábla indexei `aspnetrole`
 --
-ALTER TABLE `aspnetroleclaims`
+ALTER TABLE `aspnetrole`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `IX_AspNetRoleClaims_RoleId` (`RoleId`);
+  ADD UNIQUE KEY `Name` (`Name`);
 
 --
--- A tábla indexei `aspnetroles`
+-- A tábla indexei `aspnetuserrole`
 --
-ALTER TABLE `aspnetroles`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `RoleNameIndex` (`NormalizedName`);
-
---
--- A tábla indexei `aspnetuserclaims`
---
-ALTER TABLE `aspnetuserclaims`
-  ADD PRIMARY KEY (`Id`),
-  ADD KEY `IX_AspNetUserClaims_UserId` (`UserId`);
-
---
--- A tábla indexei `aspnetuserlogins`
---
-ALTER TABLE `aspnetuserlogins`
-  ADD PRIMARY KEY (`LoginProvider`,`ProviderKey`),
-  ADD KEY `IX_AspNetUserLogins_UserId` (`UserId`);
-
---
--- A tábla indexei `aspnetuserroles`
---
-ALTER TABLE `aspnetuserroles`
-  ADD PRIMARY KEY (`UserId`,`RoleId`),
-  ADD KEY `IX_AspNetUserRoles_RoleId` (`RoleId`);
+ALTER TABLE `aspnetuserrole`
+  ADD PRIMARY KEY (`UserId`),
+  ADD KEY `RoleId` (`RoleId`);
 
 --
 -- A tábla indexei `aspnetusers`
 --
 ALTER TABLE `aspnetusers`
   ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `UserNameIndex` (`NormalizedUserName`),
-  ADD KEY `EmailIndex` (`NormalizedEmail`);
-
---
--- A tábla indexei `aspnetusertokens`
---
-ALTER TABLE `aspnetusertokens`
-  ADD PRIMARY KEY (`UserId`,`LoginProvider`,`Name`);
+  ADD UNIQUE KEY `UserName` (`UserName`),
+  ADD UNIQUE KEY `Email` (`Email`);
 
 --
 -- A tábla indexei `ftpfiles`
@@ -565,34 +465,22 @@ ALTER TABLE `__efmigrationshistory`
 --
 
 --
--- AUTO_INCREMENT a táblához `aspnetroleclaims`
---
-ALTER TABLE `aspnetroleclaims`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT a táblához `aspnetuserclaims`
---
-ALTER TABLE `aspnetuserclaims`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT a táblához `ftpfiles`
 --
 ALTER TABLE `ftpfiles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT a táblához `helyadatok`
 --
 ALTER TABLE `helyadatok`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT a táblához `hozzaszolasok`
 --
 ALTER TABLE `hozzaszolasok`
-  MODIFY `HozzaszolasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `HozzaszolasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 
 --
 -- AUTO_INCREMENT a táblához `kategoriak`
@@ -604,7 +492,7 @@ ALTER TABLE `kategoriak`
 -- AUTO_INCREMENT a táblához `szamlazas`
 --
 ALTER TABLE `szamlazas`
-  MODIFY `SzamlazasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `SzamlazasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT a táblához `tagek`
@@ -622,42 +510,18 @@ ALTER TABLE `tagkapcsolo`
 -- AUTO_INCREMENT a táblához `termekek`
 --
 ALTER TABLE `termekek`
-  MODIFY `TermekId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `TermekId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Megkötések a kiírt táblákhoz
 --
 
 --
--- Megkötések a táblához `aspnetroleclaims`
+-- Megkötések a táblához `aspnetuserrole`
 --
-ALTER TABLE `aspnetroleclaims`
-  ADD CONSTRAINT `FK_AspNetRoleClaims_AspNetRoles_RoleId` FOREIGN KEY (`RoleId`) REFERENCES `aspnetroles` (`Id`) ON DELETE CASCADE;
-
---
--- Megkötések a táblához `aspnetuserclaims`
---
-ALTER TABLE `aspnetuserclaims`
-  ADD CONSTRAINT `FK_AspNetUserClaims_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE;
-
---
--- Megkötések a táblához `aspnetuserlogins`
---
-ALTER TABLE `aspnetuserlogins`
-  ADD CONSTRAINT `FK_AspNetUserLogins_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE;
-
---
--- Megkötések a táblához `aspnetuserroles`
---
-ALTER TABLE `aspnetuserroles`
-  ADD CONSTRAINT `FK_AspNetUserRoles_AspNetRoles_RoleId` FOREIGN KEY (`RoleId`) REFERENCES `aspnetroles` (`Id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_AspNetUserRoles_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE;
-
---
--- Megkötések a táblához `aspnetusertokens`
---
-ALTER TABLE `aspnetusertokens`
-  ADD CONSTRAINT `FK_AspNetUserTokens_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE;
+ALTER TABLE `aspnetuserrole`
+  ADD CONSTRAINT `aspnetuserrole_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `aspnetuserrole_ibfk_2` FOREIGN KEY (`RoleId`) REFERENCES `aspnetrole` (`Id`);
 
 --
 -- Megkötések a táblához `helyadatok`
@@ -696,11 +560,12 @@ DELIMITER $$
 --
 -- Események
 --
-CREATE DEFINER=`root`@`localhost` EVENT `delete_old_records` ON SCHEDULE EVERY 1 DAY STARTS '2024-03-24 15:03:43' ON COMPLETION NOT PRESERVE ENABLE DO begin
-    delete from ftpfiles
-    where 
-    Timestamp < timestamp(current_date() - interval 1 day);
-end$$
+CREATE DEFINER=`root`@`localhost` EVENT `delete_old_records` ON SCHEDULE EVERY 1 DAY STARTS '2024-03-24 15:03:43' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM ftpfiles
+WHERE Timestamp < DATE_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `delete_unconfirmed_users` ON SCHEDULE EVERY 1 DAY STARTS '2024-04-23 10:17:06' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+    DELETE FROM aspnetusers WHERE EmailConfirmed = 0 AND AktivalasIdopontja <= DATE_SUB(NOW(), INTERVAL 1 DAY);
+END$$
 
 DELIMITER ;
 COMMIT;
