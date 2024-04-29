@@ -42,6 +42,17 @@ function ProfilePage() {
   const [userStreetNumber, setUserStreetNumber] = useState('');
   const [userOther, setUserOther] = useState('');
 
+  const [collapseOneOpen, setCollapseOneOpen] = useState(false);
+  const [collapseTwoOpen, setCollapseTwoOpen] = useState(false);
+
+  const toggleCollapseOne = () => {
+    setCollapseOneOpen(!collapseOneOpen);
+  };
+
+  const toggleCollapseTwo = () => {
+    setCollapseTwoOpen(!collapseTwoOpen);
+  };
+  
   const userId = localStorage.getItem("userId");
   const token=localStorage.getItem("LoginToken")
 
@@ -488,9 +499,63 @@ function ProfilePage() {
           {!userProfile && <p>Loading...</p>}
         </div>
         
-        {/*classname collapse és collapsed között kell váltogatni onclickre*/}
-
-     
+        <div className="accordion w-50 m-5" id="accordionExample">
+        <div className="accordion-item" style={{border:"none"}}>
+          <h2 className="accordion-header" id="headingOne">
+          <button
+            className={`accordion-button ${collapseOneOpen ? '' : 'collapsed'}`}
+            style={{ backgroundColor: '#05a866' }}
+            type="button"
+            onClick={toggleCollapseOne}
+            aria-expanded={collapseOneOpen ? "true" : "false"}
+            aria-controls="collapseOne"
+          >
+            Your Comments
+          </button>
+          </h2>
+          <div id="collapseOne" className={`accordion-collapse ${collapseOneOpen ? 'collapse show' : 'collapse'}`} aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div className="accordion-body">
+              {userComments && userComments.map(comment => (
+                <div className="comment-card" key={comment.hozzaszolasId}>
+                  <p><strong>Comment ID:</strong> {comment.hozzaszolasId}</p>
+                  <p><strong>Product name:</strong></p>
+                  <p><strong>Description:</strong> {comment.leiras}</p>
+                  <p><strong>Rating:</strong> {comment.ertekeles}</p>
+                  <hr style={{border: '2px solid #05a866'}}></hr>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="accordion-item" style={{border:"none"}}>
+          <h2 className="accordion-header"  id="headingTwo">
+          <button
+            className={`accordion-button ${collapseTwoOpen ? '' : 'collapsed'}`}
+            style={{ backgroundColor: '#05a866' }}
+            type="button"
+            onClick={toggleCollapseTwo}
+            aria-expanded={collapseTwoOpen ? "true" : "false"}
+            aria-controls="collapseTwo"
+          >
+            Your Invoices
+          </button>
+          </h2>
+          <div id="collapseTwo" className={`accordion-collapse ${collapseTwoOpen ? 'collapse show' : 'collapse'}`} aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div className="accordion-body">
+              {userSzamlak && userSzamlak.map(invoice => (
+                <div className="invoice-card" key={invoice.szamlazasId}>
+                  <h3>Invoice</h3>
+                  <p><strong>Product ID:</strong> {invoice.termekId}</p>
+                  <p><strong>Color:</strong> {invoice.szinHex}</p>
+                  <p><strong>Quantity:</strong> {invoice.darab}</p>
+                  <p><strong>Purchase Time:</strong> {new Date(invoice.vasarlasIdopontja).toLocaleString()}</p>
+                  <p><strong>Successful Delivery:</strong> {invoice.sikeresSzalitas ? 'Yes' : 'No'}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
 
         <Modal show={modalIsOpen} onHide={closeModal}>
           <Modal.Header closeButton>
