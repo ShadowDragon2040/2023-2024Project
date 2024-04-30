@@ -9,14 +9,13 @@ namespace TestProject1
     public class Tests
     {
         private HttpClient client;
-        private static int commentId=136;
+        private static int commentId=185;
         private static Hozzaszolasok dummyPostComment = new Hozzaszolasok
         {
-            HozzaszolasId = commentId,
             UserId = "ee8b35cc-3cea-4445-b7c2-7b4022a3ae02",
-            TermekId = 8,
-            Leiras = "A sor tesztelve lett",
-            Ertekeles = 5
+            TermekId = 3,
+            Leiras = "Ez a sor tesztelve lesz",
+            Ertekeles = 1
         };
 
         [SetUp]
@@ -65,14 +64,14 @@ namespace TestProject1
 
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, "Failed to post comment");
         }
-
+        
         [Test]
         public async Task HozzaszolasPutTest()
         {
             Hozzaszolasok dummyComment = new Hozzaszolasok
             {
                 TermekId = 8,
-                Leiras = "Test#1",
+                Leiras = "A sor tesztelve lett",
                 Ertekeles = 3
             };
 
@@ -82,6 +81,7 @@ namespace TestProject1
             HttpResponseMessage response = await client.PutAsync($"/Hozzaszolas/{commentId}", data);
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, "Expected OK status code but got " + response.StatusCode + " ");
         }
+        
 
         
         [Test]
@@ -90,6 +90,7 @@ namespace TestProject1
             HttpResponseMessage response = await client.DeleteAsync($"/Hozzaszolas/{commentId}");
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
+       
 
         
     }

@@ -10,7 +10,7 @@ import {
   NavBtnLink,
   NavBtn
 } from '../../components/TextElements';
-import {Accordion, Modal, Button, Row, Col, Image, ButtonToolbar} from 'react-bootstrap';
+import {Accordion, Modal, Button, Row, Col, Image} from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 
@@ -158,7 +158,7 @@ function ProfilePage() {
       };
     
       fetchUserProfile();
-    }, [selectedAvatar]);
+    }, [selectedAvatar,token,userId]);
     
     useEffect(() => {
       const fetchUserHelyadat = async () => {
@@ -332,7 +332,7 @@ function ProfilePage() {
     };
 
     fetchUserSzamlak();
-  },[userId]);
+  },[userId,token]);
 
   return (
       <InfoContainer>
@@ -368,7 +368,6 @@ function ProfilePage() {
                           src={avatar.url}
                           roundedCircle
                           style={{
-                            width: '100px',
                             cursor: 'pointer',
                             width: avatar.selected ? '110px' : '100px', 
                           }}
