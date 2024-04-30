@@ -74,18 +74,18 @@ function SingleProductDisplay(props) {
             .catch(error => console.error('Error fetching product data:', error));
     }, [increment]);
 
-        const getToken=()=>{
-            const token = localStorage.getItem("LoginToken");
-            if (token) {
-                const decodedToken = jwtDecode(token);
-                setUserId(decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata"]);
-            }
+    useEffect(()=>{
+        const token = localStorage.getItem("LoginToken");
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            setUserId(decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata"]);
         }
+    })
+          
 
         const handleSubmitComment = async (e) => {
             e.preventDefault();
             try {
-                await getToken();
                 if(localStorage.getItem('bejelenkezve')== 'false'){
                     toast.error("Please log in before writing a comment!")
                 }
