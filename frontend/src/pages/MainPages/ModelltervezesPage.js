@@ -4,7 +4,7 @@ import Navbar from '../../components/MainNavbarComponent'
 import Footer from '../../components/FooterComponent'
 import Sidebar from '../../components/MainPageComponents/SidebarComponent'
 import {
-  InfoContainer,
+  InfoContainer15,
   InfoWrapper,
   InfoRow,
   Column1,
@@ -26,63 +26,37 @@ function ModellTervezesPage(){
       <>
       <Sidebar isOpen={isOpen} toggle={toggle}/>
       <Navbar toggle={toggle}/>
-      <InfoContainer  lightBg={false} id={'Modelltervezes'} >
-        <Heading lightText={false}>Modelltervezés</Heading>
+      <InfoContainer15  lightBg={false} id={'Modelltervezes'} >
+        <Heading lightText={false}>Modell Designing</Heading>
         <InfoWrapper>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img></Img>
+                  <Img style={{height:'500px'}} src={`${process.env.REACT_APP_KEP_URL}Blender.jpg`} />
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
             <TopLine>Szoftver</TopLine>
-                <Subtitle darkText={true}>
-                A modellek tervezésére és elkészítésére a Blender-t használjuk, a programm segítségével bármilyen 3D modellt el lehet készíteni.
+                <Subtitle darkText={true}>       
+                  We use Blender to design and create the models, with the help of the program you can create any 3D model.
                 </Subtitle>
             </Column2>
           </InfoRow>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
-            <TopLine>Méretek</TopLine>
+            <TopLine>Contact us</TopLine>
                 <Subtitle darkText={true}>
-                A belső maximum nyomtatható méret: 22cm x 22cm x 25cm.
+                 Contact us if you want to get a uniqe 3D model made by us.
                 </Subtitle>
             </Column1>
             <Column2 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img></Img>
-                </ImgWrap>
-            </Column2>
-          </InfoRow>
-          <InfoRow  imgStart={false} >
-            <Column1 style={{position: 'relative'}}>
-                <ImgWrap>
-                  <Img></Img>
-                </ImgWrap>
-            </Column1>
-            <Column2 style={{position: 'relative'}}>
-            <TopLine>PEI nyomtatólap</TopLine>
-                <Subtitle darkText={true}>
-                Kíváló nyomtatási felület amely erős tapadást biztosít és egyedi mintázatot ad.
-                </Subtitle>
-            </Column2>
-          </InfoRow>
-          <InfoRow  imgStart={false} >
-            <Column1 style={{position: 'relative'}}>
-            <TopLine>Felbontás</TopLine>
-                <Subtitle darkText={true}>
-                A minimális rétegmagasság 0,1mm és a maximális rétegmagasság 0,4mm.
-                </Subtitle>
-            </Column1>
-            <Column2 style={{position: 'relative'}}>
-                <ImgWrap>
-                  <Img></Img>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}Képernyőkép%202024-03-25%20102422.png`} />
                 </ImgWrap>
             </Column2>
           </InfoRow>
         </InfoWrapper>
-      </InfoContainer>
+      </InfoContainer15>
       <Footer/>
       </>
     )

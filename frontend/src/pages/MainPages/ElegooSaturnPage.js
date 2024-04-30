@@ -5,7 +5,7 @@ import Footer from '../../components/FooterComponent'
 import {NavBtn,NavBtnLink} from '../../components/TextElements'
 import { MdArrowBack } from "react-icons/md";
 import {
-  InfoContainer,
+  InfoContainer5,
   InfoWrapper,
   InfoRow,
   Column1,
@@ -28,8 +28,8 @@ function ElegooSaturnPage(){
     return(
       <>
       <Navbar toggle={toggle}/>
-      <InfoContainer  lightBg={false} id={'tools'} >
-        <Heading lightText={false}>Anycubic Photon Mono</Heading>
+      <InfoContainer5  lightBg={false} id={'tools'} >
+        <Heading lightText={false}>Elegoo Saturn</Heading>
           <NavBtn style={{margin:'20px 0px 20px 200px'}}>
             <NavBtnLink to='/'><MdArrowBack/>Back</NavBtnLink>
           </NavBtn>
@@ -37,33 +37,33 @@ function ElegooSaturnPage(){
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img/>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}SaturnTechnology.png`} />
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
             <TopLine>Technology</TopLine>
                 <Subtitle darkText={true}>
-                Anycubic Photon Mono is an SLA 3D printer that prints with resin that cures under UV light.
+                Elegoo Saturn is an SLA 3D printer that prints with resin that cures under UV light.
                 </Subtitle>
             </Column2>
           </InfoRow>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
-            <TopLine>Size</TopLine>
+            <TopLine>Build volume</TopLine>
                 <Subtitle darkText={true}>
-                The maximum printable size inside: 13cm x 8cm x 16.5cm.
+                The maximum printable size inside: 21,8cm x 12,2cm x 26cm.
                 </Subtitle>
             </Column1>
             <Column2 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img/>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}ElegooVolume.jpeg`} />
                 </ImgWrap>
             </Column2>
           </InfoRow>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
                 <ImgWrap>
-                  <Img/>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}elegooSaturn3.png`} />
                 </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
@@ -82,12 +82,12 @@ function ElegooSaturnPage(){
             </Column1>
             <Column2 style={{position: 'relative'}}>
                 <ImgWrap>
-                    <Img/>
+                  <Img src={`${process.env.REACT_APP_KEP_URL}abslikeresin.jpg`} />
                 </ImgWrap>
             </Column2>
           </InfoRow>
         </InfoWrapper>
-      </InfoContainer>
+      </InfoContainer5>
       <Footer/>
       </>
     )

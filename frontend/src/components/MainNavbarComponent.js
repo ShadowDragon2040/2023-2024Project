@@ -132,7 +132,7 @@ const Navbar = (props) => {
             <NavBtn2>
               <SearchBar />
             </NavBtn2>
-          ) : <div style={{width: '1000px'}}></div>}
+          ) : <div style={{width: '800px'}}></div>}
           {pathname.startsWith('/ShopPage') ? (
             localStorage.getItem("bejelenkezve") === 'true' ? (
               <div style={{marginTop:"15px"}}>

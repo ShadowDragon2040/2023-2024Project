@@ -26,7 +26,15 @@ export const InfoContainer5=styled.div`
 
     }
 `
+export const InfoContainer15=styled.div`
+    color: #fff;
+    background: ${({lightBg})=>(lightBg?'#f9f9f9':'#010606')};
+    height:1200px;
+    @media screen and (max-width:768px) {
+        padding: 100px 0;
 
+    }
+`
 export const InfoContainer6=styled.div`
     color: #fff;
     background: ${({lightBg})=>(lightBg?'#f9f9f9':'#010606')};

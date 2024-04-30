@@ -26,7 +26,23 @@ namespace ProjectBackend.Services
             smtpServer.Send(mail);
         }
 
-        public static void SendConfirmationMail(string mailAddressTo, string subject, string body, IConfiguration configuration)
+        public static void SendMail(string mailAddressTo, string subject, string body, IConfiguration configuration)
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
+            string emailAddress = configuration["EmailSettings:EmailAddress"];
+            string emailSecret = configuration["EmailSettings:EmailSecret"];
+            mail.From = new MailAddress(emailAddress);
+            mail.To.Add(mailAddressTo);
+            mail.Subject = subject;
+            mail.Body = body;
+            smtpServer.Credentials = new System.Net.NetworkCredential(emailAddress, emailSecret);
+            smtpServer.Port = 587;
+            smtpServer.EnableSsl = true;
+            smtpServer.Send(mail);
+        }
+
+        public static void SendPurchaseMail(string mailAddressTo, string subject, string body, IConfiguration configuration)
         {
             MailMessage mail = new MailMessage();
             SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
