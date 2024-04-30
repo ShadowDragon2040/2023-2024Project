@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using ProjectBackend.Services;
 using static System.Net.WebRequestMethods;
+using Microsoft.EntityFrameworkCore;
 namespace ProjectBackend.Controllers
 {
     [Route("[controller]")]
@@ -131,7 +132,7 @@ namespace ProjectBackend.Controllers
                 _authContext.SaveChanges();
 
                 // Optionally, you can send a confirmation email here
-                EmailService.SendConfirmationMail(request.Email,$"Your new password is {request.NewPassword}",$"Your password was changed on the PrintFusion site, if this was not done by you contact us immediately!", _configuration);
+                EmailService.SendMail(request.Email,$"Your new password is {request.NewPassword}",$"Your password was changed on the PrintFusion site, if this was not done by you contact us immediately!", _configuration);
 
                 return Ok("Password updated successfully.");
             }

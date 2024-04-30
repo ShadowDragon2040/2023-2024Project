@@ -18,12 +18,10 @@ import React, { useState, useEffect } from 'react';
 import CartPage from './pages/ShopPages/CartPage';
 import ProfilePage from './pages/ShopPages/ProfilePage';
 import LabPage from './pages/ShopPages/LabPage';
-import { ToastContainer, collapseToast } from 'react-toastify';
+import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  /*sessionStorage.setItem("bejelenkezve", "false");
-  sessionStorage.setItem("role", "PUBLIC");*/
   const [cartItems, setCartItems] = useState([]);
   const [addedToCart, setAddedToCart] = useState([]);
   const [cartItemCount, setCartItemCount] = useState(0);
@@ -33,10 +31,10 @@ function App() {
 
   const handleMouseEnter = () => {
     setCollapsed(false);
-};
-const handleMouseLeave = () => {
-  setCollapsed(true);
-};
+  };
+  const handleMouseLeave = () => {
+    setCollapsed(true);
+  };
   useEffect(() => {
     //console.log(cartItems)
   }, [cartItems]);
@@ -62,6 +60,7 @@ const handleMouseLeave = () => {
       
     });
 };
+
 const addToCart = (product, quantity) => {
   let existingItemIndex = -1;
 
@@ -82,7 +81,6 @@ const addToCart = (product, quantity) => {
 
   setAddedToCart([...addedToCart, product.id]);
 
-
   setCartItemCount(cartItems.length + 1); 
   console.log("Added to cart: " + product.name);
 
@@ -92,10 +90,8 @@ const addToCart = (product, quantity) => {
     }, "");
     localStorage.setItem("kosar", kosarString);
   }
+};
 
-
-
-}; 
   return (
   <>
   <ToastContainer 

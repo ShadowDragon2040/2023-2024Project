@@ -42,16 +42,18 @@ function SingleProductDisplay(props) {
     };
 
     const handleAddToCart = () => {
+        let colorToAdd = selectedColor || "black";
+    
         const newItem = {
             id: ProductId,
             name: singleProductData.termekNev,
             price: singleProductData.ar * quantity,
             image:singleProductData.keputvonal,
             quantity: quantity,
-            color: selectedColor
+            color: colorToAdd
         };
-
-        props.addToCart(newItem, quantity)
+    
+        props.addToCart(newItem, quantity);
     };
 
     useEffect(() => {

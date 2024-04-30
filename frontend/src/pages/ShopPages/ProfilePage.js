@@ -62,7 +62,7 @@ function ProfilePage() {
 
     if (parseInt(emailCode)!==parseInt(userProfile.emailCode)) {
       setError('Email code not match.');
-      console.log(userProfile.emailCode);
+      //console.log(userProfile.emailCode);
       return false;
     }
 
@@ -122,7 +122,7 @@ function ProfilePage() {
   
   const handleSaveAvatar = async () => {
     try {
-      console.log("Selected avatar:", selectedAvatar);
+      //console.log("Selected avatar:", selectedAvatar);
       const response = await axios.put(
         `${process.env.REACT_APP_BASE_URL}Felhasznalok/${userId}`,
         {
@@ -138,7 +138,7 @@ function ProfilePage() {
           }
         }
       );
-      console.log(response);
+      //console.log(response);
       handleClose();
     } catch (error) {
       console.error('Error saving avatar:', error);
@@ -302,14 +302,14 @@ function ProfilePage() {
         });
         
         setUserComments(response.data);
-        console.log(response.data);
+        //console.log(response.data);
         
         const termekResponse = await axios.get(`${process.env.REACT_APP_BASE_URL}Termekek/EgyTermek/${response.data[0].termekId}`,{
           headers:{'Authorization': 'Bearer ' + token}
         });
         
         setUserCommentProduct(termekResponse.data);
-        console.log(termekResponse.data);
+        //console.log(termekResponse.data);
       } catch (error) {
         console.error('Error fetching user Comments:', error);
       }
@@ -341,8 +341,6 @@ function ProfilePage() {
         <NavBtn style={{margin: '20px 0px 20px 0px'}}>
           <NavBtnLink to='/ShopPage'><MdArrowBack />Back</NavBtnLink>
         </NavBtn>
-
-
         
         <Modal show={avatarChangeModal} onHide={handleClose} dialogClassName='avatar-modal'>
           <Modal.Header closeButton>

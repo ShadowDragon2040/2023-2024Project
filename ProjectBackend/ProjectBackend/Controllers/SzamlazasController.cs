@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectBackend.DTOs;
 using ProjectBackend.Models;
+using ProjectBackend.Services;
+using System.Text;
 
 namespace Webárúház_Nagy_Project.Controllers
 {
@@ -12,9 +14,11 @@ namespace Webárúház_Nagy_Project.Controllers
     public class SzamlazasController : ControllerBase
     {
         private readonly AuthContext _context;
+        private readonly IConfiguration _configuration;
 
-        public SzamlazasController(AuthContext context)
+        public SzamlazasController(IConfiguration configuration, AuthContext context)
         {
+            _configuration = configuration;
             _context = context;
         }
 
@@ -31,6 +35,64 @@ namespace Webárúház_Nagy_Project.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost("purchaseMail"), Authorize(Roles = "USER,ADMIN")]
+        public IActionResult PurchaseMail(PurchaseDTO request)
+        {
+            try
+            {
+                var user = _context.Aspnetuser.FirstOrDefault(u => u.Id == request.UserId);
+                if (user == null)
+                {
+                    return BadRequest("Invalid user ID!");
+                }
+
+                string[] cartItems = request.Cart.Split(';');
+                StringBuilder emailBodyBuilder = new StringBuilder();
+                emailBodyBuilder.Append($"Dear {user.UserName},\nThank you for your purchase.\nHere is your purchase Details:\n");
+
+                foreach (string item in cartItems)
+                {
+                    string[] itemDetails = item.Trim().Split(' ');
+                    if (itemDetails.Length == 3)
+                    {
+                        int termekId;
+                        if (int.TryParse(itemDetails[0], out termekId))
+                        {
+                            var termek = _context.Termekek.FirstOrDefault(t => t.TermekId == termekId);
+                            if (termek != null)
+                            {
+                                emailBodyBuilder.Append($"TermekId: {termek.TermekId}, Name: {termek.TermekNev}, Quantity: {itemDetails[1]}, Color: {itemDetails[2]}\n");
+                            }
+
+                            var szamlazas = new Szamlaza
+                            {
+                                UserId = request.UserId,
+                                TermekId = termekId,
+                                SzinHex = itemDetails[2],
+                                Darab = int.Parse(itemDetails[1]),
+                                VasarlasIdopontja = DateTime.Now,
+                                SikeresSzalitas = false
+                            };
+
+                            _context.Szamlaza.Add(szamlazas);
+                        }
+                    }
+                }
+                emailBodyBuilder.Append("\nRegards,\nPrintFusion");
+                _context.SaveChanges();
+
+                EmailService.SendMail(request.UserEmail, "Purchase Details", emailBodyBuilder.ToString(), _configuration);
+
+                return Ok("Purchase details stored successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error storing purchase details: {ex.Message}");
+                return StatusCode(500, "Internal server error.");
+            }
+        }
+
 
         //userId alapján
         [HttpGet("{id}"), Authorize(Roles = "USER,ADMIN")]
@@ -57,6 +119,7 @@ namespace Webárúház_Nagy_Project.Controllers
                     UserId = createdSzamlazasokDto.UserId,
                     TermekId = createdSzamlazasokDto.TermekId,
                     SzinHex = createdSzamlazasokDto.SzinHex,
+                    Darab = createdSzamlazasokDto.Darab,
                     VasarlasIdopontja = DateTime.Now,
                     SikeresSzalitas = false
                 };
@@ -64,7 +127,7 @@ namespace Webárúház_Nagy_Project.Controllers
                 _context.Szamlaza.Add(request);
                 await _context.SaveChangesAsync();
 
-                return Ok(); // Optionally, you can return a response or data
+                return Ok();
             }
             catch (Exception ex)
             {

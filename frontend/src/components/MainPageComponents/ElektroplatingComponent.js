@@ -2,7 +2,7 @@ import React from 'react'
 import { MdArrowBack } from "react-icons/md";
 import {NavBtn,NavBtnLink} from '../TextElements'
 import {
-InfoContainer5,
+InfoContainer15,
 InfoWrapper,
 InfoRow,
 Column1,
@@ -17,8 +17,8 @@ Subtitle
 const Elektroplating = () => {
   return (
     <>
-      <InfoContainer5  lightBg={false} id={'Elektroplating'} >
-        <Heading lightText={false}>Ender 3V2</Heading>
+      <InfoContainer15  lightBg={false} id={'Elektroplating'} >
+        <Heading lightText={false}>Elektroplating</Heading>
           <NavBtn style={{margin:'20px 0px 20px 200px'}}>
             <NavBtnLink to='/'><MdArrowBack/>Back</NavBtnLink>
           </NavBtn>
@@ -26,53 +26,31 @@ const Elektroplating = () => {
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
               <ImgWrap>
-                  <Img
-                    src={`${process.env.REACT_APP_KEP_URL}anycubicphotonmono.jpg`}
-                    alt={'Our Company'}
-                  />
+                  <Img src={`${process.env.REACT_APP_KEP_URL}ElektroplatingProcess.jpg`} />
               </ImgWrap>
             </Column1>
             <Column2 style={{position: 'relative'}}>
             <TopLine>Technology</TopLine>
                 <Subtitle darkText={true}>
-                The Ender 3 V2 is an FDM 3D printer that builds the desired object layer by layer using liquid plastic.
+                  Electrochemical deposition is a flexible low-cost technology of fabrication of a wide variety of two- and three-dimensional coatings or films. As the name suggests, the process involves depositing material using an electric current.
                 </Subtitle>
             </Column2>
           </InfoRow>
           <InfoRow  imgStart={false} >
             <Column1 style={{position: 'relative'}}>
-            <TopLine>Size</TopLine>
+            <TopLine>Surface finish</TopLine>
                 <Subtitle darkText={true}>
-                The maximum printable size inside: 22cm x 22cm x 25cm.
+                 After the process the elektroplated plastic object will have a metalic finsih.
                 </Subtitle>
             </Column1>
             <Column2 style={{position: 'relative'}}>
               <ImgWrap>
-                  <Img
-                    src={`${process.env.REACT_APP_KEP_URL}anycubicphotonmono.jpg`}
-                    alt={'Our Company'}
-                  />
+                <Img src={`${process.env.REACT_APP_KEP_URL}Elektroplating.jpg`} />
               </ImgWrap>
-            </Column2>
-          </InfoRow>
-          <InfoRow  imgStart={false} >
-            <Column1 style={{position: 'relative'}}>
-              <ImgWrap>
-                  <Img
-                    src={`${process.env.REACT_APP_KEP_URL}anycubicphotonmono.jpg`}
-                    alt={'Our Company'}
-                  />
-              </ImgWrap>
-            </Column1>
-            <Column2 style={{position: 'relative'}}>
-            <TopLine>PEI Buildplate</TopLine>
-                <Subtitle darkText={true}>
-                An excellent printing surface that provides strong adhesion and gives a unique pattern.
-                </Subtitle>
             </Column2>
           </InfoRow>
         </InfoWrapper>
-      </InfoContainer5>
+      </InfoContainer15>
     </>
   )
 }

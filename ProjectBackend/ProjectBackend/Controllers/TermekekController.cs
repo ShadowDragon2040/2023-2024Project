@@ -84,6 +84,20 @@ namespace ProjectBackend.Controllers
         }
         */
 
+        [HttpGet("Termek{id}"), Authorize(Roles = "USER,ADMIN")]
+        public async Task<IActionResult> GetTermekId(int id)
+        {
+            try
+            {
+                var result = await _context.Termekek.Where(x => x.TermekId == id).ToListAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("EgyTermek/{id}")]
         public async Task<ActionResult<TermekEgyoldalAdatokWithHozzaszolasok>> Get(int id)
         {
