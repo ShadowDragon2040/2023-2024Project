@@ -51,6 +51,7 @@ const CartPage = ({ cart, setCart}) => {
           Cart: cart,
           UserEmail: getUserProfile.email,
           UserId: userId,
+          TotalPurchase: totalPayment,
         },
         {
           headers: {
