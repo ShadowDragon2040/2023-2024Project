@@ -8,5 +8,6 @@
 
         public string UserId { get; set; }
 
+        public int TotalPurchase { get; set; }
     }
 }
