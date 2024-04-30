@@ -79,7 +79,7 @@ namespace Webárúház_Nagy_Project.Controllers
                 _context.Hozzaszolasok.Add(request);
                 await _context.SaveChangesAsync();
 
-                return Ok(/*request.AsDto()*/);
+                return Ok(request);
             }
             catch (Exception ex)
             {
