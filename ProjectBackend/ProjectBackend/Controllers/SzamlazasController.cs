@@ -89,7 +89,7 @@ namespace Webárúház_Nagy_Project.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine($"Error storing purchase details: {ex.Message}");
-                return StatusCode(500, "Internal server error.");
+                return StatusCode(500, $"Internal server error. {ex.Message}");
             }
         }
 

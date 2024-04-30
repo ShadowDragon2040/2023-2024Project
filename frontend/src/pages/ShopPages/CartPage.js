@@ -9,17 +9,18 @@ import Navbar from '../../components/MainNavbarComponent';
 import TermekCartCard from '../../components/ShopPageComponent/TermekCartCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const CartPage = ({ cart, setCart}) => {
 
   const [userProfile,setUserProfile]=useState([]);
   const [getUserProfile,setGetUserProfile]=useState([]);
   
+  const token = localStorage.getItem("LoginToken");
+  const userId = localStorage.getItem("userId");
+
   useEffect(() => {
-    
       try {
-        const token=localStorage.getItem("LoginToken");
-        const userId=localStorage.getItem("userId");
         axios.get(`${process.env.REACT_APP_BASE_URL}Helyadatok/${userId}`,{
           headers:{'Authorization': 'Bearer ' + token}
         })
@@ -27,29 +28,23 @@ const CartPage = ({ cart, setCart}) => {
       } catch (error) {
         console.error('Error fetching user profile:', error);
       }
-    
-  },[userProfile])
+  },[])
 
   useEffect(() => {
-    const token = localStorage.getItem("LoginToken");
-    const userId = localStorage.getItem("userId");
     try {
-      const response = axios.get(`${process.env.REACT_APP_BASE_URL}Felhasznalok/${userId}`, {
+      axios.get(`${process.env.REACT_APP_BASE_URL}Felhasznalok/${userId}`, {
         headers: {'Authorization': 'Bearer ' + token}
-      });
-      console.log("User profile response:", response.data);
-      setGetUserProfile(response.data[0]);
+      })
+      .then(response=>setGetUserProfile(response.data[0]))
+     
     } catch (error) {
       console.error('Error fetching user profile:', error);
     }
-})
+},[userProfile])
 
   const handlePayment = async () => {
     try {
-      const token = localStorage.getItem("LoginToken");
-      const userId = localStorage.getItem("userId");
       const cart = localStorage.getItem("kosar");
-  
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}Szamlazas/purchaseMail`,
         {
@@ -63,10 +58,12 @@ const CartPage = ({ cart, setCart}) => {
             'Authorization': 'Bearer ' + token
           }
         }
-      );
+      )
+      .then(localStorage.setItem("kosar",""))
+      .finally(toast.success("Order placed successfully!"));
   
     } catch (error) {
-      console.error('Error with the payment:', error);
+      toast.error("Failed to place order!")
     }
   }
 
