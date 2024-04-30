@@ -79,7 +79,7 @@ namespace Webárúház_Nagy_Project.Controllers
                         }
                     }
                 }
-                emailBodyBuilder.Append("\nRegards,\nPrintFusion");
+                emailBodyBuilder.Append($"Your total purchase is {request.TotalPurchase} Ft\nRegards,\nPrintFusion");
                 _context.SaveChanges();
 
                 EmailService.SendMail(request.UserEmail, "Purchase Details", emailBodyBuilder.ToString(), _configuration);
