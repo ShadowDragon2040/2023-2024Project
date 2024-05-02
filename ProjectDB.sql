@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Ápr 26. 07:33
+-- Létrehozás ideje: 2024. Máj 02. 08:42
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -58,6 +58,7 @@ CREATE TABLE `aspnetuserrole` (
 --
 
 INSERT INTO `aspnetuserrole` (`UserId`, `RoleId`) VALUES
+('8182cc76-dd86-4ace-ad8c-ede960a14602', '49d1592d-dc96-4868-834e-fa4e837e3d97'),
 ('af3f31fb-8693-42bb-86a2-076e5df37026', '49d1592d-dc96-4868-834e-fa4e837e3d97'),
 ('1310d8a6-1174-4480-b815-41379c654d11', '81f1660f-8329-4f49-9b16-7a1592d43d7e');
 
@@ -75,7 +76,7 @@ CREATE TABLE `aspnetusers` (
   `EmailConfirmed` tinyint(1) NOT NULL,
   `PasswordHash` longtext DEFAULT NULL,
   `AktivalasIdopotja` datetime NOT NULL DEFAULT current_timestamp(),
-  `ProfilKep` mediumblob NOT NULL
+  `ProfilKep` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -84,6 +85,7 @@ CREATE TABLE `aspnetusers` (
 
 INSERT INTO `aspnetusers` (`Id`, `EmailCode`, `UserName`, `Email`, `EmailConfirmed`, `PasswordHash`, `AktivalasIdopotja`, `ProfilKep`) VALUES
 ('1310d8a6-1174-4480-b815-41379c654d11', 9827, 'string', 'string', 1, '$2a$11$Edek6dtSHiOGR.Do3625POM8qUthmpRydiN4WG5EUTengKwaIXQ/S', '2024-04-10 09:34:21', ''),
+('8182cc76-dd86-4ace-ad8c-ede960a14602', 4603, 'Balazs', 'vardai.balazs22@gmail.com', 1, '$2a$11$VkjmXRKsm9iE.OO9SWVrEe7ooGEr7Pf5UI7h6T7tH/4qp2MIiq7K.', '2024-05-02 08:32:57', 'http://printfusion.nhely.hu/test/ppp.jpg'),
 ('af3f31fb-8693-42bb-86a2-076e5df37026', 6441, 'test', 'string@gmail.com', 1, '$2a$11$f5B2971fciXmkIoICyRLKeQWlnwNdyN7i1bdlD5M/HXE1n2PoRRSu', '2024-04-23 09:58:37', ''),
 ('ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 4712, 'Balint', 'pejkob@kkszki.hu', 0, '$2a$11$87hOBvGa7BmXPd2liJdLKOIbJOsX969.yzYZBCCESbACZkGogZ9jO', '2024-04-10 10:29:25', '');
 
@@ -161,7 +163,17 @@ INSERT INTO `hozzaszolasok` (`HozzaszolasId`, `UserId`, `TermekId`, `Leiras`, `E
 (76, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'test leiras', 3),
 (106, '1310d8a6-1174-4480-b815-41379c654d11', 3, 'Nice', 4),
 (116, '1310d8a6-1174-4480-b815-41379c654d11', 3, 'Very Nice!', 5),
-(117, '1310d8a6-1174-4480-b815-41379c654d11', 3, 'asdsad', 3);
+(117, '1310d8a6-1174-4480-b815-41379c654d11', 3, 'asdsad', 3),
+(118, '8182cc76-dd86-4ace-ad8c-ede960a14602', 26, 'Great product, highly recommended!', 5),
+(119, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 4, 'Looks amazing on my desk, very sturdy.', 4),
+(120, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 27, 'Not what I expected, but still good.', 3),
+(121, '8182cc76-dd86-4ace-ad8c-ede960a14602', 23, 'Quality is okay, expected more.', 4),
+(122, 'af3f31fb-8693-42bb-86a2-076e5df37026', 4, 'Perfect for the holiday season!', 5),
+(123, '1310d8a6-1174-4480-b815-41379c654d11', 6, 'Beautiful and functional, worth the price.', 5),
+(124, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 3, 'Unique design, I get lots of compliments.', 5),
+(125, '8182cc76-dd86-4ace-ad8c-ede960a14602', 23, 'Comfortable and stylish, love it!', 4),
+(126, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 8, 'Could be better, but it serves its purpose.', 4),
+(127, '1310d8a6-1174-4480-b815-41379c654d11', 27, 'Good quality, but a bit overpriced.', 3);
 
 -- --------------------------------------------------------
 
@@ -211,6 +223,18 @@ CREATE TABLE `szamlazas` (
 --
 
 INSERT INTO `szamlazas` (`SzamlazasId`, `UserId`, `TermekId`, `SzinHex`, `darab`, `VasarlasIdopontja`, `SikeresSzalitas`) VALUES
+(39, '1310d8a6-1174-4480-b815-41379c654d11', 3, '32a852', 6, '2024-04-05 09:19:44', 0),
+(40, '1310d8a6-1174-4480-b815-41379c654d11', 22, '000000', 30, '2024-04-05 09:23:10', 1),
+(41, '8182cc76-dd86-4ace-ad8c-ede960a14602', 12, 'ab9fcc', 1, '2024-04-05 09:23:10', 0),
+(42, '8182cc76-dd86-4ace-ad8c-ede960a14602', 27, 'ffffff', 9, '2024-04-05 09:23:10', 1),
+(43, '8182cc76-dd86-4ace-ad8c-ede960a14602', 24, 'ffffff', 3, '2024-04-05 09:23:10', 0),
+(44, 'af3f31fb-8693-42bb-86a2-076e5df37026', 6, '5431b5', 4, '2024-04-05 09:23:10', 1),
+(45, 'af3f31fb-8693-42bb-86a2-076e5df37026', 23, 'de2393', 20, '2024-04-05 09:23:10', 1),
+(46, 'af3f31fb-8693-42bb-86a2-076e5df37026', 21, '820774', 5, '2024-04-05 09:23:10', 1),
+(47, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 6, 'f7eb81', 8, '2024-04-05 09:23:10', 0),
+(48, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 2, 'Black', 5, '2024-04-30 10:16:29', 0),
+(49, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 3, 'White', 1, '2024-04-30 10:16:29', 0),
+(50, 'ee8b35cc-3cea-4445-b7c2-7b4022a3ae02', 5, 'Yellow', 2, '2024-04-30 10:16:29', 0),
 (55, '1310d8a6-1174-4480-b815-41379c654d11', 5, 'test', 0, '2024-04-16 13:15:32', 0);
 
 -- --------------------------------------------------------
@@ -455,7 +479,7 @@ ALTER TABLE `helyadatok`
 -- AUTO_INCREMENT a táblához `hozzaszolasok`
 --
 ALTER TABLE `hozzaszolasok`
-  MODIFY `HozzaszolasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+  MODIFY `HozzaszolasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT a táblához `kategoriak`
